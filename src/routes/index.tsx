@@ -46,7 +46,12 @@ export const Route = createFileRoute("/")({
           "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://kazevo-adventure-launch.lovable.app/" },
+      { rel: "preload", as: "image", href: purple.url, fetchpriority: "high" },
     ],
   }),
   loader: async () => {
@@ -156,7 +161,7 @@ function Landing() {
               </span>
               <h1 className="mt-5 font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
                 kazevo: <span className="text-primary">190g</span> of Pure{" "}
-                <span className="text-secondary">Adventure</span>
+                <span className="text-sunset-deep">Adventure</span>
               </h1>
               <p className="mt-5 max-w-md text-lg text-muted-foreground">
                 Ultra-lightweight performance built for people who move fast. Ripstop nylon,
@@ -195,6 +200,7 @@ function Landing() {
                 <img
                   src={purple.url}
                   alt="kazevo 190g ultralight backpack in deep purple"
+                  fetchPriority="high"
                   width={1200}
                   height={1200}
                   className="h-full w-full object-cover"

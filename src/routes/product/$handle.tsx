@@ -8,23 +8,65 @@ import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify"
 import { getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
+const SITE_URL = "https://kazevo-adventure-launch.lovable.app";
+
 export const Route = createFileRoute("/product/$handle")({
-  head: ({ match }) => ({
-    meta: [
-      { title: `${match.params.handle} — kazevo by solarah` },
-      {
-        name: "description",
-        content: "Shop the kazevo ultralight backpack collection.",
-      },
-      { property: "og:title", content: `${match.params.handle} — kazevo by solarah` },
-      {
-        property: "og:description",
-        content: "Shop the kazevo ultralight backpack collection.",
-      },
-      { property: "og:type", content: "product" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: ({ match, loaderData }) => {
+    const product = (loaderData as { product: ShopifyProduct["node"] } | undefined)?.product;
+    const title = product ? `${product.title} — kazevo by solarah` : "Product — kazevo by solarah";
+    const raw = (product?.description ?? "").replace(/\s+/g, " ").trim();
+    const description =
+      raw.length >= 50
+        ? raw.slice(0, 158)
+        : `${raw ? `${raw} ` : ""}kazevo by solarah: 190g ultralight, weather-resistant nylon backpacks with ergonomic arc straps and 18L capacity.`.slice(
+            0,
+            158,
+          );
+    const url = `${SITE_URL}/product/${match.params.handle}`;
+    const image = product?.images.edges[0]?.node.url;
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: url },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(image
+          ? [
+              { property: "og:image", content: image },
+              { name: "twitter:image", content: image },
+            ]
+          : []),
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: product
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Product",
+                name: product.title,
+                description: raw || description,
+                image: product.images.edges.map((e) => e.node.url),
+                brand: { "@type": "Brand", name: "kazevo by solarah" },
+                url,
+                offers: {
+                  "@type": "Offer",
+                  price: product.priceRange.minVariantPrice.amount,
+                  priceCurrency: product.priceRange.minVariantPrice.currencyCode,
+                  availability: "https://schema.org/InStock",
+                  url,
+                },
+              }),
+            },
+          ]
+        : [],
+    };
+  },
   loader: async ({ params }) => {
     const product = await fetchShopifyProductByHandle(params.handle);
     if (!product) throw notFound();
@@ -32,6 +74,7 @@ export const Route = createFileRoute("/product/$handle")({
   },
   component: ProductDetail,
 });
+
 
 function ProductDetail() {
   const { product } = Route.useLoaderData() as { product: ShopifyProduct["node"] };
