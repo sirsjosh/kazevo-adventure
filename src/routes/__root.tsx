@@ -152,9 +152,40 @@ function RootShell({ children }: { children: ReactNode }) {
       <body>
         {children}
         <Scripts />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${getPixelId()}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
       </body>
     </html>
   );
+}
+
+function PixelRouteTracker() {
+  const router = useRouter();
+  const lastPathRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    lastPathRef.current = window.location.pathname;
+
+    const unsubscribe = router.subscribe("onResolved", () => {
+      const path = window.location.pathname;
+      if (path !== lastPathRef.current) {
+        lastPathRef.current = path;
+        trackPageView();
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+  return null;
 }
 
 function RootComponent() {
@@ -164,8 +195,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <PixelRouteTracker />
       <Outlet />
       <CartDrawer />
     </QueryClientProvider>
   );
 }
+
