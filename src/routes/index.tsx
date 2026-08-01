@@ -17,6 +17,12 @@ import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import {
+  colorDotMap,
+  colorNameMap,
+  fallbackVariantImage,
+  getVariantImage,
+} from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
@@ -102,11 +108,8 @@ function Landing() {
   const isLoading = useCartStore((state) => state.isLoading);
 
   const showcaseImage = useMemo(() => {
-    if (!selectedVariant) return purple.url;
-    const colorValue = selectedVariant.selectedOptions.find((o) =>
-      /color|colour|颜色/i.test(o.name)
-    )?.value;
-    return (colorValue && variantImageMap[colorValue]) || purple.url;
+    if (!selectedVariant) return fallbackVariantImage;
+    return getVariantImage(selectedVariant.selectedOptions);
   }, [selectedVariant]);
 
   const handleAddToCart = async () => {
@@ -118,6 +121,7 @@ function Landing() {
       price: selectedVariant.price,
       quantity: 1,
       selectedOptions: selectedVariant.selectedOptions,
+      imageUrl: getVariantImage(selectedVariant.selectedOptions),
     });
   };
 
