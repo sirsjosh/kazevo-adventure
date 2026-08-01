@@ -55,9 +55,11 @@ export const useCartStore = create<CartStore>()(
 
         set({ isLoading: true });
         try {
+          let succeeded = false;
           if (!cartId) {
             const result = await createShopifyCart({ variantId: item.variantId, quantity: item.quantity });
             if (result) {
+              succeeded = true;
               set({
                 cartId: result.cartId,
                 checkoutUrl: result.checkoutUrl,
@@ -73,6 +75,7 @@ export const useCartStore = create<CartStore>()(
             }
             const result = await updateShopifyCartLine(cartId, existingItem.lineId, newQuantity);
             if (result.success) {
+              succeeded = true;
               const currentItems = get().items;
               set({
                 items: currentItems.map((i) =>
@@ -86,6 +89,7 @@ export const useCartStore = create<CartStore>()(
           } else {
             const result = await addLineToShopifyCart(cartId, { variantId: item.variantId, quantity: item.quantity });
             if (result.success) {
+              succeeded = true;
               const currentItems = get().items;
               set({
                 items: [
@@ -98,12 +102,24 @@ export const useCartStore = create<CartStore>()(
               clearCart();
             }
           }
+
+          if (succeeded) {
+            trackAddToCart({
+              content_ids: [item.variantId],
+              content_name: item.product.node.title,
+              content_type: "product",
+              currency: item.price.currencyCode,
+              value: parseFloat(item.price.amount) * item.quantity,
+              quantity: item.quantity,
+            });
+          }
         } catch (error) {
           console.error("Failed to add item:", error);
         } finally {
           set({ isLoading: false });
         }
       },
+
 
       updateQuantity: async (variantId, quantity) => {
         if (quantity <= 0) {

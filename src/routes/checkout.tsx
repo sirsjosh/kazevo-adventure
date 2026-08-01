@@ -12,7 +12,9 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { getVariantImage } from "@/lib/variantImages";
+import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
+
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
