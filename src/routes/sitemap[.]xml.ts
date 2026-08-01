@@ -22,7 +22,13 @@ export const Route = createFileRoute("/sitemap.xml")({
             changefreq: "monthly",
             priority: "0.7",
           },
+          { path: "/contact", changefreq: "yearly", priority: "0.5" },
+          { path: "/shipping", changefreq: "yearly", priority: "0.4" },
+          { path: "/refund-policy", changefreq: "yearly", priority: "0.4" },
+          { path: "/terms", changefreq: "yearly", priority: "0.3" },
+          { path: "/legal", changefreq: "yearly", priority: "0.3" },
         ];
+
 
         try {
           const products = await fetchShopifyProducts("*", 50);

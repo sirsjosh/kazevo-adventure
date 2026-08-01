@@ -26,9 +26,11 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import life1 from "@/assets/life-1.jpg";
-import life2 from "@/assets/life-2.jpg";
-import life3 from "@/assets/life-3.jpg";
+import detail1 from "@/assets/detail-1.jpg.asset.json";
+import detail2 from "@/assets/detail-2.jpg.asset.json";
+import detail3 from "@/assets/detail-3.jpg.asset.json";
+import detail4 from "@/assets/detail-4.jpg.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -351,38 +353,28 @@ function Landing() {
           </div>
         </section>
 
-        {/* Gallery */}
+        {/* Detail gallery */}
         <section id="gallery" className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
-          <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Out there, every weekend
-          </h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <img
-              src={life1}
-              alt="Hiker running a ridge at sunset with a kazevo pack"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              className="h-72 w-full rounded-3xl object-cover md:row-span-2 md:h-full"
-            />
-            <img
-              src={life2}
-              alt="Two friends hiking an alpine meadow"
-              width={1024}
-              height={768}
-              loading="lazy"
-              className="h-56 w-full rounded-3xl object-cover md:col-span-2"
-            />
-            <img
-              src={life3}
-              alt="Close-up of colorful backpack straps and cord pulls"
-              width={1024}
-              height={768}
-              loading="lazy"
-              className="h-56 w-full rounded-3xl object-cover md:col-span-2"
-            />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { src: detail1.url, alt: "Runner wearing a lime kazevo backpack by the water" },
+              { src: detail2.url, alt: "Breathable mesh back panel and adjustable webbing straps" },
+              { src: detail3.url, alt: "Grab handle and colorful cord pulls on the top panel" },
+              { src: detail4.url, alt: "Side mesh pocket with cord pulls and charm keyring" },
+            ].map((img) => (
+              <img
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                width={750}
+                height={700}
+                loading="lazy"
+                className="h-64 w-full rounded-3xl bg-muted object-cover sm:h-72"
+              />
+            ))}
           </div>
         </section>
+
 
         {/* CTA band */}
         <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
@@ -406,18 +398,22 @@ function Landing() {
             <span className="font-display text-lg font-black lowercase text-foreground">
               kazevo by solarah
             </span>
-            <a className="hover:text-foreground" href="#features">
-              Features
+            <a className="hover:text-foreground" href="/shipping">
+              Shipping Policy
             </a>
-            <a className="hover:text-foreground" href="#shop">
-              Shop
+            <a className="hover:text-foreground" href="/refund-policy">
+              Refund Policy
             </a>
-            <a className="hover:text-foreground" href="#specs">
-              Specs
+            <a className="hover:text-foreground" href="/terms">
+              Terms of Service
             </a>
-            <a className="hover:text-foreground" href="#gallery">
-              Trail
+            <a className="hover:text-foreground" href="/legal">
+              Legal Notice
             </a>
+            <a className="hover:text-foreground" href="/contact">
+              Contact
+            </a>
+
           </div>
           <div className="flex shrink-0 gap-3">
             {[Instagram, Youtube, Twitter].map((Icon, i) => (

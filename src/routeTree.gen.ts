@@ -11,7 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as LegalRouteImport } from './routes/legal'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as BlogChoosingAnUltralightBackpackRouteImport } from './routes/blog/choosing-an-ultralight-backpack'
 import { Route as ProductHandleRouteImport } from './routes/product/$handle'
 
@@ -25,9 +30,34 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingRoute = ShippingRouteImport.update({
+  id: '/shipping',
+  path: '/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogChoosingAnUltralightBackpackRoute =
@@ -45,14 +75,24 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -60,7 +100,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -69,21 +114,36 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/checkout'
+    | '/contact'
+    | '/legal'
+    | '/refund-policy'
+    | '/shipping'
     | '/sitemap.xml'
+    | '/terms'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/checkout'
+    | '/contact'
+    | '/legal'
+    | '/refund-policy'
+    | '/shipping'
     | '/sitemap.xml'
+    | '/terms'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   id:
     | '__root__'
     | '/'
     | '/checkout'
+    | '/contact'
+    | '/legal'
+    | '/refund-policy'
+    | '/shipping'
     | '/sitemap.xml'
+    | '/terms'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   fileRoutesById: FileRoutesById
@@ -91,7 +151,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
+  ContactRoute: typeof ContactRoute
+  LegalRoute: typeof LegalRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
+  ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   BlogChoosingAnUltralightBackpackRoute: typeof BlogChoosingAnUltralightBackpackRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
@@ -112,11 +177,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping': {
+      id: '/shipping'
+      path: '/shipping'
+      fullPath: '/shipping'
+      preLoaderRoute: typeof ShippingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/choosing-an-ultralight-backpack': {
@@ -139,7 +239,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
+  ContactRoute: ContactRoute,
+  LegalRoute: LegalRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
+  ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   BlogChoosingAnUltralightBackpackRoute: BlogChoosingAnUltralightBackpackRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
