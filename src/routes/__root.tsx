@@ -81,6 +81,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "author", content: "kazevo" },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
+      { property: "og:site_name", content: "kazevo by solarah" },
       { name: "twitter:card", content: "summary_large_image" },
       { title: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
       { property: "og:title", content: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
@@ -103,6 +105,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "kazevo by solarah",
+          url: "https://kazevo-adventure-launch.lovable.app/",
+          description:
+            "kazevo by solarah designs 190g ultralight, weather-resistant nylon hiking backpacks in vivid colorways.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "kazevo by solarah",
+          url: "https://kazevo-adventure-launch.lovable.app/",
+        }),
+      },
     ],
   }),
 
