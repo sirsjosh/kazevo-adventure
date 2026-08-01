@@ -253,11 +253,13 @@ function Landing() {
                 key={f.title}
                 className="rounded-3xl border border-border bg-card p-7 transition-transform duration-300 hover:-translate-y-1.5"
               >
-                <span className={`grid h-12 w-12 place-items-center rounded-2xl ${f.tone}`}>
-                  <f.icon size={22} />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-extrabold">{f.title}</h3>
-                <p className="mt-2 text-muted-foreground">{f.body}</p>
+                <div className="flex items-center gap-3">
+                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${f.tone}`}>
+                    <f.icon size={22} />
+                  </span>
+                  <h3 className="font-display text-xl font-extrabold leading-tight">{f.title}</h3>
+                </div>
+                <p className="mt-4 text-muted-foreground">{f.body}</p>
               </article>
             ))}
           </div>
