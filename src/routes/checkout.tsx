@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { getVariantImage } from "@/lib/variantImages";
+import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -51,7 +51,7 @@ function CheckoutPage() {
     (sum, i) => sum + parseFloat(i.price.amount) * i.quantity,
     0
   );
-  const currency = items[0]?.price.currencyCode ?? "USD";
+
 
   const handleCheckout = () => {
     const url = getCheckoutUrl();
@@ -129,22 +129,16 @@ function CheckoutPage() {
                     <div className="aspect-square w-full overflow-hidden rounded-2xl bg-muted sm:h-40 sm:w-40 sm:shrink-0">
                       <img
                         src={image}
-                        alt={`${item.product.node.title} — ${item.selectedOptions
-                          .map((o) => o.value)
-                          .join(", ")}`}
+                        alt={getVariantColorName(item.selectedOptions)}
                         className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="flex flex-1 flex-col">
                       <h2 className="font-display text-lg font-black leading-snug">
-                        {item.product.node.title}
+                        {getVariantColorName(item.selectedOptions)}
                       </h2>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {item.selectedOptions.map((o) => o.value).join(" • ")}
-                      </p>
                       <p className="mt-3 font-display text-xl font-black">
-                        {item.price.currencyCode}{" "}
-                        {(parseFloat(item.price.amount) * item.quantity).toFixed(2)}
+                        {formatUsd(parseFloat(item.price.amount) * item.quantity)} USD
                       </p>
                       <div className="mt-auto flex items-center justify-between gap-4 pt-5">
                         <div className="flex items-center gap-1 rounded-full border border-border p-1">
@@ -191,19 +185,17 @@ function CheckoutPage() {
               <dl className="mt-5 space-y-3 text-sm">
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Subtotal</dt>
-                  <dd className="font-semibold">
-                    {currency} {subtotal.toFixed(2)}
-                  </dd>
+                  <dd className="font-semibold">{formatUsd(subtotal)} USD</dd>
                 </div>
                 <div className="flex items-center justify-between">
-                  <dt className="text-muted-foreground">Shipping &amp; taxes</dt>
-                  <dd className="text-muted-foreground">Calculated at payment</dd>
+                  <dt className="text-muted-foreground">Shipping</dt>
+                  <dd className="font-semibold text-primary">Free</dd>
                 </div>
               </dl>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
                 <span className="font-display text-lg font-black">Total</span>
                 <span className="font-display text-2xl font-black">
-                  {currency} {subtotal.toFixed(2)}
+                  {formatUsd(subtotal)} USD
                 </span>
               </div>
               <Button
@@ -222,7 +214,8 @@ function CheckoutPage() {
                 )}
               </Button>
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                Payment is completed on Shopify&apos;s secure checkout.
+                Free shipping on every order. Payment is completed on Shopify&apos;s
+                secure checkout.
               </p>
             </aside>
           </div>
