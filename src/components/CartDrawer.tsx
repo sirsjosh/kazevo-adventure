@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import {
   ShoppingCart,
   Minus,
@@ -21,6 +22,7 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
+  const navigate = useNavigate();
   const { isDrawerOpen, setDrawerOpen } = useCartStore();
   const {
     items,
@@ -28,9 +30,9 @@ export function CartDrawer() {
     isSyncing,
     updateQuantity,
     removeItem,
-    getCheckoutUrl,
     syncCart,
   } = useCartStore();
+
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce(
@@ -43,11 +45,8 @@ export function CartDrawer() {
   }, [isDrawerOpen, syncCart]);
 
   const handleCheckout = () => {
-    const checkoutUrl = getCheckoutUrl();
-    if (checkoutUrl) {
-      window.open(checkoutUrl, "_blank");
-      setDrawerOpen(false);
-    }
+    setDrawerOpen(false);
+    navigate({ to: "/checkout" });
   };
 
   return (
@@ -154,7 +153,7 @@ export function CartDrawer() {
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Checkout with Shopify
+                      Review &amp; checkout
                     </>
                   )}
                 </Button>
