@@ -441,8 +441,8 @@ function Landing() {
         <section id="gallery" className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { src: detail1.url, alt: "Runner wearing a lime kazevo backpack by the water" },
               { src: detail2.url, alt: "Breathable mesh back panel and adjustable webbing straps" },
+              { src: detail1.url, alt: "Mint green kazevo backpack with a yellow donut charm" },
               { src: detail3.url, alt: "Grab handle and colorful cord pulls on the top panel" },
               { src: detail4.url, alt: "Side mesh pocket with cord pulls and charm keyring" },
             ].map((img) => (
