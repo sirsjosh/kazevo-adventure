@@ -5,6 +5,7 @@ import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
+import { getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 export const Route = createFileRoute("/product/$handle")({
@@ -69,6 +70,7 @@ function ProductDetail() {
       price: selectedVariant.price,
       quantity: 1,
       selectedOptions: selectedVariant.selectedOptions,
+      imageUrl: getVariantImage(selectedVariant.selectedOptions),
     });
   };
 

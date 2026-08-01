@@ -19,6 +19,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
@@ -85,13 +86,11 @@ export function CartDrawer() {
                   {items.map((item) => (
                     <div key={item.variantId} className="flex gap-4 p-2">
                       <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
-                        {item.product.node.images?.edges?.[0]?.node && (
-                          <img
-                            src={item.product.node.images.edges[0].node.url}
-                            alt={item.product.node.images.edges[0].node.altText ?? item.product.node.title}
-                            className="w-full h-full object-cover"
-                          />
-                        )}
+                        <img
+                          src={item.imageUrl ?? getVariantImage(item.selectedOptions)}
+                          alt={item.product.node.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-medium truncate">{item.product.node.title}</h4>

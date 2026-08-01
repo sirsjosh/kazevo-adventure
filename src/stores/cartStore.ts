@@ -18,6 +18,7 @@ export interface CartItem {
   price: { amount: string; currencyCode: string };
   quantity: number;
   selectedOptions: Array<{ name: string; value: string }>;
+  imageUrl?: string;
 }
 
 interface CartStore {

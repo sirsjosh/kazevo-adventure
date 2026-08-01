@@ -17,14 +17,15 @@ import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import {
+  colorDotMap,
+  colorNameMap,
+  fallbackVariantImage,
+  getVariantImage,
+} from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import orange from "@/assets/orange.jpg.asset.json";
-import mint from "@/assets/mint.jpg.asset.json";
-import lavender from "@/assets/lavender.jpg.asset.json";
-import lime from "@/assets/lime.jpg.asset.json";
-import black from "@/assets/black.jpg.asset.json";
 import life1 from "@/assets/life-1.jpg";
 import life2 from "@/assets/life-2.jpg";
 import life3 from "@/assets/life-3.jpg";
@@ -55,32 +56,8 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const variantImageMap: Record<string, string> = {
-  "深紫色": purple.url,
-  "深绿色": mint.url,
-  "橘色": orange.url,
-  "浅紫色": lavender.url,
-  "浅绿色": lime.url,
-  "黑色": black.url,
-};
+// color maps live in @/lib/variantImages
 
-const colorDotMap: Record<string, string> = {
-  "深紫色": "oklch(0.62 0.19 300)",
-  "橘色": "oklch(0.75 0.17 75)",
-  "深绿色": "oklch(0.85 0.13 172)",
-  "浅绿色": "oklch(0.87 0.2 122)",
-  "浅紫色": "oklch(0.78 0.11 300)",
-  "黑色": "oklch(0.25 0.02 285)",
-};
-
-const colorNameMap: Record<string, string> = {
-  "深紫色": "Deep Purple",
-  "橘色": "Vibrant Orange",
-  "深绿色": "Deep Green",
-  "浅绿色": "Light Green",
-  "浅紫色": "Lilac Bloom",
-  "黑色": "Classic Black",
-};
 
 const features = [
   {
@@ -126,11 +103,8 @@ function Landing() {
   const isLoading = useCartStore((state) => state.isLoading);
 
   const showcaseImage = useMemo(() => {
-    if (!selectedVariant) return purple.url;
-    const colorValue = selectedVariant.selectedOptions.find((o) =>
-      /color|colour|颜色/i.test(o.name)
-    )?.value;
-    return (colorValue && variantImageMap[colorValue]) || purple.url;
+    if (!selectedVariant) return fallbackVariantImage;
+    return getVariantImage(selectedVariant.selectedOptions);
   }, [selectedVariant]);
 
   const handleAddToCart = async () => {
@@ -142,6 +116,7 @@ function Landing() {
       price: selectedVariant.price,
       quantity: 1,
       selectedOptions: selectedVariant.selectedOptions,
+      imageUrl: getVariantImage(selectedVariant.selectedOptions),
     });
   };
 
