@@ -351,38 +351,28 @@ function Landing() {
           </div>
         </section>
 
-        {/* Gallery */}
+        {/* Detail gallery */}
         <section id="gallery" className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
-          <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Out there, every weekend
-          </h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <img
-              src={life1}
-              alt="Hiker running a ridge at sunset with a kazevo pack"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              className="h-72 w-full rounded-3xl object-cover md:row-span-2 md:h-full"
-            />
-            <img
-              src={life2}
-              alt="Two friends hiking an alpine meadow"
-              width={1024}
-              height={768}
-              loading="lazy"
-              className="h-56 w-full rounded-3xl object-cover md:col-span-2"
-            />
-            <img
-              src={life3}
-              alt="Close-up of colorful backpack straps and cord pulls"
-              width={1024}
-              height={768}
-              loading="lazy"
-              className="h-56 w-full rounded-3xl object-cover md:col-span-2"
-            />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { src: detail1.url, alt: "Runner wearing a lime kazevo backpack by the water" },
+              { src: detail2.url, alt: "Breathable mesh back panel and adjustable webbing straps" },
+              { src: detail3.url, alt: "Grab handle and colorful cord pulls on the top panel" },
+              { src: detail4.url, alt: "Side mesh pocket with cord pulls and charm keyring" },
+            ].map((img) => (
+              <img
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                width={750}
+                height={700}
+                loading="lazy"
+                className="h-64 w-full rounded-3xl bg-muted object-cover sm:h-72"
+              />
+            ))}
           </div>
         </section>
+
 
         {/* CTA band */}
         <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">

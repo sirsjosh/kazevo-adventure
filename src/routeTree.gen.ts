@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -27,6 +28,11 @@ const IndexRoute = IndexRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -69,6 +75,7 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/contact': typeof ContactRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/checkout'
+    | '/contact'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/checkout'
+    | '/contact'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/checkout'
+    | '/contact'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -139,6 +151,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
+  ContactRoute: typeof ContactRoute
   LegalRoute: typeof LegalRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   ShippingRoute: typeof ShippingRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -219,6 +239,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
+  ContactRoute: ContactRoute,
   LegalRoute: LegalRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   ShippingRoute: ShippingRoute,
