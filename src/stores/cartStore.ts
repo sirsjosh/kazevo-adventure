@@ -108,7 +108,7 @@ export const useCartStore = create<CartStore>()(
               content_ids: [item.variantId],
               content_name: item.product.node.title,
               content_type: "product",
-              currency: item.price.currencyCode,
+              currency: "USD",
               value: parseFloat(item.price.amount) * item.quantity,
               quantity: item.quantity,
             });

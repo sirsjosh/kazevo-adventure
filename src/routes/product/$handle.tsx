@@ -5,7 +5,7 @@ import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
-import { getVariantImage } from "@/lib/variantImages";
+import { formatUsd, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 const SITE_URL = "https://kazevo-adventure-launch.lovable.app";
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/product/$handle")({
                 offers: {
                   "@type": "Offer",
                   price: product.priceRange.minVariantPrice.amount,
-                  priceCurrency: product.priceRange.minVariantPrice.currencyCode,
+                  priceCurrency: "USD",
                   availability: "https://schema.org/InStock",
                   url,
                 },
@@ -168,8 +168,8 @@ function ProductDetail() {
             <div className="mt-6">
               <span className="font-display text-3xl font-black">
                 {selectedVariant
-                  ? `${selectedVariant.price.currencyCode} ${parseFloat(selectedVariant.price.amount).toFixed(2)}`
-                  : `${product.priceRange.minVariantPrice.currencyCode} ${parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2)}`}
+                  ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
+                  : `${formatUsd(parseFloat(product.priceRange.minVariantPrice.amount))} USD`}
               </span>
             </div>
 
