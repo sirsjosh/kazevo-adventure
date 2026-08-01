@@ -27,10 +27,6 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import detail1 from "@/assets/detail-1.jpg.asset.json";
-import detail2 from "@/assets/detail-2.jpg.asset.json";
-import detail3 from "@/assets/detail-3.jpg.asset.json";
-import detail4 from "@/assets/detail-4.jpg.asset.json";
 import life1 from "@/assets/life-1.png.asset.json";
 import life4 from "@/assets/life-4.png.asset.json";
 import life7 from "@/assets/life-7.png.asset.json";
@@ -437,27 +433,6 @@ function Landing() {
           </div>
         </section>
 
-        {/* Detail gallery */}
-        <section id="gallery" className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { src: detail2.url, alt: "Breathable mesh back panel and adjustable webbing straps" },
-              { src: detail1.url, alt: "Mint green kazevo backpack with a yellow donut charm" },
-              { src: detail3.url, alt: "Grab handle and colorful cord pulls on the top panel" },
-              { src: detail2.url, alt: "Breathable mesh back panel and adjustable webbing straps" },
-            ].map((img) => (
-              <img
-                key={img.src}
-                src={img.src}
-                alt={img.alt}
-                width={750}
-                height={700}
-                loading="lazy"
-                className="h-64 w-full rounded-3xl bg-muted object-cover sm:h-72"
-              />
-            ))}
-          </div>
-        </section>
 
 
         {/* CTA band */}
