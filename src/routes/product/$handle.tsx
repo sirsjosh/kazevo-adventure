@@ -1,8 +1,9 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useState, useMemo } from "react";
-import { Loader2, ShoppingBag, ArrowLeft } from "lucide-react";
+import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { CartButton } from "@/components/CartButton";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 
