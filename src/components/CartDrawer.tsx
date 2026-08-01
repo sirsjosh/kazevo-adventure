@@ -39,19 +39,19 @@ export function CartDrawer() {
   );
 
   useEffect(() => {
-    if (isOpen) syncCart();
-  }, [isOpen, syncCart]);
+    if (isDrawerOpen) syncCart();
+  }, [isDrawerOpen, syncCart]);
 
   const handleCheckout = () => {
     const checkoutUrl = getCheckoutUrl();
     if (checkoutUrl) {
       window.open(checkoutUrl, "_blank");
-      setIsOpen(false);
+      setDrawerOpen(false);
     }
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isDrawerOpen} onOpenChange={setDrawerOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" className="relative shrink-0">
           <ShoppingCart className="h-5 w-5" />
