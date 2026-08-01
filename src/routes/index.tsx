@@ -89,29 +89,15 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-        <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3 sm:flex sm:justify-between">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <a href="#top" className="flex min-w-0 items-center gap-2">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
               <Mountain size={18} />
             </span>
-            <span className="truncate font-display text-xl font-black tracking-tight lowercase">
-              kazevo
+            <span className="font-display text-xl font-black tracking-tight lowercase">
+              kazevo by solarah
             </span>
           </a>
-          <div className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
-            <a className="transition-colors hover:text-foreground" href="#features">
-              Features
-            </a>
-            <a className="transition-colors hover:text-foreground" href="#colors">
-              Colors
-            </a>
-            <a className="transition-colors hover:text-foreground" href="#specs">
-              Specs
-            </a>
-            <a className="transition-colors hover:text-foreground" href="#gallery">
-              Trail
-            </a>
-          </div>
           <a
             href="#colors"
             className="shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
