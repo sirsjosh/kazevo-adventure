@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Feather,
   ShieldCheck,
@@ -86,6 +86,36 @@ const features = [
     tone: "bg-mint/25 text-accent-foreground",
   },
 ];
+
+function useSmoothScroll(duration = 900) {
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const id = anchor.getAttribute("href")?.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      const start = window.scrollY;
+      const headerOffset = 88;
+      const end = el.getBoundingClientRect().top + start - headerOffset;
+      const startTime = performance.now();
+      const easeInOutCubic = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const step = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [duration]);
+}
 
 const specs = [
   ["Material", "Premium ripstop nylon, DWR coated"],
@@ -223,11 +253,13 @@ function Landing() {
                 key={f.title}
                 className="rounded-3xl border border-border bg-card p-7 transition-transform duration-300 hover:-translate-y-1.5"
               >
-                <span className={`grid h-12 w-12 place-items-center rounded-2xl ${f.tone}`}>
-                  <f.icon size={22} />
-                </span>
-                <h3 className="mt-5 font-display text-xl font-extrabold">{f.title}</h3>
-                <p className="mt-2 text-muted-foreground">{f.body}</p>
+                <div className="flex items-center gap-3">
+                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${f.tone}`}>
+                    <f.icon size={22} />
+                  </span>
+                  <h3 className="font-display text-xl font-extrabold leading-tight">{f.title}</h3>
+                </div>
+                <p className="mt-4 text-muted-foreground">{f.body}</p>
               </article>
             ))}
           </div>
