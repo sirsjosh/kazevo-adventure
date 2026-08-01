@@ -82,6 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "kazevo" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { title: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
+      { property: "og:title", content: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
+      { name: "twitter:title", content: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
+      { name: "description", content: "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days." },
+      { property: "og:description", content: "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days." },
+      { name: "twitter:description", content: "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c6e9e54a-dc01-4069-8a0b-7c7483ec778a/id-preview-9bcaa8a4--44ab39b5-ed9e-4af7-8a4c-5c5c342799a6.lovable.app-1785581284915.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c6e9e54a-dc01-4069-8a0b-7c7483ec778a/id-preview-9bcaa8a4--44ab39b5-ed9e-4af7-8a4c-5c5c342799a6.lovable.app-1785581284915.png" },
     ],
     links: [
       {
