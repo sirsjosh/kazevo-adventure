@@ -179,6 +179,8 @@ function RootComponent() {
       <MetaPixelTracker />
       <Outlet />
       <CartDrawer />
+      <DiscountPopup />
+
     </QueryClientProvider>
   );
 }
