@@ -357,7 +357,8 @@ export async function addLineToShopifyCart(
 
   const lines = data?.data?.cartLinesAdd?.cart?.lines?.edges ?? [];
   const newLine = lines.find((l) => l.node.merchandise.id === item.variantId);
-  return { success: true, lineId: newLine?.node?.id };
+  const lineId = newLine?.node?.id;
+  return lineId ? { success: true, lineId } : { success: true };
 }
 
 export async function updateShopifyCartLine(
