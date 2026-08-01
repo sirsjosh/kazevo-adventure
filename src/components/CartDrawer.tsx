@@ -19,7 +19,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { getVariantImage } from "@/lib/variantImages";
+import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
@@ -88,17 +88,16 @@ export function CartDrawer() {
                       <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
                         <img
                           src={item.imageUrl ?? getVariantImage(item.selectedOptions)}
-                          alt={item.product.node.title}
+                          alt={getVariantColorName(item.selectedOptions)}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-medium truncate">{item.product.node.title}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {item.selectedOptions.map((option) => option.value).join(" • ")}
-                        </p>
+                        <h4 className="font-medium truncate">
+                          {getVariantColorName(item.selectedOptions)}
+                        </h4>
                         <p className="font-semibold">
-                          {item.price.currencyCode} {parseFloat(item.price.amount).toFixed(2)}
+                          {formatUsd(parseFloat(item.price.amount))} USD
                         </p>
                       </div>
                       <div className="flex flex-col items-end gap-2 flex-shrink-0">
@@ -137,10 +136,11 @@ export function CartDrawer() {
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Total</span>
-                  <span className="text-xl font-bold">
-                    {items[0]?.price.currencyCode || "$"} {totalPrice.toFixed(2)}
-                  </span>
+                  <span className="text-xl font-bold">{formatUsd(totalPrice)} USD</span>
                 </div>
+                <p className="text-sm font-medium text-primary">
+                  Free shipping on every order
+                </p>
                 <Button
                   onClick={handleCheckout}
                   className="w-full"
