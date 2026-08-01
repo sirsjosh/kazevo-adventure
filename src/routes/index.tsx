@@ -315,8 +315,8 @@ function Landing() {
                   <div className="mt-6">
                     <span className="font-display text-3xl font-black">
                       {selectedVariant
-                        ? `${selectedVariant.price.currencyCode} ${parseFloat(selectedVariant.price.amount).toFixed(2)}`
-                        : `${product.node.priceRange.minVariantPrice.currencyCode} ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}`}
+                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
+                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
                     </span>
                   </div>
                   <Button
