@@ -26,11 +26,6 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import orange from "@/assets/orange.jpg.asset.json";
-import mint from "@/assets/mint.jpg.asset.json";
-import lavender from "@/assets/lavender.jpg.asset.json";
-import lime from "@/assets/lime.jpg.asset.json";
-import black from "@/assets/black.jpg.asset.json";
 import life1 from "@/assets/life-1.jpg";
 import life2 from "@/assets/life-2.jpg";
 import life3 from "@/assets/life-3.jpg";
