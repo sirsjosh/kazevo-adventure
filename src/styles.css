@@ -169,3 +169,16 @@
     color: var(--color-foreground);
   }
 }
+
+@keyframes kz-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  animation: kz-marquee 45s linear infinite;
+}
+
+.kz-marquee-track:hover {
+  animation-play-state: paused;
+}

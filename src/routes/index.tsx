@@ -31,6 +31,22 @@ import detail1 from "@/assets/detail-1.jpg.asset.json";
 import detail2 from "@/assets/detail-2.jpg.asset.json";
 import detail3 from "@/assets/detail-3.jpg.asset.json";
 import detail4 from "@/assets/detail-4.jpg.asset.json";
+import life1 from "@/assets/life-1.png.asset.json";
+import life4 from "@/assets/life-4.png.asset.json";
+import life7 from "@/assets/life-7.png.asset.json";
+import life10 from "@/assets/life-10.png.asset.json";
+import life13 from "@/assets/life-13.png.asset.json";
+import life16 from "@/assets/life-16.png.asset.json";
+import life19 from "@/assets/life-19.png.asset.json";
+
+const lifestyleShots = [
+  { src: life4.url, alt: "Woman resting beside a lime green kazevo backpack in a sunlit lounge" },
+  { src: life16.url, alt: "Woman holding a lilac kazevo backpack with rainbow zip pulls" },
+  { src: life10.url, alt: "Mint green kazevo backpack on a wooden bench in the sun" },
+  { src: life13.url, alt: "Yellow kazevo backpack held on a lap in an airport terminal" },
+  { src: life1.url, alt: "Black kazevo backpack with rainbow trim and donut charm" },
+  { src: life7.url, alt: "Woman slipping a tablet into a lavender kazevo backpack" },
+];
 
 
 export const Route = createFileRoute("/")({
@@ -266,6 +282,41 @@ function Landing() {
           </div>
         </section>
 
+        {/* Lifestyle marquee */}
+        <section id="in-the-wild" className="overflow-hidden pb-4">
+          <div className="mx-auto mb-8 max-w-6xl px-5">
+            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+              Out in the world
+            </h2>
+            <p className="mt-2 max-w-lg text-muted-foreground">
+              Terminals, benches, trailheads. kazevo goes wherever the day does.
+            </p>
+          </div>
+          <div className="relative">
+            <div className="flex w-max animate-marquee kz-marquee-track gap-4 px-4">
+              {[...lifestyleShots, ...lifestyleShots].map((img, i) => (
+                <figure
+                  key={i}
+                  className="group relative h-[26rem] w-64 shrink-0 overflow-hidden rounded-[2rem] bg-muted sm:w-72"
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    width={768}
+                    height={1366}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </figure>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
+          </div>
+        </section>
+
+
+
         {/* Product showcase */}
         <section id="shop" className="bg-muted/60 py-16 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
@@ -411,18 +462,30 @@ function Landing() {
 
         {/* CTA band */}
         <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
-          <div className="rounded-[2.5rem] bg-[image:var(--gradient-dopamine)] px-7 py-14 text-center">
-            <h2 className="font-display text-3xl font-black tracking-tight text-primary-foreground sm:text-4xl">
-              190 grams. Zero excuses.
-            </h2>
-            <a
-              href="#shop"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
-            >
-              Shop Now <ArrowRight size={18} />
-            </a>
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-ink">
+            <img
+              src={life19.url}
+              alt="Athlete wearing a lime kazevo backpack on a bold graphic set"
+              width={768}
+              height={1366}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-[72%_25%] opacity-70"
+            />
+            <div className="absolute inset-0 bg-[image:var(--gradient-dopamine)] opacity-60 mix-blend-multiply" />
+            <div className="relative px-7 py-20 text-center md:py-28">
+              <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
+                190 grams. Zero excuses.
+              </h2>
+              <a
+                href="#shop"
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
+              >
+                Shop Now <ArrowRight size={18} />
+              </a>
+            </div>
           </div>
         </section>
+
       </main>
 
       <footer className="border-t border-border">
