@@ -12,7 +12,9 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { getVariantImage } from "@/lib/variantImages";
+import { trackInitiateCheckout } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
+
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -53,8 +55,20 @@ function CheckoutPage() {
 
   const handleCheckout = () => {
     const url = getCheckoutUrl();
-    if (url) window.open(url, "_blank");
+    if (!url) return;
+
+    trackInitiateCheckout({
+      content_ids: items.map((i) => i.variantId),
+      content_name: items[0]?.product.node.title ?? "kazevo backpack",
+      content_type: "product",
+      currency: items[0]?.price.currencyCode ?? "USD",
+      value: subtotal,
+      num_items: totalItems,
+    });
+
+    window.open(url, "_blank");
   };
+
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">

@@ -7,12 +7,14 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartSync } from "@/hooks/useCartSync";
+import { getPixelId, trackPageView } from "@/lib/meta-pixel";
+
 
 function NotFoundComponent() {
   return (
@@ -127,6 +129,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           url: "https://kazevo-adventure-launch.lovable.app/",
         }),
       },
+      {
+        type: "text/javascript",
+        children: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '${getPixelId()}');fbq('track', 'PageView');`,
+      },
     ],
   }),
 
@@ -135,6 +141,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
+
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
@@ -145,9 +152,40 @@ function RootShell({ children }: { children: ReactNode }) {
       <body>
         {children}
         <Scripts />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${getPixelId()}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
       </body>
     </html>
   );
+}
+
+function PixelRouteTracker() {
+  const router = useRouter();
+  const lastPathRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    lastPathRef.current = window.location.pathname;
+
+    const unsubscribe = router.subscribe("onResolved", () => {
+      const path = window.location.pathname;
+      if (path !== lastPathRef.current) {
+        lastPathRef.current = path;
+        trackPageView();
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+  return null;
 }
 
 function RootComponent() {
@@ -157,8 +195,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <PixelRouteTracker />
       <Outlet />
       <CartDrawer />
     </QueryClientProvider>
   );
 }
+
