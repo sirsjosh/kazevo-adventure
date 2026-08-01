@@ -282,6 +282,41 @@ function Landing() {
           </div>
         </section>
 
+        {/* Lifestyle marquee */}
+        <section id="in-the-wild" className="overflow-hidden pb-4">
+          <div className="mx-auto mb-8 max-w-6xl px-5">
+            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+              Out in the world
+            </h2>
+            <p className="mt-2 max-w-lg text-muted-foreground">
+              Terminals, benches, trailheads. kazevo goes wherever the day does.
+            </p>
+          </div>
+          <div className="relative">
+            <div className="flex w-max animate-marquee kz-marquee-track gap-4 px-4">
+              {[...lifestyleShots, ...lifestyleShots].map((img, i) => (
+                <figure
+                  key={i}
+                  className="group relative h-[26rem] w-64 shrink-0 overflow-hidden rounded-[2rem] bg-muted sm:w-72"
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    width={768}
+                    height={1366}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </figure>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
+          </div>
+        </section>
+
+
+
         {/* Product showcase */}
         <section id="shop" className="bg-muted/60 py-16 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
