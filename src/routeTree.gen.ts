@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as BlogChoosingAnUltralightBackpackRouteImport } from './routes/blog/choosing-an-ultralight-backpack'
 import { Route as ProductHandleRouteImport } from './routes/product/$handle'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,12 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogChoosingAnUltralightBackpackRoute =
+  BlogChoosingAnUltralightBackpackRouteImport.update({
+    id: '/blog/choosing-an-ultralight-backpack',
+    path: '/blog/choosing-an-ultralight-backpack',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ProductHandleRoute = ProductHandleRouteImport.update({
   id: '/product/$handle',
   path: '/product/$handle',
@@ -39,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesById {
@@ -52,20 +61,38 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/checkout' | '/sitemap.xml' | '/product/$handle'
+  fullPaths:
+    | '/'
+    | '/checkout'
+    | '/sitemap.xml'
+    | '/blog/choosing-an-ultralight-backpack'
+    | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/checkout' | '/sitemap.xml' | '/product/$handle'
-  id: '__root__' | '/' | '/checkout' | '/sitemap.xml' | '/product/$handle'
+  to:
+    | '/'
+    | '/checkout'
+    | '/sitemap.xml'
+    | '/blog/choosing-an-ultralight-backpack'
+    | '/product/$handle'
+  id:
+    | '__root__'
+    | '/'
+    | '/checkout'
+    | '/sitemap.xml'
+    | '/blog/choosing-an-ultralight-backpack'
+    | '/product/$handle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogChoosingAnUltralightBackpackRoute: typeof BlogChoosingAnUltralightBackpackRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
 
@@ -92,6 +119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/choosing-an-ultralight-backpack': {
+      id: '/blog/choosing-an-ultralight-backpack'
+      path: '/blog/choosing-an-ultralight-backpack'
+      fullPath: '/blog/choosing-an-ultralight-backpack'
+      preLoaderRoute: typeof BlogChoosingAnUltralightBackpackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$handle': {
       id: '/product/$handle'
       path: '/product/$handle'
@@ -106,8 +140,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogChoosingAnUltralightBackpackRoute: BlogChoosingAnUltralightBackpackRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
