@@ -12,7 +12,7 @@ const SITE_URL = "https://kazevo-adventure-launch.lovable.app";
 
 export const Route = createFileRoute("/product/$handle")({
   head: ({ match, loaderData }) => {
-    const product = loaderData?.product;
+    const product = (loaderData as { product: ShopifyProduct["node"] } | undefined)?.product;
     const title = product ? `${product.title} — kazevo by solarah` : "Product — kazevo by solarah";
     const raw = (product?.description ?? "").replace(/\s+/g, " ").trim();
     const description =
