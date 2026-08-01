@@ -13,6 +13,7 @@ export function CartButton() {
       variant="outline"
       size="icon"
       className="relative shrink-0"
+      aria-label="Open cart"
       onClick={() => setDrawerOpen(true)}
     >
       <ShoppingCart className="h-5 w-5" />
