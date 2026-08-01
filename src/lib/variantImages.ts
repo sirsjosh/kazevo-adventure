@@ -46,3 +46,15 @@ export function getVariantImage(
   const colorValue = getVariantColorValue(selectedOptions);
   return (colorValue && variantImageMap[colorValue]) || fallbackVariantImage;
 }
+
+export function getVariantColorName(
+  selectedOptions: Array<{ name: string; value: string }>
+): string {
+  const colorValue = getVariantColorValue(selectedOptions);
+  if (!colorValue) return "";
+  return colorNameMap[colorValue] ?? colorValue;
+}
+
+export function formatUsd(amount: number): string {
+  return `$${amount.toFixed(2)}`;
+}
