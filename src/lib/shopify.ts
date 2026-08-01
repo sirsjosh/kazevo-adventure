@@ -262,12 +262,17 @@ const CART_LINES_REMOVE_MUTATION = `
 export function formatCheckoutUrl(checkoutUrl: string): string {
   try {
     const url = new URL(checkoutUrl);
+    // The store's primary domain may point at this marketing site, which would
+    // 404 on checkout paths. Always use the permanent myshopify.com domain.
+    url.host = SHOPIFY_STORE_PERMANENT_DOMAIN;
+    url.protocol = "https:";
     url.searchParams.set("channel", "online_store");
     return url.toString();
   } catch {
     return checkoutUrl;
   }
 }
+
 
 function isCartNotFoundError(
   userErrors: Array<{ field: string[] | null; message: string }>
