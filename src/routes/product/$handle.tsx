@@ -5,7 +5,7 @@ import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
-import { getVariantImage } from "@/lib/variantImages";
+import { formatUsd, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 const SITE_URL = "https://kazevo-adventure-launch.lovable.app";

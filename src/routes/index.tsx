@@ -21,6 +21,7 @@ import {
   colorDotMap,
   colorNameMap,
   fallbackVariantImage,
+  formatUsd,
   getVariantImage,
 } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
