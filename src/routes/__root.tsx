@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartDrawer } from "@/components/CartDrawer";
+import { DiscountPopup } from "@/components/DiscountPopup";
 import { MetaPixelTracker } from "@/components/MetaPixelTracker";
 import { useCartSync } from "@/hooks/useCartSync";
 import { getPixelId } from "@/lib/meta-pixel";
@@ -178,6 +179,8 @@ function RootComponent() {
       <MetaPixelTracker />
       <Outlet />
       <CartDrawer />
+      <DiscountPopup />
+
     </QueryClientProvider>
   );
 }
