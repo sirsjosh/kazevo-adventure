@@ -15,7 +15,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
-import { ProductCard } from "@/components/ProductCard";
+
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -348,19 +348,6 @@ function Landing() {
           </div>
         </section>
 
-        {/* Product grid */}
-        {products.length > 0 && (
-          <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              Shop the collection
-            </h2>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {products.map((product) => (
-                <ProductCard key={product.node.id} product={product} />
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* Specs */}
         <section id="specs" className="mx-auto max-w-4xl px-5 py-16 md:py-24">

@@ -43,11 +43,8 @@ export function CartDrawer() {
   }, [isDrawerOpen, syncCart]);
 
   const handleCheckout = () => {
-    const checkoutUrl = getCheckoutUrl();
-    if (checkoutUrl) {
-      window.open(checkoutUrl, "_blank");
-      setDrawerOpen(false);
-    }
+    setDrawerOpen(false);
+    navigate({ to: "/checkout" });
   };
 
   return (
