@@ -427,18 +427,30 @@ function Landing() {
 
         {/* CTA band */}
         <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
-          <div className="rounded-[2.5rem] bg-[image:var(--gradient-dopamine)] px-7 py-14 text-center">
-            <h2 className="font-display text-3xl font-black tracking-tight text-primary-foreground sm:text-4xl">
-              190 grams. Zero excuses.
-            </h2>
-            <a
-              href="#shop"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
-            >
-              Shop Now <ArrowRight size={18} />
-            </a>
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-ink">
+            <img
+              src={life19.url}
+              alt="Athlete wearing a lime kazevo backpack on a bold graphic set"
+              width={768}
+              height={1366}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-[70%_center] opacity-70"
+            />
+            <div className="absolute inset-0 bg-[image:var(--gradient-dopamine)] opacity-60 mix-blend-multiply" />
+            <div className="relative px-7 py-20 text-center md:py-28">
+              <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
+                190 grams. Zero excuses.
+              </h2>
+              <a
+                href="#shop"
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
+              >
+                Shop Now <ArrowRight size={18} />
+              </a>
+            </div>
           </div>
         </section>
+
       </main>
 
       <footer className="border-t border-border">
