@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   ShoppingCart,
   Minus,
@@ -21,7 +21,7 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isDrawerOpen, setDrawerOpen } = useCartStore();
   const {
     items,
     isLoading,
