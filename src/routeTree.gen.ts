@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as BlogChoosingAnUltralightBackpackRouteImport } from './routes/blog/choosing-an-ultralight-backpack'
 import { Route as ProductHandleRouteImport } from './routes/product/$handle'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingRoute = ShippingRouteImport.update({
+  id: '/shipping',
+  path: '/shipping',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -45,6 +51,7 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
@@ -52,6 +59,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
@@ -60,6 +68,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
@@ -69,6 +78,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/checkout'
+    | '/shipping'
     | '/sitemap.xml'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
@@ -76,6 +86,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/checkout'
+    | '/shipping'
     | '/sitemap.xml'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
@@ -83,6 +94,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/checkout'
+    | '/shipping'
     | '/sitemap.xml'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
@@ -91,6 +103,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
+  ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogChoosingAnUltralightBackpackRoute: typeof BlogChoosingAnUltralightBackpackRoute
   ProductHandleRoute: typeof ProductHandleRoute
@@ -110,6 +123,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping': {
+      id: '/shipping'
+      path: '/shipping'
+      fullPath: '/shipping'
+      preLoaderRoute: typeof ShippingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -139,6 +159,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
+  ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogChoosingAnUltralightBackpackRoute: BlogChoosingAnUltralightBackpackRoute,
   ProductHandleRoute: ProductHandleRoute,
