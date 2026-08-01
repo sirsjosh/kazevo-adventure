@@ -89,6 +89,7 @@ export const useCartStore = create<CartStore>()(
                   ...currentItems,
                   { ...item, lineId: result.lineId ?? null },
                 ],
+                isDrawerOpen: true,
               });
             } else if (result.cartNotFound) {
               clearCart();
