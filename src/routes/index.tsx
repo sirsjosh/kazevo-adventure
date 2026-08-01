@@ -398,18 +398,22 @@ function Landing() {
             <span className="font-display text-lg font-black lowercase text-foreground">
               kazevo by solarah
             </span>
-            <a className="hover:text-foreground" href="#features">
-              Features
+            <a className="hover:text-foreground" href="/shipping">
+              Shipping Policy
             </a>
-            <a className="hover:text-foreground" href="#shop">
-              Shop
+            <a className="hover:text-foreground" href="/refund-policy">
+              Refund Policy
             </a>
-            <a className="hover:text-foreground" href="#specs">
-              Specs
+            <a className="hover:text-foreground" href="/terms">
+              Terms of Service
             </a>
-            <a className="hover:text-foreground" href="#gallery">
-              Trail
+            <a className="hover:text-foreground" href="/legal">
+              Legal Notice
             </a>
+            <a className="hover:text-foreground" href="/contact">
+              Contact
+            </a>
+
           </div>
           <div className="flex shrink-0 gap-3">
             {[Instagram, Youtube, Twitter].map((Icon, i) => (
