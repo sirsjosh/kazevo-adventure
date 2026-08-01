@@ -7,13 +7,14 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartDrawer } from "@/components/CartDrawer";
+import { MetaPixelTracker } from "@/components/MetaPixelTracker";
 import { useCartSync } from "@/hooks/useCartSync";
-import { getPixelId, trackPageView } from "@/lib/meta-pixel";
+import { getPixelId } from "@/lib/meta-pixel";
 
 
 function NotFoundComponent() {
@@ -166,27 +167,6 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-function PixelRouteTracker() {
-  const router = useRouter();
-  const lastPathRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    lastPathRef.current = window.location.pathname;
-
-    const unsubscribe = router.subscribe("onResolved", () => {
-      const path = window.location.pathname;
-      if (path !== lastPathRef.current) {
-        lastPathRef.current = path;
-        trackPageView();
-      }
-    });
-
-    return () => unsubscribe();
-  }, [router]);
-
-  return null;
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -195,7 +175,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <PixelRouteTracker />
+      <MetaPixelTracker />
       <Outlet />
       <CartDrawer />
     </QueryClientProvider>
