@@ -9,6 +9,8 @@ import {
   removeLineFromShopifyCart,
   getShopifyCart,
 } from "@/lib/shopify";
+import { trackAddToCart } from "@/lib/meta-pixel";
+
 
 export interface CartItem {
   lineId: string | null;
