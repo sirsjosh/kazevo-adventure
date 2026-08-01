@@ -8,7 +8,9 @@ import {
   updateShopifyCartLine,
   removeLineFromShopifyCart,
   getShopifyCart,
+  formatCheckoutUrl,
 } from "@/lib/shopify";
+
 import { trackAddToCart } from "@/lib/meta-pixel";
 
 
