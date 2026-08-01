@@ -469,7 +469,7 @@ function Landing() {
               width={768}
               height={1366}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-[70%_center] opacity-70"
+              className="absolute inset-0 h-full w-full object-cover object-[72%_25%] opacity-70"
             />
             <div className="absolute inset-0 bg-[image:var(--gradient-dopamine)] opacity-60 mix-blend-multiply" />
             <div className="relative px-7 py-20 text-center md:py-28">
