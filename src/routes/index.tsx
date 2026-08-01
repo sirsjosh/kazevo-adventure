@@ -31,6 +31,22 @@ import detail1 from "@/assets/detail-1.jpg.asset.json";
 import detail2 from "@/assets/detail-2.jpg.asset.json";
 import detail3 from "@/assets/detail-3.jpg.asset.json";
 import detail4 from "@/assets/detail-4.jpg.asset.json";
+import life1 from "@/assets/life-1.png.asset.json";
+import life4 from "@/assets/life-4.png.asset.json";
+import life7 from "@/assets/life-7.png.asset.json";
+import life10 from "@/assets/life-10.png.asset.json";
+import life13 from "@/assets/life-13.png.asset.json";
+import life16 from "@/assets/life-16.png.asset.json";
+import life19 from "@/assets/life-19.png.asset.json";
+
+const lifestyleShots = [
+  { src: life4.url, alt: "Woman resting beside a lime green kazevo backpack in a sunlit lounge" },
+  { src: life16.url, alt: "Woman holding a lilac kazevo backpack with rainbow zip pulls" },
+  { src: life10.url, alt: "Mint green kazevo backpack on a wooden bench in the sun" },
+  { src: life13.url, alt: "Yellow kazevo backpack held on a lap in an airport terminal" },
+  { src: life1.url, alt: "Black kazevo backpack with rainbow trim and donut charm" },
+  { src: life7.url, alt: "Woman slipping a tablet into a lavender kazevo backpack" },
+];
 
 
 export const Route = createFileRoute("/")({
