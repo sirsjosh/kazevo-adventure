@@ -444,7 +444,7 @@ function Landing() {
               { src: detail2.url, alt: "Breathable mesh back panel and adjustable webbing straps" },
               { src: detail1.url, alt: "Mint green kazevo backpack with a yellow donut charm" },
               { src: detail3.url, alt: "Grab handle and colorful cord pulls on the top panel" },
-              { src: detail4.url, alt: "Side mesh pocket with cord pulls and charm keyring" },
+              { src: life16.url, alt: "Woman opening a purple kazevo backpack with rainbow zip pulls" },
             ].map((img) => (
               <img
                 key={img.src}
