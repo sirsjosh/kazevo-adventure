@@ -59,6 +59,7 @@ export const useCartStore = create<CartStore>()(
                 cartId: result.cartId,
                 checkoutUrl: result.checkoutUrl,
                 items: [{ ...item, lineId: result.lineId }],
+                isDrawerOpen: true,
               });
             }
           } else if (existingItem) {
