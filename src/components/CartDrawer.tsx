@@ -153,7 +153,7 @@ export function CartDrawer() {
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Checkout with Shopify
+                      Review &amp; checkout
                     </>
                   )}
                 </Button>
