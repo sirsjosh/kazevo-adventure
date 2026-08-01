@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 export const Route = createFileRoute("/checkout")({
@@ -104,20 +105,21 @@ function CheckoutPage() {
           <div className="mt-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
             <ul className="space-y-6">
               {items.map((item) => {
-                const image = item.product.node.images?.edges?.[0]?.node;
+                const image =
+                  item.imageUrl ?? getVariantImage(item.selectedOptions);
                 return (
                   <li
                     key={item.variantId}
                     className="flex flex-col gap-5 rounded-3xl border border-border bg-card p-5 sm:flex-row"
                   >
                     <div className="aspect-square w-full overflow-hidden rounded-2xl bg-muted sm:h-40 sm:w-40 sm:shrink-0">
-                      {image && (
-                        <img
-                          src={image.url}
-                          alt={image.altText ?? item.product.node.title}
-                          className="h-full w-full object-cover"
-                        />
-                      )}
+                      <img
+                        src={image}
+                        alt={`${item.product.node.title} — ${item.selectedOptions
+                          .map((o) => o.value)
+                          .join(", ")}`}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                     <div className="flex flex-1 flex-col">
                       <h2 className="font-display text-lg font-black leading-snug">
