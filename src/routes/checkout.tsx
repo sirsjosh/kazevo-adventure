@@ -61,7 +61,7 @@ function CheckoutPage() {
       content_ids: items.map((i) => i.variantId),
       content_name: items[0]?.product.node.title ?? "kazevo backpack",
       content_type: "product",
-      currency: items[0]?.price.currencyCode ?? "USD",
+      currency: "USD",
       value: subtotal,
       num_items: totalItems,
     });
