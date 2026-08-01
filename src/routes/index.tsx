@@ -49,7 +49,10 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://kazevo-adventure-launch.lovable.app/" }],
+    links: [
+      { rel: "canonical", href: "https://kazevo-adventure-launch.lovable.app/" },
+      { rel: "preload", as: "image", href: purple.url, fetchpriority: "high" },
+    ],
   }),
   loader: async () => {
     const products = await fetchShopifyProducts("*", 50);
@@ -197,6 +200,7 @@ function Landing() {
                 <img
                   src={purple.url}
                   alt="kazevo 190g ultralight backpack in deep purple"
+                  fetchPriority="high"
                   width={1200}
                   height={1200}
                   className="h-full w-full object-cover"

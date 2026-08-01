@@ -23,7 +23,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           const products = await fetchShopifyProducts("*", 50);
           for (const product of products) {
             entries.push({
-              path: `/product/${product.node.handle}`,
+              path: `/product/${encodeURIComponent(product.node.handle)}`,
               changefreq: "weekly",
               priority: "0.8",
             });
