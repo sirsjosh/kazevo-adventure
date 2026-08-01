@@ -79,10 +79,14 @@ function ProductDetail() {
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <a href="/" className="flex min-w-0 items-center gap-2">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
+              <Mountain size={18} />
+            </span>
             <span className="font-display text-xl font-black tracking-tight lowercase">
               kazevo by solarah
             </span>
           </a>
+          <CartButton />
         </nav>
       </header>
 
