@@ -26,9 +26,11 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import life1 from "@/assets/life-1.jpg";
-import life2 from "@/assets/life-2.jpg";
-import life3 from "@/assets/life-3.jpg";
+import detail1 from "@/assets/detail-1.jpg.asset.json";
+import detail2 from "@/assets/detail-2.jpg.asset.json";
+import detail3 from "@/assets/detail-3.jpg.asset.json";
+import detail4 from "@/assets/detail-4.jpg.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
