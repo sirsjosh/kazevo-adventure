@@ -50,7 +50,7 @@ export const useCartStore = create<CartStore>()(
         set({ isLoading: true });
         try {
           if (!cartId) {
-            const result = await createShopifyCart({ ...item, lineId: null });
+            const result = await createShopifyCart({ variantId: item.variantId, quantity: item.quantity });
             if (result) {
               set({
                 cartId: result.cartId,
