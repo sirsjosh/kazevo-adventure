@@ -75,6 +75,7 @@ export const useCartStore = create<CartStore>()(
                 items: currentItems.map((i) =>
                   i.variantId === item.variantId ? { ...i, quantity: newQuantity } : i
                 ),
+                isDrawerOpen: true,
               });
             } else if (result.cartNotFound) {
               clearCart();
