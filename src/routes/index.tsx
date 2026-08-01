@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Feather,
   ShieldCheck,
@@ -9,7 +9,15 @@ import {
   Instagram,
   Youtube,
   Twitter,
+  ShoppingBag,
+  Loader2,
 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { CartButton } from "@/components/CartButton";
+import { ProductCard } from "@/components/ProductCard";
+import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
 import orange from "@/assets/orange.jpg.asset.json";
@@ -24,31 +32,55 @@ import life3 from "@/assets/life-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "kazevo — 190g Ultralight Adventure Backpacks" },
+      { title: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
       {
         name: "description",
         content:
-          "kazevo makes 190g ultralight, weather-resistant nylon backpacks in five vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days.",
+          "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days.",
       },
-      { property: "og:title", content: "kazevo — 190g of Pure Adventure" },
+      { property: "og:title", content: "kazevo by solarah — 190g of Pure Adventure" },
       {
         property: "og:description",
         content:
           "Ultralight 190g nylon backpacks with arc-shaped straps and dopamine colorways. Shop the kazevo pack.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  loader: async () => {
+    const products = await fetchShopifyProducts("*", 50);
+    return { products };
+  },
   component: Landing,
 });
 
-const variants = [
-  { name: "Deep Purple", img: purple.url, dot: "oklch(0.62 0.19 300)" },
-  { name: "Vibrant Orange", img: orange.url, dot: "oklch(0.75 0.17 75)" },
-  { name: "Deep Green", img: mint.url, dot: "oklch(0.85 0.13 172)" },
-  { name: "Light Green", img: lime.url, dot: "oklch(0.87 0.2 122)" },
-  { name: "Lilac Bloom", img: lavender.url, dot: "oklch(0.78 0.11 300)" },
-  { name: "Classic Black", img: black.url, dot: "oklch(0.25 0.02 285)" },
-];
+const variantImageMap: Record<string, string> = {
+  "深紫色": purple.url,
+  "深绿色": mint.url,
+  "橘色": orange.url,
+  "浅紫色": lavender.url,
+  "浅绿色": lime.url,
+  "黑色": black.url,
+};
+
+const colorDotMap: Record<string, string> = {
+  "深紫色": "oklch(0.62 0.19 300)",
+  "橘色": "oklch(0.75 0.17 75)",
+  "深绿色": "oklch(0.85 0.13 172)",
+  "浅绿色": "oklch(0.87 0.2 122)",
+  "浅紫色": "oklch(0.78 0.11 300)",
+  "黑色": "oklch(0.25 0.02 285)",
+};
+
+const colorNameMap: Record<string, string> = {
+  "深紫色": "Deep Purple",
+  "橘色": "Vibrant Orange",
+  "深绿色": "Deep Green",
+  "浅绿色": "Light Green",
+  "浅紫色": "Lilac Bloom",
+  "黑色": "Classic Black",
+};
 
 const features = [
   {
@@ -79,12 +111,39 @@ const specs = [
   ["Straps", "Arc-shaped breathable mesh"],
   ["Pockets", "Main, front zip, dual side mesh"],
   ["Packability", "Folds into internal pocket"],
-  ["Colorways", "5 dopamine variants"],
+  ["Colorways", "6 dopamine variants"],
 ];
 
 function Landing() {
+  const { products } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const product = products[0];
+  const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
+
   const [active, setActive] = useState(0);
-  const variant = variants[active]!;
+  const selectedVariant = variants[active];
+
+  const addItem = useCartStore((state) => state.addItem);
+  const isLoading = useCartStore((state) => state.isLoading);
+
+  const showcaseImage = useMemo(() => {
+    if (!selectedVariant) return purple.url;
+    const colorValue = selectedVariant.selectedOptions.find((o) =>
+      /color|colour|颜色/i.test(o.name)
+    )?.value;
+    return (colorValue && variantImageMap[colorValue]) || purple.url;
+  }, [selectedVariant]);
+
+  const handleAddToCart = async () => {
+    if (!product || !selectedVariant) return;
+    await addItem({
+      product,
+      variantId: selectedVariant.id,
+      variantTitle: selectedVariant.title,
+      price: selectedVariant.price,
+      quantity: 1,
+      selectedOptions: selectedVariant.selectedOptions,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
@@ -98,12 +157,15 @@ function Landing() {
               kazevo by solarah
             </span>
           </a>
-          <a
-            href="#colors"
-            className="shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
-          >
-            Shop Now
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href="#shop"
+              className="hidden shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 sm:inline-flex"
+            >
+              Shop Now
+            </a>
+            <CartButton />
+          </div>
         </nav>
       </header>
 
@@ -127,7 +189,7 @@ function Landing() {
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
-                  href="#colors"
+                  href="#shop"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
                 >
                   Shop Now <ArrowRight size={18} />
@@ -143,7 +205,7 @@ function Landing() {
                 {[
                   ["190g", "Weight"],
                   ["18L", "Capacity"],
-                  ["5", "Colorways"],
+                  ["6", "Colorways"],
                 ].map(([v, k]) => (
                   <div key={k} className="rounded-2xl bg-muted px-2 py-3">
                     <dt className="font-display text-2xl font-black">{v}</dt>
@@ -189,55 +251,116 @@ function Landing() {
         </section>
 
         {/* Product showcase */}
-        <section id="colors" className="bg-muted/60 py-16 md:py-24">
+        <section id="shop" className="bg-muted/60 py-16 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
-            <div className="order-2 md:order-1">
-              <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-                Pick your dopamine hit
-              </h2>
-              <p className="mt-3 text-muted-foreground">
-                Five color-blocked variants, each with contrast webbing, mesh side pockets and the
-                signature cord-pull cluster.
-              </p>
-              <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-                Colorway
-              </p>
-              <p className="mt-1 font-display text-2xl font-extrabold">{variant.name}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {variants.map((v, i) => (
-                  <button
-                    key={v.name}
-                    type="button"
-                    aria-label={v.name}
-                    aria-pressed={i === active}
-                    onClick={() => setActive(i)}
-                    className={`h-11 w-11 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
-                      i === active ? "border-foreground scale-110" : "border-border"
-                    }`}
-                    style={{ backgroundColor: v.dot }}
+            {product ? (
+              <>
+                <div className="order-2 md:order-1">
+                  <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+                    Pick your dopamine hit
+                  </h2>
+                  <p className="mt-3 text-muted-foreground">
+                    {product.node.description}
+                  </p>
+                  <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+                    Colorway
+                  </p>
+                  <p className="mt-1 font-display text-2xl font-extrabold">
+                    {selectedVariant
+                      ? colorNameMap[
+                          selectedVariant.selectedOptions.find((o) =>
+                            /color|colour|颜色/i.test(o.name)
+                          )?.value ?? ""
+                        ] || selectedVariant.title
+                      : "Select a color"}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    {variants.map((variant, i) => {
+                      const colorValue = variant.selectedOptions.find((o) =>
+                        /color|colour|颜色/i.test(o.name)
+                      )?.value;
+                      return (
+                        <button
+                          key={variant.id}
+                          type="button"
+                          aria-label={colorNameMap[colorValue ?? ""] || variant.title}
+                          aria-pressed={i === active}
+                          onClick={() => setActive(i)}
+                          className={`h-11 w-11 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
+                            i === active ? "border-foreground scale-110" : "border-border"
+                          }`}
+                          style={{
+                            backgroundColor: colorDotMap[colorValue ?? ""] || "oklch(0.7 0.05 300)",
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="mt-6">
+                    <span className="font-display text-3xl font-black">
+                      {selectedVariant
+                        ? `${selectedVariant.price.currencyCode} ${parseFloat(selectedVariant.price.amount).toFixed(2)}`
+                        : `${product.node.priceRange.minVariantPrice.currencyCode} ${parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}`}
+                    </span>
+                  </div>
+                  <Button
+                    onClick={handleAddToCart}
+                    disabled={isLoading || !selectedVariant?.availableForSale}
+                    className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 h-auto text-base font-semibold shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
+                  >
+                    {isLoading ? (
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                    ) : (
+                      <>
+                        <ShoppingBag className="h-5 w-5" />
+                        Add to Cart
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <div className="order-1 aspect-[3/4] overflow-hidden rounded-[2.5rem] bg-card md:order-2">
+                  <img
+                    key={showcaseImage}
+                    src={showcaseImage}
+                    alt={
+                      selectedVariant
+                        ? `kazevo backpack in ${colorNameMap[selectedVariant.selectedOptions.find((o) => /color|colour|颜色/i.test(o.name))?.value ?? ""] || selectedVariant.title}`
+                        : "kazevo backpack"
+                    }
+                    width={1200}
+                    height={1200}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-opacity duration-500"
                   />
-                ))}
+                </div>
+              </>
+            ) : (
+              <div className="order-2 md:order-1 md:col-span-2 text-center py-16">
+                <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+                  No products found
+                </h2>
+                <p className="mt-3 text-muted-foreground">
+                  Your Shopify store is connected but has no products yet. Tell me what product
+                  you'd like to add and I'll create it for you.
+                </p>
               </div>
-              <a
-                href="#specs"
-                className="mt-9 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
-              >
-                Shop {variant.name} <ArrowRight size={18} />
-              </a>
-            </div>
-            <div className="order-1 aspect-[3/4] overflow-hidden rounded-[2.5rem] bg-card md:order-2">
-              <img
-                key={variant.img}
-                src={variant.img}
-                alt={`kazevo backpack in ${variant.name}`}
-                width={1200}
-                height={1200}
-                loading="lazy"
-                className="h-full w-full object-cover transition-opacity duration-500"
-              />
-            </div>
+            )}
           </div>
         </section>
+
+        {/* Product grid */}
+        {products.length > 0 && (
+          <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+              Shop the collection
+            </h2>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {products.map((product) => (
+                <ProductCard key={product.node.id} product={product} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Specs */}
         <section id="specs" className="mx-auto max-w-4xl px-5 py-16 md:py-24">
@@ -300,7 +423,7 @@ function Landing() {
               190 grams. Zero excuses.
             </h2>
             <a
-              href="#colors"
+              href="#shop"
               className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
             >
               Shop Now <ArrowRight size={18} />
@@ -313,13 +436,13 @@ function Landing() {
         <div className="mx-auto grid max-w-6xl gap-6 px-5 py-10 sm:grid-cols-[1fr_auto] sm:items-center">
           <div className="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
             <span className="font-display text-lg font-black lowercase text-foreground">
-              kazevo
+              kazevo by solarah
             </span>
             <a className="hover:text-foreground" href="#features">
               Features
             </a>
-            <a className="hover:text-foreground" href="#colors">
-              Colors
+            <a className="hover:text-foreground" href="#shop">
+              Shop
             </a>
             <a className="hover:text-foreground" href="#specs">
               Specs
@@ -342,7 +465,7 @@ function Landing() {
           </div>
         </div>
         <p className="pb-8 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} kazevo. Built for the light and fast.
+          © {new Date().getFullYear()} kazevo by solarah. Built for the light and fast.
         </p>
       </footer>
     </div>
