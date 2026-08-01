@@ -168,13 +168,13 @@ function Landing() {
             </div>
             <div className="relative">
               <div className="absolute inset-4 rounded-[3rem] bg-[image:var(--gradient-dopamine)] opacity-80 blur-2xl" />
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-card">
+              <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-card">
                 <img
                   src={purple.url}
                   alt="kazevo 190g ultralight backpack in deep purple"
                   width={1200}
                   height={1200}
-                  className="h-full w-full scale-[1.35] object-cover object-bottom"
+                  className="h-full w-full object-cover"
                 />
               </div>
             </div>
@@ -239,7 +239,7 @@ function Landing() {
                 Shop {variant.name} <ArrowRight size={18} />
               </a>
             </div>
-            <div className="order-1 aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-card md:order-2">
+            <div className="order-1 aspect-[3/4] overflow-hidden rounded-[2.5rem] bg-card md:order-2">
               <img
                 key={variant.img}
                 src={variant.img}
@@ -247,7 +247,7 @@ function Landing() {
                 width={1200}
                 height={1200}
                 loading="lazy"
-                className="h-full w-full scale-[1.3] object-cover object-bottom transition-transform duration-500"
+                className="h-full w-full object-cover transition-opacity duration-500"
               />
             </div>
           </div>
