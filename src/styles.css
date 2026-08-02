@@ -182,3 +182,7 @@
 .kz-marquee-track:hover {
   animation-play-state: paused;
 }
+
+.kz-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

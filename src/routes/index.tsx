@@ -16,6 +16,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
