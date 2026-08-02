@@ -462,17 +462,31 @@ function Landing() {
               }`}
             />
 
-            <div className="relative px-7 py-20 text-center md:py-28">
+            <div
+              className={`relative px-7 py-20 text-center md:py-28 ${
+                ctaPlaying ? "pointer-events-none opacity-0" : "opacity-100"
+              } transition-opacity`}
+            >
               <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
                 190 grams. Zero excuses.
               </h2>
-              <a
-                href="#shop"
-                className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
-              >
-                Shop Now <ArrowRight size={18} />
-              </a>
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href="#shop"
+                  className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
+                >
+                  Shop Now <ArrowRight size={18} />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => ctaVideoRef.current?.play()}
+                  className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-primary-foreground/10 px-8 py-4 font-semibold text-primary-foreground backdrop-blur transition-transform hover:scale-105"
+                >
+                  <Play size={18} /> Play video
+                </button>
+              </div>
             </div>
+
           </div>
         </section>
 
