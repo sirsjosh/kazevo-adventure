@@ -45,10 +45,11 @@ export function CartDrawer() {
     if (isDrawerOpen) syncCart();
   }, [isDrawerOpen, syncCart]);
 
-  const handleCheckout = () => {
+  // Close the drawer whenever the route changes (e.g. after going to /checkout)
+  useEffect(() => {
     setDrawerOpen(false);
-    navigate({ to: "/checkout" });
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setDrawerOpen}>
