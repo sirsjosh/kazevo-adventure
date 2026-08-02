@@ -154,9 +154,26 @@ const specs = [
 ];
 
 function Landing() {
-  const { products } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
+
+  // Prices/variants can change in Shopify after this page was rendered/cached,
+  // so always refresh from the Storefront API on the client.
+  useEffect(() => {
+    let cancelled = false;
+    fetchShopifyProducts("*", 50)
+      .then((fresh) => {
+        if (!cancelled && fresh.length > 0) setProducts(fresh);
+      })
+      .catch((err) => console.error("Shopify products refresh failed:", err));
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const product = products[0];
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
+
 
   const [active, setActive] = useState(0);
   const [ctaPlaying, setCtaPlaying] = useState(false);
