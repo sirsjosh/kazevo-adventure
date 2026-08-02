@@ -7,6 +7,7 @@ import {
   Mountain,
   ArrowRight,
   Instagram,
+  Facebook,
   ShoppingBag,
   Play,
 
