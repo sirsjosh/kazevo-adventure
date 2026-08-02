@@ -75,9 +75,15 @@ export const Route = createFileRoute("/")({
     ],
   }),
   loader: async () => {
-    const products = await fetchShopifyProducts("*", 50);
-    return { products };
+    try {
+      const products = await fetchShopifyProducts("*", 50);
+      return { products };
+    } catch (err) {
+      console.error("Shopify products fetch failed:", err);
+      return { products: [] };
+    }
   },
+  errorComponent: () => null,
   component: Landing,
 });
 
