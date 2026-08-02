@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import {
   Feather,
   ShieldCheck,
@@ -10,6 +10,8 @@ import {
   Youtube,
   Twitter,
   ShoppingBag,
+  Play,
+
   Loader2,
 } from "lucide-react";
 
@@ -27,7 +29,9 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import life19 from "@/assets/life-19.png.asset.json";
+import ctaClip from "@/assets/cta-clip.mp4.asset.json";
+import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
+
 import fit1 from "@/assets/fit-1.png.asset.json";
 import fit2 from "@/assets/fit-2.png.asset.json";
 import fit3 from "@/assets/fit-3.png.asset.json";
@@ -148,7 +152,10 @@ function Landing() {
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
 
   const [active, setActive] = useState(0);
+  const [ctaPlaying, setCtaPlaying] = useState(false);
+  const ctaVideoRef = useRef<HTMLVideoElement>(null);
   const selectedVariant = variants[active];
+
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
@@ -439,26 +446,50 @@ function Landing() {
         {/* CTA band */}
         <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
           <div className="relative overflow-hidden rounded-[2.5rem] bg-ink">
-            <img
-              src={life19.url}
-              alt="Athlete wearing a lime kazevo backpack on a bold graphic set"
-              width={768}
-              height={1366}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-[72%_25%] opacity-70"
+            <video
+              ref={ctaVideoRef}
+              src={ctaClip.url}
+              poster={ctaPoster.url}
+              playsInline
+              preload="none"
+              controls={ctaPlaying}
+              onPlay={() => setCtaPlaying(true)}
+              onPause={() => setCtaPlaying(false)}
+              onEnded={() => setCtaPlaying(false)}
+              className="absolute inset-0 h-full w-full object-cover"
+              aria-label="kazevo backpack in action"
             />
-            <div className="absolute inset-0 bg-[image:var(--gradient-dopamine)] opacity-60 mix-blend-multiply" />
-            <div className="relative px-7 py-20 text-center md:py-28">
+            <div
+              className={`absolute inset-0 bg-[image:var(--gradient-dopamine)] mix-blend-multiply transition-opacity ${
+                ctaPlaying ? "pointer-events-none opacity-0" : "opacity-60"
+              }`}
+            />
+
+            <div
+              className={`relative px-7 py-20 text-center md:py-28 ${
+                ctaPlaying ? "pointer-events-none opacity-0" : "opacity-100"
+              } transition-opacity`}
+            >
               <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
                 190 grams. Zero excuses.
               </h2>
-              <a
-                href="#shop"
-                className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
-              >
-                Shop Now <ArrowRight size={18} />
-              </a>
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href="#shop"
+                  className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105"
+                >
+                  Shop Now <ArrowRight size={18} />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => ctaVideoRef.current?.play()}
+                  className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-primary-foreground/10 px-8 py-4 font-semibold text-primary-foreground backdrop-blur transition-transform hover:scale-105"
+                >
+                  <Play size={18} /> Play video
+                </button>
+              </div>
             </div>
+
           </div>
         </section>
 
