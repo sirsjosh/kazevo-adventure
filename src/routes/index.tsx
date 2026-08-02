@@ -20,12 +20,14 @@ import { CartButton } from "@/components/CartButton";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
-  colorDotMap,
-  colorNameMap,
   fallbackVariantImage,
   formatUsd,
+  getColorLabel,
+  getVariantColorName,
+  getVariantDotColor,
   getVariantImage,
 } from "@/lib/variantImages";
+
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
