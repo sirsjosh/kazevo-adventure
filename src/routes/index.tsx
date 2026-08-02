@@ -152,7 +152,10 @@ function Landing() {
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
 
   const [active, setActive] = useState(0);
+  const [ctaPlaying, setCtaPlaying] = useState(false);
+  const ctaVideoRef = useRef<HTMLVideoElement>(null);
   const selectedVariant = variants[active];
+
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
