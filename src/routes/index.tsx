@@ -20,12 +20,14 @@ import { CartButton } from "@/components/CartButton";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
-  colorDotMap,
-  colorNameMap,
   fallbackVariantImage,
   formatUsd,
+  getColorLabel,
+  getVariantColorName,
+  getVariantDotColor,
   getVariantImage,
 } from "@/lib/variantImages";
+
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
@@ -344,11 +346,8 @@ function Landing() {
                   </p>
                   <p className="mt-1 font-display text-2xl font-extrabold">
                     {selectedVariant
-                      ? colorNameMap[
-                          selectedVariant.selectedOptions.find((o) =>
-                            /color|colour|颜色/i.test(o.name)
-                          )?.value ?? ""
-                        ] || selectedVariant.title
+                      ? getVariantColorName(selectedVariant.selectedOptions) ||
+                        selectedVariant.title
                       : "Select a color"}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-3">
@@ -360,18 +359,19 @@ function Landing() {
                         <button
                           key={variant.id}
                           type="button"
-                          aria-label={colorNameMap[colorValue ?? ""] || variant.title}
+                          aria-label={getColorLabel(colorValue) || variant.title}
                           aria-pressed={i === active}
                           onClick={() => setActive(i)}
                           className={`h-11 w-11 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
                             i === active ? "border-foreground scale-110" : "border-border"
                           }`}
                           style={{
-                            backgroundColor: colorDotMap[colorValue ?? ""] || "oklch(0.7 0.05 300)",
+                            backgroundColor: getVariantDotColor(colorValue),
                           }}
                         />
                       );
                     })}
+
                   </div>
                   <div className="mt-6">
                     <span className="font-display text-3xl font-black">
@@ -401,7 +401,7 @@ function Landing() {
                     src={showcaseImage}
                     alt={
                       selectedVariant
-                        ? `kazevo backpack in ${colorNameMap[selectedVariant.selectedOptions.find((o) => /color|colour|颜色/i.test(o.name))?.value ?? ""] || selectedVariant.title}`
+                        ? `kazevo backpack in ${getVariantColorName(selectedVariant.selectedOptions) || selectedVariant.title}`
                         : "kazevo backpack"
                     }
                     width={1200}
