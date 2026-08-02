@@ -55,6 +55,12 @@ export const colorNameMap: Record<string, string> = {
 
 export const fallbackVariantImage = purple.url;
 
+function lookup(map: Record<string, string>, value?: string): string | undefined {
+  if (!value) return undefined;
+  const raw = value.trim();
+  return map[raw] ?? map[raw.toLowerCase()];
+}
+
 export function getVariantColorValue(
   selectedOptions: Array<{ name: string; value: string }>
 ): string | undefined {
@@ -64,8 +70,7 @@ export function getVariantColorValue(
 export function getVariantImage(
   selectedOptions: Array<{ name: string; value: string }>
 ): string {
-  const colorValue = getVariantColorValue(selectedOptions);
-  return (colorValue && variantImageMap[colorValue]) || fallbackVariantImage;
+  return lookup(variantImageMap, getVariantColorValue(selectedOptions)) ?? fallbackVariantImage;
 }
 
 export function getVariantColorName(
@@ -73,8 +78,17 @@ export function getVariantColorName(
 ): string {
   const colorValue = getVariantColorValue(selectedOptions);
   if (!colorValue) return "";
-  return colorNameMap[colorValue] ?? colorValue;
+  return lookup(colorNameMap, colorValue) ?? colorValue;
 }
+
+export function getVariantDotColor(colorValue?: string): string {
+  return lookup(colorDotMap, colorValue) ?? "oklch(0.7 0.05 300)";
+}
+
+export function getColorLabel(colorValue?: string): string {
+  return lookup(colorNameMap, colorValue) ?? colorValue ?? "";
+}
+
 
 export function formatUsd(amount: number): string {
   return `$${amount.toFixed(2)}`;
