@@ -7,8 +7,6 @@ import {
   Mountain,
   ArrowRight,
   Instagram,
-  Youtube,
-  Twitter,
   ShoppingBag,
   Play,
 
@@ -525,16 +523,15 @@ function Landing() {
 
           </div>
           <div className="flex shrink-0 gap-3">
-            {[Instagram, Youtube, Twitter].map((Icon, i) => (
-              <a
-                key={i}
-                href="#top"
-                aria-label="kazevo social"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border transition-colors hover:bg-muted"
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+            <a
+              href="https://www.instagram.com/kazevoadventures/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="kazevo on Instagram"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border transition-colors hover:bg-muted"
+            >
+              <Instagram size={18} />
+            </a>
           </div>
         </div>
         <p className="pb-8 text-center text-xs text-muted-foreground">
