@@ -39,6 +39,18 @@ export const Route = createFileRoute("/checkout")({
 });
 
 function CheckoutPage() {
+  const [hydrated, setHydrated] = useState(
+    () => useCartStore.persist?.hasHydrated?.() ?? false
+  );
+  useEffect(() => {
+    if (useCartStore.persist?.hasHydrated?.()) {
+      setHydrated(true);
+      return;
+    }
+    const unsub = useCartStore.persist?.onFinishHydration?.(() => setHydrated(true));
+    return () => unsub?.();
+  }, []);
+
   const items = useCartStore((s) => s.items);
   const isLoading = useCartStore((s) => s.isLoading);
   const isSyncing = useCartStore((s) => s.isSyncing);
