@@ -10,6 +10,8 @@ import {
   Youtube,
   Twitter,
   ShoppingBag,
+  Play,
+
   Loader2,
 } from "lucide-react";
 
