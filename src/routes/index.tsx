@@ -533,6 +533,15 @@ function Landing() {
             >
               <Instagram size={18} />
             </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=61592887435083"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="kazevo on Facebook"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border transition-colors hover:bg-muted"
+            >
+              <Facebook size={18} />
+            </a>
           </div>
         </div>
         <p className="pb-8 text-center text-xs text-muted-foreground">
