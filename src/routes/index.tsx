@@ -443,15 +443,25 @@ function Landing() {
         {/* CTA band */}
         <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-24">
           <div className="relative overflow-hidden rounded-[2.5rem] bg-ink">
-            <img
-              src={life19.url}
-              alt="Athlete wearing a lime kazevo backpack on a bold graphic set"
-              width={768}
-              height={1366}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-[72%_25%] opacity-70"
+            <video
+              ref={ctaVideoRef}
+              src={ctaClip.url}
+              poster={ctaPoster.url}
+              playsInline
+              preload="none"
+              controls={ctaPlaying}
+              onPlay={() => setCtaPlaying(true)}
+              onPause={() => setCtaPlaying(false)}
+              onEnded={() => setCtaPlaying(false)}
+              className="absolute inset-0 h-full w-full object-cover"
+              aria-label="kazevo backpack in action"
             />
-            <div className="absolute inset-0 bg-[image:var(--gradient-dopamine)] opacity-60 mix-blend-multiply" />
+            <div
+              className={`absolute inset-0 bg-[image:var(--gradient-dopamine)] mix-blend-multiply transition-opacity ${
+                ctaPlaying ? "pointer-events-none opacity-0" : "opacity-60"
+              }`}
+            />
+
             <div className="relative px-7 py-20 text-center md:py-28">
               <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
                 190 grams. Zero excuses.
