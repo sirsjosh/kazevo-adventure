@@ -23,7 +23,7 @@ import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantIm
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
-  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { isDrawerOpen, setDrawerOpen } = useCartStore();
   const {
     items,
