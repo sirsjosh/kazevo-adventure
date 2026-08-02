@@ -27,22 +27,23 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import life1 from "@/assets/life-1.png.asset.json";
-import life4 from "@/assets/life-4.png.asset.json";
-import life7 from "@/assets/life-7.png.asset.json";
-import life10 from "@/assets/life-10.png.asset.json";
-import life13 from "@/assets/life-13.png.asset.json";
-import life16 from "@/assets/life-16.png.asset.json";
 import life19 from "@/assets/life-19.png.asset.json";
+import fit1 from "@/assets/fit-1.png.asset.json";
+import fit2 from "@/assets/fit-2.png.asset.json";
+import fit3 from "@/assets/fit-3.png.asset.json";
+import fit4 from "@/assets/fit-4.png.asset.json";
+import fit5 from "@/assets/fit-5.png.asset.json";
+import fit6 from "@/assets/fit-6.png.asset.json";
 
 const lifestyleShots = [
-  { src: life4.url, alt: "Woman resting beside a lime green kazevo backpack in a sunlit lounge" },
-  { src: life16.url, alt: "Woman holding a lilac kazevo backpack with rainbow zip pulls" },
-  { src: life10.url, alt: "Mint green kazevo backpack on a wooden bench in the sun" },
-  { src: life13.url, alt: "Yellow kazevo backpack held on a lap in an airport terminal" },
-  { src: life1.url, alt: "Black kazevo backpack with rainbow trim and donut charm" },
-  { src: life7.url, alt: "Woman slipping a tablet into a lavender kazevo backpack" },
+  { src: fit2.url, alt: "Hiker on a mountain ridge wearing a lime and lilac kazevo backpack" },
+  { src: fit5.url, alt: "Woman in bright streetwear carrying a lilac kazevo backpack in a park" },
+  { src: fit3.url, alt: "Woman watching the sunset with a black kazevo backpack on a rock" },
+  { src: fit4.url, alt: "Back view of a lime kazevo backpack styled with a retro colorblock jacket" },
+  { src: fit1.url, alt: "Hiker in an alpine meadow with a lilac and orange kazevo backpack" },
+  { src: fit6.url, alt: "Woman in neon 90s outfit with a pink and purple kazevo backpack" },
 ];
+
 
 
 export const Route = createFileRoute("/")({
