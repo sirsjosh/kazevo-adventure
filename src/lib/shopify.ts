@@ -417,16 +417,48 @@ export async function removeLineFromShopifyCart(
 
 const CART_QUERY = `
   query cart($id: ID!) {
-    cart(id: $id) { id totalQuantity }
+    cart(id: $id) {
+      id
+      totalQuantity
+      lines(first: 100) {
+        edges {
+          node {
+            id
+            quantity
+            merchandise {
+              ... on ProductVariant {
+                id
+                price { amount currencyCode }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
+export interface ShopifyCartSnapshot {
+  id: string;
+  totalQuantity: number;
+  lines: {
+    edges: Array<{
+      node: {
+        id: string;
+        quantity: number;
+        merchandise: { id: string; price: { amount: string; currencyCode: string } };
+      };
+    }>;
+  };
+}
+
 export async function getShopifyCart(cartId: string): Promise<
-  | { data: { cart: { id: string; totalQuantity: number } | null } }
+  | { data: { cart: ShopifyCartSnapshot | null } }
   | undefined
 > {
-  return storefrontApiRequest<{ data: { cart: { id: string; totalQuantity: number } | null } }>(
+  return storefrontApiRequest<{ data: { cart: ShopifyCartSnapshot | null } }>(
     CART_QUERY,
     { id: cartId }
   );
 }
+
