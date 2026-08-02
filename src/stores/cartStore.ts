@@ -192,10 +192,26 @@ export const useCartStore = create<CartStore>()(
           const data = await getShopifyCart(cartId);
           if (!data) return;
           const cart = data?.data?.cart;
-          if (!cart || cart.totalQuantity === 0) clearCart();
+          if (!cart || cart.totalQuantity === 0) {
+            clearCart();
+            return;
+          }
+          // Refresh prices/quantities from Shopify so stale persisted carts show current pricing
+          const byVariant = new Map(
+            cart.lines.edges.map((e) => [e.node.merchandise.id, e.node])
+          );
+          set({
+            items: get().items.map((i) => {
+              const line = byVariant.get(i.variantId);
+              return line
+                ? { ...i, price: line.merchandise.price, quantity: line.quantity, lineId: line.id }
+                : i;
+            }),
+          });
         } catch (error) {
           console.error("Failed to sync cart with Shopify:", error);
         } finally {
+
           set({ isSyncing: false });
         }
       },
