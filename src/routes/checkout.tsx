@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -114,12 +115,19 @@ function CheckoutPage() {
           Your order
         </h1>
         <p className="mt-3 text-muted-foreground">
-          {totalItems === 0
+          {!hydrated
+            ? "Loading your cart…"
+            : totalItems === 0
             ? "Your cart is empty — pick a colorway to get started."
             : `${totalItems} item${totalItems !== 1 ? "s" : ""} ready to ship.`}
         </p>
 
-        {items.length === 0 ? (
+        {!hydrated ? (
+          <div className="mt-12 rounded-3xl border border-border bg-card px-6 py-20 text-center">
+            <Loader2 className="mx-auto h-10 w-10 animate-spin text-muted-foreground" />
+            <p className="mt-4 text-muted-foreground">Loading your cart…</p>
+          </div>
+        ) : items.length === 0 ? (
           <div className="mt-12 rounded-3xl border border-border bg-card px-6 py-20 text-center">
             <ShoppingCart className="mx-auto h-12 w-12 text-muted-foreground" />
             <p className="mt-4 text-muted-foreground">Nothing here yet.</p>
