@@ -29,7 +29,9 @@ import {
 import { useCartStore } from "@/stores/cartStore";
 
 import purple from "@/assets/purple.jpg.asset.json";
-import life19 from "@/assets/life-19.png.asset.json";
+import ctaClip from "@/assets/cta-clip.mp4.asset.json";
+import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
+
 import fit1 from "@/assets/fit-1.png.asset.json";
 import fit2 from "@/assets/fit-2.png.asset.json";
 import fit3 from "@/assets/fit-3.png.asset.json";
