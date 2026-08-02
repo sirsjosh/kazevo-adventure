@@ -401,7 +401,7 @@ function Landing() {
                     src={showcaseImage}
                     alt={
                       selectedVariant
-                        ? `kazevo backpack in ${colorNameMap[selectedVariant.selectedOptions.find((o) => /color|colour|颜色/i.test(o.name))?.value ?? ""] || selectedVariant.title}`
+                        ? `kazevo backpack in ${getVariantColorName(selectedVariant.selectedOptions) || selectedVariant.title}`
                         : "kazevo backpack"
                     }
                     width={1200}
