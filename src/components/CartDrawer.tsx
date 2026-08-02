@@ -143,19 +143,21 @@ export function CartDrawer() {
                   Free shipping on every order
                 </p>
                 <Button
-                  onClick={handleCheckout}
+                  asChild
                   className="w-full"
                   size="lg"
                   disabled={items.length === 0 || isLoading || isSyncing}
                 >
-                  {isLoading || isSyncing ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    <>
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Review &amp; checkout
-                    </>
-                  )}
+                  <Link to="/checkout" onClick={() => setDrawerOpen(false)}>
+                    {isLoading || isSyncing ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <>
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Review &amp; checkout
+                      </>
+                    )}
+                  </Link>
                 </Button>
               </div>
             </>
