@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import {
   ShoppingCart,
   Minus,
@@ -23,7 +23,7 @@ import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantIm
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
-  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { isDrawerOpen, setDrawerOpen } = useCartStore();
   const {
     items,
@@ -45,10 +45,11 @@ export function CartDrawer() {
     if (isDrawerOpen) syncCart();
   }, [isDrawerOpen, syncCart]);
 
-  const handleCheckout = () => {
+  // Close the drawer whenever the route changes (e.g. after going to /checkout)
+  useEffect(() => {
     setDrawerOpen(false);
-    navigate({ to: "/checkout" });
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setDrawerOpen}>
@@ -142,19 +143,21 @@ export function CartDrawer() {
                   Free shipping on every order
                 </p>
                 <Button
-                  onClick={handleCheckout}
+                  asChild
                   className="w-full"
                   size="lg"
                   disabled={items.length === 0 || isLoading || isSyncing}
                 >
-                  {isLoading || isSyncing ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    <>
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Review &amp; checkout
-                    </>
-                  )}
+                  <Link to="/checkout" onClick={() => setDrawerOpen(false)}>
+                    {isLoading || isSyncing ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <>
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Review &amp; checkout
+                      </>
+                    )}
+                  </Link>
                 </Button>
               </div>
             </>
