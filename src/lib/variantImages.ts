@@ -12,6 +12,16 @@ export const variantImageMap: Record<string, string> = {
   "浅紫色": lavender.url,
   "浅绿色": lime.url,
   "黑色": black.url,
+  "deep purple": purple.url,
+  "deep green": mint.url,
+  "vibrant orange": orange.url,
+  "orange": orange.url,
+  "lilac bloom": lavender.url,
+  "light purple": lavender.url,
+  "lilac": lavender.url,
+  "light green": lime.url,
+  "classic black": black.url,
+  "black": black.url,
 };
 
 export const colorDotMap: Record<string, string> = {
@@ -21,6 +31,16 @@ export const colorDotMap: Record<string, string> = {
   "浅绿色": "oklch(0.87 0.2 122)",
   "浅紫色": "oklch(0.78 0.11 300)",
   "黑色": "oklch(0.25 0.02 285)",
+  "deep purple": "oklch(0.62 0.19 300)",
+  "vibrant orange": "oklch(0.75 0.17 75)",
+  "orange": "oklch(0.75 0.17 75)",
+  "deep green": "oklch(0.85 0.13 172)",
+  "light green": "oklch(0.87 0.2 122)",
+  "lilac bloom": "oklch(0.78 0.11 300)",
+  "light purple": "oklch(0.78 0.11 300)",
+  "lilac": "oklch(0.78 0.11 300)",
+  "classic black": "oklch(0.25 0.02 285)",
+  "black": "oklch(0.25 0.02 285)",
 };
 
 export const colorNameMap: Record<string, string> = {
@@ -31,6 +51,7 @@ export const colorNameMap: Record<string, string> = {
   "浅紫色": "Lilac Bloom",
   "黑色": "Classic Black",
 };
+
 
 export const fallbackVariantImage = purple.url;
 
