@@ -3,6 +3,8 @@ import { Check, Copy, Gift, X } from "lucide-react";
 import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
+import { setAdvancedMatching, trackLead } from "@/lib/meta-pixel";
+
 import { useCartStore } from "@/stores/cartStore";
 
 const DISCOUNT_CODE = "Kazevo10";
