@@ -29,6 +29,8 @@ import {
 } from "@/lib/variantImages";
 
 import { useCartStore } from "@/stores/cartStore";
+import { trackViewContent } from "@/lib/meta-pixel";
+
 
 import purple from "@/assets/purple.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
@@ -180,6 +182,20 @@ function Landing() {
   const [ctaPlaying, setCtaPlaying] = useState(false);
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
   const selectedVariant = variants[active];
+
+  // Fire ViewContent once the product is known (Meta needs it for catalog/retargeting).
+  const viewContentSent = useRef(false);
+  useEffect(() => {
+    if (viewContentSent.current || !product || !selectedVariant) return;
+    viewContentSent.current = true;
+    trackViewContent({
+      content_ids: [selectedVariant.id],
+      content_name: product.node.title,
+      content_type: "product",
+      currency: "USD",
+      value: parseFloat(selectedVariant.price.amount),
+    });
+  }, [product, selectedVariant]);
 
 
   const addItem = useCartStore((state) => state.addItem);
