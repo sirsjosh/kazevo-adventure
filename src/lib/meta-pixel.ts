@@ -68,3 +68,17 @@ export function trackInitiateCheckout(params: {
 }) {
   trackEvent("InitiateCheckout", params);
 }
+
+export function trackViewContent(params: {
+  content_ids: string[];
+  content_name: string;
+  content_type: "product";
+  currency: string;
+  value: number;
+}) {
+  trackEvent("ViewContent", params);
+}
+
+export function trackLead(params?: { content_name?: string; value?: number; currency?: string }) {
+  trackEvent("Lead", params);
+}
