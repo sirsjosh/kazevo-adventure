@@ -29,6 +29,8 @@ import {
 } from "@/lib/variantImages";
 
 import { useCartStore } from "@/stores/cartStore";
+import { trackViewContent } from "@/lib/meta-pixel";
+
 
 import purple from "@/assets/purple.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
