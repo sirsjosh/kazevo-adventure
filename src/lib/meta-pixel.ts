@@ -21,9 +21,10 @@ export function getPixelId(): string {
 export function setAdvancedMatching(data: { em?: string; fn?: string; ln?: string }) {
   if (typeof window === "undefined" || !window.fbq) return;
   const payload: Record<string, unknown> = {};
-  if (data.em) payload.em = data.em.trim().toLowerCase();
-  if (data.fn) payload.fn = data.fn.trim().toLowerCase();
-  if (data.ln) payload.ln = data.ln.trim().toLowerCase();
+  if (data.em) payload["em"] = data.em.trim().toLowerCase();
+  if (data.fn) payload["fn"] = data.fn.trim().toLowerCase();
+  if (data.ln) payload["ln"] = data.ln.trim().toLowerCase();
+
   if (Object.keys(payload).length === 0) return;
   window.fbq("init", PIXEL_ID, payload);
 }
