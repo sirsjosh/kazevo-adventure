@@ -183,6 +183,20 @@ function Landing() {
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
   const selectedVariant = variants[active];
 
+  // Fire ViewContent once the product is known (Meta needs it for catalog/retargeting).
+  const viewContentSent = useRef(false);
+  useEffect(() => {
+    if (viewContentSent.current || !product || !selectedVariant) return;
+    viewContentSent.current = true;
+    trackViewContent({
+      content_ids: [selectedVariant.id],
+      content_name: product.node.title,
+      content_type: "product",
+      currency: "USD",
+      value: parseFloat(selectedVariant.price.amount),
+    });
+  }, [product, selectedVariant]);
+
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
