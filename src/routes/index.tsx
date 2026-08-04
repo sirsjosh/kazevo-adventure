@@ -55,25 +55,26 @@ const lifestyleShots = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
+      { title: "kazevo — Bags for Every Journey | Ultralight Backpacks" },
       {
         name: "description",
         content:
-          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
+          "From daily commutes to weekend adventures – find the perfect kazevo bag for every occasion. Premium, ultralight backpacks with free worldwide shipping.",
       },
-      { property: "og:title", content: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
+      { property: "og:title", content: "kazevo — Bags for Every Journey" },
       {
         property: "og:description",
         content:
-          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
+          "From daily commutes to weekend adventures – find the perfect kazevo bag for every occasion. Free worldwide shipping.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
+      { property: "og:url", content: "https://kazevo.store/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://kazevo-adventure-launch.lovable.app/" },
-      { rel: "preload", as: "image", href: purple.url, fetchpriority: "high" },
+      { rel: "canonical", href: "https://kazevo.store/" },
+      { rel: "preload", as: "image", href: outdoor2.url, fetchpriority: "high" },
+
     ],
   }),
   loader: async () => {
