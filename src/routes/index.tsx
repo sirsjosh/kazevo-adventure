@@ -11,7 +11,6 @@ import {
   ShoppingBag,
   Play,
 
-  Loader2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,14 +20,9 @@ import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
   formatUsd,
-  getColorLabel,
-  getVariantColorName,
-  getVariantColorValue,
-  getVariantDotColor,
   getVariantImage,
 } from "@/lib/variantImages";
 
-import { useCartStore } from "@/stores/cartStore";
 import { trackViewContent } from "@/lib/meta-pixel";
 
 
