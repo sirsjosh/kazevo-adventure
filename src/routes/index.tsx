@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useMemo, useEffect, useRef } from "react";
 import {
   Feather,
@@ -24,6 +24,7 @@ import {
   formatUsd,
   getColorLabel,
   getVariantColorName,
+  getVariantColorValue,
   getVariantDotColor,
   getVariantImage,
 } from "@/lib/variantImages";
