@@ -30,7 +30,7 @@ import {
 import { trackViewContent } from "@/lib/meta-pixel";
 
 
-import purple from "@/assets/purple.jpg.asset.json";
+
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
 import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
