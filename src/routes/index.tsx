@@ -212,90 +212,87 @@ function Landing() {
 
       <main id="top">
         {/* Hero */}
-        <section className="relative overflow-hidden">
-          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-secondary/30 blur-3xl" />
-          <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-accent/40 blur-3xl" />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-2 md:py-24">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
-                Ultralight · Durable · Free Shipping
-              </span>
-              <h1 className="mt-5 font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                kazevo. <span className="text-primary">Backpacks</span>{" "}
-                <span className="text-sunset-deep">built light.</span>
-              </h1>
-              <p className="mt-5 max-w-md text-lg text-muted-foreground">
-                Premium packs for school, play, trails and travel. Designed to carry what matters
-                without the bulk — so every adventure feels effortless.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="#shop"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
-                >
-                  Shop the Collection <ArrowRight size={18} />
-                </a>
-                <a
-                  href="/kazevo-mini"
-                  className="rounded-full border border-border px-7 py-3.5 text-base font-semibold transition-colors hover:bg-muted"
-                >
-                  Explore kazevo Mini
-                </a>
-              </div>
-              <dl className="mt-10 grid max-w-sm grid-cols-3 gap-4 text-center">
-                {[
-                  ["190g", "Ultralight"],
-                  ["20D", "Ripstop nylon"],
-                  ["Free", "Shipping"],
-                ].map(([v, k]) => (
-                  <div key={k} className="rounded-2xl bg-muted px-2 py-3">
-                    <dt className="font-display text-2xl font-black">{v}</dt>
-                    <dd className="text-xs uppercase tracking-wide text-muted-foreground">{k}</dd>
-                  </div>
-                ))}
-              </dl>
+        <section className="relative isolate overflow-hidden">
+          <img
+            src={outdoor2.url}
+            alt="Adventurer on a mountain ridge wearing a kazevo backpack"
+            fetchPriority="high"
+            width={1600}
+            height={1200}
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 -z-10 bg-ink/65" />
+          <div className="absolute inset-0 -z-10 bg-[image:var(--gradient-dopamine)] opacity-40 mix-blend-overlay" />
+
+          <div className="relative mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-foreground backdrop-blur">
+              kazevo by solarah
+            </span>
+            <h1 className="mx-auto mt-6 max-w-4xl font-display text-5xl font-black leading-[0.95] tracking-tight text-primary-foreground sm:text-6xl lg:text-7xl">
+              Bags for Every Journey
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-primary-foreground/85">
+              From daily commutes to weekend adventures – find the perfect bag for every occasion.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#shop"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
+              >
+                Shop Now <ArrowRight size={18} />
+              </a>
+              <a
+                href="#why-kazevo"
+                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-primary-foreground/10 px-8 py-4 text-base font-semibold text-primary-foreground backdrop-blur transition-transform hover:scale-105"
+              >
+                Why Kazevo?
+              </a>
             </div>
-            <div className="relative">
-              <div className="absolute inset-4 rounded-[3rem] bg-[image:var(--gradient-dopamine)] opacity-80 blur-2xl" />
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-card">
-                <img
-                  src={purple.url}
-                  alt="kazevo ultralight backpack in deep purple"
-                  fetchPriority="high"
-                  width={1200}
-                  height={1200}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
+            <ul className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium text-primary-foreground/80">
+              <li className="inline-flex items-center gap-2">
+                <Truck size={16} /> Free worldwide shipping
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <Feather size={16} /> Ultralight builds
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <ShieldCheck size={16} /> Secure checkout
+              </li>
+            </ul>
           </div>
         </section>
 
-        {/* Features */}
-        <section id="features" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <h2 className="max-w-xl font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Built light. Built to move. Built to last.
-          </h2>
-          <p className="mt-3 max-w-lg text-muted-foreground">
-            Everything we make is designed around one idea: carry less weight, experience more.
-          </p>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+        {/* Why Kazevo */}
+        <section id="why-kazevo" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <div className="text-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
+              Our difference
+            </span>
+            <h2 className="mt-4 font-display text-4xl font-black tracking-tight sm:text-5xl">
+              Why Kazevo?
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
+              Four reasons thousands of adventurers, students and commuters carry kazevo.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
               <article
                 key={f.title}
-                className="rounded-3xl border border-border bg-card p-7 transition-transform duration-300 hover:-translate-y-1.5"
+                className="group rounded-3xl border border-border bg-card p-7 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-pop)]"
               >
-                <div className="flex items-center gap-3">
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${f.tone}`}>
-                    <f.icon size={22} />
-                  </span>
-                  <h3 className="font-display text-xl font-extrabold leading-tight">{f.title}</h3>
-                </div>
-                <p className="mt-4 text-muted-foreground">{f.body}</p>
+                <span
+                  className={`mx-auto grid h-16 w-16 place-items-center rounded-2xl transition-transform duration-300 group-hover:scale-110 ${f.tone}`}
+                >
+                  <f.icon size={28} />
+                </span>
+                <h3 className="mt-5 font-display text-xl font-extrabold leading-tight">{f.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
               </article>
             ))}
           </div>
         </section>
+
 
         {/* Lifestyle marquee */}
         <section id="in-the-wild" className="overflow-hidden pb-4">
