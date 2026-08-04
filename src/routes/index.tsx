@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Feather,
   ShieldCheck,
@@ -20,7 +20,6 @@ import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
-  fallbackVariantImage,
   formatUsd,
   getColorLabel,
   getVariantColorName,
