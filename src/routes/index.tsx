@@ -3,15 +3,19 @@ import { useState, useEffect, useRef } from "react";
 import {
   Feather,
   ShieldCheck,
-  Sparkles,
   Mountain,
   ArrowRight,
   Instagram,
   Facebook,
   ShoppingBag,
   Play,
-
+  Truck,
+  Dumbbell,
+  Palette,
+  Globe,
+  PiggyBank,
 } from "lucide-react";
+
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
