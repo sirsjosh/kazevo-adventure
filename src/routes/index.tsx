@@ -309,8 +309,12 @@ function Landing() {
         {/* Features */}
         <section id="features" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <h2 className="max-w-xl font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Engineered light. Built loud.
+            Built light. Built playful. Built to last.
           </h2>
+          <p className="mt-3 max-w-lg text-muted-foreground">
+            Everything parents look for in a school bag — ergonomic, premium and genuinely fun to
+            wear.
+          </p>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {features.map((f) => (
               <article
@@ -333,10 +337,10 @@ function Landing() {
         <section id="in-the-wild" className="overflow-hidden pb-4">
           <div className="mx-auto mb-8 max-w-6xl px-5">
             <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              Out in the world
+              From classroom to playground
             </h2>
             <p className="mt-2 max-w-lg text-muted-foreground">
-              Terminals, benches, trailheads. kazevo goes wherever the day does.
+              School runs, park days, weekend trips. kazevo Mini goes wherever their day does.
             </p>
           </div>
           <div className="relative">
@@ -356,10 +360,11 @@ function Landing() {
               <>
                 <div className="order-2 md:order-1">
                   <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-                    Pick your dopamine hit
+                    Let them pick their color
                   </h2>
                   <p className="mt-3 text-muted-foreground">
-                    {product.node.description}
+                    Six vivid dopamine colorways in the junior 18L size — easy to spot in a pile of
+                    school bags, and light enough that they'll never ask you to carry it.
                   </p>
                   <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
                     Colorway
