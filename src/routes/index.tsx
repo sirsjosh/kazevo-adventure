@@ -90,19 +90,19 @@ const features = [
   {
     icon: Feather,
     title: "Feather-Light",
-    body: "Just 190g — lighter than a juice box — so nothing weighs on growing, developing backs.",
+    body: "Engineered to be impossibly light — so you can carry more adventure and less weight.",
     tone: "bg-grape/10 text-grape",
   },
   {
     icon: Sparkles,
-    title: "Kid-Friendly Fit",
-    body: "Custom arc-shaped straps designed for small shoulders and smaller frames, never slipping or digging in.",
+    title: "Adventure-Ready Fit",
+    body: "Ergonomic straps and thoughtful proportions built for real movement, from school halls to mountain trails.",
     tone: "bg-sunset/15 text-sunset",
   },
   {
     icon: ShieldCheck,
-    title: "Playground Proof",
-    body: "Durable 20D nylon that shrugs off mud, spills, snack crumbs and everyday school life.",
+    title: "Built to Last",
+    body: "Tough, weather-resistant nylon that handles mud, spills, rain and everyday life without weighing you down.",
     tone: "bg-mint/25 text-accent-foreground",
   },
 ];
