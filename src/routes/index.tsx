@@ -426,8 +426,8 @@ function Landing() {
                     src={showcaseImage}
                     alt={
                       selectedVariant
-                        ? `kazevo backpack in ${getVariantColorName(selectedVariant.selectedOptions) || selectedVariant.title}`
-                        : "kazevo backpack"
+                        ? `kazevo Mini kids backpack in ${getVariantColorName(selectedVariant.selectedOptions) || selectedVariant.title}`
+                        : "kazevo Mini kids backpack"
                     }
                     width={1200}
                     height={1200}
@@ -488,7 +488,7 @@ function Landing() {
               onPause={() => setCtaPlaying(false)}
               onEnded={() => setCtaPlaying(false)}
               className="absolute inset-0 h-full w-full object-cover"
-              aria-label="kazevo backpack in action"
+              aria-label="kazevo Mini kids backpack in action"
             />
             <div
               className={`absolute inset-0 bg-[image:var(--gradient-dopamine)] mix-blend-multiply transition-opacity ${
@@ -502,7 +502,7 @@ function Landing() {
               } transition-opacity`}
             >
               <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
-                190 grams. Zero excuses.
+                190 grams. Big adventures.
               </h2>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
                 <a
