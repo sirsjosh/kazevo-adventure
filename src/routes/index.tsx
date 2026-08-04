@@ -546,6 +546,9 @@ function Landing() {
             <a className="hover:text-foreground" href="/#shop">
               Shop
             </a>
+            <a className="hover:text-foreground" href="/kazevo-outdoor">
+              kazevo Outdoor
+            </a>
             <a className="hover:text-foreground" href="/kazevo-mini">
               kazevo Mini
             </a>
