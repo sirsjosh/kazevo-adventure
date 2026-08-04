@@ -336,11 +336,11 @@ function Landing() {
                   Shop the collection
                 </span>
                 <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
-                  Our products
+                  Backpacks for every adventure
                 </h2>
                 <p className="mt-3 max-w-lg text-muted-foreground">
-                  Ultralight packs built for real school days and weekend adventures. Free worldwide
-                  shipping on every order.
+                  Explore our lineup of ultralight, durable packs. Free worldwide shipping on every
+                  order.
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold">
