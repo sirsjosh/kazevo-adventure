@@ -49,17 +49,17 @@ const lifestyleShots = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "kazevo Mini — 190g Ultralight Kids Adventure Backpack" },
+      { title: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
       {
         name: "description",
         content:
-          "kazevo Mini is a 190g ultralight backpack for kids 5-10. Lighter than a juice box, arc straps designed for small shoulders, 18L junior size, playground-proof 20D nylon.",
+          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
       },
-      { property: "og:title", content: "kazevo Mini — 190g Ultralight Kids Adventure Backpack" },
+      { property: "og:title", content: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
       {
         property: "og:description",
         content:
-          "kazevo Mini is a 190g ultralight backpack for kids 5-10. Lighter than a juice box, arc straps designed for small shoulders, 18L junior size, playground-proof 20D nylon.",
+          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
