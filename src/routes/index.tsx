@@ -350,102 +350,122 @@ function Landing() {
 
 
 
-        {/* Product showcase */}
+        {/* Shop grid */}
         <section id="shop" className="bg-muted/60 py-16 md:py-24">
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
-            {product ? (
-              <>
-                <div className="order-2 md:order-1">
-                  <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-                    Let them pick their color
-                  </h2>
-                  <p className="mt-3 text-muted-foreground">
-                    Six vivid dopamine colorways in the junior 18L size — easy to spot in a pile of
-                    school bags, and light enough that they'll never ask you to carry it.
-                  </p>
-                  <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-                    Colorway
-                  </p>
-                  <p className="mt-1 font-display text-2xl font-extrabold">
-                    {selectedVariant
-                      ? getVariantColorName(selectedVariant.selectedOptions) ||
-                        selectedVariant.title
-                      : "Select a color"}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    {variants.map((variant, i) => {
-                      const colorValue = variant.selectedOptions.find((o) =>
-                        /color|colour|颜色/i.test(o.name)
-                      )?.value;
-                      return (
-                        <button
-                          key={variant.id}
-                          type="button"
-                          aria-label={getColorLabel(colorValue) || variant.title}
-                          aria-pressed={i === active}
-                          onClick={() => setActive(i)}
-                          className={`h-11 w-11 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
-                            i === active ? "border-foreground scale-110" : "border-border"
-                          }`}
-                          style={{
-                            backgroundColor: getVariantDotColor(colorValue),
-                          }}
-                        />
-                      );
-                    })}
-
-                  </div>
-                  <div className="mt-6">
-                    <span className="font-display text-3xl font-black">
-                      {selectedVariant
-                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
-                    </span>
-                  </div>
-                  <Button
-                    onClick={handleAddToCart}
-                    disabled={isLoading || !selectedVariant?.availableForSale}
-                    className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 h-auto text-base font-semibold shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
-                  >
-                    {isLoading ? (
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                    ) : (
-                      <>
-                        <ShoppingBag className="h-5 w-5" />
-                        Add to Cart
-                      </>
-                    )}
-                  </Button>
-                </div>
-                <div className="order-1 aspect-[3/4] overflow-hidden rounded-[2.5rem] bg-card md:order-2">
-                  <img
-                    key={showcaseImage}
-                    src={showcaseImage}
-                    alt={
-                      selectedVariant
-                        ? `kazevo Mini kids backpack in ${getVariantColorName(selectedVariant.selectedOptions) || selectedVariant.title}`
-                        : "kazevo Mini kids backpack"
-                    }
-                    width={1200}
-                    height={1200}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-opacity duration-500"
-                  />
-                </div>
-              </>
-            ) : (
-              <div className="order-2 md:order-1 md:col-span-2 text-center py-16">
-                <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-                  No products found
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:flex-wrap sm:justify-between">
+              <div className="min-w-0">
+                <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
+                  Shop the collection
+                </span>
+                <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
+                  Pick your colorway
                 </h2>
-                <p className="mt-3 text-muted-foreground">
-                  Your Shopify store is connected but has no products yet. Tell me what product
-                  you'd like to add and I'll create it for you.
+                <p className="mt-3 max-w-lg text-muted-foreground">
+                  Every kazevo Mini is the same 190g, 18L junior pack — just choose the color they
+                  will actually be excited to wear. Free worldwide shipping on all colors.
                 </p>
+              </div>
+              <span className="shrink-0 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold">
+                {variants.length} colors
+              </span>
+            </div>
+
+            {product && variants.length > 0 ? (
+              <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {variants.map((variant) => {
+                  const colorValue = getVariantColorValue(variant.selectedOptions);
+                  const colorName = getVariantColorName(variant.selectedOptions) || variant.title;
+                  const image = getVariantImage(variant.selectedOptions);
+                  const pending = pendingVariant === variant.id;
+                  return (
+                    <article
+                      key={variant.id}
+                      className="group flex flex-col overflow-hidden rounded-[2rem] border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-pop)]"
+                    >
+                      <Link
+                        to="/kazevo-mini"
+                        search={{ color: colorValue }}
+                        className="relative block aspect-[4/5] overflow-hidden bg-muted"
+                      >
+                        <img
+                          src={image}
+                          alt={`kazevo Mini kids backpack in ${colorName}`}
+                          width={1200}
+                          height={1500}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <span
+                          className="absolute left-4 top-4 h-8 w-8 rounded-full border-2 border-background shadow-sm"
+                          style={{ backgroundColor: getVariantDotColor(colorValue) }}
+                          aria-hidden
+                        />
+                        {!variant.availableForSale && (
+                          <span className="absolute right-4 top-4 rounded-full bg-foreground/85 px-3 py-1 text-xs font-semibold text-background">
+                            Sold out
+                          </span>
+                        )}
+                      </Link>
+                      <div className="flex flex-1 flex-col p-5">
+                        <Link to="/kazevo-mini" search={{ color: colorValue }} className="min-w-0">
+                          <h3 className="font-display text-xl font-extrabold leading-tight transition-colors hover:text-primary">
+                            kazevo Mini — {getColorLabel(colorValue) || colorName}
+                          </h3>
+                        </Link>
+                        <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                          190g · 18L junior size · ages 5–10
+                        </p>
+                        <div className="mt-5 flex items-center justify-between gap-3">
+                          <span className="font-display text-2xl font-black">
+                            {formatUsd(parseFloat(variant.price.amount))}
+                          </span>
+                          <Button
+                            onClick={() => handleAddVariant(variant)}
+                            disabled={isLoading || !variant.availableForSale}
+                            size="sm"
+                            className="rounded-full"
+                          >
+                            {pending ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <>
+                                <ShoppingBag className="mr-1.5 h-4 w-4" />
+                                Add
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="py-16 text-center">
+                <h3 className="font-display text-2xl font-black tracking-tight">
+                  No products found
+                </h3>
+                <p className="mt-3 text-muted-foreground">
+                  Your store is connected but has no products yet. Tell me what product you'd like
+                  to add and I'll create it for you.
+                </p>
+              </div>
+            )}
+
+            {product && (
+              <div className="mt-10 text-center">
+                <Link
+                  to="/kazevo-mini"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-base font-semibold transition-transform hover:scale-105"
+                >
+                  See the full product page <ArrowRight size={18} />
+                </Link>
               </div>
             )}
           </div>
         </section>
+
 
 
         {/* Specs */}
