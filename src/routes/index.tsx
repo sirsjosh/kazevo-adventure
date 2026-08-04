@@ -198,27 +198,8 @@ function Landing() {
     });
   }, [product, firstVariant]);
 
-  const addItem = useCartStore((state) => state.addItem);
-  const isLoading = useCartStore((state) => state.isLoading);
-  const [pendingVariant, setPendingVariant] = useState<string | null>(null);
 
-  const handleAddVariant = async (variant: (typeof variants)[number]) => {
-    if (!product) return;
-    setPendingVariant(variant.id);
-    try {
-      await addItem({
-        product,
-        variantId: variant.id,
-        variantTitle: variant.title,
-        price: variant.price,
-        quantity: 1,
-        selectedOptions: variant.selectedOptions,
-        imageUrl: getVariantImage(variant.selectedOptions),
-      });
-    } finally {
-      setPendingVariant(null);
-    }
-  };
+
 
 
   return (
