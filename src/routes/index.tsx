@@ -533,20 +533,23 @@ function Landing() {
             <span className="font-display text-lg font-black lowercase text-foreground">
               kazevo by solarah
             </span>
+            <a className="hover:text-foreground" href="/#shop">
+              Shop
+            </a>
             <a className="hover:text-foreground" href="/kazevo-mini">
               kazevo Mini
             </a>
             <a className="hover:text-foreground" href="/shipping">
-              Shipping Policy
+              Shipping
             </a>
             <a className="hover:text-foreground" href="/refund-policy">
               Refund Policy
             </a>
             <a className="hover:text-foreground" href="/terms">
-              Terms of Service
+              Terms
             </a>
             <a className="hover:text-foreground" href="/legal">
-              Legal Notice
+              Legal
             </a>
             <a className="hover:text-foreground" href="/contact">
               Contact
