@@ -3,15 +3,19 @@ import { useState, useEffect, useRef } from "react";
 import {
   Feather,
   ShieldCheck,
-  Sparkles,
   Mountain,
   ArrowRight,
   Instagram,
   Facebook,
   ShoppingBag,
   Play,
-
+  Truck,
+  Dumbbell,
+  Palette,
+  Globe,
+  PiggyBank,
 } from "lucide-react";
+
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
@@ -26,9 +30,11 @@ import {
 import { trackViewContent } from "@/lib/meta-pixel";
 
 
-import purple from "@/assets/purple.jpg.asset.json";
+
+import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
 import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
+
 
 import kid1 from "@/assets/kid-1.jpg.asset.json";
 import kid2 from "@/assets/kid-2.jpg.asset.json";
@@ -49,25 +55,26 @@ const lifestyleShots = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
+      { title: "kazevo — Bags for Every Journey | Ultralight Backpacks" },
       {
         name: "description",
         content:
-          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
+          "From daily commutes to weekend adventures – find the perfect kazevo bag for every occasion. Premium, ultralight backpacks with free worldwide shipping.",
       },
-      { property: "og:title", content: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
+      { property: "og:title", content: "kazevo — Bags for Every Journey" },
       {
         property: "og:description",
         content:
-          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
+          "From daily commutes to weekend adventures – find the perfect kazevo bag for every occasion. Free worldwide shipping.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
+      { property: "og:url", content: "https://kazevo.store/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://kazevo-adventure-launch.lovable.app/" },
-      { rel: "preload", as: "image", href: purple.url, fetchpriority: "high" },
+      { rel: "canonical", href: "https://kazevo.store/" },
+      { rel: "preload", as: "image", href: outdoor2.url, fetchpriority: "high" },
+
     ],
   }),
   loader: async () => {
@@ -88,24 +95,31 @@ export const Route = createFileRoute("/")({
 
 const features = [
   {
-    icon: Feather,
-    title: "Feather-Light",
-    body: "Engineered to be impossibly light — so you can carry more adventure and less weight.",
+    icon: Dumbbell,
+    title: "Premium Quality",
+    body: "Durable materials built to last.",
     tone: "bg-grape/10 text-grape",
   },
   {
-    icon: Sparkles,
-    title: "Adventure-Ready Fit",
-    body: "Ergonomic straps and thoughtful proportions built for real movement, from school halls to mountain trails.",
+    icon: Palette,
+    title: "Stylish Designs",
+    body: "Modern designs for every style.",
     tone: "bg-sunset/15 text-sunset",
   },
   {
-    icon: ShieldCheck,
-    title: "Built to Last",
-    body: "Tough, weather-resistant nylon that handles mud, spills, rain and everyday life without weighing you down.",
+    icon: Globe,
+    title: "Versatile Collections",
+    body: "Bags for every occasion.",
     tone: "bg-mint/25 text-accent-foreground",
   },
+  {
+    icon: PiggyBank,
+    title: "Affordable Prices",
+    body: "Quality bags at accessible prices.",
+    tone: "bg-secondary/15 text-secondary-foreground",
+  },
 ];
+
 
 function useSmoothScroll(duration = 900) {
   useEffect(() => {
@@ -212,97 +226,95 @@ function Landing() {
 
       <main id="top">
         {/* Hero */}
-        <section className="relative overflow-hidden">
-          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-secondary/30 blur-3xl" />
-          <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-accent/40 blur-3xl" />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-2 md:py-24">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
-                Ultralight · Durable · Free Shipping
-              </span>
-              <h1 className="mt-5 font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                kazevo. <span className="text-primary">Backpacks</span>{" "}
-                <span className="text-sunset-deep">built light.</span>
-              </h1>
-              <p className="mt-5 max-w-md text-lg text-muted-foreground">
-                Premium packs for school, play, trails and travel. Designed to carry what matters
-                without the bulk — so every adventure feels effortless.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="#shop"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
-                >
-                  Shop the Collection <ArrowRight size={18} />
-                </a>
-                <a
-                  href="/kazevo-mini"
-                  className="rounded-full border border-border px-7 py-3.5 text-base font-semibold transition-colors hover:bg-muted"
-                >
-                  Explore kazevo Mini
-                </a>
-              </div>
-              <dl className="mt-10 grid max-w-sm grid-cols-3 gap-4 text-center">
-                {[
-                  ["190g", "Ultralight"],
-                  ["20D", "Ripstop nylon"],
-                  ["Free", "Shipping"],
-                ].map(([v, k]) => (
-                  <div key={k} className="rounded-2xl bg-muted px-2 py-3">
-                    <dt className="font-display text-2xl font-black">{v}</dt>
-                    <dd className="text-xs uppercase tracking-wide text-muted-foreground">{k}</dd>
-                  </div>
-                ))}
-              </dl>
+        <section className="relative isolate overflow-hidden">
+          <img
+            src={outdoor2.url}
+            alt="Adventurer on a mountain ridge wearing a kazevo backpack"
+            fetchPriority="high"
+            width={1600}
+            height={1200}
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 -z-10 bg-ink/65" />
+          <div className="absolute inset-0 -z-10 bg-[image:var(--gradient-dopamine)] opacity-40 mix-blend-overlay" />
+
+          <div className="relative mx-auto max-w-6xl px-5 py-24 text-center md:py-36">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-foreground backdrop-blur">
+              kazevo by solarah
+            </span>
+            <h1 className="mx-auto mt-6 max-w-4xl font-display text-5xl font-black leading-[0.95] tracking-tight text-primary-foreground sm:text-6xl lg:text-7xl">
+              Bags for Every Journey
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-primary-foreground/85">
+              From daily commutes to weekend adventures – find the perfect bag for every occasion.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#shop"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
+              >
+                Shop Now <ArrowRight size={18} />
+              </a>
+              <a
+                href="#why-kazevo"
+                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-primary-foreground/10 px-8 py-4 text-base font-semibold text-primary-foreground backdrop-blur transition-transform hover:scale-105"
+              >
+                Why Kazevo?
+              </a>
             </div>
-            <div className="relative">
-              <div className="absolute inset-4 rounded-[3rem] bg-[image:var(--gradient-dopamine)] opacity-80 blur-2xl" />
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-card">
-                <img
-                  src={purple.url}
-                  alt="kazevo ultralight backpack in deep purple"
-                  fetchPriority="high"
-                  width={1200}
-                  height={1200}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
+            <ul className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium text-primary-foreground/80">
+              <li className="inline-flex items-center gap-2">
+                <Truck size={16} /> Free worldwide shipping
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <Feather size={16} /> Ultralight builds
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <ShieldCheck size={16} /> Secure checkout
+              </li>
+            </ul>
           </div>
         </section>
 
-        {/* Features */}
-        <section id="features" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <h2 className="max-w-xl font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Built light. Built to move. Built to last.
-          </h2>
-          <p className="mt-3 max-w-lg text-muted-foreground">
-            Everything we make is designed around one idea: carry less weight, experience more.
-          </p>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+        {/* Why Kazevo */}
+        <section id="why-kazevo" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <div className="text-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
+              Our difference
+            </span>
+            <h2 className="mt-4 font-display text-4xl font-black tracking-tight sm:text-5xl">
+              Why Kazevo?
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
+              Four reasons thousands of adventurers, students and commuters carry kazevo.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
               <article
                 key={f.title}
-                className="rounded-3xl border border-border bg-card p-7 transition-transform duration-300 hover:-translate-y-1.5"
+                className="group rounded-3xl border border-border bg-card p-7 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-pop)]"
               >
-                <div className="flex items-center gap-3">
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${f.tone}`}>
-                    <f.icon size={22} />
-                  </span>
-                  <h3 className="font-display text-xl font-extrabold leading-tight">{f.title}</h3>
-                </div>
-                <p className="mt-4 text-muted-foreground">{f.body}</p>
+                <span
+                  className={`mx-auto grid h-16 w-16 place-items-center rounded-2xl transition-transform duration-300 group-hover:scale-110 ${f.tone}`}
+                >
+                  <f.icon size={28} />
+                </span>
+                <h3 className="mt-5 font-display text-xl font-extrabold leading-tight">{f.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
               </article>
             ))}
           </div>
         </section>
 
+
         {/* Lifestyle marquee */}
         <section id="in-the-wild" className="overflow-hidden pb-4">
           <div className="mx-auto mb-8 max-w-6xl px-5">
             <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              Made for real life
+              Kazevo in the wild
             </h2>
+
             <p className="mt-2 max-w-lg text-muted-foreground">
               School runs, park days, weekend trails. kazevo goes wherever the day takes you.
             </p>
@@ -434,54 +446,26 @@ function Landing() {
 
 
 
-        {/* Brand promise */}
-        <section id="why-kazevo" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <div className="grid gap-10 md:grid-cols-2 md:items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-secondary/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-secondary-foreground">
-                Our promise
-              </span>
-              <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
-                Less weight. More freedom.
-              </h2>
-              <p className="mt-4 max-w-md text-muted-foreground">
-                Every kazevo pack is designed around a simple belief: the best adventures happen
-                when you are not weighed down by your gear. We use premium, lightweight materials
-                and clean, functional design so you can focus on the journey.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#shop"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
-                >
-                  Shop Now <ArrowRight size={16} />
-                </a>
-                <a
-                  href="/contact"
-                  className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition-colors hover:bg-muted"
-                >
-                  Contact us
-                </a>
+        {/* Value strip */}
+        <section id="why-kazevo-strip" className="mx-auto max-w-6xl px-5 pb-4 pt-16 md:pt-24">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Ultralight design", "Packs that disappear on your back."],
+              ["Weather-ready", "DWR-coated nylon shrugs off rain and spills."],
+              ["Smart storage", "Pockets where you actually need them."],
+              ["Free shipping", "Worldwide delivery on every order."],
+            ].map(([title, body]) => (
+              <div
+                key={title}
+                className="rounded-3xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1"
+              >
+                <h3 className="font-display text-lg font-extrabold">{title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{body}</p>
               </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["Ultralight design", "Packs that disappear on your back."],
-                ["Weather-ready", "DWR-coated nylon shrugs off rain and spills."],
-                ["Smart storage", "Pockets where you actually need them."],
-                ["Free shipping", "Worldwide delivery on every order."],
-              ].map(([title, body]) => (
-                <div
-                  key={title}
-                  className="rounded-3xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <h3 className="font-display text-lg font-extrabold">{title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{body}</p>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
         </section>
+
 
 
 
