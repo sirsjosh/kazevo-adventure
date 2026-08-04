@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   Feather,
   ShieldCheck,
-  Mountain,
+  
   ArrowRight,
   Instagram,
   Facebook,
