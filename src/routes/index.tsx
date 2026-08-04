@@ -88,24 +88,31 @@ export const Route = createFileRoute("/")({
 
 const features = [
   {
-    icon: Feather,
-    title: "Feather-Light",
-    body: "Engineered to be impossibly light — so you can carry more adventure and less weight.",
+    icon: Dumbbell,
+    title: "Premium Quality",
+    body: "Durable materials built to last.",
     tone: "bg-grape/10 text-grape",
   },
   {
-    icon: Sparkles,
-    title: "Adventure-Ready Fit",
-    body: "Ergonomic straps and thoughtful proportions built for real movement, from school halls to mountain trails.",
+    icon: Palette,
+    title: "Stylish Designs",
+    body: "Modern designs for every style.",
     tone: "bg-sunset/15 text-sunset",
   },
   {
-    icon: ShieldCheck,
-    title: "Built to Last",
-    body: "Tough, weather-resistant nylon that handles mud, spills, rain and everyday life without weighing you down.",
+    icon: Globe,
+    title: "Versatile Collections",
+    body: "Bags for every occasion.",
     tone: "bg-mint/25 text-accent-foreground",
   },
+  {
+    icon: PiggyBank,
+    title: "Affordable Prices",
+    body: "Quality bags at accessible prices.",
+    tone: "bg-secondary/15 text-secondary-foreground",
+  },
 ];
+
 
 function useSmoothScroll(duration = 900) {
   useEffect(() => {
