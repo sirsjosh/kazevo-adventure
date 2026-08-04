@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   Feather,
   ShieldCheck,
-  Mountain,
+  
   ArrowRight,
   Instagram,
   Facebook,
@@ -26,6 +26,7 @@ import { formatUsd, getVariantImage } from "@/lib/variantImages";
 import { trackViewContent } from "@/lib/meta-pixel";
 
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
+import logoAsset from "@/assets/kazevo-logo.png.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
 import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
 
@@ -184,9 +185,13 @@ function Landing() {
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <a href="#top" className="flex min-w-0 items-center gap-2">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
-              <Mountain size={18} />
-            </span>
+            <img
+              src={logoAsset.url}
+              alt="kazevo by solarah logo"
+              width={36}
+              height={36}
+              className="h-9 w-9 shrink-0 rounded-xl object-cover"
+            />
             <span className="font-display text-xl font-black tracking-tight lowercase">
               kazevo by solarah
             </span>
