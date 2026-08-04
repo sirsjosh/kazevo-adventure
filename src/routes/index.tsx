@@ -36,20 +36,18 @@ import purple from "@/assets/purple.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
 import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
 
-import fit1 from "@/assets/fit-1.png.asset.json";
-import fit2 from "@/assets/fit-2.png.asset.json";
-import fit3 from "@/assets/fit-3.png.asset.json";
-import fit4 from "@/assets/fit-4.png.asset.json";
-import fit5 from "@/assets/fit-5.png.asset.json";
-import fit6 from "@/assets/fit-6.png.asset.json";
+import kid1 from "@/assets/kid-1.jpg.asset.json";
+import kid2 from "@/assets/kid-2.jpg.asset.json";
+import kid3 from "@/assets/kid-3.jpg.asset.json";
+import kid4 from "@/assets/kid-4.jpg.asset.json";
+import kid5 from "@/assets/kid-5.jpg.asset.json";
 
 const lifestyleShots = [
-  { src: fit2.url, alt: "Young explorer on a ridge wearing a lime and lilac kazevo Mini backpack" },
-  { src: fit5.url, alt: "Kid in bright streetwear carrying a lilac kazevo Mini backpack in a park" },
-  { src: fit3.url, alt: "Child watching the sunset with a black kazevo Mini backpack on a rock" },
-  { src: fit4.url, alt: "Back view of a lime kazevo Mini backpack styled with a retro colorblock jacket" },
-  { src: fit1.url, alt: "Young hiker in a meadow with a lilac and orange kazevo Mini backpack" },
-  { src: fit6.url, alt: "Kid in neon 90s outfit with a pink and purple kazevo Mini backpack" },
+  { src: kid2.url, alt: "Smiling schoolgirl balancing books and wearing a kazevo Mini backpack" },
+  { src: kid4.url, alt: "Girl walking down a school hallway with a kazevo Mini backpack" },
+  { src: kid1.url, alt: "Boy walking to school wearing a colourful kazevo Mini backpack" },
+  { src: kid5.url, alt: "Young girl in dungarees smiling with a kazevo Mini backpack" },
+  { src: kid3.url, alt: "Excited schoolboy cheering with a kazevo Mini backpack on his shoulder" },
 ];
 
 
