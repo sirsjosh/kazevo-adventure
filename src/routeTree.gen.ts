@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -33,6 +34,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KazevoMiniRoute = KazevoMiniRouteImport.update({
+  id: '/kazevo-mini',
+  path: '/kazevo-mini',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/kazevo-mini': typeof KazevoMiniRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/kazevo-mini': typeof KazevoMiniRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/kazevo-mini': typeof KazevoMiniRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/contact'
+    | '/kazevo-mini'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/contact'
+    | '/kazevo-mini'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/contact'
+    | '/kazevo-mini'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -152,6 +164,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
+  KazevoMiniRoute: typeof KazevoMiniRoute
   LegalRoute: typeof LegalRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   ShippingRoute: typeof ShippingRoute
@@ -182,6 +195,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kazevo-mini': {
+      id: '/kazevo-mini'
+      path: '/kazevo-mini'
+      fullPath: '/kazevo-mini'
+      preLoaderRoute: typeof KazevoMiniRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -240,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
+  KazevoMiniRoute: KazevoMiniRoute,
   LegalRoute: LegalRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   ShippingRoute: ShippingRoute,
@@ -251,3 +272,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

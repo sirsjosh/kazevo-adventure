@@ -269,10 +269,10 @@ function Landing() {
                   Shop Now <ArrowRight size={18} />
                 </a>
                 <a
-                  href="#specs"
+                  href="/kazevo-mini"
                   className="rounded-full border border-border px-7 py-3.5 text-base font-semibold transition-colors hover:bg-muted"
                 >
-                  See the specs
+                  See the full product page
                 </a>
               </div>
               <dl className="mt-10 grid max-w-sm grid-cols-3 gap-4 text-center">
@@ -530,6 +530,9 @@ function Landing() {
             <span className="font-display text-lg font-black lowercase text-foreground">
               kazevo by solarah
             </span>
+            <a className="hover:text-foreground" href="/kazevo-mini">
+              kazevo Mini
+            </a>
             <a className="hover:text-foreground" href="/shipping">
               Shipping Policy
             </a>
