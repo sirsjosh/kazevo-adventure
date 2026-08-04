@@ -150,6 +150,9 @@ export const Route = createFileRoute("/kazevo-mini")({
       },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>) => ({
+    color: typeof search.color === "string" ? search.color : undefined,
+  }),
   loader: async () => {
     try {
       const products = await fetchShopifyProducts("*", 50);
