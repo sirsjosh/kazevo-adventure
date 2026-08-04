@@ -19,36 +19,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
-import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
-import {
-  formatUsd,
-  getVariantImage,
-} from "@/lib/variantImages";
+import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
 import { trackViewContent } from "@/lib/meta-pixel";
-
-
 
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
 import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
-
-
-import kid1 from "@/assets/kid-1.jpg.asset.json";
-import kid2 from "@/assets/kid-2.jpg.asset.json";
-import kid3 from "@/assets/kid-3.jpg.asset.json";
-import kid4 from "@/assets/kid-4.jpg.asset.json";
-import kid5 from "@/assets/kid-5.jpg.asset.json";
-
-const lifestyleShots = [
-  { src: kid2.url, alt: "Smiling schoolgirl balancing books and wearing a kazevo Mini backpack" },
-  { src: kid4.url, alt: "Girl walking down a school hallway with a kazevo Mini backpack" },
-  { src: kid1.url, alt: "Boy walking to school wearing a colourful kazevo Mini backpack" },
-  { src: kid5.url, alt: "Young girl in dungarees smiling with a kazevo Mini backpack" },
-  { src: kid3.url, alt: "Excited schoolboy cheering with a kazevo Mini backpack on his shoulder" },
-];
 
 
 
@@ -306,27 +285,6 @@ function Landing() {
             ))}
           </div>
         </section>
-
-
-        {/* Lifestyle marquee */}
-        <section id="in-the-wild" className="overflow-hidden pb-4">
-          <div className="mx-auto mb-8 max-w-6xl px-5">
-            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              Kazevo in the wild
-            </h2>
-
-            <p className="mt-2 max-w-lg text-muted-foreground">
-              School runs, park days, weekend trails. kazevo goes wherever the day takes you.
-            </p>
-          </div>
-          <div className="relative">
-            <LifestyleMarquee shots={lifestyleShots} />
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
-          </div>
-
-        </section>
-
 
 
         {/* Shop grid */}
