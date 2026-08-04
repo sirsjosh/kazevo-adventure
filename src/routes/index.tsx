@@ -11,7 +11,6 @@ import {
   ShoppingBag,
   Play,
 
-  Loader2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,14 +20,9 @@ import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
   formatUsd,
-  getColorLabel,
-  getVariantColorName,
-  getVariantColorValue,
-  getVariantDotColor,
   getVariantImage,
 } from "@/lib/variantImages";
 
-import { useCartStore } from "@/stores/cartStore";
 import { trackViewContent } from "@/lib/meta-pixel";
 
 
@@ -143,7 +137,11 @@ function useSmoothScroll(duration = 900) {
   }, [duration]);
 }
 
+const MINI_HANDLE =
+  "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包";
+
 const specs = [
+
   ["Material", "20D ripstop nylon, DWR coated"],
   ["Weight", "190 g"],
   ["Capacity", "18L (Junior Size)"],
@@ -194,27 +192,8 @@ function Landing() {
     });
   }, [product, firstVariant]);
 
-  const addItem = useCartStore((state) => state.addItem);
-  const isLoading = useCartStore((state) => state.isLoading);
-  const [pendingVariant, setPendingVariant] = useState<string | null>(null);
 
-  const handleAddVariant = async (variant: (typeof variants)[number]) => {
-    if (!product) return;
-    setPendingVariant(variant.id);
-    try {
-      await addItem({
-        product,
-        variantId: variant.id,
-        variantTitle: variant.title,
-        price: variant.price,
-        quantity: 1,
-        selectedOptions: variant.selectedOptions,
-        imageUrl: getVariantImage(variant.selectedOptions),
-      });
-    } finally {
-      setPendingVariant(null);
-    }
-  };
+
 
 
   return (
@@ -359,81 +338,82 @@ function Landing() {
                   Shop the collection
                 </span>
                 <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
-                  Pick your colorway
+                  Our products
                 </h2>
                 <p className="mt-3 max-w-lg text-muted-foreground">
-                  Every kazevo Mini is the same 190g, 18L junior pack — just choose the color they
-                  will actually be excited to wear. Free worldwide shipping on all colors.
+                  Ultralight packs built for real school days and weekend adventures. Free worldwide
+                  shipping on every order.
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold">
-                {variants.length} colors
+                {products.length} {products.length === 1 ? "product" : "products"}
               </span>
             </div>
 
-            {product && variants.length > 0 ? (
+            {products.length > 0 ? (
               <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {variants.map((variant) => {
-                  const colorValue = getVariantColorValue(variant.selectedOptions);
-                  const colorName = getVariantColorName(variant.selectedOptions) || variant.title;
-                  const image = getVariantImage(variant.selectedOptions);
-                  const pending = pendingVariant === variant.id;
+                {products.map(({ node }) => {
+                  const productVariants = node.variants.edges.map((edge) => edge.node);
+                  const firstOptions = productVariants[0]?.selectedOptions ?? [];
+                  const image =
+                    getVariantImage(firstOptions) || node.images.edges[0]?.node.url;
+                  const colorOption = node.options.find(
+                    (option) => option.name.toLowerCase() === "color" || option.name.toLowerCase() === "colour",
+                  );
+                  const colorCount = colorOption?.values.length ?? 0;
+                  const inStock = productVariants.some((variant) => variant.availableForSale);
+                  const isMini = node.handle === MINI_HANDLE;
+                  const title = isMini ? "kazevo Mini" : node.title;
+                  const linkProps = isMini
+                    ? ({ to: "/kazevo-mini" } as const)
+                    : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
+
                   return (
                     <article
-                      key={variant.id}
+                      key={node.id}
                       className="group flex flex-col overflow-hidden rounded-[2rem] border border-border bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-pop)]"
                     >
                       <Link
-                        to="/kazevo-mini"
-                        search={{ color: colorValue }}
+                        {...linkProps}
                         className="relative block aspect-[4/5] overflow-hidden bg-muted"
                       >
                         <img
                           src={image}
-                          alt={`kazevo Mini kids backpack in ${colorName}`}
+                          alt={`${title} kids backpack`}
                           width={1200}
                           height={1500}
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <span
-                          className="absolute left-4 top-4 h-8 w-8 rounded-full border-2 border-background shadow-sm"
-                          style={{ backgroundColor: getVariantDotColor(colorValue) }}
-                          aria-hidden
-                        />
-                        {!variant.availableForSale && (
+                        {colorCount > 1 && (
+                          <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold">
+                            {colorCount} colors
+                          </span>
+                        )}
+                        {!inStock && (
                           <span className="absolute right-4 top-4 rounded-full bg-foreground/85 px-3 py-1 text-xs font-semibold text-background">
                             Sold out
                           </span>
                         )}
                       </Link>
                       <div className="flex flex-1 flex-col p-5">
-                        <Link to="/kazevo-mini" search={{ color: colorValue }} className="min-w-0">
+                        <Link {...linkProps} className="min-w-0">
                           <h3 className="font-display text-xl font-extrabold leading-tight transition-colors hover:text-primary">
-                            kazevo Mini — {getColorLabel(colorValue) || colorName}
+                            {title}
                           </h3>
                         </Link>
                         <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                          190g · 18L junior size · ages 5–10
+                          {isMini ? "190g · 18L junior size · ages 5–10" : node.description?.slice(0, 90)}
                         </p>
                         <div className="mt-5 flex items-center justify-between gap-3">
                           <span className="font-display text-2xl font-black">
-                            {formatUsd(parseFloat(variant.price.amount))}
+                            {formatUsd(parseFloat(node.priceRange.minVariantPrice.amount))}
                           </span>
-                          <Button
-                            onClick={() => handleAddVariant(variant)}
-                            disabled={isLoading || !variant.availableForSale}
-                            size="sm"
-                            className="rounded-full"
-                          >
-                            {pending ? (
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                            ) : (
-                              <>
-                                <ShoppingBag className="mr-1.5 h-4 w-4" />
-                                Add
-                              </>
-                            )}
+                          <Button asChild size="sm" className="rounded-full">
+                            <Link {...linkProps}>
+                              <ShoppingBag className="mr-1.5 h-4 w-4" />
+                              View
+                            </Link>
                           </Button>
                         </div>
                       </div>
@@ -452,19 +432,9 @@ function Landing() {
                 </p>
               </div>
             )}
-
-            {product && (
-              <div className="mt-10 text-center">
-                <Link
-                  to="/kazevo-mini"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-base font-semibold transition-transform hover:scale-105"
-                >
-                  See the full product page <ArrowRight size={18} />
-                </Link>
-              </div>
-            )}
           </div>
         </section>
+
 
 
 
