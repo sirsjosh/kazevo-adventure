@@ -252,15 +252,16 @@ function Landing() {
           <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-2 md:py-24">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
-                New · 18L Ultralight
+                New · Junior 18L · Ages 5–10
               </span>
               <h1 className="mt-5 font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                kazevo: <span className="text-primary">190g</span> of Pure{" "}
+                kazevo Mini: <span className="text-primary">190g</span> of Big{" "}
                 <span className="text-sunset-deep">Adventure</span>
               </h1>
               <p className="mt-5 max-w-md text-lg text-muted-foreground">
-                Ultra-lightweight performance built for people who move fast. Ripstop nylon,
-                arc-shaped straps, and colorways loud enough for the summit selfie.
+                The ultimate ultra-lightweight pack for young explorers — perfect for school days
+                and weekend play. Lighter than a juice box, with arc straps designed for small
+                shoulders and colors kids actually want to wear.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
@@ -279,8 +280,8 @@ function Landing() {
               <dl className="mt-10 grid max-w-sm grid-cols-3 gap-4 text-center">
                 {[
                   ["190g", "Weight"],
-                  ["18L", "Capacity"],
-                  ["6", "Colorways"],
+                  ["18L", "Junior size"],
+                  ["5–10", "Ages"],
                 ].map(([v, k]) => (
                   <div key={k} className="rounded-2xl bg-muted px-2 py-3">
                     <dt className="font-display text-2xl font-black">{v}</dt>
@@ -294,7 +295,7 @@ function Landing() {
               <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-card">
                 <img
                   src={purple.url}
-                  alt="kazevo 190g ultralight backpack in deep purple"
+                  alt="kazevo Mini 190g ultralight kids backpack in deep purple"
                   fetchPriority="high"
                   width={1200}
                   height={1200}
