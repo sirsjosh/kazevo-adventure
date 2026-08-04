@@ -151,7 +151,7 @@ export const Route = createFileRoute("/kazevo-mini")({
     ],
   }),
   validateSearch: (search: Record<string, unknown>) => ({
-    color: typeof search.color === "string" ? search.color : undefined,
+    color: typeof search["color"] === "string" ? (search["color"] as string) : undefined,
   }),
   loader: async () => {
     try {
