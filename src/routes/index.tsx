@@ -287,27 +287,6 @@ function Landing() {
         </section>
 
 
-        {/* Lifestyle marquee */}
-        <section id="in-the-wild" className="overflow-hidden pb-4">
-          <div className="mx-auto mb-8 max-w-6xl px-5">
-            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              Kazevo in the wild
-            </h2>
-
-            <p className="mt-2 max-w-lg text-muted-foreground">
-              School runs, park days, weekend trails. kazevo goes wherever the day takes you.
-            </p>
-          </div>
-          <div className="relative">
-            <LifestyleMarquee shots={lifestyleShots} />
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
-          </div>
-
-        </section>
-
-
-
         {/* Shop grid */}
         <section id="shop" className="bg-muted/60 py-16 md:py-24">
           <div className="mx-auto max-w-6xl px-5">
