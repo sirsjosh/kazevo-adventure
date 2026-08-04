@@ -434,54 +434,26 @@ function Landing() {
 
 
 
-        {/* Brand promise */}
-        <section id="why-kazevo" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <div className="grid gap-10 md:grid-cols-2 md:items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-secondary/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-secondary-foreground">
-                Our promise
-              </span>
-              <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
-                Less weight. More freedom.
-              </h2>
-              <p className="mt-4 max-w-md text-muted-foreground">
-                Every kazevo pack is designed around a simple belief: the best adventures happen
-                when you are not weighed down by your gear. We use premium, lightweight materials
-                and clean, functional design so you can focus on the journey.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="#shop"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
-                >
-                  Shop Now <ArrowRight size={16} />
-                </a>
-                <a
-                  href="/contact"
-                  className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition-colors hover:bg-muted"
-                >
-                  Contact us
-                </a>
+        {/* Value strip */}
+        <section id="why-kazevo-strip" className="mx-auto max-w-6xl px-5 pb-4 pt-16 md:pt-24">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Ultralight design", "Packs that disappear on your back."],
+              ["Weather-ready", "DWR-coated nylon shrugs off rain and spills."],
+              ["Smart storage", "Pockets where you actually need them."],
+              ["Free shipping", "Worldwide delivery on every order."],
+            ].map(([title, body]) => (
+              <div
+                key={title}
+                className="rounded-3xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1"
+              >
+                <h3 className="font-display text-lg font-extrabold">{title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{body}</p>
               </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ["Ultralight design", "Packs that disappear on your back."],
-                ["Weather-ready", "DWR-coated nylon shrugs off rain and spills."],
-                ["Smart storage", "Pockets where you actually need them."],
-                ["Free shipping", "Worldwide delivery on every order."],
-              ].map(([title, body]) => (
-                <div
-                  key={title}
-                  className="rounded-3xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <h3 className="font-display text-lg font-extrabold">{title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{body}</p>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
         </section>
+
 
 
 
