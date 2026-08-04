@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
+import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -39,6 +40,11 @@ const ContactRoute = ContactRouteImport.update({
 const KazevoMiniRoute = KazevoMiniRouteImport.update({
   id: '/kazevo-mini',
   path: '/kazevo-mini',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KazevoOutdoorRoute = KazevoOutdoorRouteImport.update({
+  id: '/kazevo-outdoor',
+  path: '/kazevo-outdoor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/kazevo-mini': typeof KazevoMiniRoute
+  '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/kazevo-mini': typeof KazevoMiniRoute
+  '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/kazevo-mini': typeof KazevoMiniRoute
+  '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/kazevo-mini'
+    | '/kazevo-outdoor'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/kazevo-mini'
+    | '/kazevo-outdoor'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contact'
     | '/kazevo-mini'
+    | '/kazevo-outdoor'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
   KazevoMiniRoute: typeof KazevoMiniRoute
+  KazevoOutdoorRoute: typeof KazevoOutdoorRoute
   LegalRoute: typeof LegalRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   ShippingRoute: typeof ShippingRoute
@@ -202,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/kazevo-mini'
       fullPath: '/kazevo-mini'
       preLoaderRoute: typeof KazevoMiniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kazevo-outdoor': {
+      id: '/kazevo-outdoor'
+      path: '/kazevo-outdoor'
+      fullPath: '/kazevo-outdoor'
+      preLoaderRoute: typeof KazevoOutdoorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -261,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
   KazevoMiniRoute: KazevoMiniRoute,
+  KazevoOutdoorRoute: KazevoOutdoorRoute,
   LegalRoute: LegalRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   ShippingRoute: ShippingRoute,
@@ -272,13 +293,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
