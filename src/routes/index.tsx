@@ -140,18 +140,6 @@ function useSmoothScroll(duration = 900) {
 const MINI_HANDLE =
   "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包";
 
-const specs = [
-
-  ["Material", "20D ripstop nylon, DWR coated"],
-  ["Weight", "190 g"],
-  ["Capacity", "18L (Junior Size)"],
-  ["Dimensions", "44 × 27 × 15 cm (Mini Silhouette)"],
-  ["Straps", "Arc-shaped breathable mesh, sized for kids"],
-  ["Pockets", "Main, front zip, dual side mesh (bottle-friendly)"],
-  ["Packability", "Folds into internal pocket"],
-  ["Ages", "5–10 years"],
-  ["Colorways", "6 dopamine variants"],
-];
 
 function Landing() {
   const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
