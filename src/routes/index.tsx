@@ -284,11 +284,10 @@ function Landing() {
         {/* Features */}
         <section id="features" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <h2 className="max-w-xl font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Built light. Built playful. Built to last.
+            Built light. Built to move. Built to last.
           </h2>
           <p className="mt-3 max-w-lg text-muted-foreground">
-            Everything parents look for in a school bag — ergonomic, premium and genuinely fun to
-            wear.
+            Everything we make is designed around one idea: carry less weight, experience more.
           </p>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {features.map((f) => (
