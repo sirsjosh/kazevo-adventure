@@ -311,10 +311,10 @@ function Landing() {
         <section id="in-the-wild" className="overflow-hidden pb-4">
           <div className="mx-auto mb-8 max-w-6xl px-5">
             <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              From classroom to playground
+              Made for real life
             </h2>
             <p className="mt-2 max-w-lg text-muted-foreground">
-              School runs, park days, weekend trips. kazevo Mini goes wherever their day does.
+              School runs, park days, weekend trails. kazevo goes wherever the day takes you.
             </p>
           </div>
           <div className="relative">
