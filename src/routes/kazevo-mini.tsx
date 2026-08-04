@@ -23,6 +23,7 @@ import {
   formatUsd,
   getColorLabel,
   getVariantColorName,
+  getVariantColorValue,
   getVariantDotColor,
   getVariantImage,
 } from "@/lib/variantImages";
