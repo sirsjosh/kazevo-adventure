@@ -184,7 +184,19 @@ function KazevoMiniPage() {
 
   const product = products[0];
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
+  const { color } = Route.useSearch();
   const [active, setActive] = useState(0);
+
+  // Preselect the colorway chosen on the homepage grid.
+  useEffect(() => {
+    if (!color || variants.length === 0) return;
+    const index = variants.findIndex(
+      (v) => getVariantColorValue(v.selectedOptions)?.toLowerCase() === color.toLowerCase(),
+    );
+    if (index >= 0) setActive(index);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [color, variants.length]);
+
   const selectedVariant = variants[active];
 
   const addItem = useCartStore((state) => state.addItem);
