@@ -489,7 +489,7 @@ function Landing() {
               onPause={() => setCtaPlaying(false)}
               onEnded={() => setCtaPlaying(false)}
               className="absolute inset-0 h-full w-full object-cover"
-              aria-label="kazevo Mini kids backpack in action"
+              aria-label="kazevo backpacks in action"
             />
             <div
               className={`absolute inset-0 bg-[image:var(--gradient-dopamine)] mix-blend-multiply transition-opacity ${
@@ -503,7 +503,7 @@ function Landing() {
               } transition-opacity`}
             >
               <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
-                190 grams. Big adventures.
+                Pack light. Go far.
               </h2>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
                 <a
