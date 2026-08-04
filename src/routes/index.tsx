@@ -19,36 +19,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
-import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
-import {
-  formatUsd,
-  getVariantImage,
-} from "@/lib/variantImages";
+import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
 import { trackViewContent } from "@/lib/meta-pixel";
-
-
 
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
 import ctaClip from "@/assets/cta-clip.mp4.asset.json";
 import ctaPoster from "@/assets/cta-poster.jpg.asset.json";
-
-
-import kid1 from "@/assets/kid-1.jpg.asset.json";
-import kid2 from "@/assets/kid-2.jpg.asset.json";
-import kid3 from "@/assets/kid-3.jpg.asset.json";
-import kid4 from "@/assets/kid-4.jpg.asset.json";
-import kid5 from "@/assets/kid-5.jpg.asset.json";
-
-const lifestyleShots = [
-  { src: kid2.url, alt: "Smiling schoolgirl balancing books and wearing a kazevo Mini backpack" },
-  { src: kid4.url, alt: "Girl walking down a school hallway with a kazevo Mini backpack" },
-  { src: kid1.url, alt: "Boy walking to school wearing a colourful kazevo Mini backpack" },
-  { src: kid5.url, alt: "Young girl in dungarees smiling with a kazevo Mini backpack" },
-  { src: kid3.url, alt: "Excited schoolboy cheering with a kazevo Mini backpack on his shoulder" },
-];
 
 
 
