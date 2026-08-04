@@ -44,12 +44,12 @@ import fit5 from "@/assets/fit-5.png.asset.json";
 import fit6 from "@/assets/fit-6.png.asset.json";
 
 const lifestyleShots = [
-  { src: fit2.url, alt: "Hiker on a mountain ridge wearing a lime and lilac kazevo backpack" },
-  { src: fit5.url, alt: "Woman in bright streetwear carrying a lilac kazevo backpack in a park" },
-  { src: fit3.url, alt: "Woman watching the sunset with a black kazevo backpack on a rock" },
-  { src: fit4.url, alt: "Back view of a lime kazevo backpack styled with a retro colorblock jacket" },
-  { src: fit1.url, alt: "Hiker in an alpine meadow with a lilac and orange kazevo backpack" },
-  { src: fit6.url, alt: "Woman in neon 90s outfit with a pink and purple kazevo backpack" },
+  { src: fit2.url, alt: "Young explorer on a ridge wearing a lime and lilac kazevo Mini backpack" },
+  { src: fit5.url, alt: "Kid in bright streetwear carrying a lilac kazevo Mini backpack in a park" },
+  { src: fit3.url, alt: "Child watching the sunset with a black kazevo Mini backpack on a rock" },
+  { src: fit4.url, alt: "Back view of a lime kazevo Mini backpack styled with a retro colorblock jacket" },
+  { src: fit1.url, alt: "Young hiker in a meadow with a lilac and orange kazevo Mini backpack" },
+  { src: fit6.url, alt: "Kid in neon 90s outfit with a pink and purple kazevo Mini backpack" },
 ];
 
 
@@ -57,17 +57,17 @@ const lifestyleShots = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
+      { title: "kazevo Mini — 190g Ultralight Kids Adventure Backpack" },
       {
         name: "description",
         content:
-          "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days.",
+          "kazevo Mini is a 190g ultralight backpack for kids 5-10. Lighter than a juice box, arc straps designed for small shoulders, 18L junior size, playground-proof 20D nylon.",
       },
-      { property: "og:title", content: "kazevo by solarah — 190g Ultralight Adventure Backpacks" },
+      { property: "og:title", content: "kazevo Mini — 190g Ultralight Kids Adventure Backpack" },
       {
         property: "og:description",
         content:
-          "kazevo by solarah makes 190g ultralight, weather-resistant nylon backpacks in vivid colorways. Ergonomic arc straps, 18L capacity, built for trail days.",
+          "kazevo Mini is a 190g ultralight backpack for kids 5-10. Lighter than a juice box, arc straps designed for small shoulders, 18L junior size, playground-proof 20D nylon.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
@@ -97,20 +97,20 @@ export const Route = createFileRoute("/")({
 const features = [
   {
     icon: Feather,
-    title: "Ultra-Lightweight",
-    body: "A feather-light 190g frame you forget you're wearing — packs down to the size of a fist.",
+    title: "Feather-Light",
+    body: "Just 190g — lighter than a juice box — so nothing weighs on growing, developing backs.",
     tone: "bg-grape/10 text-grape",
   },
   {
     icon: Sparkles,
-    title: "Ergonomic Comfort",
-    body: "Arc-shaped shoulder straps follow your body line and spread load across the shoulders.",
+    title: "Kid-Friendly Fit",
+    body: "Custom arc-shaped straps designed for small shoulders and smaller frames, never slipping or digging in.",
     tone: "bg-sunset/15 text-sunset",
   },
   {
     icon: ShieldCheck,
-    title: "Durable Nylon",
-    body: "Weather-resistant premium ripstop nylon that shrugs off rain, grit and long seasons.",
+    title: "Playground Proof",
+    body: "Durable 20D nylon that shrugs off mud, spills, snack crumbs and everyday school life.",
     tone: "bg-mint/25 text-accent-foreground",
   },
 ];
@@ -146,13 +146,14 @@ function useSmoothScroll(duration = 900) {
 }
 
 const specs = [
-  ["Material", "Premium ripstop nylon, DWR coated"],
+  ["Material", "20D ripstop nylon, DWR coated"],
   ["Weight", "190 g"],
-  ["Capacity", "18 L"],
-  ["Dimensions", "43 × 25 × 16 cm"],
-  ["Straps", "Arc-shaped breathable mesh"],
-  ["Pockets", "Main, front zip, dual side mesh"],
+  ["Capacity", "18L (Junior Size)"],
+  ["Dimensions", "44 × 27 × 15 cm (Mini Silhouette)"],
+  ["Straps", "Arc-shaped breathable mesh, sized for kids"],
+  ["Pockets", "Main, front zip, dual side mesh (bottle-friendly)"],
   ["Packability", "Folds into internal pocket"],
+  ["Ages", "5–10 years"],
   ["Colorways", "6 dopamine variants"],
 ];
 
