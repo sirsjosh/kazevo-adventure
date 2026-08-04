@@ -143,7 +143,11 @@ function useSmoothScroll(duration = 900) {
   }, [duration]);
 }
 
+const MINI_HANDLE =
+  "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包";
+
 const specs = [
+
   ["Material", "20D ripstop nylon, DWR coated"],
   ["Weight", "190 g"],
   ["Capacity", "18L (Junior Size)"],
