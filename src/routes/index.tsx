@@ -49,17 +49,17 @@ const lifestyleShots = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "kazevo Mini — 190g Ultralight Kids Adventure Backpack" },
+      { title: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
       {
         name: "description",
         content:
-          "kazevo Mini is a 190g ultralight backpack for kids 5-10. Lighter than a juice box, arc straps designed for small shoulders, 18L junior size, playground-proof 20D nylon.",
+          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
       },
-      { property: "og:title", content: "kazevo Mini — 190g Ultralight Kids Adventure Backpack" },
+      { property: "og:title", content: "kazevo — Ultralight Backpacks for School, Play & Adventure" },
       {
         property: "og:description",
         content:
-          "kazevo Mini is a 190g ultralight backpack for kids 5-10. Lighter than a juice box, arc straps designed for small shoulders, 18L junior size, playground-proof 20D nylon.",
+          "Discover kazevo by solarah: ultralight, durable backpacks designed for everyday adventures. Shop premium packs with free worldwide shipping.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
@@ -90,19 +90,19 @@ const features = [
   {
     icon: Feather,
     title: "Feather-Light",
-    body: "Just 190g — lighter than a juice box — so nothing weighs on growing, developing backs.",
+    body: "Engineered to be impossibly light — so you can carry more adventure and less weight.",
     tone: "bg-grape/10 text-grape",
   },
   {
     icon: Sparkles,
-    title: "Kid-Friendly Fit",
-    body: "Custom arc-shaped straps designed for small shoulders and smaller frames, never slipping or digging in.",
+    title: "Adventure-Ready Fit",
+    body: "Ergonomic straps and thoughtful proportions built for real movement, from school halls to mountain trails.",
     tone: "bg-sunset/15 text-sunset",
   },
   {
     icon: ShieldCheck,
-    title: "Playground Proof",
-    body: "Durable 20D nylon that shrugs off mud, spills, snack crumbs and everyday school life.",
+    title: "Built to Last",
+    body: "Tough, weather-resistant nylon that handles mud, spills, rain and everyday life without weighing you down.",
     tone: "bg-mint/25 text-accent-foreground",
   },
 ];
@@ -140,18 +140,6 @@ function useSmoothScroll(duration = 900) {
 const MINI_HANDLE =
   "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包";
 
-const specs = [
-
-  ["Material", "20D ripstop nylon, DWR coated"],
-  ["Weight", "190 g"],
-  ["Capacity", "18L (Junior Size)"],
-  ["Dimensions", "44 × 27 × 15 cm (Mini Silhouette)"],
-  ["Straps", "Arc-shaped breathable mesh, sized for kids"],
-  ["Pockets", "Main, front zip, dual side mesh (bottle-friendly)"],
-  ["Packability", "Folds into internal pocket"],
-  ["Ages", "5–10 years"],
-  ["Colorways", "6 dopamine variants"],
-];
 
 function Landing() {
   const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
@@ -228,36 +216,35 @@ function Landing() {
           <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-2 md:py-24">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
-                New · Junior 18L · Ages 5–10
+                Ultralight · Durable · Free Shipping
               </span>
               <h1 className="mt-5 font-display text-5xl font-black leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-                kazevo Mini: <span className="text-primary">190g</span> of Big{" "}
-                <span className="text-sunset-deep">Adventure</span>
+                kazevo. <span className="text-primary">Backpacks</span>{" "}
+                <span className="text-sunset-deep">built light.</span>
               </h1>
               <p className="mt-5 max-w-md text-lg text-muted-foreground">
-                The ultimate ultra-lightweight pack for young explorers — perfect for school days
-                and weekend play. Lighter than a juice box, with arc straps designed for small
-                shoulders and colors kids actually want to wear.
+                Premium packs for school, play, trails and travel. Designed to carry what matters
+                without the bulk — so every adventure feels effortless.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
                   href="#shop"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-[var(--shadow-pop)] transition-transform hover:scale-105"
                 >
-                  Shop Now <ArrowRight size={18} />
+                  Shop the Collection <ArrowRight size={18} />
                 </a>
                 <a
                   href="/kazevo-mini"
                   className="rounded-full border border-border px-7 py-3.5 text-base font-semibold transition-colors hover:bg-muted"
                 >
-                  See the full product page
+                  Explore kazevo Mini
                 </a>
               </div>
               <dl className="mt-10 grid max-w-sm grid-cols-3 gap-4 text-center">
                 {[
-                  ["190g", "Weight"],
-                  ["18L", "Junior size"],
-                  ["5–10", "Ages"],
+                  ["190g", "Ultralight"],
+                  ["20D", "Ripstop nylon"],
+                  ["Free", "Shipping"],
                 ].map(([v, k]) => (
                   <div key={k} className="rounded-2xl bg-muted px-2 py-3">
                     <dt className="font-display text-2xl font-black">{v}</dt>
@@ -271,7 +258,7 @@ function Landing() {
               <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2.5rem] bg-card">
                 <img
                   src={purple.url}
-                  alt="kazevo Mini 190g ultralight kids backpack in deep purple"
+                  alt="kazevo ultralight backpack in deep purple"
                   fetchPriority="high"
                   width={1200}
                   height={1200}
@@ -285,11 +272,10 @@ function Landing() {
         {/* Features */}
         <section id="features" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <h2 className="max-w-xl font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Built light. Built playful. Built to last.
+            Built light. Built to move. Built to last.
           </h2>
           <p className="mt-3 max-w-lg text-muted-foreground">
-            Everything parents look for in a school bag — ergonomic, premium and genuinely fun to
-            wear.
+            Everything we make is designed around one idea: carry less weight, experience more.
           </p>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {features.map((f) => (
@@ -313,10 +299,10 @@ function Landing() {
         <section id="in-the-wild" className="overflow-hidden pb-4">
           <div className="mx-auto mb-8 max-w-6xl px-5">
             <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              From classroom to playground
+              Made for real life
             </h2>
             <p className="mt-2 max-w-lg text-muted-foreground">
-              School runs, park days, weekend trips. kazevo Mini goes wherever their day does.
+              School runs, park days, weekend trails. kazevo goes wherever the day takes you.
             </p>
           </div>
           <div className="relative">
@@ -338,11 +324,11 @@ function Landing() {
                   Shop the collection
                 </span>
                 <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
-                  Our products
+                  Backpacks for every adventure
                 </h2>
                 <p className="mt-3 max-w-lg text-muted-foreground">
-                  Ultralight packs built for real school days and weekend adventures. Free worldwide
-                  shipping on every order.
+                  Explore our lineup of ultralight, durable packs. Free worldwide shipping on every
+                  order.
                 </p>
               </div>
               <span className="shrink-0 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold">
@@ -438,24 +424,52 @@ function Landing() {
 
 
 
-        {/* Specs */}
-        <section id="specs" className="mx-auto max-w-4xl px-5 py-16 md:py-24">
-          <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-            Technical specs
-          </h2>
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border">
-            <table className="w-full text-left text-sm sm:text-base">
-              <tbody>
-                {specs.map(([k, v], i) => (
-                  <tr key={k} className={i % 2 ? "bg-muted/50" : "bg-card"}>
-                    <th scope="row" className="w-2/5 px-5 py-4 font-semibold">
-                      {k}
-                    </th>
-                    <td className="px-5 py-4 text-muted-foreground">{v}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Brand promise */}
+        <section id="why-kazevo" className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <div className="grid gap-10 md:grid-cols-2 md:items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-secondary/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-secondary-foreground">
+                Our promise
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-black tracking-tight sm:text-4xl">
+                Less weight. More freedom.
+              </h2>
+              <p className="mt-4 max-w-md text-muted-foreground">
+                Every kazevo pack is designed around a simple belief: the best adventures happen
+                when you are not weighed down by your gear. We use premium, lightweight materials
+                and clean, functional design so you can focus on the journey.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#shop"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+                >
+                  Shop Now <ArrowRight size={16} />
+                </a>
+                <a
+                  href="/contact"
+                  className="rounded-full border border-border px-6 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                >
+                  Contact us
+                </a>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                ["Ultralight design", "Packs that disappear on your back."],
+                ["Weather-ready", "DWR-coated nylon shrugs off rain and spills."],
+                ["Smart storage", "Pockets where you actually need them."],
+                ["Free shipping", "Worldwide delivery on every order."],
+              ].map(([title, body]) => (
+                <div
+                  key={title}
+                  className="rounded-3xl border border-border bg-card p-6 transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <h3 className="font-display text-lg font-extrabold">{title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{body}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -475,7 +489,7 @@ function Landing() {
               onPause={() => setCtaPlaying(false)}
               onEnded={() => setCtaPlaying(false)}
               className="absolute inset-0 h-full w-full object-cover"
-              aria-label="kazevo Mini kids backpack in action"
+              aria-label="kazevo backpacks in action"
             />
             <div
               className={`absolute inset-0 bg-[image:var(--gradient-dopamine)] mix-blend-multiply transition-opacity ${
@@ -489,7 +503,7 @@ function Landing() {
               } transition-opacity`}
             >
               <h2 className="font-display text-4xl font-black tracking-tight text-primary-foreground sm:text-5xl">
-                190 grams. Big adventures.
+                Pack light. Go far.
               </h2>
               <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
                 <a
@@ -519,20 +533,23 @@ function Landing() {
             <span className="font-display text-lg font-black lowercase text-foreground">
               kazevo by solarah
             </span>
+            <a className="hover:text-foreground" href="/#shop">
+              Shop
+            </a>
             <a className="hover:text-foreground" href="/kazevo-mini">
               kazevo Mini
             </a>
             <a className="hover:text-foreground" href="/shipping">
-              Shipping Policy
+              Shipping
             </a>
             <a className="hover:text-foreground" href="/refund-policy">
               Refund Policy
             </a>
             <a className="hover:text-foreground" href="/terms">
-              Terms of Service
+              Terms
             </a>
             <a className="hover:text-foreground" href="/legal">
-              Legal Notice
+              Legal
             </a>
             <a className="hover:text-foreground" href="/contact">
               Contact
