@@ -41,6 +41,9 @@ export const colorDotMap: Record<string, string> = {
   "lilac": "oklch(0.78 0.11 300)",
   "classic black": "oklch(0.25 0.02 285)",
   "black": "oklch(0.25 0.02 285)",
+  "mixed": "oklch(0.8 0.13 200)",
+  "light blue": "oklch(0.82 0.09 240)",
+  "pink": "oklch(0.85 0.09 5)",
 };
 
 export const colorNameMap: Record<string, string> = {
