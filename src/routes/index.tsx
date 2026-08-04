@@ -176,47 +176,46 @@ function Landing() {
   const product = products[0];
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
 
-
-  const [active, setActive] = useState(0);
   const [ctaPlaying, setCtaPlaying] = useState(false);
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
-  const selectedVariant = variants[active];
+  const firstVariant = variants[0];
 
   // Fire ViewContent once the product is known (Meta needs it for catalog/retargeting).
   const viewContentSent = useRef(false);
   useEffect(() => {
-    if (viewContentSent.current || !product || !selectedVariant) return;
+    if (viewContentSent.current || !product || !firstVariant) return;
     viewContentSent.current = true;
     trackViewContent({
-      content_ids: [selectedVariant.id],
+      content_ids: [firstVariant.id],
       content_name: product.node.title,
       content_type: "product",
       currency: "USD",
-      value: parseFloat(selectedVariant.price.amount),
+      value: parseFloat(firstVariant.price.amount),
     });
-  }, [product, selectedVariant]);
-
+  }, [product, firstVariant]);
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
+  const [pendingVariant, setPendingVariant] = useState<string | null>(null);
 
-  const showcaseImage = useMemo(() => {
-    if (!selectedVariant) return fallbackVariantImage;
-    return getVariantImage(selectedVariant.selectedOptions);
-  }, [selectedVariant]);
-
-  const handleAddToCart = async () => {
-    if (!product || !selectedVariant) return;
-    await addItem({
-      product,
-      variantId: selectedVariant.id,
-      variantTitle: selectedVariant.title,
-      price: selectedVariant.price,
-      quantity: 1,
-      selectedOptions: selectedVariant.selectedOptions,
-      imageUrl: getVariantImage(selectedVariant.selectedOptions),
-    });
+  const handleAddVariant = async (variant: (typeof variants)[number]) => {
+    if (!product) return;
+    setPendingVariant(variant.id);
+    try {
+      await addItem({
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: 1,
+        selectedOptions: variant.selectedOptions,
+        imageUrl: getVariantImage(variant.selectedOptions),
+      });
+    } finally {
+      setPendingVariant(null);
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
