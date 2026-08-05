@@ -3,7 +3,7 @@ import { Check, Copy, Gift, X } from "lucide-react";
 import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
-import { setAdvancedMatching, trackLead } from "@/lib/meta-pixel";
+import { saveKnownUser, setAdvancedMatching, trackLead } from "@/lib/meta-pixel";
 
 import { useCartStore } from "@/stores/cartStore";
 
@@ -53,11 +53,13 @@ export function DiscountPopup() {
       return;
     }
 
-    // Feed the email into Meta advanced matching + fire a Lead event.
+    // Feed the email into Meta advanced matching (hashed) + fire a Lead event.
+    saveKnownUser({ em: parsed.data });
     setAdvancedMatching({ em: parsed.data });
     trackLead({ content_name: "10% discount signup" });
 
     if (typeof window !== "undefined") window.localStorage.setItem(STORAGE_KEY, "1");
+
     setStatus("done");
 
   };
