@@ -19,6 +19,7 @@ import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ApiTestJudgemeRouteImport } from './routes/api/test-judgeme'
 import { Route as BlogChoosingAnUltralightBackpackRouteImport } from './routes/blog/choosing-an-ultralight-backpack'
 import { Route as ProductHandleRouteImport } from './routes/product/$handle'
 
@@ -72,6 +73,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiTestJudgemeRoute = ApiTestJudgemeRouteImport.update({
+  id: '/api/test-judgeme',
+  path: '/api/test-judgeme',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogChoosingAnUltralightBackpackRoute =
   BlogChoosingAnUltralightBackpackRouteImport.update({
     id: '/blog/choosing-an-ultralight-backpack',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/api/test-judgeme': typeof ApiTestJudgemeRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/api/test-judgeme': typeof ApiTestJudgemeRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/api/test-judgeme': typeof ApiTestJudgemeRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/api/test-judgeme'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/api/test-judgeme'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   id:
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/api/test-judgeme'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   fileRoutesById: FileRoutesById
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  ApiTestJudgemeRoute: typeof ApiTestJudgemeRoute
   BlogChoosingAnUltralightBackpackRoute: typeof BlogChoosingAnUltralightBackpackRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/test-judgeme': {
+      id: '/api/test-judgeme'
+      path: '/api/test-judgeme'
+      fullPath: '/api/test-judgeme'
+      preLoaderRoute: typeof ApiTestJudgemeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/choosing-an-ultralight-backpack': {
       id: '/blog/choosing-an-ultralight-backpack'
       path: '/blog/choosing-an-ultralight-backpack'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  ApiTestJudgemeRoute: ApiTestJudgemeRoute,
   BlogChoosingAnUltralightBackpackRoute: BlogChoosingAnUltralightBackpackRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
