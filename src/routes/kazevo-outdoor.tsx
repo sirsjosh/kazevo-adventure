@@ -128,20 +128,9 @@ const faqs = [
 ];
 
 export const Route = createFileRoute("/kazevo-outdoor")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "product" },
-      { property: "og:url", content: PAGE_URL },
-      { property: "og:image", content: SHOPIFY_SHOTS[0]! },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: SHOPIFY_SHOTS[0]! },
-    ],
-    links: [{ rel: "canonical", href: PAGE_URL }],
-    scripts: [
+  head: ({ loaderData }) => {
+    const reviews = (loaderData as { reviews?: ProductReviewsData } | undefined)?.reviews;
+    const scripts: Array<{ type: string; children: string }> = [
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -154,8 +143,40 @@ export const Route = createFileRoute("/kazevo-outdoor")({
           })),
         }),
       },
-    ],
-  }),
+    ];
+
+    if (reviews && reviews.reviewCount > 0) {
+      scripts.push({
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "kazevo Outdoor Backpack",
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: String(reviews.averageRating),
+            reviewCount: String(reviews.reviewCount),
+          },
+        }),
+      });
+    }
+
+    return {
+      meta: [
+        { title: TITLE },
+        { name: "description", content: DESCRIPTION },
+        { property: "og:title", content: TITLE },
+        { property: "og:description", content: DESCRIPTION },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: PAGE_URL },
+        { property: "og:image", content: SHOPIFY_SHOTS[0]! },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: SHOPIFY_SHOTS[0]! },
+      ],
+      links: [{ rel: "canonical", href: PAGE_URL }],
+      scripts,
+    };
+  },
   validateSearch: (search: Record<string, unknown>) => ({
     color: typeof search["color"] === "string" ? (search["color"] as string) : undefined,
   }),
