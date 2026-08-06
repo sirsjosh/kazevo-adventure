@@ -47,7 +47,7 @@ export const Route = createFileRoute("/product/$handle")({
     };
 
     if (reviews && reviews.reviewCount > 0) {
-      productLd.aggregateRating = {
+      productLd["aggregateRating"] = {
         "@type": "AggregateRating",
         ratingValue: String(reviews.averageRating),
         reviewCount: String(reviews.reviewCount),
