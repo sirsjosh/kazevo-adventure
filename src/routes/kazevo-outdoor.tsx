@@ -17,6 +17,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { LifestyleMarquee } from "@/components/LifestyleMarquee";
+import { ProductReviews } from "@/components/ProductReviews";
+import { getProductReviews } from "@/lib/judgeme.functions";
+import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
   formatUsd,
@@ -125,20 +128,9 @@ const faqs = [
 ];
 
 export const Route = createFileRoute("/kazevo-outdoor")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "product" },
-      { property: "og:url", content: PAGE_URL },
-      { property: "og:image", content: SHOPIFY_SHOTS[0]! },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: SHOPIFY_SHOTS[0]! },
-    ],
-    links: [{ rel: "canonical", href: PAGE_URL }],
-    scripts: [
+  head: ({ loaderData }) => {
+    const reviews = (loaderData as { reviews?: ProductReviewsData } | undefined)?.reviews;
+    const scripts: Array<{ type: string; children: string }> = [
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -151,18 +143,54 @@ export const Route = createFileRoute("/kazevo-outdoor")({
           })),
         }),
       },
-    ],
-  }),
+    ];
+
+    if (reviews && reviews.reviewCount > 0) {
+      scripts.push({
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "kazevo Outdoor Backpack",
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: String(reviews.averageRating),
+            reviewCount: String(reviews.reviewCount),
+          },
+        }),
+      });
+    }
+
+    return {
+      meta: [
+        { title: TITLE },
+        { name: "description", content: DESCRIPTION },
+        { property: "og:title", content: TITLE },
+        { property: "og:description", content: DESCRIPTION },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: PAGE_URL },
+        { property: "og:image", content: SHOPIFY_SHOTS[0]! },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: SHOPIFY_SHOTS[0]! },
+      ],
+      links: [{ rel: "canonical", href: PAGE_URL }],
+      scripts,
+    };
+  },
   validateSearch: (search: Record<string, unknown>) => ({
     color: typeof search["color"] === "string" ? (search["color"] as string) : undefined,
   }),
   loader: async () => {
     try {
       const products = await fetchShopifyProducts("*", 50);
-      return { products };
+      const reviews = await getProductReviews({ data: { handle: OUTDOOR_HANDLE } });
+      return { products, reviews };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
-      return { products: [] as ShopifyProduct[] };
+      return {
+        products: [] as ShopifyProduct[],
+        reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+      };
     }
   },
   errorComponent: () => null,
@@ -170,7 +198,10 @@ export const Route = createFileRoute("/kazevo-outdoor")({
 });
 
 function KazevoOutdoorPage() {
-  const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const { products: loaderProducts, reviews } = Route.useLoaderData() as {
+    products: ShopifyProduct[];
+    reviews: ProductReviewsData;
+  };
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
@@ -441,6 +472,13 @@ function KazevoOutdoorPage() {
           </div>
         </section>
 
+        {/* Reviews */}
+        <ProductReviews
+          reviews={reviews.reviews}
+          averageRating={reviews.averageRating}
+          reviewCount={reviews.reviewCount}
+        />
+
         {/* FAQ */}
         <section className="mx-auto max-w-4xl px-5 pb-16 md:pb-24">
           <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
@@ -485,7 +523,7 @@ function KazevoOutdoorPage() {
           <Link to="/" className="font-display text-lg font-black lowercase text-foreground">
             kazevo by solarah
           </Link>
-          <Link className="hover:text-foreground" to="/kazevo-mini">
+          <Link className="hover:text-foreground" to="/kazevo-mini" search={{}}>
             kazevo Mini
           </Link>
           <a className="hover:text-foreground" href="/shipping">

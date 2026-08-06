@@ -17,6 +17,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { LifestyleMarquee } from "@/components/LifestyleMarquee";
+import { ProductReviews } from "@/components/ProductReviews";
+import { getProductReviews } from "@/lib/judgeme.functions";
+import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import {
   fallbackVariantImage,
@@ -122,21 +125,9 @@ const faqs = [
 ];
 
 export const Route = createFileRoute("/kazevo-mini")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "product" },
-      { property: "og:url", content: PAGE_URL },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "canonical", href: PAGE_URL },
-      { rel: "preload", as: "image", href: purple.url, fetchpriority: "high" },
-    ],
-    scripts: [
+  head: ({ loaderData }) => {
+    const reviews = (loaderData as { reviews?: ProductReviewsData } | undefined)?.reviews;
+    const scripts: Array<{ type: string; children: string }> = [
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -149,18 +140,58 @@ export const Route = createFileRoute("/kazevo-mini")({
           })),
         }),
       },
-    ],
-  }),
+    ];
+
+    if (reviews && reviews.reviewCount > 0) {
+      scripts.push({
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "kazevo Mini Backpack",
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: String(reviews.averageRating),
+            reviewCount: String(reviews.reviewCount),
+          },
+        }),
+      });
+    }
+
+    return {
+      meta: [
+        { title: TITLE },
+        { name: "description", content: DESCRIPTION },
+        { property: "og:title", content: TITLE },
+        { property: "og:description", content: DESCRIPTION },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: PAGE_URL },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [
+        { rel: "canonical", href: PAGE_URL },
+        { rel: "preload", as: "image", href: purple.url, fetchpriority: "high" },
+      ],
+      scripts,
+    };
+  },
   validateSearch: (search: Record<string, unknown>) => ({
     color: typeof search["color"] === "string" ? (search["color"] as string) : undefined,
   }),
   loader: async () => {
     try {
       const products = await fetchShopifyProducts("*", 50);
-      return { products };
+      const handle = products[0]?.node.handle;
+      const reviews = handle
+        ? await getProductReviews({ data: { handle } })
+        : { reviews: [], averageRating: 0, reviewCount: 0 };
+      return { products, reviews };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
-      return { products: [] as ShopifyProduct[] };
+      return {
+        products: [] as ShopifyProduct[],
+        reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+      };
     }
   },
   errorComponent: () => null,
@@ -168,7 +199,10 @@ export const Route = createFileRoute("/kazevo-mini")({
 });
 
 function KazevoMiniPage() {
-  const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const { products: loaderProducts, reviews } = Route.useLoaderData() as {
+    products: ShopifyProduct[];
+    reviews: ProductReviewsData;
+  };
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
@@ -440,6 +474,13 @@ function KazevoMiniPage() {
             </table>
           </div>
         </section>
+
+        {/* Reviews */}
+        <ProductReviews
+          reviews={reviews.reviews}
+          averageRating={reviews.averageRating}
+          reviewCount={reviews.reviewCount}
+        />
 
         {/* FAQ */}
         <section className="mx-auto max-w-4xl px-5 pb-16 md:pb-24">

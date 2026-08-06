@@ -4,6 +4,9 @@ import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { ProductReviews } from "@/components/ProductReviews";
+import { getProductReviews } from "@/lib/judgeme.functions";
+import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
@@ -13,6 +16,7 @@ const SITE_URL = "https://kazevo-adventure-launch.lovable.app";
 export const Route = createFileRoute("/product/$handle")({
   head: ({ match, loaderData }) => {
     const product = (loaderData as { product: ShopifyProduct["node"] } | undefined)?.product;
+    const reviews = (loaderData as { reviews?: ProductReviewsData } | undefined)?.reviews;
     const title = product ? `${product.title} — kazevo by solarah` : "Product — kazevo by solarah";
     const raw = (product?.description ?? "").replace(/\s+/g, " ").trim();
     const description =
@@ -24,6 +28,31 @@ export const Route = createFileRoute("/product/$handle")({
           );
     const url = `${SITE_URL}/product/${match.params.handle}`;
     const image = product?.images.edges[0]?.node.url;
+
+    const productLd: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: product?.title,
+      description: raw || description,
+      image: product?.images.edges.map((e) => e.node.url),
+      brand: { "@type": "Brand", name: "kazevo by solarah" },
+      url,
+      offers: {
+        "@type": "Offer",
+        price: product?.priceRange.minVariantPrice.amount,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url,
+      },
+    };
+
+    if (reviews && reviews.reviewCount > 0) {
+      productLd["aggregateRating"] = {
+        "@type": "AggregateRating",
+        ratingValue: String(reviews.averageRating),
+        reviewCount: String(reviews.reviewCount),
+      };
+    }
 
     return {
       meta: [
@@ -46,22 +75,7 @@ export const Route = createFileRoute("/product/$handle")({
         ? [
             {
               type: "application/ld+json",
-              children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Product",
-                name: product.title,
-                description: raw || description,
-                image: product.images.edges.map((e) => e.node.url),
-                brand: { "@type": "Brand", name: "kazevo by solarah" },
-                url,
-                offers: {
-                  "@type": "Offer",
-                  price: product.priceRange.minVariantPrice.amount,
-                  priceCurrency: "USD",
-                  availability: "https://schema.org/InStock",
-                  url,
-                },
-              }),
+              children: JSON.stringify(productLd),
             },
           ]
         : [],
@@ -70,14 +84,18 @@ export const Route = createFileRoute("/product/$handle")({
   loader: async ({ params }) => {
     const product = await fetchShopifyProductByHandle(params.handle);
     if (!product) throw notFound();
-    return { product };
+    const reviews = await getProductReviews({ data: { handle: params.handle } });
+    return { product, reviews };
   },
   component: ProductDetail,
 });
 
 
 function ProductDetail() {
-  const { product } = Route.useLoaderData() as { product: ShopifyProduct["node"] };
+  const { product, reviews } = Route.useLoaderData() as {
+    product: ShopifyProduct["node"];
+    reviews: ProductReviewsData;
+  };
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -226,6 +244,12 @@ function ProductDetail() {
             </div>
           </div>
         </div>
+
+        <ProductReviews
+          reviews={reviews.reviews}
+          averageRating={reviews.averageRating}
+          reviewCount={reviews.reviewCount}
+        />
       </main>
     </div>
   );
