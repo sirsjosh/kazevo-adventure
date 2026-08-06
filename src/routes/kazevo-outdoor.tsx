@@ -198,7 +198,10 @@ export const Route = createFileRoute("/kazevo-outdoor")({
 });
 
 function KazevoOutdoorPage() {
-  const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const { products: loaderProducts, reviews } = Route.useLoaderData() as {
+    products: ShopifyProduct[];
+    reviews: ProductReviewsData;
+  };
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
