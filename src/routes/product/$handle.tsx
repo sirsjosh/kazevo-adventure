@@ -84,7 +84,8 @@ export const Route = createFileRoute("/product/$handle")({
   loader: async ({ params }) => {
     const product = await fetchShopifyProductByHandle(params.handle);
     if (!product) throw notFound();
-    return { product };
+    const reviews = await getProductReviews({ data: { handle: params.handle } });
+    return { product, reviews };
   },
   component: ProductDetail,
 });
