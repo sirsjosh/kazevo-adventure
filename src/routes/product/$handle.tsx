@@ -4,6 +4,9 @@ import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { ProductReviews } from "@/components/ProductReviews";
+import { getProductReviews } from "@/lib/judgeme.functions";
+import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
