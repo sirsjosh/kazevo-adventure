@@ -475,6 +475,13 @@ function KazevoMiniPage() {
           </div>
         </section>
 
+        {/* Reviews */}
+        <ProductReviews
+          reviews={reviews.reviews}
+          averageRating={reviews.averageRating}
+          reviewCount={reviews.reviewCount}
+        />
+
         {/* FAQ */}
         <section className="mx-auto max-w-4xl px-5 pb-16 md:pb-24">
           <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
