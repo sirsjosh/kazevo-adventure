@@ -16,6 +16,7 @@ const SITE_URL = "https://kazevo-adventure-launch.lovable.app";
 export const Route = createFileRoute("/product/$handle")({
   head: ({ match, loaderData }) => {
     const product = (loaderData as { product: ShopifyProduct["node"] } | undefined)?.product;
+    const reviews = (loaderData as { reviews?: ProductReviewsData } | undefined)?.reviews;
     const title = product ? `${product.title} — kazevo by solarah` : "Product — kazevo by solarah";
     const raw = (product?.description ?? "").replace(/\s+/g, " ").trim();
     const description =
@@ -27,6 +28,31 @@ export const Route = createFileRoute("/product/$handle")({
           );
     const url = `${SITE_URL}/product/${match.params.handle}`;
     const image = product?.images.edges[0]?.node.url;
+
+    const productLd: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: product?.title,
+      description: raw || description,
+      image: product?.images.edges.map((e) => e.node.url),
+      brand: { "@type": "Brand", name: "kazevo by solarah" },
+      url,
+      offers: {
+        "@type": "Offer",
+        price: product?.priceRange.minVariantPrice.amount,
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url,
+      },
+    };
+
+    if (reviews && reviews.reviewCount > 0) {
+      productLd.aggregateRating = {
+        "@type": "AggregateRating",
+        ratingValue: String(reviews.averageRating),
+        reviewCount: String(reviews.reviewCount),
+      };
+    }
 
     return {
       meta: [
@@ -49,22 +75,7 @@ export const Route = createFileRoute("/product/$handle")({
         ? [
             {
               type: "application/ld+json",
-              children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Product",
-                name: product.title,
-                description: raw || description,
-                image: product.images.edges.map((e) => e.node.url),
-                brand: { "@type": "Brand", name: "kazevo by solarah" },
-                url,
-                offers: {
-                  "@type": "Offer",
-                  price: product.priceRange.minVariantPrice.amount,
-                  priceCurrency: "USD",
-                  availability: "https://schema.org/InStock",
-                  url,
-                },
-              }),
+              children: JSON.stringify(productLd),
             },
           ]
         : [],
