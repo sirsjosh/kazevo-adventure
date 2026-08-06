@@ -244,6 +244,12 @@ function ProductDetail() {
             </div>
           </div>
         </div>
+
+        <ProductReviews
+          reviews={reviews.reviews}
+          averageRating={reviews.averageRating}
+          reviewCount={reviews.reviewCount}
+        />
       </main>
     </div>
   );
