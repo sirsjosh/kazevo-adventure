@@ -199,7 +199,10 @@ export const Route = createFileRoute("/kazevo-mini")({
 });
 
 function KazevoMiniPage() {
-  const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const { products: loaderProducts, reviews } = Route.useLoaderData() as {
+    products: ShopifyProduct[];
+    reviews: ProductReviewsData;
+  };
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
