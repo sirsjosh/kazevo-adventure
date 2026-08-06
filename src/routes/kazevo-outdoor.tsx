@@ -183,10 +183,14 @@ export const Route = createFileRoute("/kazevo-outdoor")({
   loader: async () => {
     try {
       const products = await fetchShopifyProducts("*", 50);
-      return { products };
+      const reviews = await getProductReviews({ data: { handle: OUTDOOR_HANDLE } });
+      return { products, reviews };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
-      return { products: [] as ShopifyProduct[] };
+      return {
+        products: [] as ShopifyProduct[],
+        reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+      };
     }
   },
   errorComponent: () => null,
