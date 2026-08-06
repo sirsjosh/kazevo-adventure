@@ -181,10 +181,17 @@ export const Route = createFileRoute("/kazevo-mini")({
   loader: async () => {
     try {
       const products = await fetchShopifyProducts("*", 50);
-      return { products };
+      const handle = products[0]?.node.handle;
+      const reviews = handle
+        ? await getProductReviews({ data: { handle } })
+        : { reviews: [], averageRating: 0, reviewCount: 0 };
+      return { products, reviews };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
-      return { products: [] as ShopifyProduct[] };
+      return {
+        products: [] as ShopifyProduct[],
+        reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+      };
     }
   },
   errorComponent: () => null,
