@@ -48,10 +48,13 @@ export async function fetchJudgeMeReviewsByHandle(
     signal = undefined;
   }
 
+  const fetchInit: RequestInit = signal ? { signal } : {};
+
   try {
-    const response = await fetch(`${JUDGE_ME_API_BASE}/reviews?${params.toString()}`, {
-      signal,
-    });
+    const response = await fetch(
+      `${JUDGE_ME_API_BASE}/reviews?${params.toString()}`,
+      fetchInit
+    );
 
     if (!response.ok) {
       console.error(`Judge.me API error: ${response.status}`);
