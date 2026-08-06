@@ -92,7 +92,10 @@ export const Route = createFileRoute("/product/$handle")({
 
 
 function ProductDetail() {
-  const { product } = Route.useLoaderData() as { product: ShopifyProduct["node"] };
+  const { product, reviews } = Route.useLoaderData() as {
+    product: ShopifyProduct["node"];
+    reviews: ProductReviewsData;
+  };
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
