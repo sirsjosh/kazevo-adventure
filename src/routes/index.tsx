@@ -135,6 +135,8 @@ const MINI_HANDLE =
   "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包";
 const OUTDOOR_HANDLE =
   "彩色多巴胺户外运动包女大容量轻便休闲旅行书包防泼水登山双肩包";
+const SLING_HANDLE = "篮球包篮球袋双肩单肩袋子排球足球背包网兜袋球网兜训练包收纳包";
+
 
 
 function Landing() {
