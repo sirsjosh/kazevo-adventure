@@ -70,14 +70,27 @@ function CheckoutPage() {
     const url = getCheckoutUrl();
     if (!url) return;
 
-    trackInitiateCheckout({
-      content_ids: items.map((i) => i.variantId),
-      content_name: items[0]?.product.node.title ?? "kazevo backpack",
-      content_type: "product",
-      currency: "USD",
-      value: subtotal,
-      num_items: totalItems,
-    });
+    // One event ID for this checkout, remembered so the server-side
+    // (Shopify CAPI) counterpart can be deduplicated against it.
+    const eventId = newEventId();
+    rememberCheckoutEventId(eventId);
+
+    trackInitiateCheckout(
+      {
+        content_ids: items.map((i) => i.variantId),
+        content_name: items[0]?.product.node.title ?? "kazevo backpack",
+        content_type: "product",
+        currency: "USD",
+        value: subtotal,
+        num_items: totalItems,
+        contents: items.map((i) => ({
+          id: numericId(i.variantId),
+          quantity: i.quantity,
+          item_price: parseFloat(i.price.amount),
+        })),
+      },
+      eventId,
+    );
 
     window.open(url, "_blank");
   };
