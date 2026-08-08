@@ -24,6 +24,8 @@ its scopes and report back which of these are available:
 If the token turns out to carry event-sending permission, the CAPI send path
 becomes available without obtaining a second token.
 
+## What will be built
+
 
 ### 1. Secure secret storage
 - Add the token as a runtime secret named `META_DATASET_QUALITY_API_TOKEN` using Lovable's secret tooling.
