@@ -164,19 +164,8 @@ function Landing() {
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
   const firstVariant = variants[0];
 
-  // Fire ViewContent once the product is known (Meta needs it for catalog/retargeting).
-  const viewContentSent = useRef(false);
-  useEffect(() => {
-    if (viewContentSent.current || !product || !firstVariant) return;
-    viewContentSent.current = true;
-    trackViewContent({
-      content_ids: [firstVariant.id],
-      content_name: product.node.title,
-      content_type: "product",
-      currency: "USD",
-      value: parseFloat(firstVariant.price.amount),
-    });
-  }, [product, firstVariant]);
+  // No ViewContent here: the homepage is a catalog, not a product view.
+  // ViewContent fires on the individual product routes.
 
 
 
