@@ -270,6 +270,13 @@ export function formatCheckoutUrl(checkoutUrl: string): string {
     url.host = SHOPIFY_STORE_PERMANENT_DOMAIN;
     url.protocol = "https:";
     url.searchParams.set("channel", "online_store");
+    // Checkout lives on another domain, so the _fbp/_fbc cookies set on
+    // kazevo.store are invisible to Shopify's Conversions API. Forward the
+    // click identifiers in the URL so server-side events keep attribution.
+    const clickIds = readClickIds();
+    if (clickIds.fbclid) url.searchParams.set("fbclid", clickIds.fbclid);
+    if (clickIds.fbp) url.searchParams.set("fbp", clickIds.fbp);
+    if (clickIds.fbc) url.searchParams.set("fbc", clickIds.fbc);
     return url.toString();
   } catch {
     return checkoutUrl;
