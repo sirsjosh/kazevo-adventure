@@ -1,9 +1,29 @@
 # Meta Dataset Quality API integration
 
+## Before anything else: rotate the token
+
+The token was pasted into chat in plaintext, so it must be considered exposed.
+Revoke it in Meta Business Settings (System Users -> the issuing user ->
+regenerate token) and issue a replacement. The replacement is entered through
+the secure secret form, never typed into chat.
+
 ## Goal
 Store the Meta Dataset Quality API token securely and use it to fetch event-quality diagnostics from Meta, then surface them in a simple internal dashboard so you can monitor the 4.4/10 score as it improves.
 
-## What will be built
+## Token capability check (first implementation step)
+
+Meta tokens all share the `EAA...` shape; read-only quality access and
+event-sending CAPI access are distinguished only by granted permissions. The
+first build step calls the Graph API debug endpoint with the new token to list
+its scopes and report back which of these are available:
+
+- reading dataset quality diagnostics (this plan)
+- sending server-side Conversions API events (the follow-up that actually
+  raises the match-quality score)
+
+If the token turns out to carry event-sending permission, the CAPI send path
+becomes available without obtaining a second token.
+
 
 ### 1. Secure secret storage
 - Add the token as a runtime secret named `META_DATASET_QUALITY_API_TOKEN` using Lovable's secret tooling.
