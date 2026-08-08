@@ -123,14 +123,13 @@ function readCookie(name: string): string | undefined {
 /** Reads fbclid from the URL and the _fbp/_fbc cookies, persisting what it finds. */
 export function captureClickIds(): ClickIds {
   if (typeof window === "undefined") return {};
-  const stored = readClickIds();
-  const fromUrl = new URLSearchParams(window.location.search).get("fbclid") ?? undefined;
-  const next: ClickIds = {
-    ...stored,
-    ...(fromUrl ? { fbclid: fromUrl } : {}),
-    ...(readCookie("_fbp") ? { fbp: readCookie("_fbp") } : {}),
-    ...(readCookie("_fbc") ? { fbc: readCookie("_fbc") } : {}),
-  };
+  const next: ClickIds = { ...readClickIds() };
+  const fromUrl = new URLSearchParams(window.location.search).get("fbclid");
+  const fbp = readCookie("_fbp");
+  const fbc = readCookie("_fbc");
+  if (fromUrl) next.fbclid = fromUrl;
+  if (fbp) next.fbp = fbp;
+  if (fbc) next.fbc = fbc;
   try {
     window.localStorage.setItem(CLICK_IDS_KEY, JSON.stringify(next));
   } catch {
