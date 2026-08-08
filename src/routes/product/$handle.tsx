@@ -1,5 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { trackViewContent } from "@/lib/meta-pixel";
 import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
