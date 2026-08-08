@@ -14,6 +14,7 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
+import { Route as KazevoSlingRouteImport } from './routes/kazevo-sling'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -45,6 +46,11 @@ const KazevoMiniRoute = KazevoMiniRouteImport.update({
 const KazevoOutdoorRoute = KazevoOutdoorRouteImport.update({
   id: '/kazevo-outdoor',
   path: '/kazevo-outdoor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KazevoSlingRoute = KazevoSlingRouteImport.update({
+  id: '/kazevo-sling',
+  path: '/kazevo-sling',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
+  '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
+  '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
+  '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/shipping': typeof ShippingRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
+    | '/kazevo-sling'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
+    | '/kazevo-sling'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
+    | '/kazevo-sling'
     | '/legal'
     | '/refund-policy'
     | '/shipping'
@@ -178,6 +190,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   KazevoMiniRoute: typeof KazevoMiniRoute
   KazevoOutdoorRoute: typeof KazevoOutdoorRoute
+  KazevoSlingRoute: typeof KazevoSlingRoute
   LegalRoute: typeof LegalRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   ShippingRoute: typeof ShippingRoute
@@ -222,6 +235,13 @@ declare module '@tanstack/react-router' {
       path: '/kazevo-outdoor'
       fullPath: '/kazevo-outdoor'
       preLoaderRoute: typeof KazevoOutdoorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kazevo-sling': {
+      id: '/kazevo-sling'
+      path: '/kazevo-sling'
+      fullPath: '/kazevo-sling'
+      preLoaderRoute: typeof KazevoSlingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -282,6 +302,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   KazevoMiniRoute: KazevoMiniRoute,
   KazevoOutdoorRoute: KazevoOutdoorRoute,
+  KazevoSlingRoute: KazevoSlingRoute,
   LegalRoute: LegalRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   ShippingRoute: ShippingRoute,
@@ -293,3 +314,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

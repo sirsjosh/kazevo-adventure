@@ -135,6 +135,8 @@ const MINI_HANDLE =
   "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包";
 const OUTDOOR_HANDLE =
   "彩色多巴胺户外运动包女大容量轻便休闲旅行书包防泼水登山双肩包";
+const SLING_HANDLE = "篮球包篮球袋双肩单肩袋子排球足球背包网兜袋球网兜训练包收纳包";
+
 
 
 function Landing() {
@@ -328,16 +330,21 @@ function Landing() {
                   const colorCount = colorOption?.values.length ?? 0;
                   const inStock = productVariants.some((variant) => variant.availableForSale);
                   const isOutdoor = node.handle === OUTDOOR_HANDLE;
+                  const isSling = node.handle === SLING_HANDLE;
                   const title = isMini
                     ? "kazevo Mini"
                     : isOutdoor
                       ? "kazevo Outdoor Backpack"
-                      : node.title;
+                      : isSling
+                        ? "kazevo + Michael Rose Sling Bag"
+                        : node.title;
                   const linkProps = isMini
                     ? ({ to: "/kazevo-mini" } as const)
                     : isOutdoor
                       ? ({ to: "/kazevo-outdoor" } as const)
-                      : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
+                      : isSling
+                        ? ({ to: "/kazevo-sling" } as const)
+                        : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
 
                   return (
                     <article
@@ -498,6 +505,9 @@ function Landing() {
             </a>
             <a className="hover:text-foreground" href="/kazevo-mini">
               kazevo Mini
+            </a>
+            <a className="hover:text-foreground" href="/kazevo-sling">
+              Michael Rose Sling
             </a>
             <a className="hover:text-foreground" href="/shipping">
               Shipping
