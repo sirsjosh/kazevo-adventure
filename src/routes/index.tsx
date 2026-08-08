@@ -23,7 +23,7 @@ import { CartButton } from "@/components/CartButton";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
-import { trackViewContent } from "@/lib/meta-pixel";
+
 
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
 import logoAsset from "@/assets/kazevo-logo.png.asset.json";
@@ -157,26 +157,11 @@ function Landing() {
     };
   }, []);
 
-  const product = products[0];
-  const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
-
   const [ctaPlaying, setCtaPlaying] = useState(false);
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
-  const firstVariant = variants[0];
 
-  // Fire ViewContent once the product is known (Meta needs it for catalog/retargeting).
-  const viewContentSent = useRef(false);
-  useEffect(() => {
-    if (viewContentSent.current || !product || !firstVariant) return;
-    viewContentSent.current = true;
-    trackViewContent({
-      content_ids: [firstVariant.id],
-      content_name: product.node.title,
-      content_type: "product",
-      currency: "USD",
-      value: parseFloat(firstVariant.price.amount),
-    });
-  }, [product, firstVariant]);
+  // No ViewContent here: the homepage is a catalog, not a product view.
+  // ViewContent fires on the individual product routes.
 
 
 

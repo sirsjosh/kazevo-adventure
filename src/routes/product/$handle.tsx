@@ -1,5 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { trackViewContent } from "@/lib/meta-pixel";
 import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -117,6 +118,21 @@ function ProductDetail() {
       )
     );
   }, [variants, selectedOptions]);
+
+  // Meta ViewContent — one per product view, with the selected variant's price.
+  const viewContentSent = useRef(false);
+  useEffect(() => {
+    if (viewContentSent.current || !selectedVariant) return;
+    viewContentSent.current = true;
+    trackViewContent({
+      content_ids: [selectedVariant.id],
+      content_name: product.title,
+      content_type: "product",
+      currency: "USD",
+      value: parseFloat(selectedVariant.price.amount),
+    });
+  }, [product, selectedVariant]);
+
 
   const handleOptionChange = (optionName: string, value: string) => {
     setSelectedOptions((prev) => ({ ...prev, [optionName]: value }));

@@ -1,7 +1,9 @@
 import { useRouter } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import {
+  captureClickIds,
   initPixel,
+  isTrackingEnabled,
   readKnownUser,
   trackPageView,
   type PixelUserData,
@@ -12,14 +14,18 @@ export function MetaPixelTracker() {
   const lastPathRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !isTrackingEnabled()) return;
     lastPathRef.current = window.location.pathname;
+
+    // Persist fbclid / _fbp / _fbc so they can be forwarded to Shopify checkout.
+    captureClickIds();
 
     // ─────────────────────────────────────────────────────────────
     // Advanced matching: pass whatever you know about the visitor.
-    // Supported keys: em, ph, fn, ln, ct, st, zp, country.
+    // Supported keys: em, ph, fn, ln, ct, st, zp, country, external_id.
     // Values are trimmed, normalised and SHA-256 hashed in the browser
-    // before they are sent to Meta.
+    // before they are sent to Meta. A stable anonymous external_id is
+    // added automatically.
     //
     //   const userData: PixelUserData = {
     //     em: user.email,
@@ -33,6 +39,7 @@ export function MetaPixelTracker() {
     void initPixel(userData).then(() => {
       trackPageView();
     });
+
 
     const unsubscribe = router.subscribe("onResolved", () => {
       const path = window.location.pathname;
