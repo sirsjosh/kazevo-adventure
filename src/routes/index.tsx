@@ -157,12 +157,8 @@ function Landing() {
     };
   }, []);
 
-  const product = products[0];
-  const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
-
   const [ctaPlaying, setCtaPlaying] = useState(false);
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
-  const firstVariant = variants[0];
 
   // No ViewContent here: the homepage is a catalog, not a product view.
   // ViewContent fires on the individual product routes.
