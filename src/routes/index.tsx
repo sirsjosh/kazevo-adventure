@@ -23,7 +23,7 @@ import { CartButton } from "@/components/CartButton";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
-import { trackViewContent } from "@/lib/meta-pixel";
+
 
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
 import logoAsset from "@/assets/kazevo-logo.png.asset.json";
