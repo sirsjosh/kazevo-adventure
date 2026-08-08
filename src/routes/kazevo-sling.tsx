@@ -514,10 +514,10 @@ function KazevoSlingPage() {
           <Link to="/" className="font-display text-lg font-black lowercase text-foreground">
             kazevo by solarah
           </Link>
-          <Link className="hover:text-foreground" to="/kazevo-mini" search={{}}>
+          <Link className="hover:text-foreground" to="/kazevo-mini" search={{ color: undefined }}>
             kazevo Mini
           </Link>
-          <Link className="hover:text-foreground" to="/kazevo-outdoor" search={{}}>
+          <Link className="hover:text-foreground" to="/kazevo-outdoor" search={{ color: undefined }}>
             kazevo Outdoor
           </Link>
           <a className="hover:text-foreground" href="/shipping">
