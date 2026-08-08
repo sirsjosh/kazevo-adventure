@@ -1,3 +1,5 @@
+import { readClickIds } from "@/lib/meta-pixel";
+
 export interface ShopifyProduct {
   node: {
     id: string;
