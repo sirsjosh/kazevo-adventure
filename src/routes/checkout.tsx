@@ -13,7 +13,12 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
-import { trackInitiateCheckout } from "@/lib/meta-pixel";
+import {
+  trackInitiateCheckout,
+  newEventId,
+  numericId,
+  rememberCheckoutEventId,
+} from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
 
 
