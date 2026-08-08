@@ -203,11 +203,9 @@ export type ContentLine = { id: string; quantity: number; item_price: number };
  */
 export async function initPixel(userData?: PixelUserData) {
   if (!isTrackingEnabled() || !window.fbq) return;
-  const merged: PixelUserData = {
-    ...readKnownUser(),
-    ...userData,
-    external_id: userData?.external_id ?? getExternalId(),
-  };
+  const merged: PixelUserData = { ...readKnownUser(), ...userData };
+  const externalId = userData?.external_id ?? getExternalId();
+  if (externalId) merged.external_id = externalId;
   const hashed = await hashUserData(merged);
   if (Object.keys(hashed).length > 0) {
     window.fbq("init", PIXEL_ID, hashed);
