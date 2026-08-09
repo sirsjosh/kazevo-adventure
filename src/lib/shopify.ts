@@ -14,8 +14,6 @@ export interface ShopifyProduct {
     priceRange: {
       minVariantPrice: ShopifyMoney;
       maxVariantPrice?: ShopifyMoney;
-      minVariantCompareAtPrice?: ShopifyMoney | null;
-      maxVariantCompareAtPrice?: ShopifyMoney | null;
     };
     images: {
       edges: Array<{
