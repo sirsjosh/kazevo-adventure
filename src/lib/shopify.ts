@@ -96,14 +96,6 @@ const PRODUCTS_QUERY = `
               amount
               currencyCode
             }
-            minVariantCompareAtPrice {
-              amount
-              currencyCode
-            }
-            maxVariantCompareAtPrice {
-              amount
-              currencyCode
-            }
           }
           images(first: 5) {
             edges {
