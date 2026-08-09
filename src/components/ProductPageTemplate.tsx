@@ -3,6 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Feather,
   Layers,
   Loader2,
@@ -76,6 +78,13 @@ export function ProductPageTemplate({
       value: parseFloat(selectedVariant.price.amount),
     });
   }, [product, selectedVariant]);
+
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const scrollGallery = (dir: number) => {
+    const el = galleryRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
 
   const galleryImages = useMemo(
     () => product?.node.images.edges.map((e) => e.node.url) ?? [],
@@ -269,12 +278,38 @@ export function ProductPageTemplate({
         {/* Gallery */}
         {galleryImages.length > 1 && (
           <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-            <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
-              Closer look
-            </h2>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {galleryImages.slice(0, 6).map((url, i) => (
-                <div key={url} className="overflow-hidden rounded-3xl bg-muted">
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="font-display text-3xl font-black tracking-tight sm:text-4xl">
+                Closer look
+              </h2>
+              <div className="hidden gap-2 sm:flex">
+                <button
+                  type="button"
+                  aria-label="Previous images"
+                  onClick={() => scrollGallery(-1)}
+                  className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card transition-transform hover:scale-105"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next images"
+                  onClick={() => scrollGallery(1)}
+                  className="grid h-11 w-11 place-items-center rounded-full border border-border bg-card transition-transform hover:scale-105"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+            <div
+              ref={galleryRef}
+              className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {galleryImages.map((url, i) => (
+                <div
+                  key={url}
+                  className="w-[78%] shrink-0 snap-start overflow-hidden rounded-3xl bg-muted sm:w-[46%] lg:w-[31%]"
+                >
                   <img
                     src={url}
                     alt={`${content.name} detail ${i + 1}`}
