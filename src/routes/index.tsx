@@ -20,8 +20,45 @@ import {
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 
+import { productPages } from "@/lib/productContent";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
+
+/** Products that have their own dedicated marketing page. */
+const DEDICATED_PAGES = [
+  { handle: productPages["football-bag"].handle, to: "/football-bag", title: productPages["football-bag"].name },
+  {
+    handle: productPages["retro-leather-backpack"].handle,
+    to: "/retro-leather-backpack",
+    title: productPages["retro-leather-backpack"].name,
+  },
+  {
+    handle: productPages["functional-school-backpack"].handle,
+    to: "/functional-school-backpack",
+    title: productPages["functional-school-backpack"].name,
+  },
+  {
+    handle: productPages["jiumeiso-backpack"].handle,
+    to: "/jiumeiso-backpack",
+    title: productPages["jiumeiso-backpack"].name,
+  },
+  {
+    handle: productPages["color-block-kids-backpack"].handle,
+    to: "/color-block-kids-backpack",
+    title: productPages["color-block-kids-backpack"].name,
+  },
+  {
+    handle: productPages["ultra-light-kids-backpack"].handle,
+    to: "/ultra-light-kids-backpack",
+    title: productPages["ultra-light-kids-backpack"].name,
+  },
+  {
+    handle: productPages["crossbody-waist-bag"].handle,
+    to: "/crossbody-waist-bag",
+    title: productPages["crossbody-waist-bag"].name,
+  },
+] as const;
+
 
 
 
