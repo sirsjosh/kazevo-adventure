@@ -55,10 +55,12 @@ export interface VariantSaleInfo {
 }
 
 export function getVariantSaleInfo(
-  variant: ShopifyProduct["node"]["variants"]["edges"][0]["node"]
+  variant: ShopifyProduct["node"]["variants"]["edges"][0]["node"],
+  compareAtOverride?: number
 ): VariantSaleInfo {
   const current = parseFloat(variant.price.amount);
-  const compareAt = variant.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : null;
+  const shopifyCompareAt = variant.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : null;
+  const compareAt = compareAtOverride ?? shopifyCompareAt;
   const isOnSale = compareAt !== null && compareAt > current;
   const savings = isOnSale ? compareAt - current : 0;
   const percentOff = isOnSale ? Math.round((savings / compareAt) * 100) : 0;
