@@ -316,20 +316,24 @@ function Landing() {
                   const inStock = productVariants.some((variant) => variant.availableForSale);
                   const isOutdoor = node.handle === OUTDOOR_HANDLE;
                   const isSling = node.handle === SLING_HANDLE;
+                  const dedicated = DEDICATED_PAGES.find((d) => d.handle === node.handle);
                   const title = isMini
                     ? "kazevo Mini"
                     : isOutdoor
                       ? "kazevo Outdoor Backpack"
                       : isSling
                         ? "kazevo + Michael Rose Sling Bag"
-                        : node.title;
+                        : (dedicated?.title ?? node.title);
                   const linkProps = isMini
                     ? ({ to: "/kazevo-mini" } as const)
                     : isOutdoor
                       ? ({ to: "/kazevo-outdoor" } as const)
                       : isSling
                         ? ({ to: "/kazevo-sling" } as const)
-                        : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
+                        : dedicated
+                          ? ({ to: dedicated.to } as const)
+                          : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
+
 
                   return (
                     <article
