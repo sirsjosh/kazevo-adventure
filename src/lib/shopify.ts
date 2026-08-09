@@ -94,6 +94,18 @@ const PRODUCTS_QUERY = `
               amount
               currencyCode
             }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+            minVariantCompareAtPrice {
+              amount
+              currencyCode
+            }
+            maxVariantCompareAtPrice {
+              amount
+              currencyCode
+            }
           }
           images(first: 5) {
             edges {
@@ -109,6 +121,10 @@ const PRODUCTS_QUERY = `
                 id
                 title
                 price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
                   amount
                   currencyCode
                 }
