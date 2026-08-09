@@ -20,7 +20,7 @@ import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { ProductReviews } from "@/components/ProductReviews";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
-import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import {
   fallbackVariantImage,
   formatUsd,
@@ -45,6 +45,9 @@ const PAGE_URL = `${SITE_URL}/kazevo-mini`;
 const TITLE = "kazevo Mini Backpack for Kids 5–10 | 190g Ultralight";
 const DESCRIPTION =
   "The kazevo Mini is a 190g, 18L school backpack for kids 5–10. Arc straps for small shoulders, playground-proof 20D nylon, six dopamine colors, free worldwide shipping.";
+
+// Manual sale override. Set to undefined to fall back to Shopify's variant compareAtPrice.
+const SALE_ORIGINAL_PRICE = 34.99;
 
 const lifestyleShots = [
   { src: kid2.url, alt: "Schoolgirl carrying books and wearing a kazevo Mini backpack" },
@@ -233,6 +236,9 @@ function KazevoMiniPage() {
   }, [color, variants.length]);
 
   const selectedVariant = variants[active];
+  const saleInfo = selectedVariant
+    ? getVariantSaleInfo(selectedVariant, SALE_ORIGINAL_PRICE)
+    : null;
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
@@ -355,11 +361,25 @@ function KazevoMiniPage() {
               {product ? (
                 <>
                   <div className="mt-6 flex flex-wrap items-baseline gap-3">
-                    <span className="font-display text-3xl font-black">
-                      {selectedVariant
-                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
-                    </span>
+                    {saleInfo?.isOnSale ? (
+                      <>
+                        <span className="font-display text-3xl font-black text-sunset">
+                          {formatUsd(saleInfo.current)} USD
+                        </span>
+                        <span className="font-display text-xl font-semibold text-muted-foreground line-through">
+                          {formatUsd(saleInfo.compareAt!)} USD
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-sunset/15 px-3 py-1 text-xs font-semibold text-sunset">
+                          Save {saleInfo.percentOff}%
+                        </span>
+                      </>
+                    ) : (
+                      <span className="font-display text-3xl font-black">
+                        {selectedVariant
+                          ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
+                          : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
+                      </span>
+                    )}
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/25 px-3 py-1 text-xs font-semibold text-accent-foreground">
                       <Truck size={14} /> Free worldwide shipping
                     </span>

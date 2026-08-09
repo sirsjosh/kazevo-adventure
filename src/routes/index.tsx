@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 
 import { productPages } from "@/lib/productContent";
-import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
 /** Products that have their own dedicated marketing page. */
@@ -343,6 +343,8 @@ function Landing() {
                   const productVariants = node.variants.edges.map((edge) => edge.node);
                   const firstOptions = productVariants[0]?.selectedOptions ?? [];
                   const isMini = node.handle === MINI_HANDLE;
+                  const isOutdoor = node.handle === OUTDOOR_HANDLE;
+                  const isSling = node.handle === SLING_HANDLE;
                   const image = isMini
                     ? getVariantImage(firstOptions)
                     : (node.images.edges[0]?.node.url ?? getVariantImage(firstOptions));
@@ -351,8 +353,6 @@ function Landing() {
                   );
                   const colorCount = colorOption?.values.length ?? 0;
                   const inStock = productVariants.some((variant) => variant.availableForSale);
-                  const isOutdoor = node.handle === OUTDOOR_HANDLE;
-                  const isSling = node.handle === SLING_HANDLE;
                   const dedicated = DEDICATED_PAGES.find((d) => d.handle === node.handle);
                   const title = isMini
                     ? "kazevo Mini"
@@ -371,6 +371,13 @@ function Landing() {
                           ? ({ to: dedicated.to } as const)
                           : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
 
+                  const firstVariant = productVariants[0];
+                  const saleInfo = firstVariant
+                    ? getVariantSaleInfo(
+                        firstVariant,
+                        isMini ? 34.99 : isOutdoor ? 29.99 : undefined,
+                      )
+                    : null;
 
                   return (
                     <article
@@ -389,8 +396,13 @@ function Landing() {
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
+                        {saleInfo?.isOnSale && (
+                          <span className="absolute left-4 top-4 rounded-full bg-sunset px-3 py-1 text-xs font-semibold text-white">
+                            Save {saleInfo.percentOff}%
+                          </span>
+                        )}
                         {colorCount > 1 && (
-                          <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold">
+                          <span className={`absolute ${saleInfo?.isOnSale ? "left-4 top-12" : "left-4 top-4"} rounded-full bg-background/90 px-3 py-1 text-xs font-semibold`}>
                             {colorCount} colors
                           </span>
                         )}
@@ -410,9 +422,22 @@ function Landing() {
                           {isMini ? "190g · 18L junior size · ages 5–10" : node.description?.slice(0, 90)}
                         </p>
                         <div className="mt-5 flex items-center justify-between gap-3">
-                          <span className="font-display text-2xl font-black">
-                            {formatUsd(parseFloat(node.priceRange.minVariantPrice.amount))}
-                          </span>
+                          <div className="flex flex-wrap items-baseline gap-2">
+                            {saleInfo?.isOnSale ? (
+                              <>
+                                <span className="font-display text-2xl font-black text-sunset">
+                                  {formatUsd(saleInfo.current)}
+                                </span>
+                                <span className="font-display text-base font-semibold text-muted-foreground line-through">
+                                  {formatUsd(saleInfo.compareAt!)}
+                                </span>
+                              </>
+                            ) : (
+                              <span className="font-display text-2xl font-black">
+                                {formatUsd(parseFloat(node.priceRange.minVariantPrice.amount))}
+                              </span>
+                            )}
+                          </div>
                           <Button asChild size="sm" className="rounded-full">
                             <Link {...linkProps}>
                               <ShoppingBag className="mr-1.5 h-4 w-4" />

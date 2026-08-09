@@ -1,5 +1,10 @@
 import { readClickIds } from "@/lib/meta-pixel";
 
+export interface ShopifyMoney {
+  amount: string;
+  currencyCode: string;
+}
+
 export interface ShopifyProduct {
   node: {
     id: string;
@@ -7,10 +12,8 @@ export interface ShopifyProduct {
     description: string;
     handle: string;
     priceRange: {
-      minVariantPrice: {
-        amount: string;
-        currencyCode: string;
-      };
+      minVariantPrice: ShopifyMoney;
+      maxVariantPrice?: ShopifyMoney;
     };
     images: {
       edges: Array<{
@@ -25,10 +28,8 @@ export interface ShopifyProduct {
         node: {
           id: string;
           title: string;
-          price: {
-            amount: string;
-            currencyCode: string;
-          };
+          price: ShopifyMoney;
+          compareAtPrice?: ShopifyMoney | null;
           availableForSale: boolean;
           image?: { url: string } | null;
           selectedOptions: Array<{
@@ -43,6 +44,27 @@ export interface ShopifyProduct {
       values: string[];
     }>;
   };
+}
+
+export interface VariantSaleInfo {
+  isOnSale: boolean;
+  current: number;
+  compareAt: number | null;
+  savings: number;
+  percentOff: number;
+}
+
+export function getVariantSaleInfo(
+  variant: ShopifyProduct["node"]["variants"]["edges"][0]["node"],
+  compareAtOverride?: number
+): VariantSaleInfo {
+  const current = parseFloat(variant.price.amount);
+  const shopifyCompareAt = variant.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : null;
+  const compareAt = compareAtOverride ?? shopifyCompareAt;
+  const isOnSale = compareAt !== null && compareAt > current;
+  const savings = isOnSale ? compareAt - current : 0;
+  const percentOff = isOnSale ? Math.round((savings / compareAt) * 100) : 0;
+  return { isOnSale, current, compareAt, savings, percentOff };
 }
 
 export interface ShopifyProductsResponse {
@@ -72,6 +94,10 @@ const PRODUCTS_QUERY = `
               amount
               currencyCode
             }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
           }
           images(first: 5) {
             edges {
@@ -87,6 +113,10 @@ const PRODUCTS_QUERY = `
                 id
                 title
                 price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
                   amount
                   currencyCode
                 }
@@ -116,12 +146,16 @@ const PRODUCT_BY_HANDLE_QUERY = `
       title
       description
       handle
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-      }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
       images(first: 5) {
         edges {
           node {
@@ -136,6 +170,10 @@ const PRODUCT_BY_HANDLE_QUERY = `
             id
             title
             price {
+              amount
+              currencyCode
+            }
+            compareAtPrice {
               amount
               currencyCode
             }

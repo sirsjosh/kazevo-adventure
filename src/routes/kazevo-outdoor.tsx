@@ -20,7 +20,7 @@ import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { ProductReviews } from "@/components/ProductReviews";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
-import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import {
   formatUsd,
   getColorLabel,
@@ -40,6 +40,9 @@ const OUTDOOR_HANDLE =
 const TITLE = "kazevo Outdoor Backpack | Lightweight 500g Hiking & Travel Pack";
 const DESCRIPTION =
   "The kazevo Outdoor Backpack: water-repellent nylon, breathable back panel, laptop sleeve and anti-theft pocket in a 500g colour-block pack for hiking, travel and campus. Free worldwide shipping.";
+
+// Manual sale override. Set to undefined to fall back to Shopify's variant compareAtPrice.
+const SALE_ORIGINAL_PRICE = 29.99;
 
 const SHOPIFY_SHOTS = [
   "https://cdn.shopify.com/s/files/1/0744/5200/9121/files/6076E9C5-C593-4AC3-91F7-B800AB5737EC.jpg?v=1785843583",
@@ -231,6 +234,9 @@ function KazevoOutdoorPage() {
   }, [color, variants.length]);
 
   const selectedVariant = variants[active];
+  const saleInfo = selectedVariant
+    ? getVariantSaleInfo(selectedVariant, SALE_ORIGINAL_PRICE)
+    : null;
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
@@ -352,11 +358,25 @@ function KazevoOutdoorPage() {
               {product ? (
                 <>
                   <div className="mt-6 flex flex-wrap items-baseline gap-3">
-                    <span className="font-display text-3xl font-black">
-                      {selectedVariant
-                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
-                    </span>
+                    {saleInfo?.isOnSale ? (
+                      <>
+                        <span className="font-display text-3xl font-black text-sunset">
+                          {formatUsd(saleInfo.current)} USD
+                        </span>
+                        <span className="font-display text-xl font-semibold text-muted-foreground line-through">
+                          {formatUsd(saleInfo.compareAt!)} USD
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-sunset/15 px-3 py-1 text-xs font-semibold text-sunset">
+                          Save {saleInfo.percentOff}%
+                        </span>
+                      </>
+                    ) : (
+                      <span className="font-display text-3xl font-black">
+                        {selectedVariant
+                          ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
+                          : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
+                      </span>
+                    )}
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/25 px-3 py-1 text-xs font-semibold text-accent-foreground">
                       <Truck size={14} /> Free worldwide shipping
                     </span>
