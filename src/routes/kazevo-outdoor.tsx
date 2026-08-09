@@ -41,6 +41,9 @@ const TITLE = "kazevo Outdoor Backpack | Lightweight 500g Hiking & Travel Pack";
 const DESCRIPTION =
   "The kazevo Outdoor Backpack: water-repellent nylon, breathable back panel, laptop sleeve and anti-theft pocket in a 500g colour-block pack for hiking, travel and campus. Free worldwide shipping.";
 
+// Manual sale override. Set to undefined to fall back to Shopify's variant compareAtPrice.
+const SALE_ORIGINAL_PRICE = 29.99;
+
 const SHOPIFY_SHOTS = [
   "https://cdn.shopify.com/s/files/1/0744/5200/9121/files/6076E9C5-C593-4AC3-91F7-B800AB5737EC.jpg?v=1785843583",
   "https://cdn.shopify.com/s/files/1/0744/5200/9121/files/83E44F7D-FC8D-4D21-956C-4154F218379C.jpg?v=1785843581",
