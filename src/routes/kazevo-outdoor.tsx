@@ -234,7 +234,9 @@ function KazevoOutdoorPage() {
   }, [color, variants.length]);
 
   const selectedVariant = variants[active];
-  const saleInfo = selectedVariant ? getVariantSaleInfo(selectedVariant) : null;
+  const saleInfo = selectedVariant
+    ? getVariantSaleInfo(selectedVariant, SALE_ORIGINAL_PRICE)
+    : null;
 
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
