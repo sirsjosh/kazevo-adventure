@@ -1,5 +1,10 @@
 import { readClickIds } from "@/lib/meta-pixel";
 
+export interface ShopifyMoney {
+  amount: string;
+  currencyCode: string;
+}
+
 export interface ShopifyProduct {
   node: {
     id: string;
@@ -7,10 +12,10 @@ export interface ShopifyProduct {
     description: string;
     handle: string;
     priceRange: {
-      minVariantPrice: {
-        amount: string;
-        currencyCode: string;
-      };
+      minVariantPrice: ShopifyMoney;
+      maxVariantPrice?: ShopifyMoney;
+      minVariantCompareAtPrice?: ShopifyMoney | null;
+      maxVariantCompareAtPrice?: ShopifyMoney | null;
     };
     images: {
       edges: Array<{
@@ -25,10 +30,8 @@ export interface ShopifyProduct {
         node: {
           id: string;
           title: string;
-          price: {
-            amount: string;
-            currencyCode: string;
-          };
+          price: ShopifyMoney;
+          compareAtPrice?: ShopifyMoney | null;
           availableForSale: boolean;
           image?: { url: string } | null;
           selectedOptions: Array<{
@@ -43,6 +46,25 @@ export interface ShopifyProduct {
       values: string[];
     }>;
   };
+}
+
+export interface VariantSaleInfo {
+  isOnSale: boolean;
+  current: number;
+  compareAt: number | null;
+  savings: number;
+  percentOff: number;
+}
+
+export function getVariantSaleInfo(
+  variant: ShopifyProduct["node"]["variants"]["edges"][0]["node"]
+): VariantSaleInfo {
+  const current = parseFloat(variant.price.amount);
+  const compareAt = variant.compareAtPrice ? parseFloat(variant.compareAtPrice.amount) : null;
+  const isOnSale = compareAt !== null && compareAt > current;
+  const savings = isOnSale ? compareAt - current : 0;
+  const percentOff = isOnSale ? Math.round((savings / compareAt) * 100) : 0;
+  return { isOnSale, current, compareAt, savings, percentOff };
 }
 
 export interface ShopifyProductsResponse {
