@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 
 import { productPages } from "@/lib/productContent";
-import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
 /** Products that have their own dedicated marketing page. */
