@@ -87,8 +87,13 @@ export const fallbackVariantImage = purple.url;
 function lookup(map: Record<string, string>, value?: string): string | undefined {
   if (!value) return undefined;
   const raw = value.trim();
-  return map[raw] ?? map[raw.toLowerCase()];
+  const direct = map[raw] ?? map[raw.toLowerCase()];
+  if (direct) return direct;
+  // Some variants append a size, e.g. "Yellow - small" or "Cream – big".
+  const base = raw.toLowerCase().split(/\s+[-–—]\s+/)[0]?.trim();
+  return base ? map[base] : undefined;
 }
+
 
 export function getVariantColorValue(
   selectedOptions: Array<{ name: string; value: string }>
