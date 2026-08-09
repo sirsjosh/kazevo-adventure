@@ -50,8 +50,27 @@ export const colorDotMap: Record<string, string> = {
   "blue – double sling": "oklch(0.62 0.17 265)",
   "red – single sling": "oklch(0.55 0.21 25)",
   "red – double sling": "oklch(0.62 0.19 25)",
-
+  // Football hand bag / retro leather / kids + crossbody colourways
+  "white": "oklch(0.97 0.005 285)",
+  "cream": "oklch(0.93 0.04 95)",
+  "brown": "oklch(0.45 0.08 55)",
+  "light brown": "oklch(0.62 0.09 70)",
+  "dark brown": "oklch(0.33 0.05 50)",
+  "khaki": "oklch(0.72 0.06 95)",
+  "denim blue": "oklch(0.55 0.11 250)",
+  "blue": "oklch(0.58 0.17 255)",
+  "purple": "oklch(0.62 0.19 300)",
+  "green": "oklch(0.72 0.15 155)",
+  "lime green": "oklch(0.87 0.2 122)",
+  "yellow": "oklch(0.88 0.16 95)",
+  "dark pink": "oklch(0.65 0.19 5)",
+  "pink + green": "oklch(0.78 0.13 60)",
+  "khaki + blue": "oklch(0.66 0.09 190)",
+  "blue + green": "oklch(0.68 0.14 200)",
+  "purple + blue": "oklch(0.6 0.17 285)",
+  "purple + green": "oklch(0.68 0.15 230)",
 };
+
 
 export const colorNameMap: Record<string, string> = {
   "深紫色": "Deep Purple",
@@ -68,8 +87,13 @@ export const fallbackVariantImage = purple.url;
 function lookup(map: Record<string, string>, value?: string): string | undefined {
   if (!value) return undefined;
   const raw = value.trim();
-  return map[raw] ?? map[raw.toLowerCase()];
+  const direct = map[raw] ?? map[raw.toLowerCase()];
+  if (direct) return direct;
+  // Some variants append a size, e.g. "Yellow - small" or "Cream – big".
+  const base = raw.toLowerCase().split(/\s+[-–—]\s+/)[0]?.trim();
+  return base ? map[base] : undefined;
 }
+
 
 export function getVariantColorValue(
   selectedOptions: Array<{ name: string; value: string }>

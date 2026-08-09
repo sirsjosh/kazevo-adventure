@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
+import { productPages } from "@/lib/productContent";
 import { fetchShopifyProducts } from "@/lib/shopify";
 
-const BASE_URL = "https://kazevo-adventure-launch.lovable.app";
+const BASE_URL = "https://kazevo.store";
 
 interface SitemapEntry {
   path: string;
@@ -15,11 +16,18 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
+        const dedicated = Object.values(productPages);
+
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/kazevo-mini", changefreq: "weekly", priority: "0.9" },
           { path: "/kazevo-outdoor", changefreq: "weekly", priority: "0.9" },
           { path: "/kazevo-sling", changefreq: "weekly", priority: "0.9" },
+          ...dedicated.map((p) => ({
+            path: p.path,
+            changefreq: "weekly" as const,
+            priority: "0.9",
+          })),
           {
             path: "/blog/choosing-an-ultralight-backpack",
             changefreq: "monthly",
@@ -35,7 +43,9 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         try {
           const products = await fetchShopifyProducts("*", 50);
+          const covered = new Set(dedicated.map((p) => p.handle));
           for (const product of products) {
+            if (covered.has(product.node.handle)) continue;
             entries.push({
               path: `/product/${encodeURIComponent(product.node.handle)}`,
               changefreq: "weekly",
@@ -45,6 +55,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         } catch {
           // If Shopify is unreachable, still serve the static routes.
         }
+
 
         const urls = entries.map((e) =>
           [
