@@ -144,24 +144,16 @@ const PRODUCT_BY_HANDLE_QUERY = `
       title
       description
       handle
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
-        }
-        maxVariantPrice {
-          amount
-          currencyCode
-        }
-        minVariantCompareAtPrice {
-          amount
-          currencyCode
-        }
-        maxVariantCompareAtPrice {
-          amount
-          currencyCode
-        }
-      }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
       images(first: 5) {
         edges {
           node {
