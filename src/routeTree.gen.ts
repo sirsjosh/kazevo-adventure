@@ -11,15 +11,22 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ColorBlockKidsBackpackRouteImport } from './routes/color-block-kids-backpack'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CrossbodyWaistBagRouteImport } from './routes/crossbody-waist-bag'
+import { Route as FootballBagRouteImport } from './routes/football-bag'
+import { Route as FunctionalSchoolBackpackRouteImport } from './routes/functional-school-backpack'
+import { Route as JiumeisoBackpackRouteImport } from './routes/jiumeiso-backpack'
 import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
 import { Route as KazevoSlingRouteImport } from './routes/kazevo-sling'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as RetroLeatherBackpackRouteImport } from './routes/retro-leather-backpack'
 import { Route as ShippingRouteImport } from './routes/shipping'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as UltraLightKidsBackpackRouteImport } from './routes/ultra-light-kids-backpack'
 import { Route as BlogChoosingAnUltralightBackpackRouteImport } from './routes/blog/choosing-an-ultralight-backpack'
 import { Route as ProductHandleRouteImport } from './routes/product/$handle'
 
@@ -33,9 +40,35 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ColorBlockKidsBackpackRoute = ColorBlockKidsBackpackRouteImport.update({
+  id: '/color-block-kids-backpack',
+  path: '/color-block-kids-backpack',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrossbodyWaistBagRoute = CrossbodyWaistBagRouteImport.update({
+  id: '/crossbody-waist-bag',
+  path: '/crossbody-waist-bag',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FootballBagRoute = FootballBagRouteImport.update({
+  id: '/football-bag',
+  path: '/football-bag',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FunctionalSchoolBackpackRoute =
+  FunctionalSchoolBackpackRouteImport.update({
+    id: '/functional-school-backpack',
+    path: '/functional-school-backpack',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const JiumeisoBackpackRoute = JiumeisoBackpackRouteImport.update({
+  id: '/jiumeiso-backpack',
+  path: '/jiumeiso-backpack',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KazevoMiniRoute = KazevoMiniRouteImport.update({
@@ -63,6 +96,11 @@ const RefundPolicyRoute = RefundPolicyRouteImport.update({
   path: '/refund-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RetroLeatherBackpackRoute = RetroLeatherBackpackRouteImport.update({
+  id: '/retro-leather-backpack',
+  path: '/retro-leather-backpack',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShippingRoute = ShippingRouteImport.update({
   id: '/shipping',
   path: '/shipping',
@@ -76,6 +114,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UltraLightKidsBackpackRoute = UltraLightKidsBackpackRouteImport.update({
+  id: '/ultra-light-kids-backpack',
+  path: '/ultra-light-kids-backpack',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogChoosingAnUltralightBackpackRoute =
@@ -93,30 +136,44 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
+  '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
+  '/football-bag': typeof FootballBagRoute
+  '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
+  '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
+  '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/ultra-light-kids-backpack': typeof UltraLightKidsBackpackRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
+  '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
+  '/football-bag': typeof FootballBagRoute
+  '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
+  '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
+  '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/ultra-light-kids-backpack': typeof UltraLightKidsBackpackRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -124,15 +181,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
+  '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
+  '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
+  '/football-bag': typeof FootballBagRoute
+  '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
+  '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
   '/refund-policy': typeof RefundPolicyRoute
+  '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/ultra-light-kids-backpack': typeof UltraLightKidsBackpackRoute
   '/blog/choosing-an-ultralight-backpack': typeof BlogChoosingAnUltralightBackpackRoute
   '/product/$handle': typeof ProductHandleRoute
 }
@@ -141,45 +205,66 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/checkout'
+    | '/color-block-kids-backpack'
     | '/contact'
+    | '/crossbody-waist-bag'
+    | '/football-bag'
+    | '/functional-school-backpack'
+    | '/jiumeiso-backpack'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
     | '/refund-policy'
+    | '/retro-leather-backpack'
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/ultra-light-kids-backpack'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/checkout'
+    | '/color-block-kids-backpack'
     | '/contact'
+    | '/crossbody-waist-bag'
+    | '/football-bag'
+    | '/functional-school-backpack'
+    | '/jiumeiso-backpack'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
     | '/refund-policy'
+    | '/retro-leather-backpack'
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/ultra-light-kids-backpack'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   id:
     | '__root__'
     | '/'
     | '/checkout'
+    | '/color-block-kids-backpack'
     | '/contact'
+    | '/crossbody-waist-bag'
+    | '/football-bag'
+    | '/functional-school-backpack'
+    | '/jiumeiso-backpack'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
     | '/refund-policy'
+    | '/retro-leather-backpack'
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/ultra-light-kids-backpack'
     | '/blog/choosing-an-ultralight-backpack'
     | '/product/$handle'
   fileRoutesById: FileRoutesById
@@ -187,15 +272,22 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
+  ColorBlockKidsBackpackRoute: typeof ColorBlockKidsBackpackRoute
   ContactRoute: typeof ContactRoute
+  CrossbodyWaistBagRoute: typeof CrossbodyWaistBagRoute
+  FootballBagRoute: typeof FootballBagRoute
+  FunctionalSchoolBackpackRoute: typeof FunctionalSchoolBackpackRoute
+  JiumeisoBackpackRoute: typeof JiumeisoBackpackRoute
   KazevoMiniRoute: typeof KazevoMiniRoute
   KazevoOutdoorRoute: typeof KazevoOutdoorRoute
   KazevoSlingRoute: typeof KazevoSlingRoute
   LegalRoute: typeof LegalRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
+  RetroLeatherBackpackRoute: typeof RetroLeatherBackpackRoute
   ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  UltraLightKidsBackpackRoute: typeof UltraLightKidsBackpackRoute
   BlogChoosingAnUltralightBackpackRoute: typeof BlogChoosingAnUltralightBackpackRoute
   ProductHandleRoute: typeof ProductHandleRoute
 }
@@ -216,11 +308,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/color-block-kids-backpack': {
+      id: '/color-block-kids-backpack'
+      path: '/color-block-kids-backpack'
+      fullPath: '/color-block-kids-backpack'
+      preLoaderRoute: typeof ColorBlockKidsBackpackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crossbody-waist-bag': {
+      id: '/crossbody-waist-bag'
+      path: '/crossbody-waist-bag'
+      fullPath: '/crossbody-waist-bag'
+      preLoaderRoute: typeof CrossbodyWaistBagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/football-bag': {
+      id: '/football-bag'
+      path: '/football-bag'
+      fullPath: '/football-bag'
+      preLoaderRoute: typeof FootballBagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/functional-school-backpack': {
+      id: '/functional-school-backpack'
+      path: '/functional-school-backpack'
+      fullPath: '/functional-school-backpack'
+      preLoaderRoute: typeof FunctionalSchoolBackpackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jiumeiso-backpack': {
+      id: '/jiumeiso-backpack'
+      path: '/jiumeiso-backpack'
+      fullPath: '/jiumeiso-backpack'
+      preLoaderRoute: typeof JiumeisoBackpackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kazevo-mini': {
@@ -258,6 +385,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RefundPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/retro-leather-backpack': {
+      id: '/retro-leather-backpack'
+      path: '/retro-leather-backpack'
+      fullPath: '/retro-leather-backpack'
+      preLoaderRoute: typeof RetroLeatherBackpackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shipping': {
       id: '/shipping'
       path: '/shipping'
@@ -277,6 +411,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ultra-light-kids-backpack': {
+      id: '/ultra-light-kids-backpack'
+      path: '/ultra-light-kids-backpack'
+      fullPath: '/ultra-light-kids-backpack'
+      preLoaderRoute: typeof UltraLightKidsBackpackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/choosing-an-ultralight-backpack': {
@@ -299,28 +440,25 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
+  ColorBlockKidsBackpackRoute: ColorBlockKidsBackpackRoute,
   ContactRoute: ContactRoute,
+  CrossbodyWaistBagRoute: CrossbodyWaistBagRoute,
+  FootballBagRoute: FootballBagRoute,
+  FunctionalSchoolBackpackRoute: FunctionalSchoolBackpackRoute,
+  JiumeisoBackpackRoute: JiumeisoBackpackRoute,
   KazevoMiniRoute: KazevoMiniRoute,
   KazevoOutdoorRoute: KazevoOutdoorRoute,
   KazevoSlingRoute: KazevoSlingRoute,
   LegalRoute: LegalRoute,
   RefundPolicyRoute: RefundPolicyRoute,
+  RetroLeatherBackpackRoute: RetroLeatherBackpackRoute,
   ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  UltraLightKidsBackpackRoute: UltraLightKidsBackpackRoute,
   BlogChoosingAnUltralightBackpackRoute: BlogChoosingAnUltralightBackpackRoute,
   ProductHandleRoute: ProductHandleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
