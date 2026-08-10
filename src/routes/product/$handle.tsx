@@ -1,4 +1,5 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import { getEnglishPath } from "@/lib/productContent";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { trackViewContent } from "@/lib/meta-pixel";
 import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
@@ -83,6 +84,8 @@ export const Route = createFileRoute("/product/$handle")({
     };
   },
   loader: async ({ params }) => {
+    const englishPath = getEnglishPath(params.handle);
+    if (englishPath) throw redirect({ to: englishPath, statusCode: 301 });
     const product = await fetchShopifyProductByHandle(params.handle);
     if (!product) throw notFound();
     const reviews = await getProductReviews({ data: { handle: params.handle } });
