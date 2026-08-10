@@ -22,6 +22,7 @@ import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
 import { Route as KazevoSlingRouteImport } from './routes/kazevo-sling'
 import { Route as LegalRouteImport } from './routes/legal'
+import { Route as OutdoorHikingBackpackRouteImport } from './routes/outdoor-hiking-backpack'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as RetroLeatherBackpackRouteImport } from './routes/retro-leather-backpack'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -98,6 +99,11 @@ const LegalRoute = LegalRouteImport.update({
   path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OutdoorHikingBackpackRoute = OutdoorHikingBackpackRouteImport.update({
+  id: '/outdoor-hiking-backpack',
+  path: '/outdoor-hiking-backpack',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RefundPolicyRoute = RefundPolicyRouteImport.update({
   id: '/refund-policy',
   path: '/refund-policy',
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
+  '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
   '/shipping': typeof ShippingRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
+  '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
   '/shipping': typeof ShippingRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
+  '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
   '/shipping': typeof ShippingRoute
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
+    | '/outdoor-hiking-backpack'
     | '/refund-policy'
     | '/retro-leather-backpack'
     | '/shipping'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
+    | '/outdoor-hiking-backpack'
     | '/refund-policy'
     | '/retro-leather-backpack'
     | '/shipping'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
+    | '/outdoor-hiking-backpack'
     | '/refund-policy'
     | '/retro-leather-backpack'
     | '/shipping'
@@ -296,6 +308,7 @@ export interface RootRouteChildren {
   KazevoOutdoorRoute: typeof KazevoOutdoorRoute
   KazevoSlingRoute: typeof KazevoSlingRoute
   LegalRoute: typeof LegalRoute
+  OutdoorHikingBackpackRoute: typeof OutdoorHikingBackpackRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   RetroLeatherBackpackRoute: typeof RetroLeatherBackpackRoute
   ShippingRoute: typeof ShippingRoute
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/outdoor-hiking-backpack': {
+      id: '/outdoor-hiking-backpack'
+      path: '/outdoor-hiking-backpack'
+      fullPath: '/outdoor-hiking-backpack'
+      preLoaderRoute: typeof OutdoorHikingBackpackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/refund-policy': {
       id: '/refund-policy'
       path: '/refund-policy'
@@ -472,6 +492,7 @@ const rootRouteChildren: RootRouteChildren = {
   KazevoOutdoorRoute: KazevoOutdoorRoute,
   KazevoSlingRoute: KazevoSlingRoute,
   LegalRoute: LegalRoute,
+  OutdoorHikingBackpackRoute: OutdoorHikingBackpackRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   RetroLeatherBackpackRoute: RetroLeatherBackpackRoute,
   ShippingRoute: ShippingRoute,
