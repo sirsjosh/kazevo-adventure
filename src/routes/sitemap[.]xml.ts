@@ -43,9 +43,9 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         try {
           const products = await fetchShopifyProducts("*", 50);
-          const covered = new Set(dedicated.map((p) => p.handle));
           for (const product of products) {
-            if (covered.has(product.node.handle)) continue;
+            // Products with a dedicated English page are already listed above.
+            if (handleToPath[product.node.handle]) continue;
             entries.push({
               path: `/product/${encodeURIComponent(product.node.handle)}`,
               changefreq: "weekly",
