@@ -946,3 +946,16 @@ export function getCrossSellFor(handles: string[]): CrossSellPair | null {
   }
   return null;
 }
+
+/** Shopify handles that are Chinese; every one has a dedicated English route. */
+export const handleToPath: Record<string, string> = {
+  ...Object.fromEntries(Object.values(productPages).map((p) => [p.handle, p.path])),
+  "unilulu轻量户外徒步登山背包男女2026新款撞色多巴胺旅行双肩包": "/kazevo-mini",
+  "彩色多巴胺户外运动包女大容量轻便休闲旅行书包防泼水登山双肩包": "/kazevo-outdoor",
+  "篮球包篮球袋双肩单肩袋子排球足球背包网兜袋球网兜训练包收纳包": "/kazevo-sling",
+};
+
+/** Returns the pretty English URL for a Shopify handle, if one exists. */
+export function getEnglishPath(handle: string): string | null {
+  return handleToPath[handle] ?? null;
+}
