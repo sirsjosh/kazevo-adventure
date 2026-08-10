@@ -594,6 +594,243 @@ export const productPages = {
       "The kazevo Crossbody Waist Bag: soft canvas dumpling bag with PU lining, zip pocket and crossbody or waist carry. Four colours, pin-friendly, free worldwide shipping.",
     fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0809_27.png?v=1786261017`,
   },
+
+  "football-fan-leather-crossbody": {
+    path: "/football-fan-leather-crossbody",
+    handle: "新款疯马皮橄榄球包男士复古斜挎小包真皮单肩包休闲牛皮胸包男包",
+    name: "kazevo Football Fan Leather Crossbody Bag",
+    eyebrow: "Leather · Retro · Everyday",
+    headline: ["kazevo", "football fan", "leather crossbody"],
+    intro:
+      "A full-grain cowhide crossbody shaped like a football, finished in crazy-horse leather that darkens and patinas the more you carry it.",
+    bullets: [
+      "Full-grain cowhide, crazy-horse finish",
+      "Riveted retro hardware",
+      "31 × 14 × 13 cm, 450 g",
+      "Ten leather colourways",
+    ],
+    benefits: [
+      {
+        title: "Real full-grain cowhide",
+        body: "Top-layer hide, not split or bonded leather — it creases where you fold it and softens instead of cracking.",
+      },
+      {
+        title: "Crazy-horse patina",
+        body: "The waxed crazy-horse finish shifts tone with wear, so scuffs read as character rather than damage.",
+      },
+      {
+        title: "Football silhouette, done seriously",
+        body: "The oval game-day shape is cut in leather with clean panel seams and rivets — a fan piece you can wear to dinner.",
+      },
+      {
+        title: "Light for leather",
+        body: "450 g across a 31 × 14 × 13 cm body: phone, wallet, keys, cables and a compact camera without the shoulder ache.",
+      },
+      {
+        title: "Crossbody or chest carry",
+        body: "Wear it long across the body or shortened as a chest bag — the strap adjusts for either, hands free both ways.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Game-day shape. Heirloom leather.",
+    benefitsSub: "Vintage-cut cowhide built to age well season after season.",
+    specs: [
+      ["Material", "Full-grain cowhide (crazy-horse finish)"],
+      ["Lining", "Poly-cotton"],
+      ["Dimensions", "31 × 14 × 13 cm"],
+      ["Weight", "450 g"],
+      ["Hardware", "Rivets, metal zip pulls"],
+      ["Carry", "Adjustable crossbody / chest strap"],
+      ["Style", "Retro Americana"],
+      ["Colours", "Black, Elephant Grain, Vintage Brown, Vintage Brown Light, Light Grey, Grain Brown, Horse Brown, Mocha Brown, Brown, Amber Grain"],
+      ["Best for", "Daily carry, game days, travel"],
+    ],
+    faqs: [
+      {
+        q: "Is this genuine leather?",
+        a: "Yes — full-grain top-layer cowhide with a waxed crazy-horse finish, lined in poly-cotton.",
+      },
+      {
+        q: "Will it hold a large phone?",
+        a: "Comfortably. A Pro Max-sized phone, cardholder, keys and cables all fit with room to spare.",
+      },
+      {
+        q: "Why do the colours look slightly different in photos?",
+        a: "Crazy-horse leather takes dye unevenly by design, so every piece varies a little. That variation is the finish, not a flaw.",
+      },
+      {
+        q: "How should I care for it?",
+        a: "Wipe with a dry cloth and treat occasionally with leather balm. Scratches buff out with your thumb.",
+      },
+    ],
+    ctaHeadline: "Carry the game.",
+    ctaSub: "Free worldwide shipping on every kazevo Football Fan Leather Crossbody Bag.",
+    title: "kazevo Football Fan Leather Crossbody Bag | Full-Grain Cowhide",
+    description:
+      "The kazevo Football Fan Leather Crossbody Bag: 450 g full-grain crazy-horse cowhide crossbody, 31 × 14 × 13 cm, riveted retro hardware and ten colourways. Free worldwide shipping.",
+    fallbackImage: `${CDN}/O1CN01JZlbUz1J3DgHol7Eb__2257160972-0-cib.jpg?v=1786251892`,
+  },
+
+  "outdoor-hiking-backpack": {
+    path: "/outdoor-hiking-backpack",
+    handle: "unilulu轻便撞色户外徒步多巴胺登山双肩包2026新款出行休闲背包",
+    name: "kazevo Outdoor Hiking Backpack",
+    eyebrow: "Hiking · Camping · Cycling",
+    headline: ["kazevo", "outdoor", "hiking backpack"],
+    intro:
+      "A colour-blocked nylon daypack built for trails, campsites and bike commutes — 500 g, under 20 litres, and shaped to sit still while you move.",
+    bullets: [
+      "Ripstop-feel nylon shell",
+      "Curved ergonomic shoulder straps",
+      "Under 20 L day capacity",
+      "Three dopamine colourways",
+    ],
+    benefits: [
+      {
+        title: "Nylon that takes a beating",
+        body: "The nylon shell shrugs off branch scrapes, granite and gravel far better than the polyester packs at this weight.",
+      },
+      {
+        title: "Curved straps that follow you",
+        body: "Contoured shoulder straps track the shape of your shoulders, so the load stays centred on a scramble instead of swinging.",
+      },
+      {
+        title: "Day-hike sized",
+        body: "Under 20 litres: water, a shell layer, snacks, a first-aid kit and a camera — everything a day out needs, nothing you'd regret carrying.",
+      },
+      {
+        title: "500 g on your back",
+        body: "Half a kilo empty means the pack disappears once it's loaded and you're an hour into the climb.",
+      },
+      {
+        title: "Colour blocks you can spot",
+        body: "Purple-pink, pink-green and coffee-khaki — high-contrast panels that read on a trail and in a group photo.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Light enough to forget. Tough enough to trust.",
+    benefitsSub: "A dopamine-coloured daypack for hiking, camping and cycling.",
+    specs: [
+      ["Material", "Nylon"],
+      ["Lining", "Polyester"],
+      ["Capacity", "Under 20 L"],
+      ["Weight", "500 g"],
+      ["Harness", "Curved ergonomic shoulder straps"],
+      ["Pattern", "Solid colour blocks"],
+      ["Activities", "Hiking, camping, cycling"],
+      ["Colours", "Purple with Pink, Pink with Green, Coffee Khaki"],
+      ["Best for", "Day hikes, weekend camps, bike commutes"],
+    ],
+    faqs: [
+      {
+        q: "Is it big enough for an overnight trip?",
+        a: "It's a sub-20 L daypack. Great for a full day out or a light overnight with compact gear, but not a multi-day load.",
+      },
+      {
+        q: "Is it waterproof?",
+        a: "The nylon shell sheds light rain and splash. For sustained downpours use a rain cover or a dry bag inside.",
+      },
+      {
+        q: "Will it fit a laptop?",
+        a: "A tablet or small 8-inch device fits. For a full laptop, look at the kazevo Functional School Backpack.",
+      },
+      {
+        q: "How do I clean it?",
+        a: "Hand wash with mild soap in cool water and air dry. Skip the machine and the tumble dryer.",
+      },
+    ],
+    ctaHeadline: "Go further, carry less.",
+    ctaSub: "Free worldwide shipping on every kazevo Outdoor Hiking Backpack.",
+    title: "kazevo Outdoor Hiking Backpack | 500g Nylon Daypack",
+    description:
+      "The kazevo Outdoor Hiking Backpack: 500 g nylon daypack under 20 L with curved ergonomic straps, built for hiking, camping and cycling. Three colourways, free worldwide shipping.",
+    fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0810_29.png?v=1786337000`,
+  },
+
+  "mini-crossbody-bag": {
+    path: "/mini-crossbody-bag",
+    handle: "unilulu户外多巴胺单肩斜挎小方包露营徒步亲子小挎包轻量手机包",
+    name: "kazevo Mini Crossbody Bag",
+    eyebrow: "Phone · Trail · Everyday",
+    headline: ["kazevo", "mini", "crossbody bag"],
+    intro:
+      "A 120 g square crossbody sized for a phone, a card and a key — the bag you take when you don't want to take a bag.",
+    bullets: [
+      "Just 120 g",
+      "Dedicated phone and card pockets",
+      "Single adjustable strap",
+      "Four dopamine colours",
+    ],
+    benefits: [
+      {
+        title: "Barely there at 120 g",
+        body: "Lighter than the phone inside it. You'll forget it's on until you reach for your card.",
+      },
+      {
+        title: "Two pockets, zero rummaging",
+        body: "A padded phone sleeve and a separate card pocket keep the two things you actually reach for apart.",
+      },
+      {
+        title: "Small enough to say yes",
+        body: "Camping, a festival, a school run, a walk with the kids — the horizontal square shape sits flat and never swings.",
+      },
+      {
+        title: "Zip-closed and secure",
+        body: "A full-length zip across the top keeps everything in when you crouch, climb or carry a toddler.",
+      },
+      {
+        title: "Colours that pop",
+        body: "Pink, yellow, blue and grey — bright enough to find in a tent, plain enough for the office run.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "The smallest bag you'll wear the most",
+    benefitsSub: "Phone, card, key. Nothing else, nothing missing.",
+    specs: [
+      ["Material", "Polyester"],
+      ["Lining", "Polyester"],
+      ["Weight", "120 g"],
+      ["Shape", "Horizontal square, small"],
+      ["Closure", "Zipper"],
+      ["Interior", "Phone pocket, card pocket"],
+      ["Strap", "Single adjustable shoulder strap"],
+      ["Colours", "Pink, Yellow, Blue, Grey"],
+      ["Best for", "Walks, camping, travel days, kids' outings"],
+    ],
+    faqs: [
+      {
+        q: "Will a large phone fit?",
+        a: "Yes — the phone pocket takes a Pro Max or Ultra-sized handset, plus a card and a key alongside it.",
+      },
+      {
+        q: "Is the strap adjustable?",
+        a: "It is. Wear it long across the body or shortened on the shoulder.",
+      },
+      {
+        q: "Is it suitable for kids?",
+        a: "It's a favourite for family hikes — light, simple to open, and small enough for a child to carry their own snack and card.",
+      },
+      {
+        q: "How do I clean it?",
+        a: "Spot clean with mild soap and a damp cloth, then air dry.",
+      },
+    ],
+    ctaHeadline: "Travel light. Really light.",
+    ctaSub: "Free worldwide shipping on every kazevo Mini Crossbody Bag.",
+    title: "kazevo Mini Crossbody Bag | 120g Lightweight Phone Bag",
+    description:
+      "The kazevo Mini Crossbody Bag: a 120 g polyester crossbody with phone and card pockets, zip closure and an adjustable strap. Four colours, free worldwide shipping.",
+    fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0810_20.png?v=1786337184`,
+  },
 } satisfies Record<string, ProductPageContent>;
 
 export type ProductPageKey = keyof typeof productPages;
