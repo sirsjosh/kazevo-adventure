@@ -22,6 +22,7 @@ import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
 import { Route as KazevoSlingRouteImport } from './routes/kazevo-sling'
 import { Route as LegalRouteImport } from './routes/legal'
+import { Route as MiniCrossbodyBagRouteImport } from './routes/mini-crossbody-bag'
 import { Route as OutdoorHikingBackpackRouteImport } from './routes/outdoor-hiking-backpack'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as RetroLeatherBackpackRouteImport } from './routes/retro-leather-backpack'
@@ -99,6 +100,11 @@ const LegalRoute = LegalRouteImport.update({
   path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MiniCrossbodyBagRoute = MiniCrossbodyBagRouteImport.update({
+  id: '/mini-crossbody-bag',
+  path: '/mini-crossbody-bag',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OutdoorHikingBackpackRoute = OutdoorHikingBackpackRouteImport.update({
   id: '/outdoor-hiking-backpack',
   path: '/outdoor-hiking-backpack',
@@ -160,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
+  '/mini-crossbody-bag': typeof MiniCrossbodyBagRoute
   '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
@@ -184,6 +191,7 @@ export interface FileRoutesByTo {
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
+  '/mini-crossbody-bag': typeof MiniCrossbodyBagRoute
   '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
@@ -209,6 +217,7 @@ export interface FileRoutesById {
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
   '/legal': typeof LegalRoute
+  '/mini-crossbody-bag': typeof MiniCrossbodyBagRoute
   '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/retro-leather-backpack': typeof RetroLeatherBackpackRoute
@@ -235,6 +244,7 @@ export interface FileRouteTypes {
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
+    | '/mini-crossbody-bag'
     | '/outdoor-hiking-backpack'
     | '/refund-policy'
     | '/retro-leather-backpack'
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
+    | '/mini-crossbody-bag'
     | '/outdoor-hiking-backpack'
     | '/refund-policy'
     | '/retro-leather-backpack'
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/kazevo-outdoor'
     | '/kazevo-sling'
     | '/legal'
+    | '/mini-crossbody-bag'
     | '/outdoor-hiking-backpack'
     | '/refund-policy'
     | '/retro-leather-backpack'
@@ -308,6 +320,7 @@ export interface RootRouteChildren {
   KazevoOutdoorRoute: typeof KazevoOutdoorRoute
   KazevoSlingRoute: typeof KazevoSlingRoute
   LegalRoute: typeof LegalRoute
+  MiniCrossbodyBagRoute: typeof MiniCrossbodyBagRoute
   OutdoorHikingBackpackRoute: typeof OutdoorHikingBackpackRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   RetroLeatherBackpackRoute: typeof RetroLeatherBackpackRoute
@@ -412,6 +425,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mini-crossbody-bag': {
+      id: '/mini-crossbody-bag'
+      path: '/mini-crossbody-bag'
+      fullPath: '/mini-crossbody-bag'
+      preLoaderRoute: typeof MiniCrossbodyBagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/outdoor-hiking-backpack': {
       id: '/outdoor-hiking-backpack'
       path: '/outdoor-hiking-backpack'
@@ -492,6 +512,7 @@ const rootRouteChildren: RootRouteChildren = {
   KazevoOutdoorRoute: KazevoOutdoorRoute,
   KazevoSlingRoute: KazevoSlingRoute,
   LegalRoute: LegalRoute,
+  MiniCrossbodyBagRoute: MiniCrossbodyBagRoute,
   OutdoorHikingBackpackRoute: OutdoorHikingBackpackRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   RetroLeatherBackpackRoute: RetroLeatherBackpackRoute,
