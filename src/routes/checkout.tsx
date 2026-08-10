@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { CrossSellOffer } from "@/components/CrossSellOffer";
 import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import {
   trackInitiateCheckout,
@@ -230,6 +231,9 @@ function CheckoutPage() {
                   <dd className="font-semibold text-primary">Free</dd>
                 </div>
               </dl>
+              <div className="mt-5">
+                <CrossSellOffer handles={items.map((i) => i.product.node.handle)} />
+              </div>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
                 <span className="font-display text-lg font-black">Total</span>
                 <span className="font-display text-2xl font-black">

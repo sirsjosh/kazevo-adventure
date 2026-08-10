@@ -17,6 +17,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CrossSellOffer } from "@/components/CrossSellOffer";
 import { ProductReviews } from "@/components/ProductReviews";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
 import type { ProductPageContent } from "@/lib/productContent";
@@ -344,6 +345,9 @@ export function ProductPageTemplate({
             </table>
           </div>
         </section>
+
+        {/* Perfect pair cross-sell */}
+        <CrossSellOffer handles={[content.handle]} layout="section" />
 
         {/* Reviews */}
         <ProductReviews
