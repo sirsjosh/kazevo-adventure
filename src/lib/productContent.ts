@@ -893,3 +893,56 @@ export function buildProductHead(
     scripts,
   };
 }
+
+/* ------------------------------------------------------------------ */
+/* Cross-sell pairings: "one for him, one for her"                     */
+/* ------------------------------------------------------------------ */
+
+export interface CrossSellPair {
+  /** Shopify handle of the partner product being offered */
+  partnerHandle: string;
+  /** Route path of the partner product page */
+  partnerPath: string;
+  /** Short display name for the partner */
+  partnerName: string;
+  /** Punchy headline for the offer card */
+  headline: string;
+  /** One line of persuasive copy */
+  body: string;
+  /** Button label */
+  cta: string;
+}
+
+const FOOTBALL_BAG_HANDLE =
+  "欧美跨境女包晚宴包橄榄球造形趣味手提包聚会包单肩包批发";
+const FOOTBALL_CROSSBODY_HANDLE =
+  "新款疯马皮橄榄球包男士复古斜挎小包真皮单肩包休闲牛皮胸包男包";
+
+export const crossSellPairs: Record<string, CrossSellPair> = {
+  [FOOTBALL_BAG_HANDLE]: {
+    partnerHandle: FOOTBALL_CROSSBODY_HANDLE,
+    partnerPath: "/football-fan-leather-crossbody",
+    partnerName: "kazevo Football Fan Leather Crossbody Bag",
+    headline: "Want to get one for your man?",
+    body:
+      "Same football spirit, made for him — full-grain crazy-horse leather that only looks better with every wear. Match your night-out bag with his everyday carry.",
+    cta: "Add his to cart",
+  },
+  [FOOTBALL_CROSSBODY_HANDLE]: {
+    partnerHandle: FOOTBALL_BAG_HANDLE,
+    partnerPath: "/football-bag",
+    partnerName: "kazevo Football-Shaped Hand Bag",
+    headline: "Want to get one for your lady?",
+    body:
+      "The football hand bag is its perfect match — a playful, head-turning statement piece she'll actually use. One football for him, one for her.",
+    cta: "Add hers to cart",
+  },
+};
+
+export function getCrossSellFor(handles: string[]): CrossSellPair | null {
+  for (const handle of handles) {
+    const pair = crossSellPairs[handle];
+    if (pair && !handles.includes(pair.partnerHandle)) return pair;
+  }
+  return null;
+}
