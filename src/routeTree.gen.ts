@@ -15,6 +15,7 @@ import { Route as ColorBlockKidsBackpackRouteImport } from './routes/color-block
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CrossbodyWaistBagRouteImport } from './routes/crossbody-waist-bag'
 import { Route as FootballBagRouteImport } from './routes/football-bag'
+import { Route as FootballFanLeatherCrossbodyRouteImport } from './routes/football-fan-leather-crossbody'
 import { Route as FunctionalSchoolBackpackRouteImport } from './routes/functional-school-backpack'
 import { Route as JiumeisoBackpackRouteImport } from './routes/jiumeiso-backpack'
 import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
@@ -60,6 +61,12 @@ const FootballBagRoute = FootballBagRouteImport.update({
   path: '/football-bag',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FootballFanLeatherCrossbodyRoute =
+  FootballFanLeatherCrossbodyRouteImport.update({
+    id: '/football-fan-leather-crossbody',
+    path: '/football-fan-leather-crossbody',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const FunctionalSchoolBackpackRoute =
   FunctionalSchoolBackpackRouteImport.update({
     id: '/functional-school-backpack',
@@ -140,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
   '/football-bag': typeof FootballBagRoute
+  '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
   '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
@@ -162,6 +170,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
   '/football-bag': typeof FootballBagRoute
+  '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
   '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
@@ -185,6 +194,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
   '/football-bag': typeof FootballBagRoute
+  '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
   '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
@@ -209,6 +219,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/crossbody-waist-bag'
     | '/football-bag'
+    | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
     | '/jiumeiso-backpack'
     | '/kazevo-mini'
@@ -231,6 +242,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/crossbody-waist-bag'
     | '/football-bag'
+    | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
     | '/jiumeiso-backpack'
     | '/kazevo-mini'
@@ -253,6 +265,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/crossbody-waist-bag'
     | '/football-bag'
+    | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
     | '/jiumeiso-backpack'
     | '/kazevo-mini'
@@ -276,6 +289,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CrossbodyWaistBagRoute: typeof CrossbodyWaistBagRoute
   FootballBagRoute: typeof FootballBagRoute
+  FootballFanLeatherCrossbodyRoute: typeof FootballFanLeatherCrossbodyRoute
   FunctionalSchoolBackpackRoute: typeof FunctionalSchoolBackpackRoute
   JiumeisoBackpackRoute: typeof JiumeisoBackpackRoute
   KazevoMiniRoute: typeof KazevoMiniRoute
@@ -334,6 +348,13 @@ declare module '@tanstack/react-router' {
       path: '/football-bag'
       fullPath: '/football-bag'
       preLoaderRoute: typeof FootballBagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/football-fan-leather-crossbody': {
+      id: '/football-fan-leather-crossbody'
+      path: '/football-fan-leather-crossbody'
+      fullPath: '/football-fan-leather-crossbody'
+      preLoaderRoute: typeof FootballFanLeatherCrossbodyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/functional-school-backpack': {
@@ -444,6 +465,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CrossbodyWaistBagRoute: CrossbodyWaistBagRoute,
   FootballBagRoute: FootballBagRoute,
+  FootballFanLeatherCrossbodyRoute: FootballFanLeatherCrossbodyRoute,
   FunctionalSchoolBackpackRoute: FunctionalSchoolBackpackRoute,
   JiumeisoBackpackRoute: JiumeisoBackpackRoute,
   KazevoMiniRoute: KazevoMiniRoute,
@@ -462,13 +484,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
