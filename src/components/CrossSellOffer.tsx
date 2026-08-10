@@ -60,7 +60,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
         price: variant.price,
         quantity: 1,
         selectedOptions: variant.selectedOptions,
-        imageUrl: image,
+        ...(image ? { imageUrl: image } : {}),
       });
     } finally {
       setAdding(false);
