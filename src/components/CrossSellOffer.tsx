@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Gift, Loader2, Plus, X } from "lucide-react";
+import { Check, Gift, Loader2, Plus, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { getCrossSellFor, type CrossSellPair } from "@/lib/productContent";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
-import { formatUsd } from "@/lib/variantImages";
+import {
+  formatUsd,
+  getColorLabel,
+  getVariantColorValue,
+  getVariantDotColor,
+} from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 interface CrossSellOfferProps {
@@ -20,6 +25,9 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [dismissed, setDismissed] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [added, setAdded] = useState(false);
+  const [picking, setPicking] = useState(false);
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
   const addItem = useCartStore((s) => s.addItem);
 
   const dismissKey = pair ? `kazevo-crosssell-dismissed:${pair.partnerHandle}` : "";
@@ -41,27 +49,44 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
     };
   }, [pair?.partnerHandle, dismissKey]);
 
-  if (!pair || dismissed || !product) return null;
+  const variants = useMemo(
+    () => product?.variants.edges.map((e) => e.node) ?? [],
+    [product]
+  );
+  const singleVariant = variants.length === 1;
 
-  const variant =
-    product.variants.edges.map((e) => e.node).find((v) => v.availableForSale) ??
-    product.variants.edges[0]?.node;
-  if (!variant) return null;
+  const selected =
+    variants.find((v) => v.id === selectedVariantId) ??
+    (singleVariant ? variants[0] : undefined);
 
-  const image = variant.image?.url ?? product.images.edges[0]?.node.url;
+  // Display variant: chosen one, else first available (for price/image preview)
+  const display = selected ?? variants.find((v) => v.availableForSale) ?? variants[0];
+
+  if (!pair || dismissed || !product || !display) return null;
+
+  const image = display.image?.url ?? product.images.edges[0]?.node.url;
 
   const handleAdd = async () => {
+    if (!selected) return;
     setAdding(true);
     try {
+      const img = selected.image?.url ?? image;
       await addItem({
         product: { node: product },
-        variantId: variant.id,
-        variantTitle: variant.title,
-        price: variant.price,
+        variantId: selected.id,
+        variantTitle: selected.title,
+        price: selected.price,
         quantity: 1,
-        selectedOptions: variant.selectedOptions,
-        ...(image ? { imageUrl: image } : {}),
+        selectedOptions: selected.selectedOptions,
+        ...(img ? { imageUrl: img } : {}),
       });
+      setAdded(true);
+      if (layout === "panel") {
+        setTimeout(() => {
+          setDismissed(true);
+          if (typeof window !== "undefined") sessionStorage.setItem(dismissKey, "1");
+        }, 1200);
+      }
     } finally {
       setAdding(false);
     }
@@ -71,6 +96,37 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
     setDismissed(true);
     if (typeof window !== "undefined") sessionStorage.setItem(dismissKey, "1");
   };
+
+  const swatches = (size: "sm" | "md") => (
+    <div className="flex flex-wrap items-center gap-2">
+      {variants.map((v) => {
+        const colorValue = getVariantColorValue(v.selectedOptions) ?? v.title;
+        const isSelected = selected?.id === v.id;
+        return (
+          <button
+            key={v.id}
+            type="button"
+            onClick={() => setSelectedVariantId(v.id)}
+            disabled={!v.availableForSale}
+            title={`${getColorLabel(colorValue)}${v.availableForSale ? "" : " — sold out"}`}
+            aria-label={getColorLabel(colorValue)}
+            aria-pressed={isSelected}
+            className={[
+              "rounded-full border-2 transition-all",
+              size === "sm" ? "h-6 w-6" : "h-9 w-9",
+              isSelected ? "border-foreground scale-110" : "border-border",
+              v.availableForSale ? "hover:scale-110" : "opacity-40 cursor-not-allowed",
+            ].join(" ")}
+            style={{ backgroundColor: getVariantDotColor(colorValue) }}
+          />
+        );
+      })}
+    </div>
+  );
+
+  const selectedLabel = selected
+    ? getColorLabel(getVariantColorValue(selected.selectedOptions) ?? selected.title)
+    : null;
 
   if (layout === "section") {
     return (
@@ -100,16 +156,33 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
               </h2>
               <p className="mt-3 max-w-xl text-muted-foreground">{pair.body}</p>
               <p className="mt-4 font-display text-xl font-black">
-                {formatUsd(parseFloat(variant.price.amount))} USD
+                {formatUsd(parseFloat(display.price.amount))} USD
               </p>
+
+              {!singleVariant && (
+                <div className="mt-5">
+                  <p className="mb-2 text-sm font-medium">
+                    {selectedLabel ? `Colour: ${selectedLabel}` : "Choose a colour"}
+                  </p>
+                  {swatches("md")}
+                </div>
+              )}
+
               <div className="mt-5 flex flex-wrap gap-3">
                 <Button
                   onClick={handleAdd}
-                  disabled={adding || !variant.availableForSale}
+                  disabled={adding || !selected || !selected.availableForSale}
                   className="rounded-full px-6"
                 >
                   {adding ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : added ? (
+                    <>
+                      <Check className="mr-2 h-4 w-4" />
+                      Added to cart
+                    </>
+                  ) : !selected ? (
+                    "Choose a colour"
                   ) : (
                     <>
                       <Plus className="mr-2 h-4 w-4" />
@@ -155,25 +228,52 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
         <div className="min-w-0 flex-1 pr-4">
           <p className="font-display text-sm font-black leading-snug">{pair.headline}</p>
           <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{pair.body}</p>
+
+          {picking && !singleVariant && (
+            <div className="mt-2">
+              <p className="mb-1.5 text-xs text-muted-foreground">
+                {selectedLabel ? `Colour: ${selectedLabel}` : "Pick a colour"}
+              </p>
+              {swatches("sm")}
+            </div>
+          )}
+
           <div className="mt-2 flex items-center justify-between gap-2">
             <span className="text-sm font-semibold">
-              {formatUsd(parseFloat(variant.price.amount))} USD
+              {formatUsd(parseFloat(display.price.amount))} USD
             </span>
-            <Button
-              size="sm"
-              onClick={handleAdd}
-              disabled={adding || !variant.availableForSale}
-              className="h-8 rounded-full px-3 text-xs"
-            >
-              {adding ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <>
-                  <Plus className="mr-1 h-3.5 w-3.5" />
-                  {pair.cta}
-                </>
-              )}
-            </Button>
+            {added ? (
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
+                <Check className="h-3.5 w-3.5" />
+                Added
+              </span>
+            ) : picking || singleVariant ? (
+              <Button
+                size="sm"
+                onClick={handleAdd}
+                disabled={adding || !selected || !selected.availableForSale}
+                className="h-8 rounded-full px-3 text-xs"
+              >
+                {adding ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : !selected ? (
+                  "Pick a colour"
+                ) : (
+                  <>
+                    <Plus className="mr-1 h-3.5 w-3.5" />
+                    Add
+                  </>
+                )}
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                onClick={() => setPicking(true)}
+                className="h-8 rounded-full px-3 text-xs"
+              >
+                {pair.cta}
+              </Button>
+            )}
           </div>
         </div>
       </div>
