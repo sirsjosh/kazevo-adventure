@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-import { productPages } from "@/lib/productContent";
+import { handleToPath, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts } from "@/lib/shopify";
 
 const BASE_URL = "https://kazevo.store";
