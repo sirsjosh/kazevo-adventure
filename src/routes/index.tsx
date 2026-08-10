@@ -57,6 +57,21 @@ const DEDICATED_PAGES = [
     to: "/crossbody-waist-bag",
     title: productPages["crossbody-waist-bag"].name,
   },
+  {
+    handle: productPages["football-fan-leather-crossbody"].handle,
+    to: "/football-fan-leather-crossbody",
+    title: productPages["football-fan-leather-crossbody"].name,
+  },
+  {
+    handle: productPages["outdoor-hiking-backpack"].handle,
+    to: "/outdoor-hiking-backpack",
+    title: productPages["outdoor-hiking-backpack"].name,
+  },
+  {
+    handle: productPages["mini-crossbody-bag"].handle,
+    to: "/mini-crossbody-bag",
+    title: productPages["mini-crossbody-bag"].name,
+  },
 ] as const;
 
 
