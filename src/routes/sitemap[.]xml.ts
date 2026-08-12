@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-import { handleToPath, productPages } from "@/lib/productContent";
+import { handleToPath, isAccessoryHandle, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts } from "@/lib/shopify";
 
 const BASE_URL = "https://kazevo.store";
@@ -46,6 +46,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           for (const product of products) {
             // Products with a dedicated English page are already listed above.
             if (handleToPath[product.node.handle]) continue;
+            // Accessories are upsell-only and have no browsable page.
+            if (isAccessoryHandle(product.node.handle)) continue;
             entries.push({
               path: `/product/${encodeURIComponent(product.node.handle)}`,
               changefreq: "weekly",

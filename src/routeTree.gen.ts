@@ -10,10 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BogeWadeSchoolBackpackRouteImport } from './routes/boge-wade-school-backpack'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ColorBlockKidsBackpackRouteImport } from './routes/color-block-kids-backpack'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CrossbodyWaistBagRouteImport } from './routes/crossbody-waist-bag'
+import { Route as DenimWaterBottleBagRouteImport } from './routes/denim-water-bottle-bag'
+import { Route as DopamineChestBagRouteImport } from './routes/dopamine-chest-bag'
 import { Route as FootballBagRouteImport } from './routes/football-bag'
 import { Route as FootballFanLeatherCrossbodyRouteImport } from './routes/football-fan-leather-crossbody'
 import { Route as FunctionalSchoolBackpackRouteImport } from './routes/functional-school-backpack'
@@ -21,6 +24,7 @@ import { Route as JiumeisoBackpackRouteImport } from './routes/jiumeiso-backpack
 import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
 import { Route as KazevoSlingRouteImport } from './routes/kazevo-sling'
+import { Route as LargeCapacityBackpackRouteImport } from './routes/large-capacity-backpack'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as MiniCrossbodyBagRouteImport } from './routes/mini-crossbody-bag'
 import { Route as OutdoorHikingBackpackRouteImport } from './routes/outdoor-hiking-backpack'
@@ -36,6 +40,11 @@ import { Route as ProductHandleRouteImport } from './routes/product/$handle'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BogeWadeSchoolBackpackRoute = BogeWadeSchoolBackpackRouteImport.update({
+  id: '/boge-wade-school-backpack',
+  path: '/boge-wade-school-backpack',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -56,6 +65,16 @@ const ContactRoute = ContactRouteImport.update({
 const CrossbodyWaistBagRoute = CrossbodyWaistBagRouteImport.update({
   id: '/crossbody-waist-bag',
   path: '/crossbody-waist-bag',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DenimWaterBottleBagRoute = DenimWaterBottleBagRouteImport.update({
+  id: '/denim-water-bottle-bag',
+  path: '/denim-water-bottle-bag',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DopamineChestBagRoute = DopamineChestBagRouteImport.update({
+  id: '/dopamine-chest-bag',
+  path: '/dopamine-chest-bag',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FootballBagRoute = FootballBagRouteImport.update({
@@ -93,6 +112,11 @@ const KazevoOutdoorRoute = KazevoOutdoorRouteImport.update({
 const KazevoSlingRoute = KazevoSlingRouteImport.update({
   id: '/kazevo-sling',
   path: '/kazevo-sling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LargeCapacityBackpackRoute = LargeCapacityBackpackRouteImport.update({
+  id: '/large-capacity-backpack',
+  path: '/large-capacity-backpack',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -154,10 +178,13 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/boge-wade-school-backpack': typeof BogeWadeSchoolBackpackRoute
   '/checkout': typeof CheckoutRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
+  '/denim-water-bottle-bag': typeof DenimWaterBottleBagRoute
+  '/dopamine-chest-bag': typeof DopamineChestBagRoute
   '/football-bag': typeof FootballBagRoute
   '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
@@ -165,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
+  '/large-capacity-backpack': typeof LargeCapacityBackpackRoute
   '/legal': typeof LegalRoute
   '/mini-crossbody-bag': typeof MiniCrossbodyBagRoute
   '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
@@ -179,10 +207,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/boge-wade-school-backpack': typeof BogeWadeSchoolBackpackRoute
   '/checkout': typeof CheckoutRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
+  '/denim-water-bottle-bag': typeof DenimWaterBottleBagRoute
+  '/dopamine-chest-bag': typeof DopamineChestBagRoute
   '/football-bag': typeof FootballBagRoute
   '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
@@ -190,6 +221,7 @@ export interface FileRoutesByTo {
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
+  '/large-capacity-backpack': typeof LargeCapacityBackpackRoute
   '/legal': typeof LegalRoute
   '/mini-crossbody-bag': typeof MiniCrossbodyBagRoute
   '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
@@ -205,10 +237,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/boge-wade-school-backpack': typeof BogeWadeSchoolBackpackRoute
   '/checkout': typeof CheckoutRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
+  '/denim-water-bottle-bag': typeof DenimWaterBottleBagRoute
+  '/dopamine-chest-bag': typeof DopamineChestBagRoute
   '/football-bag': typeof FootballBagRoute
   '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
@@ -216,6 +251,7 @@ export interface FileRoutesById {
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
   '/kazevo-sling': typeof KazevoSlingRoute
+  '/large-capacity-backpack': typeof LargeCapacityBackpackRoute
   '/legal': typeof LegalRoute
   '/mini-crossbody-bag': typeof MiniCrossbodyBagRoute
   '/outdoor-hiking-backpack': typeof OutdoorHikingBackpackRoute
@@ -232,10 +268,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/boge-wade-school-backpack'
     | '/checkout'
     | '/color-block-kids-backpack'
     | '/contact'
     | '/crossbody-waist-bag'
+    | '/denim-water-bottle-bag'
+    | '/dopamine-chest-bag'
     | '/football-bag'
     | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
@@ -243,6 +282,7 @@ export interface FileRouteTypes {
     | '/kazevo-mini'
     | '/kazevo-outdoor'
     | '/kazevo-sling'
+    | '/large-capacity-backpack'
     | '/legal'
     | '/mini-crossbody-bag'
     | '/outdoor-hiking-backpack'
@@ -257,10 +297,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/boge-wade-school-backpack'
     | '/checkout'
     | '/color-block-kids-backpack'
     | '/contact'
     | '/crossbody-waist-bag'
+    | '/denim-water-bottle-bag'
+    | '/dopamine-chest-bag'
     | '/football-bag'
     | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
@@ -268,6 +311,7 @@ export interface FileRouteTypes {
     | '/kazevo-mini'
     | '/kazevo-outdoor'
     | '/kazevo-sling'
+    | '/large-capacity-backpack'
     | '/legal'
     | '/mini-crossbody-bag'
     | '/outdoor-hiking-backpack'
@@ -282,10 +326,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/boge-wade-school-backpack'
     | '/checkout'
     | '/color-block-kids-backpack'
     | '/contact'
     | '/crossbody-waist-bag'
+    | '/denim-water-bottle-bag'
+    | '/dopamine-chest-bag'
     | '/football-bag'
     | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
@@ -293,6 +340,7 @@ export interface FileRouteTypes {
     | '/kazevo-mini'
     | '/kazevo-outdoor'
     | '/kazevo-sling'
+    | '/large-capacity-backpack'
     | '/legal'
     | '/mini-crossbody-bag'
     | '/outdoor-hiking-backpack'
@@ -308,10 +356,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BogeWadeSchoolBackpackRoute: typeof BogeWadeSchoolBackpackRoute
   CheckoutRoute: typeof CheckoutRoute
   ColorBlockKidsBackpackRoute: typeof ColorBlockKidsBackpackRoute
   ContactRoute: typeof ContactRoute
   CrossbodyWaistBagRoute: typeof CrossbodyWaistBagRoute
+  DenimWaterBottleBagRoute: typeof DenimWaterBottleBagRoute
+  DopamineChestBagRoute: typeof DopamineChestBagRoute
   FootballBagRoute: typeof FootballBagRoute
   FootballFanLeatherCrossbodyRoute: typeof FootballFanLeatherCrossbodyRoute
   FunctionalSchoolBackpackRoute: typeof FunctionalSchoolBackpackRoute
@@ -319,6 +370,7 @@ export interface RootRouteChildren {
   KazevoMiniRoute: typeof KazevoMiniRoute
   KazevoOutdoorRoute: typeof KazevoOutdoorRoute
   KazevoSlingRoute: typeof KazevoSlingRoute
+  LargeCapacityBackpackRoute: typeof LargeCapacityBackpackRoute
   LegalRoute: typeof LegalRoute
   MiniCrossbodyBagRoute: typeof MiniCrossbodyBagRoute
   OutdoorHikingBackpackRoute: typeof OutdoorHikingBackpackRoute
@@ -339,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/boge-wade-school-backpack': {
+      id: '/boge-wade-school-backpack'
+      path: '/boge-wade-school-backpack'
+      fullPath: '/boge-wade-school-backpack'
+      preLoaderRoute: typeof BogeWadeSchoolBackpackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -367,6 +426,20 @@ declare module '@tanstack/react-router' {
       path: '/crossbody-waist-bag'
       fullPath: '/crossbody-waist-bag'
       preLoaderRoute: typeof CrossbodyWaistBagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/denim-water-bottle-bag': {
+      id: '/denim-water-bottle-bag'
+      path: '/denim-water-bottle-bag'
+      fullPath: '/denim-water-bottle-bag'
+      preLoaderRoute: typeof DenimWaterBottleBagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dopamine-chest-bag': {
+      id: '/dopamine-chest-bag'
+      path: '/dopamine-chest-bag'
+      fullPath: '/dopamine-chest-bag'
+      preLoaderRoute: typeof DopamineChestBagRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/football-bag': {
@@ -416,6 +489,13 @@ declare module '@tanstack/react-router' {
       path: '/kazevo-sling'
       fullPath: '/kazevo-sling'
       preLoaderRoute: typeof KazevoSlingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/large-capacity-backpack': {
+      id: '/large-capacity-backpack'
+      path: '/large-capacity-backpack'
+      fullPath: '/large-capacity-backpack'
+      preLoaderRoute: typeof LargeCapacityBackpackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -500,10 +580,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BogeWadeSchoolBackpackRoute: BogeWadeSchoolBackpackRoute,
   CheckoutRoute: CheckoutRoute,
   ColorBlockKidsBackpackRoute: ColorBlockKidsBackpackRoute,
   ContactRoute: ContactRoute,
   CrossbodyWaistBagRoute: CrossbodyWaistBagRoute,
+  DenimWaterBottleBagRoute: DenimWaterBottleBagRoute,
+  DopamineChestBagRoute: DopamineChestBagRoute,
   FootballBagRoute: FootballBagRoute,
   FootballFanLeatherCrossbodyRoute: FootballFanLeatherCrossbodyRoute,
   FunctionalSchoolBackpackRoute: FunctionalSchoolBackpackRoute,
@@ -511,6 +594,7 @@ const rootRouteChildren: RootRouteChildren = {
   KazevoMiniRoute: KazevoMiniRoute,
   KazevoOutdoorRoute: KazevoOutdoorRoute,
   KazevoSlingRoute: KazevoSlingRoute,
+  LargeCapacityBackpackRoute: LargeCapacityBackpackRoute,
   LegalRoute: LegalRoute,
   MiniCrossbodyBagRoute: MiniCrossbodyBagRoute,
   OutdoorHikingBackpackRoute: OutdoorHikingBackpackRoute,
