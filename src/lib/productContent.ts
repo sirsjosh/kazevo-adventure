@@ -1275,3 +1275,46 @@ export const handleToPath: Record<string, string> = {
 export function getEnglishPath(handle: string): string | null {
   return handleToPath[handle] ?? null;
 }
+
+/* ------------------------------------------------------------------ */
+/* Accessory add-ons: sold as upsells only, no dedicated pages         */
+/* ------------------------------------------------------------------ */
+
+export interface AccessoryUpsell {
+  handle: string;
+  name: string;
+  pitch: string;
+}
+
+export const accessoryUpsells: AccessoryUpsell[] = [
+  {
+    handle: "新款2026笔袋提手大容量多层高颜值ins风文具盒男孩女生款铅笔袋",
+    name: "kazevo Multi-Layer Pencil Case",
+    pitch: "Multi-layer, carry-handle pencil case — the school-bag sidekick.",
+  },
+  {
+    handle: "一键速开运动保温杯316不锈钢高颜值男女学生户外运动吸管保温杯",
+    name: "kazevo One-Touch Sports Thermos",
+    pitch: "600 ml 316 stainless thermos, one-touch lid, 6–12 h insulation.",
+  },
+  {
+    handle: "新款潮男女超大容量塑料水杯太空杯便携学生提绳混批透明渐变吸管",
+    name: "kazevo Gradient Water Bottle",
+    pitch: "1 L gradient bottle with straw and carry cord.",
+  },
+];
+
+/** Handles that must never appear as a browsable product (upsell only). */
+export const accessoryHandles = accessoryUpsells.map((a) => a.handle);
+
+export function isAccessoryHandle(handle: string): boolean {
+  return accessoryHandles.includes(handle);
+}
+
+/** Accessories worth offering next to the given handles (skips ones already in cart). */
+export function getAccessoryUpsells(handles: string[]): AccessoryUpsell[] {
+  if (handles.some((h) => isAccessoryHandle(h)) && handles.every((h) => isAccessoryHandle(h))) {
+    return [];
+  }
+  return accessoryUpsells.filter((a) => !handles.includes(a.handle));
+}
