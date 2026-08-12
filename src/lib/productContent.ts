@@ -831,6 +831,322 @@ export const productPages = {
       "The kazevo Mini Crossbody Bag: a 120 g polyester crossbody with phone and card pockets, zip closure and an adjustable strap. Four colours, free worldwide shipping.",
     fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0810_20.png?v=1786337184`,
   },
+  "boge-wade-school-backpack": {
+    path: "/boge-wade-school-backpack",
+    handle: "unilulu户外日常通勤户外女生糖果配色书包旅行双肩包多巴胺背包",
+    name: "kazevo Boge Wade School Backpack",
+    eyebrow: "School · Commute · Everyday",
+    headline: ["kazevo", "Boge Wade", "school backpack"],
+    intro:
+      "A 350 g nylon pack in a green-and-blue candy colourway — two compartments, curved straps and just enough room for a school day or a commute.",
+    bullets: [
+      "Light 350 g nylon build",
+      "Two main compartments",
+      "Curved ergonomic straps",
+      "Fits an 8-inch tablet",
+    ],
+    benefits: [
+      {
+        title: "Light before you even pack it",
+        body: "350 g of nylon means the bag itself never counts against what you're carrying — books, laptop sleeve, lunch, all of it.",
+      },
+      {
+        title: "Curved straps that follow you",
+        body: "Arc-shaped shoulder straps sit along the line of the shoulder instead of cutting across it, so a full pack stays comfortable on a long walk.",
+      },
+      {
+        title: "Two compartments, no digging",
+        body: "Keep books in the back and daily bits in the front — you stop unpacking the whole bag to find one thing.",
+      },
+      {
+        title: "Candy colour-block",
+        body: "A green and blue panel split that reads sporty in daylight and easy to spot in a pile of identical black bags.",
+      },
+      {
+        title: "Nylon that shrugs things off",
+        body: "Tight-woven nylon with a polyester lining takes chair scuffs, locker rails and damp mornings without looking tired.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "A school pack that behaves like a day pack",
+    benefitsSub: "Light nylon, two compartments and colour you can actually find.",
+    specs: [
+      ["Material", "Nylon"],
+      ["Lining", "Polyester"],
+      ["Weight", "350 g"],
+      ["Capacity", "Under 20 L"],
+      ["Device", "Fits up to an 8-inch tablet"],
+      ["Compartments", "2"],
+      ["Straps", "Curved ergonomic shoulder straps"],
+      ["Colour", "Green / Blue colour-block"],
+      ["Best for", "School, commuting, casual travel"],
+    ],
+    faqs: [
+      {
+        q: "Will A4 folders fit?",
+        a: "Yes — the main compartment takes A4 books and folders upright, with the front section left for smaller items.",
+      },
+      {
+        q: "Does it hold a laptop?",
+        a: "It's sized for tablets up to about 8 inches and slim documents rather than a full-size laptop.",
+      },
+      {
+        q: "Is it water resistant?",
+        a: "The nylon shell handles light rain and splashes. For a downpour, keep electronics in a pouch inside.",
+      },
+      {
+        q: "How do I clean it?",
+        a: "Wipe with a damp cloth and mild soap, then air dry away from direct heat.",
+      },
+    ],
+    ctaHeadline: "Pack light. Show up bright.",
+    ctaSub: "Free worldwide shipping on every kazevo Boge Wade School Backpack.",
+    title: "kazevo Boge Wade School Backpack | 350g Nylon School Pack",
+    description:
+      "The kazevo Boge Wade School Backpack: a 350 g nylon pack under 20 L with two compartments, curved ergonomic straps and a green-blue colour-block finish. Free worldwide shipping.",
+    fallbackImage: `${CDN}/9aWFPEhGfWP0FUAnUpqOZ.png?v=1786531527`,
+  },
+
+  "denim-water-bottle-bag": {
+    path: "/denim-water-bottle-bag",
+    handle: "unilulu插画师联名牛仔系列休闲户外山系可爱水杯包便携斜挎包",
+    name: "kazevo Denim Water Bottle Bag",
+    eyebrow: "Trail · Campus · Everyday",
+    headline: ["kazevo", "denim", "water bottle bag"],
+    intro:
+      "A 200 g Oxford-fabric bottle sling from our illustrator collab — carries your drink and your phone, and nothing you didn't ask for.",
+    bullets: [
+      "Only 200 g",
+      "Upright bottle-shaped body",
+      "Dedicated phone slot",
+      "Two illustrated denim prints",
+    ],
+    benefits: [
+      {
+        title: "Built around a bottle",
+        body: "The upright square shape holds a standard bottle steady instead of letting it tip and swing while you walk.",
+      },
+      {
+        title: "Phone stays separate",
+        body: "An inner phone slot keeps your screen away from a cold, damp bottle — no more wiping condensation off your handset.",
+      },
+      {
+        title: "Illustrator collab prints",
+        body: "Denim Bichon and Denim Kitten are drawn artwork, not clip art — small enough to be charming, not costume.",
+      },
+      {
+        title: "Oxford fabric, easy life",
+        body: "Tough Oxford cloth with a polyester lining wipes clean after a picnic, a hike or a spill.",
+      },
+      {
+        title: "Zip-closed and hands-free",
+        body: "Full zip across the top and an adjustable crossbody strap: your hands stay free for trekking poles or a toddler.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "The smallest bag on the trail",
+    benefitsSub: "Bottle, phone, card. That's the whole job — done in 200 g.",
+    specs: [
+      ["Material", "Oxford fabric"],
+      ["Lining", "Polyester"],
+      ["Weight", "200 g"],
+      ["Shape", "Upright square / bottle sling"],
+      ["Closure", "Zipper"],
+      ["Interior", "Phone slot"],
+      ["Carry", "Adjustable crossbody strap"],
+      ["Colours", "Denim Bichon, Denim Kitten"],
+      ["Best for", "Hiking, camping, campus, day trips"],
+    ],
+    faqs: [
+      {
+        q: "What size bottle fits?",
+        a: "A standard 500–750 ml bottle sits upright with room to zip the top closed.",
+      },
+      {
+        q: "Can I wear it as a shoulder bag?",
+        a: "Yes — the strap adjusts from crossbody length to a shorter shoulder carry.",
+      },
+      {
+        q: "Is the print printed or stitched?",
+        a: "It's a printed illustrator design on denim-look Oxford fabric, finished with clean top-stitching.",
+      },
+      {
+        q: "How do I clean it?",
+        a: "Spot clean with mild soap and a damp cloth, then air dry.",
+      },
+    ],
+    ctaHeadline: "Carry the water. Skip the bag.",
+    ctaSub: "Free worldwide shipping on every kazevo Denim Water Bottle Bag.",
+    title: "kazevo Denim Water Bottle Bag | 200g Bottle Sling",
+    description:
+      "The kazevo Denim Water Bottle Bag: a 200 g Oxford-fabric bottle sling with a phone slot, zip closure and illustrator-collab denim prints. Free worldwide shipping.",
+    fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0812_19.png?v=1786531330`,
+  },
+
+  "dopamine-chest-bag": {
+    path: "/dopamine-chest-bag",
+    handle: "unilulu休闲户外运动胸包多功能时尚潮流旅行登山包多巴胺斜挎包",
+    name: "kazevo Dopamine Crossbody Chest Bag",
+    eyebrow: "Trail · Travel · City",
+    headline: ["kazevo", "dopamine", "crossbody chest bag"],
+    intro:
+      "A 200 g nylon chest bag with a phone pocket and a card pocket — worn high across the chest so nothing bounces while you move.",
+    bullets: [
+      "200 g nylon build",
+      "Phone and card pockets",
+      "Chest or crossbody carry",
+      "Blue, white and black",
+    ],
+    benefits: [
+      {
+        title: "Sits still when you move",
+        body: "Worn high on the chest, the strap keeps the bag locked against you — no swing on a run for the train or a scramble uphill.",
+      },
+      {
+        title: "Two pockets, sorted",
+        body: "A phone pocket and a separate card pocket mean the two things you reach for most never end up under everything else.",
+      },
+      {
+        title: "Nylon that keeps its shape",
+        body: "Tight nylon with a polyester lining stays neat instead of slumping once you take your phone out.",
+      },
+      {
+        title: "Three quiet colours",
+        body: "Blue, white and black — sporty enough for a trail, plain enough to wear to work over a jacket.",
+      },
+      {
+        title: "One zip, done",
+        body: "A single full-length zip opens the whole bag, so you can get in one-handed with the other on a rail or a pole.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Everything you need, nothing you don't",
+    benefitsSub: "A 200 g chest bag for travel days, trails and the walk to work.",
+    specs: [
+      ["Material", "Nylon"],
+      ["Lining", "Polyester"],
+      ["Weight", "200 g"],
+      ["Closure", "Zipper"],
+      ["Interior", "Phone pocket, card pocket"],
+      ["Carry", "Chest strap or crossbody"],
+      ["Structure", "Medium — holds shape"],
+      ["Colours", "Blue, White, Black"],
+      ["Best for", "Hiking, travel, commuting, festivals"],
+    ],
+    faqs: [
+      {
+        q: "Will a large phone fit?",
+        a: "Yes — a Pro Max or Ultra-sized handset sits in the phone pocket with cards and keys alongside.",
+      },
+      {
+        q: "Can I wear it as a sling instead?",
+        a: "You can. Lengthen the strap and it wears as a standard crossbody over one shoulder.",
+      },
+      {
+        q: "Is it water resistant?",
+        a: "The nylon shell handles light rain and splashes; it isn't fully waterproof.",
+      },
+      {
+        q: "Does it fit over a jacket?",
+        a: "Yes — the strap adjusts long enough to sit over a winter coat.",
+      },
+    ],
+    ctaHeadline: "Hands free. Head up.",
+    ctaSub: "Free worldwide shipping on every kazevo Dopamine Crossbody Chest Bag.",
+    title: "kazevo Dopamine Crossbody Chest Bag | 200g Nylon Sling",
+    description:
+      "The kazevo Dopamine Crossbody Chest Bag: a 200 g nylon chest bag with phone and card pockets, zip closure and chest or crossbody carry. Free worldwide shipping.",
+    fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0812_5.png?v=1786530824`,
+  },
+
+  "large-capacity-backpack": {
+    path: "/large-capacity-backpack",
+    handle: "unilulu大容量通勤户外运动登山休闲双肩包简约时尚潮流山系背包",
+    name: "kazevo Large-Capacity Backpack",
+    eyebrow: "Commute · Outdoor · Travel",
+    headline: ["kazevo", "large-capacity", "backpack"],
+    intro:
+      "A 280 g polyester pack with two compartments and curved straps — mountain-style looks, commuter-friendly weight, and a charm on the front.",
+    bullets: [
+      "Just 280 g",
+      "Two roomy compartments",
+      "Curved ergonomic straps",
+      "Wisteria Purple or Beeswax Yellow",
+    ],
+    benefits: [
+      {
+        title: "Capacity without the bulk",
+        body: "280 g of polyester carrying a full day's kit — the bag disappears and what's inside is all you feel.",
+      },
+      {
+        title: "Two compartments that stay tidy",
+        body: "Split your laptop sleeve and books from chargers, snacks and a jacket so nothing has to be unpacked to reach anything.",
+      },
+      {
+        title: "Curved straps for long days",
+        body: "Arc-shaped shoulder straps follow your shoulder line instead of cutting across it, which matters by hour three.",
+      },
+      {
+        title: "Mountain-style, city-ready",
+        body: "Clean top-stitched panels in Wisteria Purple or Beeswax Yellow: at home on a trail path and in an office lift.",
+      },
+      {
+        title: "A charm on the front",
+        body: "Each pack ships with a hanging pouch charm — colour sent at random, so yours is a small surprise.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Room for the day, weight of nothing",
+    benefitsSub: "A 280 g two-compartment pack for commutes, hikes and weekends.",
+    specs: [
+      ["Material", "Polyester"],
+      ["Lining", "Polyester"],
+      ["Weight", "280 g"],
+      ["Capacity", "Under 20 L"],
+      ["Device", "Fits up to an 8-inch tablet"],
+      ["Compartments", "2"],
+      ["Straps", "Curved ergonomic shoulder straps"],
+      ["Colours", "Wisteria Purple, Beeswax Yellow"],
+      ["Extras", "Hanging pouch charm (colour sent at random)"],
+      ["Best for", "Commuting, hiking, travel"],
+    ],
+    faqs: [
+      {
+        q: "How much does it actually hold?",
+        a: "Under 20 L — a tablet, A4 books, a light jacket, a bottle and daily bits with room to spare.",
+      },
+      {
+        q: "Can I choose the charm colour?",
+        a: "No — the hanging pouch charm is sent at random, which is part of the fun.",
+      },
+      {
+        q: "Is it water resistant?",
+        a: "The polyester shell handles light rain and splashes; it isn't rated waterproof.",
+      },
+      {
+        q: "Is it unisex?",
+        a: "Yes. The strap range and neutral silhouette suit all frames.",
+      },
+    ],
+    ctaHeadline: "More room. Less weight.",
+    ctaSub: "Free worldwide shipping on every kazevo Large-Capacity Backpack.",
+    title: "kazevo Large-Capacity Backpack | 280g Lightweight Daypack",
+    description:
+      "The kazevo Large-Capacity Backpack: a 280 g polyester pack under 20 L with two compartments, curved ergonomic straps and a free hanging charm. Free worldwide shipping.",
+    fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0812_26.png?v=1786530680`,
+  },
 } satisfies Record<string, ProductPageContent>;
 
 export type ProductPageKey = keyof typeof productPages;
@@ -958,4 +1274,47 @@ export const handleToPath: Record<string, string> = {
 /** Returns the pretty English URL for a Shopify handle, if one exists. */
 export function getEnglishPath(handle: string): string | null {
   return handleToPath[handle] ?? null;
+}
+
+/* ------------------------------------------------------------------ */
+/* Accessory add-ons: sold as upsells only, no dedicated pages         */
+/* ------------------------------------------------------------------ */
+
+export interface AccessoryUpsell {
+  handle: string;
+  name: string;
+  pitch: string;
+}
+
+export const accessoryUpsells: AccessoryUpsell[] = [
+  {
+    handle: "新款2026笔袋提手大容量多层高颜值ins风文具盒男孩女生款铅笔袋",
+    name: "kazevo Multi-Layer Pencil Case",
+    pitch: "Multi-layer, carry-handle pencil case — the school-bag sidekick.",
+  },
+  {
+    handle: "一键速开运动保温杯316不锈钢高颜值男女学生户外运动吸管保温杯",
+    name: "kazevo One-Touch Sports Thermos",
+    pitch: "600 ml 316 stainless thermos, one-touch lid, 6–12 h insulation.",
+  },
+  {
+    handle: "新款潮男女超大容量塑料水杯太空杯便携学生提绳混批透明渐变吸管",
+    name: "kazevo Gradient Water Bottle",
+    pitch: "1 L gradient bottle with straw and carry cord.",
+  },
+];
+
+/** Handles that must never appear as a browsable product (upsell only). */
+export const accessoryHandles = accessoryUpsells.map((a) => a.handle);
+
+export function isAccessoryHandle(handle: string): boolean {
+  return accessoryHandles.includes(handle);
+}
+
+/** Accessories worth offering next to the given handles (skips ones already in cart). */
+export function getAccessoryUpsells(handles: string[]): AccessoryUpsell[] {
+  if (handles.some((h) => isAccessoryHandle(h)) && handles.every((h) => isAccessoryHandle(h))) {
+    return [];
+  }
+  return accessoryUpsells.filter((a) => !handles.includes(a.handle));
 }

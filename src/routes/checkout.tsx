@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
 import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import {
@@ -233,6 +234,9 @@ function CheckoutPage() {
               </dl>
               <div className="mt-5">
                 <CrossSellOffer handles={items.map((i) => i.product.node.handle)} />
+                <div className="mt-4">
+                  <AccessoryUpsell handles={items.map((i) => i.product.node.handle)} />
+                </div>
               </div>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
                 <span className="font-display text-lg font-black">Total</span>

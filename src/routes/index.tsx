@@ -20,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 
-import { productPages } from "@/lib/productContent";
+import { isAccessoryHandle, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getVariantImage } from "@/lib/variantImages";
 
@@ -71,6 +71,26 @@ const DEDICATED_PAGES = [
     handle: productPages["mini-crossbody-bag"].handle,
     to: "/mini-crossbody-bag",
     title: productPages["mini-crossbody-bag"].name,
+  },
+  {
+    handle: productPages["boge-wade-school-backpack"].handle,
+    to: "/boge-wade-school-backpack",
+    title: productPages["boge-wade-school-backpack"].name,
+  },
+  {
+    handle: productPages["denim-water-bottle-bag"].handle,
+    to: "/denim-water-bottle-bag",
+    title: productPages["denim-water-bottle-bag"].name,
+  },
+  {
+    handle: productPages["dopamine-chest-bag"].handle,
+    to: "/dopamine-chest-bag",
+    title: productPages["dopamine-chest-bag"].name,
+  },
+  {
+    handle: productPages["large-capacity-backpack"].handle,
+    to: "/large-capacity-backpack",
+    title: productPages["large-capacity-backpack"].name,
   },
 ] as const;
 
@@ -193,7 +213,9 @@ const SLING_HANDLE = "篮球包篮球袋双肩单肩袋子排球足球背包网�
 
 function Landing() {
   const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
-  const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
+  const [allProducts, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
+  // Accessories (pencil case, thermos, bottle) are upsell-only: never in the grid.
+  const products = allProducts.filter((p) => !isAccessoryHandle(p.node.handle));
 
   // Prices/variants can change in Shopify after this page was rendered/cached,
   // so always refresh from the Storefront API on the client.

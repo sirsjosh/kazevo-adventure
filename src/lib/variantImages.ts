@@ -84,6 +84,19 @@ export const colorDotMap: Record<string, string> = {
   "blue + green": "oklch(0.68 0.14 200)",
   "purple + blue": "oklch(0.6 0.17 285)",
   "purple + green": "oklch(0.68 0.15 230)",
+  // Boge Wade / denim bottle bag / dopamine chest bag / large-capacity pack
+  "wisteria purple (attached pouch color will be sent randomly)": "oklch(0.68 0.12 300)",
+  "beeswax yellow (attached pouch color will be sent randomly)": "oklch(0.85 0.15 90)",
+  "wisteria purple": "oklch(0.68 0.12 300)",
+  "beeswax yellow": "oklch(0.85 0.15 90)",
+  "denim bichon": "oklch(0.62 0.09 250)",
+  "denim kitten": "oklch(0.55 0.1 255)",
+  "green / blue": "oklch(0.68 0.14 200)",
+  "green+blue": "oklch(0.68 0.14 200)",
+  "black gradient": "oklch(0.35 0.03 285)",
+  "pink gradient": "oklch(0.8 0.12 5)",
+  "purple gradient": "oklch(0.68 0.15 300)",
+  "blue gradient": "oklch(0.7 0.13 245)",
 };
 
 
