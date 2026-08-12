@@ -36,11 +36,13 @@ export function AccessoryUpsell({ handles, layout = "panel" }: AccessoryUpsellPr
             Add the bits that go inside
           </h2>
           <p className="mt-3 max-w-xl text-muted-foreground">
-            Pencil case, thermos and bottle — small extras that ship in the same box, free worldwide.
+            {accessories.length === 1
+              ? "The one extra that actually belongs in this bag — ships in the same box, free worldwide."
+              : "Hand-picked extras for this bag — they ship in the same box, free worldwide."}
           </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          <div className={`mt-6 grid gap-4 ${accessories.length === 1 ? "sm:max-w-sm" : accessories.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}>
             {accessories.map((a) => (
-              <AccessoryCard key={a.handle} accessory={a} layout="section" />
+              <AccessoryCard key={a.id} accessory={a} layout="section" />
             ))}
           </div>
         </div>
@@ -56,7 +58,7 @@ export function AccessoryUpsell({ handles, layout = "panel" }: AccessoryUpsellPr
       </p>
       <div className="mt-3 space-y-3">
         {accessories.map((a) => (
-          <AccessoryCard key={a.handle} accessory={a} layout="panel" />
+          <AccessoryCard key={a.id} accessory={a} layout="panel" />
         ))}
       </div>
     </div>
