@@ -1281,6 +1281,7 @@ export function getEnglishPath(handle: string): string | null {
 /* ------------------------------------------------------------------ */
 
 export interface AccessoryUpsell {
+  id: "pencil-case" | "thermos" | "bottle";
   handle: string;
   name: string;
   pitch: string;
@@ -1288,19 +1289,22 @@ export interface AccessoryUpsell {
 
 export const accessoryUpsells: AccessoryUpsell[] = [
   {
+    id: "pencil-case",
     handle: "新款2026笔袋提手大容量多层高颜值ins风文具盒男孩女生款铅笔袋",
     name: "kazevo Multi-Layer Pencil Case",
-    pitch: "Multi-layer, carry-handle pencil case — the school-bag sidekick.",
+    pitch: "Multi-layer case with a carry handle — pens, ruler and calculator, sorted.",
   },
   {
+    id: "thermos",
     handle: "一键速开运动保温杯316不锈钢高颜值男女学生户外运动吸管保温杯",
     name: "kazevo One-Touch Sports Thermos",
-    pitch: "600 ml 316 stainless thermos, one-touch lid, 6–12 h insulation.",
+    pitch: "316 stainless thermos with a one-touch lid — cold all day, hot all morning.",
   },
   {
+    id: "bottle",
     handle: "新款潮男女超大容量塑料水杯太空杯便携学生提绳混批透明渐变吸管",
     name: "kazevo Gradient Water Bottle",
-    pitch: "1 L gradient bottle with straw and carry cord.",
+    pitch: "Large gradient bottle with a straw and carry cord — light enough to clip on.",
   },
 ];
 
@@ -1311,10 +1315,63 @@ export function isAccessoryHandle(handle: string): boolean {
   return accessoryHandles.includes(handle);
 }
 
-/** Accessories worth offering next to the given handles (skips ones already in cart). */
+type AccessoryId = AccessoryUpsell["id"];
+
+/**
+ * Which accessories genuinely suit which bag. Order matters — the best match
+ * is listed first. A product can have several; a product can have none.
+ */
+const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
+  // School and kids packs: stationery first, then something to drink from.
+  "/functional-school-backpack": ["pencil-case", "thermos", "bottle"],
+  "/jiumeiso-backpack": ["pencil-case", "bottle", "thermos"],
+  "/color-block-kids-backpack": ["pencil-case", "bottle"],
+  "/ultra-light-kids-backpack": ["pencil-case", "bottle"],
+  "/boge-wade-school-backpack": ["pencil-case", "thermos", "bottle"],
+  "/retro-leather-backpack": ["pencil-case", "bottle"],
+  "/kazevo-mini": ["pencil-case", "bottle"],
+
+  // Outdoor and commuter packs: hydration first.
+  "/kazevo-outdoor": ["thermos", "bottle"],
+  "/outdoor-hiking-backpack": ["thermos", "bottle"],
+  "/large-capacity-backpack": ["thermos", "bottle"],
+  "/kazevo-sling": ["thermos", "bottle"],
+
+  // Bottle sling — the whole point is what goes in it.
+  "/denim-water-bottle-bag": ["bottle", "thermos"],
+
+  // Small bags: one light add-on only, nothing that outweighs the bag.
+  "/dopamine-chest-bag": ["bottle"],
+  "/crossbody-waist-bag": ["bottle"],
+  "/mini-crossbody-bag": ["bottle"],
+
+  // Fashion / match-day bags: no accessory pairs well, keep the page clean.
+  "/football-bag": [],
+  "/football-fan-leather-crossbody": [],
+};
+
+/** Sensible default when a handle isn't explicitly mapped. */
+const defaultAccessoryIds: AccessoryId[] = ["thermos", "bottle"];
+
+function accessoryIdsForHandle(handle: string): AccessoryId[] {
+  const path = handleToPath[handle];
+  if (path && path in accessoryMatchesByPath) return accessoryMatchesByPath[path]!;
+  if (isAccessoryHandle(handle)) return [];
+  return defaultAccessoryIds;
+}
+
+/**
+ * Accessories worth offering alongside the given handles: the union of each
+ * product's matches, in match order, minus anything already in the cart.
+ */
 export function getAccessoryUpsells(handles: string[]): AccessoryUpsell[] {
-  if (handles.some((h) => isAccessoryHandle(h)) && handles.every((h) => isAccessoryHandle(h))) {
-    return [];
+  const ids: AccessoryId[] = [];
+  for (const handle of handles) {
+    for (const id of accessoryIdsForHandle(handle)) {
+      if (!ids.includes(id)) ids.push(id);
+    }
   }
-  return accessoryUpsells.filter((a) => !handles.includes(a.handle));
+  return ids
+    .map((id) => accessoryUpsells.find((a) => a.id === id)!)
+    .filter((a) => !handles.includes(a.handle));
 }
