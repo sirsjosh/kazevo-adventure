@@ -156,17 +156,19 @@ function AccessoryCard({
   );
 
   const price = formatUsd(parseFloat(display.price.amount));
+  // Name always comes live from Shopify
+  const name = product.title || accessory.name;
 
   if (layout === "section") {
     return (
       <div className="flex flex-col overflow-hidden rounded-3xl border border-border bg-background">
         <div className="aspect-square overflow-hidden bg-muted">
           {image && (
-            <img src={image} alt={accessory.name} loading="lazy" className="h-full w-full object-cover" />
+            <img src={image} alt={name} loading="lazy" className="h-full w-full object-cover" />
           )}
         </div>
         <div className="flex flex-1 flex-col p-4">
-          <p className="font-display text-base font-black leading-snug">{accessory.name}</p>
+          <p className="font-display text-base font-black leading-snug">{name}</p>
           <p className="mt-1 text-sm text-muted-foreground">{accessory.pitch}</p>
           {!singleVariant && (
             <div className="mt-3">
@@ -210,11 +212,11 @@ function AccessoryCard({
     <div className="flex gap-3">
       <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-card">
         {image && (
-          <img src={image} alt={accessory.name} loading="lazy" className="h-full w-full object-cover" />
+          <img src={image} alt={name} loading="lazy" className="h-full w-full object-cover" />
         )}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold">{accessory.name}</p>
+        <p className="truncate text-sm font-semibold">{name}</p>
         <p className="line-clamp-1 text-xs text-muted-foreground">{accessory.pitch}</p>
 
         {picking && !singleVariant && (
