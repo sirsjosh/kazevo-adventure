@@ -20,6 +20,7 @@ import { Route as DopamineChestBagRouteImport } from './routes/dopamine-chest-ba
 import { Route as FootballBagRouteImport } from './routes/football-bag'
 import { Route as FootballFanLeatherCrossbodyRouteImport } from './routes/football-fan-leather-crossbody'
 import { Route as FunctionalSchoolBackpackRouteImport } from './routes/functional-school-backpack'
+import { Route as InsulatedDrinksToteRouteImport } from './routes/insulated-drinks-tote'
 import { Route as JiumeisoBackpackRouteImport } from './routes/jiumeiso-backpack'
 import { Route as KazevoMiniRouteImport } from './routes/kazevo-mini'
 import { Route as KazevoOutdoorRouteImport } from './routes/kazevo-outdoor'
@@ -94,6 +95,11 @@ const FunctionalSchoolBackpackRoute =
     path: '/functional-school-backpack',
     getParentRoute: () => rootRouteImport,
   } as any)
+const InsulatedDrinksToteRoute = InsulatedDrinksToteRouteImport.update({
+  id: '/insulated-drinks-tote',
+  path: '/insulated-drinks-tote',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JiumeisoBackpackRoute = JiumeisoBackpackRouteImport.update({
   id: '/jiumeiso-backpack',
   path: '/jiumeiso-backpack',
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/football-bag': typeof FootballBagRoute
   '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
+  '/insulated-drinks-tote': typeof InsulatedDrinksToteRoute
   '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/football-bag': typeof FootballBagRoute
   '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
+  '/insulated-drinks-tote': typeof InsulatedDrinksToteRoute
   '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/football-bag': typeof FootballBagRoute
   '/football-fan-leather-crossbody': typeof FootballFanLeatherCrossbodyRoute
   '/functional-school-backpack': typeof FunctionalSchoolBackpackRoute
+  '/insulated-drinks-tote': typeof InsulatedDrinksToteRoute
   '/jiumeiso-backpack': typeof JiumeisoBackpackRoute
   '/kazevo-mini': typeof KazevoMiniRoute
   '/kazevo-outdoor': typeof KazevoOutdoorRoute
@@ -278,6 +287,7 @@ export interface FileRouteTypes {
     | '/football-bag'
     | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
+    | '/insulated-drinks-tote'
     | '/jiumeiso-backpack'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
@@ -307,6 +317,7 @@ export interface FileRouteTypes {
     | '/football-bag'
     | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
+    | '/insulated-drinks-tote'
     | '/jiumeiso-backpack'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
@@ -336,6 +347,7 @@ export interface FileRouteTypes {
     | '/football-bag'
     | '/football-fan-leather-crossbody'
     | '/functional-school-backpack'
+    | '/insulated-drinks-tote'
     | '/jiumeiso-backpack'
     | '/kazevo-mini'
     | '/kazevo-outdoor'
@@ -366,6 +378,7 @@ export interface RootRouteChildren {
   FootballBagRoute: typeof FootballBagRoute
   FootballFanLeatherCrossbodyRoute: typeof FootballFanLeatherCrossbodyRoute
   FunctionalSchoolBackpackRoute: typeof FunctionalSchoolBackpackRoute
+  InsulatedDrinksToteRoute: typeof InsulatedDrinksToteRoute
   JiumeisoBackpackRoute: typeof JiumeisoBackpackRoute
   KazevoMiniRoute: typeof KazevoMiniRoute
   KazevoOutdoorRoute: typeof KazevoOutdoorRoute
@@ -461,6 +474,13 @@ declare module '@tanstack/react-router' {
       path: '/functional-school-backpack'
       fullPath: '/functional-school-backpack'
       preLoaderRoute: typeof FunctionalSchoolBackpackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insulated-drinks-tote': {
+      id: '/insulated-drinks-tote'
+      path: '/insulated-drinks-tote'
+      fullPath: '/insulated-drinks-tote'
+      preLoaderRoute: typeof InsulatedDrinksToteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jiumeiso-backpack': {
@@ -590,6 +610,7 @@ const rootRouteChildren: RootRouteChildren = {
   FootballBagRoute: FootballBagRoute,
   FootballFanLeatherCrossbodyRoute: FootballFanLeatherCrossbodyRoute,
   FunctionalSchoolBackpackRoute: FunctionalSchoolBackpackRoute,
+  InsulatedDrinksToteRoute: InsulatedDrinksToteRoute,
   JiumeisoBackpackRoute: JiumeisoBackpackRoute,
   KazevoMiniRoute: KazevoMiniRoute,
   KazevoOutdoorRoute: KazevoOutdoorRoute,
