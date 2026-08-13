@@ -396,13 +396,8 @@ function Landing() {
                   const colorCount = colorOption?.values.length ?? 0;
                   const inStock = productVariants.some((variant) => variant.availableForSale);
                   const dedicated = DEDICATED_PAGES.find((d) => d.handle === node.handle);
-                  const title = isMini
-                    ? "kazevo Mini"
-                    : isOutdoor
-                      ? "kazevo Outdoor Backpack"
-                      : isSling
-                        ? "kazevo + Michael Rose Sling Bag"
-                        : (dedicated?.title ?? node.title);
+                  // Titles always come live from Shopify
+                  const title = node.title || dedicated?.title || "";
                   const linkProps = isMini
                     ? ({ to: "/kazevo-mini" } as const)
                     : isOutdoor
@@ -414,12 +409,8 @@ function Landing() {
                           : ({ to: "/product/$handle", params: { handle: node.handle } } as const);
 
                   const firstVariant = productVariants[0];
-                  const saleInfo = firstVariant
-                    ? getVariantSaleInfo(
-                        firstVariant,
-                        isMini ? 34.99 : isOutdoor ? 29.99 : undefined,
-                      )
-                    : null;
+                  // Sale state comes from Shopify's compare-at price only
+                  const saleInfo = firstVariant ? getVariantSaleInfo(firstVariant) : null;
 
                   return (
                     <article
@@ -461,7 +452,8 @@ function Landing() {
                           </h3>
                         </Link>
                         <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                          {isMini ? "190g · 18L junior size · ages 5–10" : node.description?.slice(0, 90)}
+                          {node.description?.slice(0, 90) ||
+                            (isMini ? "190g · 18L junior size · ages 5–10" : "")}
                         </p>
                         <div className="mt-5 flex items-center justify-between gap-3">
                           <div className="flex flex-wrap items-baseline gap-2">

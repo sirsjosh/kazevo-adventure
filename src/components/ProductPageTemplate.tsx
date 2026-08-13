@@ -22,7 +22,7 @@ import { CrossSellOffer } from "@/components/CrossSellOffer";
 import { ProductReviews } from "@/components/ProductReviews";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
 import type { ProductPageContent } from "@/lib/productContent";
-import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
+import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatUsd, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { trackViewContent } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
@@ -81,6 +81,8 @@ export function ProductPageTemplate({
     });
   }, [product, selectedVariant]);
 
+  const saleInfo = selectedVariant ? getVariantSaleInfo(selectedVariant) : null;
+
   const galleryRef = useRef<HTMLDivElement>(null);
   const scrollGallery = (dir: number) => {
     const el = galleryRef.current;
@@ -111,6 +113,9 @@ export function ProductPageTemplate({
       imageUrl: heroImage,
     });
   };
+
+  // Name always comes live from Shopify, with local copy only as fallback
+  const productName = product?.node.title || content.name;
 
   const colorLabel = selectedVariant
     ? getColorLabel(getVariantColorValue(selectedVariant.selectedOptions)) || selectedVariant.title
@@ -147,7 +152,7 @@ export function ProductPageTemplate({
                 <img
                   key={heroImage}
                   src={heroImage}
-                  alt={`${content.name} in ${colorLabel}`}
+                  alt={`${productName} in ${colorLabel}`}
                   fetchPriority="high"
                   width={1200}
                   height={1600}
@@ -203,6 +208,16 @@ export function ProductPageTemplate({
                         ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
                         : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
                     </span>
+                    {saleInfo?.isOnSale && (
+                      <>
+                        <span className="font-display text-xl font-semibold text-muted-foreground line-through">
+                          {formatUsd(saleInfo.compareAt!)}
+                        </span>
+                        <span className="rounded-full bg-sunset px-3 py-1 text-xs font-semibold text-primary-foreground">
+                          Save {saleInfo.percentOff}%
+                        </span>
+                      </>
+                    )}
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/25 px-3 py-1 text-xs font-semibold text-accent-foreground">
                       <Truck size={14} /> Free worldwide shipping
                     </span>
@@ -314,7 +329,7 @@ export function ProductPageTemplate({
                 >
                   <img
                     src={url}
-                    alt={`${content.name} detail ${i + 1}`}
+                    alt={`${productName} detail ${i + 1}`}
                     width={900}
                     height={900}
                     loading="lazy"
