@@ -97,6 +97,11 @@ export const colorDotMap: Record<string, string> = {
   "pink gradient": "oklch(0.8 0.12 5)",
   "purple gradient": "oklch(0.68 0.15 300)",
   "blue gradient": "oklch(0.7 0.13 245)",
+  // Insulated drinks tote stripes
+  "black and white": "oklch(0.35 0.01 285)",
+  "rend and white": "oklch(0.58 0.2 25)",
+  "red and white": "oklch(0.58 0.2 25)",
+  "blue and white": "oklch(0.6 0.15 250)",
 };
 
 
@@ -107,6 +112,9 @@ export const colorNameMap: Record<string, string> = {
   "浅绿色": "Light Green",
   "浅紫色": "Lilac Bloom",
   "黑色": "Classic Black",
+  "rend and white": "Red / White Stripe",
+  "black and white": "Black / White Stripe",
+  "blue and white": "Blue / White Stripe",
 };
 
 

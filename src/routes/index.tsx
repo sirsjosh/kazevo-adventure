@@ -92,6 +92,11 @@ const DEDICATED_PAGES = [
     to: "/large-capacity-backpack",
     title: productPages["large-capacity-backpack"].name,
   },
+  {
+    handle: productPages["insulated-drinks-tote"].handle,
+    to: "/insulated-drinks-tote",
+    title: productPages["insulated-drinks-tote"].name,
+  },
 ] as const;
 
 

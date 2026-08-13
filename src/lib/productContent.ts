@@ -1147,6 +1147,85 @@ export const productPages = {
       "The kazevo Large-Capacity Backpack: a 280 g polyester pack under 20 L with two compartments, curved ergonomic straps and a free hanging charm. Free worldwide shipping.",
     fallbackImage: `${CDN}/pomelli_photoshoot_image_1_1_0812_26.png?v=1786530680`,
   },
+
+  "insulated-drinks-tote": {
+    path: "/insulated-drinks-tote",
+    handle: "跨境户外露营收纳袋红酒袋大容量隔热便携野餐包条纹手提包",
+    name: "Kazevo Insulated Storage Tote",
+    eyebrow: "Beach · Club · Festival",
+    headline: ["kazevo", "insulated", "drinks tote"],
+    intro:
+      "A 30 L insulated Oxford tote that keeps your own drinks cold for hours — pour, zip, carry. Folds flat when the night is over.",
+    bullets: [
+      "30 L insulated capacity",
+      "Waterproof lined, leak-resistant",
+      "Folds flat, only 460 g",
+      "Striped black, red or blue",
+    ],
+    benefits: [
+      {
+        title: "Bring your own drinks",
+        body: "30 litres swallows bottles, cans, mixers and ice in one trip — beach bar prices stay at the beach bar.",
+      },
+      {
+        title: "Cold long after you arrive",
+        body: "A thermal-foil insulated lining slows the melt, so what you poured in at home is still cold when the sun goes down.",
+      },
+      {
+        title: "Pour straight in",
+        body: "The waterproof lining takes loose ice, water and spills. Fill it, zip it, wipe it out afterwards — no soggy bag.",
+      },
+      {
+        title: "Wine bottles stand upright",
+        body: "42.5 cm of height means bottles travel standing rather than rolling around and clinking against each other.",
+      },
+      {
+        title: "Folds flat for the way home",
+        body: "460 g and fully collapsible — it packs down into a suitcase, a car boot or under a club table.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Your drinks, your prices, still cold",
+    benefitsSub: "A 30 L insulated tote built for beach days, pool parties and pre-club rounds.",
+    specs: [
+      ["Material", "Oxford fabric"],
+      ["Lining", "Insulated thermal foil, waterproof"],
+      ["Capacity", "30 L"],
+      ["Weight", "460 g"],
+      ["Dimensions", "42.5 × 33 × 5 cm (folded)"],
+      ["Closure", "Zipper"],
+      ["Features", "Foldable, water-fill safe, portable handles"],
+      ["Colours", "Black/White, Red/White, Blue/White stripe"],
+      ["Best for", "Beach, club, picnics, camping, wine carry"],
+    ],
+    faqs: [
+      {
+        q: "How long does it keep drinks cold?",
+        a: "With ice or frozen packs inside, expect several hours of cold — a full beach afternoon in most climates.",
+      },
+      {
+        q: "Can I pour liquid or loose ice straight in?",
+        a: "Yes. The lining is waterproof and the zip closes over it, so loose ice and melt water stay inside.",
+      },
+      {
+        q: "How many bottles fit?",
+        a: "Around 30 L — roughly six wine bottles standing upright, or a couple of dozen cans with ice.",
+      },
+      {
+        q: "Is it easy to store?",
+        a: "It folds flat to 42.5 × 33 × 5 cm and weighs 460 g, so it slides into a suitcase or under a car seat.",
+      },
+    ],
+    ctaHeadline: "Pour it in. Keep it cold.",
+    ctaSub: "Free worldwide shipping on every Kazevo Insulated Storage Tote.",
+    title: "Kazevo Insulated Storage Tote | 30L Cooler Bag for Beach & Club",
+    description:
+      "The Kazevo Insulated Storage Tote: a 30 L waterproof-lined, foldable cooler bag that keeps your own drinks cold at the beach, the pool or the club. Free worldwide shipping.",
+    fallbackImage: `${CDN}/O1CN01CkWpvJ2FhIMOS7XAA__2215487308911-0-cib.jpg?v=1786623555`,
+  },
 } satisfies Record<string, ProductPageContent>;
 
 export type ProductPageKey = keyof typeof productPages;
@@ -1339,6 +1418,9 @@ const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
 
   // Bottle sling — the whole point is what goes in it.
   "/denim-water-bottle-bag": ["bottle", "thermos"],
+
+  // Party cooler: a thermos rides along nicely, the plastic bottle doesn't.
+  "/insulated-drinks-tote": ["thermos"],
 
   // Small bags: one light add-on only, nothing that outweighs the bag.
   "/dopamine-chest-bag": ["bottle"],
