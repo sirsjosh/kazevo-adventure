@@ -1419,6 +1419,9 @@ const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
   // Bottle sling — the whole point is what goes in it.
   "/denim-water-bottle-bag": ["bottle", "thermos"],
 
+  // Party cooler: a thermos rides along nicely, the plastic bottle doesn't.
+  "/insulated-drinks-tote": ["thermos"],
+
   // Small bags: one light add-on only, nothing that outweighs the bag.
   "/dopamine-chest-bag": ["bottle"],
   "/crossbody-waist-bag": ["bottle"],

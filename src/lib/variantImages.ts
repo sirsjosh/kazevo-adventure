@@ -112,6 +112,9 @@ export const colorNameMap: Record<string, string> = {
   "浅绿色": "Light Green",
   "浅紫色": "Lilac Bloom",
   "黑色": "Classic Black",
+  "rend and white": "Red / White Stripe",
+  "black and white": "Black / White Stripe",
+  "blue and white": "Blue / White Stripe",
 };
 
 
