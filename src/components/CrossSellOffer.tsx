@@ -140,7 +140,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
               {image && (
                 <img
                   src={image}
-                  alt={pair.partnerName}
+                  alt={product.title || pair.partnerName}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -219,7 +219,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
           {image && (
             <img
               src={image}
-              alt={pair.partnerName}
+              alt={product.title || pair.partnerName}
               loading="lazy"
               className="h-full w-full object-cover"
             />
