@@ -47,7 +47,6 @@ const DESCRIPTION =
   "The kazevo Mini is a 190g, 18L school backpack for kids 5–10. Arc straps for small shoulders, playground-proof 20D nylon, six dopamine colors, free worldwide shipping.";
 
 // Manual sale override. Set to undefined to fall back to Shopify's variant compareAtPrice.
-const SALE_ORIGINAL_PRICE = 34.99;
 
 const lifestyleShots = [
   { src: kid2.url, alt: "Schoolgirl carrying books and wearing a kazevo Mini backpack" },
@@ -237,7 +236,7 @@ function KazevoMiniPage() {
 
   const selectedVariant = variants[active];
   const saleInfo = selectedVariant
-    ? getVariantSaleInfo(selectedVariant, SALE_ORIGINAL_PRICE)
+    ? getVariantSaleInfo(selectedVariant)
     : null;
 
   const addItem = useCartStore((state) => state.addItem);
