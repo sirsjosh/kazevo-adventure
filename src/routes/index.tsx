@@ -452,7 +452,8 @@ function Landing() {
                           </h3>
                         </Link>
                         <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                          {isMini ? "190g · 18L junior size · ages 5–10" : node.description?.slice(0, 90)}
+                          {node.description?.slice(0, 90) ||
+                            (isMini ? "190g · 18L junior size · ages 5–10" : "")}
                         </p>
                         <div className="mt-5 flex items-center justify-between gap-3">
                           <div className="flex flex-wrap items-baseline gap-2">
