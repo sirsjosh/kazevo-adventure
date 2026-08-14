@@ -12,6 +12,8 @@ import {
 } from "@/lib/shopify";
 
 import { trackAddToCart } from "@/lib/meta-pixel";
+import { isAccessoryHandle } from "@/lib/productContent";
+
 
 
 export interface CartItem {
@@ -163,7 +165,23 @@ export const useCartStore = create<CartStore>()(
           const result = await removeLineFromShopifyCart(cartId, item.lineId);
           if (result.success) {
             const currentItems = get().items;
-            const newItems = currentItems.filter((i) => i.variantId !== variantId);
+            let newItems = currentItems.filter((i) => i.variantId !== variantId);
+
+            // An accessory upsell can never stand alone — if only accessories
+            // remain, drop them too so the cart is never accessory-only.
+            const onlyAccessoriesLeft =
+              newItems.length > 0 &&
+              newItems.every((i) => isAccessoryHandle(i.product.node.handle));
+
+            if (onlyAccessoriesLeft) {
+              for (const leftover of newItems) {
+                if (leftover.lineId) {
+                  await removeLineFromShopifyCart(cartId, leftover.lineId);
+                }
+              }
+              newItems = [];
+            }
+
             newItems.length === 0 ? clearCart() : set({ items: newItems });
           } else if (result.cartNotFound) {
             clearCart();
@@ -174,6 +192,7 @@ export const useCartStore = create<CartStore>()(
           set({ isLoading: false });
         }
       },
+
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
       getCheckoutUrl: () => {
