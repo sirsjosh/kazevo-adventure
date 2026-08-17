@@ -16,25 +16,16 @@ export interface Market {
   flag: string;
 }
 
+/**
+ * Only countries covered by an ACTIVE Shopify market may be listed here.
+ * Shopify silently falls back to the US market for any other country, which
+ * makes prices look broken. Verified active: US, CA, AU, SG.
+ */
 export const SUPPORTED_MARKETS: Market[] = [
   { code: "US", label: "United States", currency: "USD", locale: "en-US", flag: "🇺🇸" },
   { code: "CA", label: "Canada", currency: "CAD", locale: "en-CA", flag: "🇨🇦" },
-  { code: "GB", label: "United Kingdom", currency: "GBP", locale: "en-GB", flag: "🇬🇧" },
   { code: "AU", label: "Australia", currency: "AUD", locale: "en-AU", flag: "🇦🇺" },
-  { code: "DE", label: "Germany", currency: "EUR", locale: "de-DE", flag: "🇩🇪" },
-  { code: "FR", label: "France", currency: "EUR", locale: "fr-FR", flag: "🇫🇷" },
-  { code: "IT", label: "Italy", currency: "EUR", locale: "it-IT", flag: "🇮🇹" },
-  { code: "ES", label: "Spain", currency: "EUR", locale: "es-ES", flag: "🇪🇸" },
-  { code: "NL", label: "Netherlands", currency: "EUR", locale: "nl-NL", flag: "🇳🇱" },
-  { code: "JP", label: "Japan", currency: "JPY", locale: "ja-JP", flag: "🇯🇵" },
-  { code: "KR", label: "South Korea", currency: "KRW", locale: "ko-KR", flag: "🇰🇷" },
   { code: "SG", label: "Singapore", currency: "SGD", locale: "en-SG", flag: "🇸🇬" },
-  { code: "HK", label: "Hong Kong", currency: "HKD", locale: "en-HK", flag: "🇭🇰" },
-  { code: "AE", label: "United Arab Emirates", currency: "AED", locale: "en-AE", flag: "🇦🇪" },
-  { code: "SA", label: "Saudi Arabia", currency: "SAR", locale: "ar-SA", flag: "🇸🇦" },
-  { code: "BR", label: "Brazil", currency: "BRL", locale: "pt-BR", flag: "🇧🇷" },
-  { code: "MX", label: "Mexico", currency: "MXN", locale: "es-MX", flag: "🇲🇽" },
-  { code: "IN", label: "India", currency: "INR", locale: "en-IN", flag: "🇮🇳" },
 ];
 
 const MARKET_BY_CODE = new Map(SUPPORTED_MARKETS.map((m) => [m.code, m]));
