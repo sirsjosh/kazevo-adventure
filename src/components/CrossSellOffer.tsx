@@ -23,6 +23,7 @@ interface CrossSellOfferProps {
 
 export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProps) {
   const pair: CrossSellPair | null = getCrossSellFor(handles);
+  const { countryCode, market } = useMarket();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [dismissed, setDismissed] = useState(false);
   const [adding, setAdding] = useState(false);
