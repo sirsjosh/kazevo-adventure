@@ -102,7 +102,7 @@ export function CartDrawer() {
                           {getVariantColorName(item.selectedOptions)}
                         </h4>
                         <p className="font-semibold">
-                          {formatUsd(parseFloat(item.price.amount))} USD
+                          {formatMoney(parseFloat(item.price.amount), item.price.currencyCode, market.locale)}
                         </p>
                       </div>
                       <div className="flex flex-col items-end gap-2 flex-shrink-0">
