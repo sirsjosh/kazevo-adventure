@@ -82,9 +82,55 @@ function CheckoutPage() {
   );
 
 
-  const handleCheckout = () => {
+  const captureEmail = async (value: string) => {
+    const parsed = checkoutEmailSchema.safeParse(value);
+    if (!parsed.success) return null;
+    const clean = parsed.data.toLowerCase();
+
+    try {
+      window.localStorage.setItem("kazevo_email", clean);
+    } catch {
+      /* storage unavailable */
+    }
+
+    // Hashed advanced matching for Meta, same as the popup does.
+    saveKnownUser({ em: clean });
+    setAdvancedMatching({ em: clean });
+
+    const { error: insertError } = await supabase.from("email_subscribers").insert({
+      email: clean,
+      source: "checkout_page",
+    });
+    // 23505 = already subscribed, which is fine.
+    if (insertError && insertError.code !== "23505") {
+      console.error("Checkout email capture failed:", insertError);
+    }
+
+    void syncEmailSubscriberToShopify({
+      data: { email: clean, source: "kazevo-checkout" },
+    }).catch(() => undefined);
+
+    return clean;
+  };
+
+  const handleCheckout = async () => {
     const url = getCheckoutUrl();
     if (!url) return;
+
+    // Capture the shopper's email before handing off, so we keep them even
+    // if they never finish on Shopify's hosted checkout.
+    const captured = await captureEmail(email);
+
+    let checkoutUrl = url;
+    if (captured) {
+      try {
+        const parsedUrl = new URL(url);
+        parsedUrl.searchParams.set("checkout[email]", captured);
+        checkoutUrl = parsedUrl.toString();
+      } catch {
+        /* keep original url */
+      }
+    }
 
     // One event ID for this checkout, remembered so the server-side
     // (Shopify CAPI) counterpart can be deduplicated against it.
