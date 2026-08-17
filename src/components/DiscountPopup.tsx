@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
 import { saveKnownUser, setAdvancedMatching, trackLead } from "@/lib/meta-pixel";
+import { syncEmailSubscriberToShopify } from "@/lib/shopify-customers.functions";
 
 import { useCartStore } from "@/stores/cartStore";
 
