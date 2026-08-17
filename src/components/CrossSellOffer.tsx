@@ -3,10 +3,11 @@ import { Link } from "@tanstack/react-router";
 import { Check, Gift, Loader2, Plus, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useMarket } from "@/components/MarketProvider";
 import { getCrossSellFor, type CrossSellPair } from "@/lib/productContent";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import {
-  formatUsd,
+  formatMoney,
   getColorLabel,
   getVariantColorValue,
   getVariantDotColor,
