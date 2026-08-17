@@ -1,9 +1,5 @@
-import { createServerFn } from "@tanstack/react-start";
-import {
-  getRequestHeader,
-  getCookie,
-  setCookie,
-} from "@tanstack/react-start/server";
+import { detectCountryFn } from "./market.functions";
+
 
 export const COUNTRY_COOKIE = "kazevo_country";
 export const DEFAULT_COUNTRY = "US";
