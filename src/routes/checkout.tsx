@@ -57,6 +57,7 @@ export const Route = createFileRoute("/checkout")({
 });
 
 function CheckoutPage() {
+  const { market } = useMarket();
   const [hydrated, setHydrated] = useState(
     () => useCartStore.persist?.hasHydrated?.() ?? false
   );
