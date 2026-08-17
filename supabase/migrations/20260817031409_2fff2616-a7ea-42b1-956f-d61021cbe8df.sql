@@ -1,0 +1,1 @@
+ALTER TABLE public.email_subscribers ADD COLUMN IF NOT EXISTS shopify_synced_at timestamptz;
