@@ -369,10 +369,10 @@ function KazevoOutdoorPage() {
                     {saleInfo?.isOnSale ? (
                       <>
                         <span className="font-display text-3xl font-black text-sunset">
-                          {formatUsd(saleInfo.current)} USD
+                          {formatMoney(saleInfo.current, selectedVariant?.price.currencyCode ?? market.currency, market.locale)}
                         </span>
                         <span className="font-display text-xl font-semibold text-muted-foreground line-through">
-                          {formatUsd(saleInfo.compareAt!)} USD
+                          {formatMoney(saleInfo.compareAt!, market.currency, market.locale)}
                         </span>
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-sunset/15 px-3 py-1 text-xs font-semibold text-sunset">
                           Save {saleInfo.percentOff}%
@@ -381,8 +381,8 @@ function KazevoOutdoorPage() {
                     ) : (
                       <span className="font-display text-3xl font-black">
                         {selectedVariant
-                          ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                          : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
+                          ? formatMoney(parseFloat(selectedVariant.price.amount), selectedVariant.price.currencyCode, market.locale)
+                          : formatMoney(parseFloat(product.node.priceRange.minVariantPrice.amount), product.node.priceRange.minVariantPrice.currencyCode, market.locale)}
                       </span>
                     )}
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/25 px-3 py-1 text-xs font-semibold text-accent-foreground">
