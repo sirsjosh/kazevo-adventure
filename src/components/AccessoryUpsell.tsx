@@ -73,6 +73,7 @@ function AccessoryCard({
   accessory: Accessory;
   layout: "panel" | "section";
 }) {
+  const { countryCode, market } = useMarket();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [adding, setAdding] = useState(false);
   const [added, setAdded] = useState(false);
@@ -82,7 +83,7 @@ function AccessoryCard({
 
   useEffect(() => {
     let cancelled = false;
-    fetchShopifyProductByHandle(accessory.handle)
+    fetchShopifyProductByHandle(accessory.handle, countryCode)
       .then((node) => {
         if (!cancelled) setProduct(node);
       })
@@ -90,7 +91,7 @@ function AccessoryCard({
     return () => {
       cancelled = true;
     };
-  }, [accessory.handle]);
+  }, [accessory.handle, countryCode]);
 
   const variants = useMemo(
     () => product?.variants.edges.map((e) => e.node) ?? [],
