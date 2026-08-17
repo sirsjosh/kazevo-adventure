@@ -41,7 +41,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
       return;
     }
     let cancelled = false;
-    fetchShopifyProductByHandle(pair.partnerHandle)
+    fetchShopifyProductByHandle(pair.partnerHandle, countryCode)
       .then((node) => {
         if (!cancelled) setProduct(node);
       })
@@ -49,7 +49,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
     return () => {
       cancelled = true;
     };
-  }, [pair?.partnerHandle, dismissKey]);
+  }, [pair?.partnerHandle, dismissKey, countryCode]);
 
   const variants = useMemo(
     () => product?.variants.edges.map((e) => e.node) ?? [],
