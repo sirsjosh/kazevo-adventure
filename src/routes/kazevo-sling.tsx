@@ -15,14 +15,17 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CountrySelector } from "@/components/CountrySelector";
 import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { ProductReviews } from "@/components/ProductReviews";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
+import { detectCountry } from "@/lib/market";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
-import { formatUsd, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
+import { formatMoney, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 import { trackViewContent } from "@/lib/meta-pixel";
+import { useMarket } from "@/components/MarketProvider";
 
 import sling1 from "@/assets/sling-1.jpg.asset.json";
 import sling2 from "@/assets/sling-2.jpg.asset.json";
