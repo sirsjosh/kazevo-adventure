@@ -158,7 +158,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
               </h2>
               <p className="mt-3 max-w-xl text-muted-foreground">{pair.body}</p>
               <p className="mt-4 font-display text-xl font-black">
-                {formatUsd(parseFloat(display.price.amount))} USD
+                {formatMoney(parseFloat(display.price.amount), display.price.currencyCode, market.locale)}
               </p>
 
               {!singleVariant && (
