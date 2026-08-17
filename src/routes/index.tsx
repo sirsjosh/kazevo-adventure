@@ -19,10 +19,13 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CountrySelector } from "@/components/CountrySelector";
 
 import { isAccessoryHandle, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
-import { formatUsd, getVariantImage } from "@/lib/variantImages";
+import { formatMoney, getVariantImage } from "@/lib/variantImages";
+import { detectCountry } from "@/lib/market";
+import { useMarket } from "@/components/MarketProvider";
 
 /** Products that have their own dedicated marketing page. */
 const DEDICATED_PAGES = [
@@ -136,11 +139,12 @@ export const Route = createFileRoute("/")({
   }),
   loader: async () => {
     try {
-      const products = await fetchShopifyProducts("*", 50);
-      return { products };
+      const countryCode = await detectCountry();
+      const products = await fetchShopifyProducts("*", 50, countryCode);
+      return { products, countryCode };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
-      return { products: [] };
+      return { products: [], countryCode: "US" };
     }
   },
   errorComponent: () => null,
@@ -217,7 +221,11 @@ const SLING_HANDLE = "篮球包篮球袋双肩单肩袋子排球足球背包网�
 
 
 function Landing() {
-  const { products: loaderProducts } = Route.useLoaderData() as { products: ShopifyProduct[] };
+  const { products: loaderProducts, countryCode: loaderCountry } = Route.useLoaderData() as {
+    products: ShopifyProduct[];
+    countryCode: string;
+  };
+  const { countryCode, market } = useMarket();
   const [allProducts, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
   // Accessories (pencil case, thermos, bottle) are upsell-only: never in the grid.
   const products = allProducts.filter((p) => !isAccessoryHandle(p.node.handle));
@@ -226,7 +234,7 @@ function Landing() {
   // so always refresh from the Storefront API on the client.
   useEffect(() => {
     let cancelled = false;
-    fetchShopifyProducts("*", 50)
+    fetchShopifyProducts("*", 50, countryCode)
       .then((fresh) => {
         if (!cancelled && fresh.length > 0) setProducts(fresh);
       })
@@ -234,7 +242,7 @@ function Landing() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [countryCode]);
 
   const [ctaPlaying, setCtaPlaying] = useState(false);
   const ctaVideoRef = useRef<HTMLVideoElement>(null);
@@ -263,6 +271,7 @@ function Landing() {
             </span>
           </a>
           <div className="flex items-center gap-3">
+            <CountrySelector />
             <a
               href="#shop"
               className="hidden shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 sm:inline-flex"
@@ -460,15 +469,19 @@ function Landing() {
                             {saleInfo?.isOnSale ? (
                               <>
                                 <span className="font-display text-2xl font-black text-sunset">
-                                  {formatUsd(saleInfo.current)}
+                                  {formatMoney(saleInfo.current, market.currency, market.locale)}
                                 </span>
                                 <span className="font-display text-base font-semibold text-muted-foreground line-through">
-                                  {formatUsd(saleInfo.compareAt!)}
+                                  {formatMoney(saleInfo.compareAt!, market.currency, market.locale)}
                                 </span>
                               </>
                             ) : (
                               <span className="font-display text-2xl font-black">
-                                {formatUsd(parseFloat(node.priceRange.minVariantPrice.amount))}
+                                {formatMoney(
+                                  parseFloat(node.priceRange.minVariantPrice.amount),
+                                  node.priceRange.minVariantPrice.currencyCode,
+                                  market.locale
+                                )}
                               </span>
                             )}
                           </div>

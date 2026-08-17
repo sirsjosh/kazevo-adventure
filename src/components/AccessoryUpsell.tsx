@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { Check, Loader2, PackagePlus, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useMarket } from "@/components/MarketProvider";
 import { getAccessoryUpsells, type AccessoryUpsell as Accessory } from "@/lib/productContent";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import {
-  formatUsd,
+  formatMoney,
   getColorLabel,
   getVariantColorValue,
   getVariantDotColor,
@@ -72,6 +73,7 @@ function AccessoryCard({
   accessory: Accessory;
   layout: "panel" | "section";
 }) {
+  const { countryCode, market } = useMarket();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [adding, setAdding] = useState(false);
   const [added, setAdded] = useState(false);
@@ -81,7 +83,7 @@ function AccessoryCard({
 
   useEffect(() => {
     let cancelled = false;
-    fetchShopifyProductByHandle(accessory.handle)
+    fetchShopifyProductByHandle(accessory.handle, countryCode)
       .then((node) => {
         if (!cancelled) setProduct(node);
       })
@@ -89,7 +91,7 @@ function AccessoryCard({
     return () => {
       cancelled = true;
     };
-  }, [accessory.handle]);
+  }, [accessory.handle, countryCode]);
 
   const variants = useMemo(
     () => product?.variants.edges.map((e) => e.node) ?? [],
@@ -155,7 +157,7 @@ function AccessoryCard({
     </div>
   );
 
-  const price = formatUsd(parseFloat(display.price.amount));
+  const price = formatMoney(parseFloat(display.price.amount), display.price.currencyCode, market.locale);
   // Name always comes live from Shopify
   const name = product.title || accessory.name;
 

@@ -6,12 +6,15 @@ import { Loader2, ShoppingBag, ArrowLeft, Mountain } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CountrySelector } from "@/components/CountrySelector";
 import { ProductReviews } from "@/components/ProductReviews";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
-import { formatUsd, getVariantImage } from "@/lib/variantImages";
+import { formatMoney, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
+import { useMarket } from "@/components/MarketProvider";
+import { detectCountry } from "@/lib/market";
 
 const SITE_URL = "https://kazevo-adventure-launch.lovable.app";
 
@@ -42,7 +45,7 @@ export const Route = createFileRoute("/product/$handle")({
       offers: {
         "@type": "Offer",
         price: product?.priceRange.minVariantPrice.amount,
-        priceCurrency: "USD",
+        priceCurrency: product?.priceRange.minVariantPrice.currencyCode ?? "USD",
         availability: "https://schema.org/InStock",
         url,
       },
@@ -86,10 +89,11 @@ export const Route = createFileRoute("/product/$handle")({
   loader: async ({ params }) => {
     const englishPath = getEnglishPath(params.handle);
     if (englishPath) throw redirect({ to: englishPath, statusCode: 301 });
-    const product = await fetchShopifyProductByHandle(params.handle);
+    const countryCode = await detectCountry();
+    const product = await fetchShopifyProductByHandle(params.handle, countryCode);
     if (!product) throw notFound();
     const reviews = await getProductReviews({ data: { handle: params.handle } });
-    return { product, reviews };
+    return { product, reviews, countryCode };
   },
   component: ProductDetail,
 });
@@ -100,6 +104,7 @@ function ProductDetail() {
     product: ShopifyProduct["node"];
     reviews: ProductReviewsData;
   };
+  const { market } = useMarket();
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -131,7 +136,7 @@ function ProductDetail() {
       content_ids: [selectedVariant.id],
       content_name: product.title,
       content_type: "product",
-      currency: "USD",
+      currency: selectedVariant.price.currencyCode,
       value: parseFloat(selectedVariant.price.amount),
     });
   }, [product, selectedVariant]);
@@ -168,7 +173,10 @@ function ProductDetail() {
               kazevo by solarah
             </span>
           </a>
-          <CartButton />
+          <div className="flex items-center gap-3">
+            <CountrySelector />
+            <CartButton />
+          </div>
         </nav>
       </header>
 
@@ -205,8 +213,8 @@ function ProductDetail() {
             <div className="mt-6">
               <span className="font-display text-3xl font-black">
                 {selectedVariant
-                  ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                  : `${formatUsd(parseFloat(product.priceRange.minVariantPrice.amount))} USD`}
+                  ? formatMoney(parseFloat(selectedVariant.price.amount), selectedVariant.price.currencyCode, market.locale)
+                  : formatMoney(parseFloat(product.priceRange.minVariantPrice.amount), product.priceRange.minVariantPrice.currencyCode, market.locale)}
               </span>
             </div>
 

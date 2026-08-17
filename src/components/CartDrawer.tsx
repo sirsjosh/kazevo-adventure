@@ -21,12 +21,14 @@ import {
 } from "@/components/ui/sheet";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
-import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
+import { useMarket } from "@/components/MarketProvider";
+import { formatMoney, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
 export function CartDrawer() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { isDrawerOpen, setDrawerOpen } = useCartStore();
+  const { market } = useMarket();
   const {
     items,
     isLoading,
@@ -100,7 +102,7 @@ export function CartDrawer() {
                           {getVariantColorName(item.selectedOptions)}
                         </h4>
                         <p className="font-semibold">
-                          {formatUsd(parseFloat(item.price.amount))} USD
+                          {formatMoney(parseFloat(item.price.amount), item.price.currencyCode, market.locale)}
                         </p>
                       </div>
                       <div className="flex flex-col items-end gap-2 flex-shrink-0">
@@ -141,7 +143,7 @@ export function CartDrawer() {
                 <AccessoryUpsell handles={items.map((i) => i.product.node.handle)} />
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Total</span>
-                  <span className="text-xl font-bold">{formatUsd(totalPrice)} USD</span>
+                  <span className="text-xl font-bold">{formatMoney(totalPrice, items[0]?.price.currencyCode ?? "USD", market.locale)}</span>
                 </div>
                 <p className="text-sm font-medium text-primary">
                   Free shipping on every order

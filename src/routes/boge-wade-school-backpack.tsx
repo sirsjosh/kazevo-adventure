@@ -4,6 +4,7 @@ import { ProductPageTemplate } from "@/components/ProductPageTemplate";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { buildProductHead, productPages } from "@/lib/productContent";
+import { detectCountry } from "@/lib/market";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
 
 const content = productPages["boge-wade-school-backpack"];
@@ -16,9 +17,10 @@ export const Route = createFileRoute("/boge-wade-school-backpack")({
     ),
   loader: async () => {
     try {
-      const products = await fetchShopifyProducts("*", 50);
+      const countryCode = await detectCountry();
+      const products = await fetchShopifyProducts("*", 50, countryCode);
       const reviews = await getProductReviews({ data: { handle: content.handle } });
-      return { products, reviews };
+      return { products, reviews, countryCode };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
       return {

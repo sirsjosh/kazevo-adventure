@@ -160,6 +160,21 @@ export function getColorLabel(colorValue?: string): string {
 }
 
 
+export function formatMoney(
+  amount: number,
+  currencyCode: string = "USD",
+  locale: string = "en-US"
+): string {
+  try {
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency: currencyCode,
+    }).format(amount);
+  } catch {
+    return `${currencyCode} ${amount.toFixed(2)}`;
+  }
+}
+
 export function formatUsd(amount: number): string {
-  return `$${amount.toFixed(2)}`;
+  return formatMoney(amount, "USD", "en-US");
 }

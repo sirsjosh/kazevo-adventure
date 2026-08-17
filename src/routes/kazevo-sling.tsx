@@ -15,14 +15,17 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CountrySelector } from "@/components/CountrySelector";
 import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { ProductReviews } from "@/components/ProductReviews";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
+import { detectCountry } from "@/lib/market";
 import { fetchShopifyProducts, type ShopifyProduct } from "@/lib/shopify";
-import { formatUsd, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
+import { formatMoney, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 import { trackViewContent } from "@/lib/meta-pixel";
+import { useMarket } from "@/components/MarketProvider";
 
 import sling1 from "@/assets/sling-1.jpg.asset.json";
 import sling2 from "@/assets/sling-2.jpg.asset.json";
@@ -174,14 +177,16 @@ export const Route = createFileRoute("/kazevo-sling")({
   }),
   loader: async () => {
     try {
-      const products = await fetchShopifyProducts("*", 50);
+      const countryCode = await detectCountry();
+      const products = await fetchShopifyProducts("*", 50, countryCode);
       const reviews = await getProductReviews({ data: { handle: SLING_HANDLE } });
-      return { products, reviews };
+      return { products, reviews, countryCode };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
       return {
         products: [] as ShopifyProduct[],
         reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+        countryCode: "US",
       };
     }
   },
@@ -194,11 +199,12 @@ function KazevoSlingPage() {
     products: ShopifyProduct[];
     reviews: ProductReviewsData;
   };
+  const { countryCode, market } = useMarket();
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
     let cancelled = false;
-    fetchShopifyProducts("*", 50)
+    fetchShopifyProducts("*", 50, countryCode)
       .then((fresh) => {
         if (!cancelled && fresh.length > 0) setProducts(fresh);
       })
@@ -206,7 +212,7 @@ function KazevoSlingPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [countryCode]);
 
   const product = products.find((p) => p.node.handle === SLING_HANDLE);
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
@@ -235,7 +241,7 @@ function KazevoSlingPage() {
       content_ids: [selectedVariant.id],
       content_name: product.node.title,
       content_type: "product",
-      currency: "USD",
+      currency: selectedVariant.price.currencyCode,
       value: parseFloat(selectedVariant.price.amount),
     });
   }, [product, selectedVariant]);
@@ -278,7 +284,10 @@ function KazevoSlingPage() {
               kazevo by solarah
             </span>
           </Link>
-          <CartButton />
+          <div className="flex items-center gap-3">
+            <CountrySelector />
+            <CartButton />
+          </div>
         </nav>
       </header>
 
@@ -345,8 +354,8 @@ function KazevoSlingPage() {
                   <div className="mt-6 flex flex-wrap items-baseline gap-3">
                     <span className="font-display text-3xl font-black">
                       {selectedVariant
-                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
+                        ? formatMoney(parseFloat(selectedVariant.price.amount), selectedVariant.price.currencyCode, market.locale)
+                        : formatMoney(parseFloat(product.node.priceRange.minVariantPrice.amount), product.node.priceRange.minVariantPrice.currencyCode, market.locale)}
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/25 px-3 py-1 text-xs font-semibold text-accent-foreground">
                       <Truck size={14} /> Free worldwide shipping

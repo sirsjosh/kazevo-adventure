@@ -17,8 +17,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
+import { useMarket } from "@/components/MarketProvider";
 import { supabase } from "@/integrations/supabase/client";
-import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
+import { formatMoney, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import {
   trackInitiateCheckout,
   newEventId,
@@ -56,6 +57,7 @@ export const Route = createFileRoute("/checkout")({
 });
 
 function CheckoutPage() {
+  const { market } = useMarket();
   const [hydrated, setHydrated] = useState(
     () => useCartStore.persist?.hasHydrated?.() ?? false
   );
@@ -243,7 +245,7 @@ function CheckoutPage() {
                         {getVariantColorName(item.selectedOptions)}
                       </h2>
                       <p className="mt-3 font-display text-xl font-black">
-                        {formatUsd(parseFloat(item.price.amount) * item.quantity)} USD
+                        {formatMoney(parseFloat(item.price.amount) * item.quantity, item.price.currencyCode, market.locale)}
                       </p>
                       <div className="mt-auto flex items-center justify-between gap-4 pt-5">
                         <div className="flex items-center gap-1 rounded-full border border-border p-1">
@@ -290,7 +292,7 @@ function CheckoutPage() {
               <dl className="mt-5 space-y-3 text-sm">
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Subtotal</dt>
-                  <dd className="font-semibold">{formatUsd(subtotal)} USD</dd>
+                  <dd className="font-semibold">{formatMoney(subtotal, items[0]?.price.currencyCode ?? "USD", market.locale)}</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Shipping</dt>
@@ -306,7 +308,7 @@ function CheckoutPage() {
               <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
                 <span className="font-display text-lg font-black">Total</span>
                 <span className="font-display text-2xl font-black">
-                  {formatUsd(subtotal)} USD
+                  {formatMoney(subtotal, items[0]?.price.currencyCode ?? "USD", market.locale)}
                 </span>
               </div>
               <div className="mt-6">

@@ -3,10 +3,11 @@ import { Link } from "@tanstack/react-router";
 import { Check, Gift, Loader2, Plus, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useMarket } from "@/components/MarketProvider";
 import { getCrossSellFor, type CrossSellPair } from "@/lib/productContent";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import {
-  formatUsd,
+  formatMoney,
   getColorLabel,
   getVariantColorValue,
   getVariantDotColor,
@@ -22,6 +23,7 @@ interface CrossSellOfferProps {
 
 export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProps) {
   const pair: CrossSellPair | null = getCrossSellFor(handles);
+  const { countryCode, market } = useMarket();
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [dismissed, setDismissed] = useState(false);
   const [adding, setAdding] = useState(false);
@@ -39,7 +41,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
       return;
     }
     let cancelled = false;
-    fetchShopifyProductByHandle(pair.partnerHandle)
+    fetchShopifyProductByHandle(pair.partnerHandle, countryCode)
       .then((node) => {
         if (!cancelled) setProduct(node);
       })
@@ -47,7 +49,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
     return () => {
       cancelled = true;
     };
-  }, [pair?.partnerHandle, dismissKey]);
+  }, [pair?.partnerHandle, dismissKey, countryCode]);
 
   const variants = useMemo(
     () => product?.variants.edges.map((e) => e.node) ?? [],
@@ -156,7 +158,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
               </h2>
               <p className="mt-3 max-w-xl text-muted-foreground">{pair.body}</p>
               <p className="mt-4 font-display text-xl font-black">
-                {formatUsd(parseFloat(display.price.amount))} USD
+                {formatMoney(parseFloat(display.price.amount), display.price.currencyCode, market.locale)}
               </p>
 
               {!singleVariant && (
@@ -240,7 +242,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
 
           <div className="mt-2 flex items-center justify-between gap-2">
             <span className="text-sm font-semibold">
-              {formatUsd(parseFloat(display.price.amount))} USD
+              {formatMoney(parseFloat(display.price.amount), display.price.currencyCode, market.locale)}
             </span>
             {added ? (
               <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">

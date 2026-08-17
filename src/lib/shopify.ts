@@ -1,4 +1,5 @@
 import { readClickIds } from "@/lib/meta-pixel";
+import { getMarketByCode } from "@/lib/market";
 
 export interface ShopifyMoney {
   amount: string;
@@ -81,8 +82,8 @@ const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${
 const SHOPIFY_STOREFRONT_TOKEN = "5aa8021fdacca0eccf7517254b518901";
 
 const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $query: String) {
-    products(first: $first, query: $query) {
+  query GetProducts($first: Int!, $query: String, $country: CountryCode) {
+    products(first: $first, query: $query, country: $country) {
       edges {
         node {
           id
@@ -140,8 +141,8 @@ const PRODUCTS_QUERY = `
 `;
 
 const PRODUCT_BY_HANDLE_QUERY = `
-  query GetProductByHandle($handle: String!) {
-    product(handle: $handle) {
+  query GetProductByHandle($handle: String!, $country: CountryCode) {
+    product(handle: $handle, country: $country) {
       id
       title
       description
@@ -196,14 +197,21 @@ const PRODUCT_BY_HANDLE_QUERY = `
 
 export async function storefrontApiRequest<T = unknown>(
   query: string,
-  variables: Record<string, unknown> = {}
+  variables: Record<string, unknown> = {},
+  countryCode?: string
 ): Promise<T | undefined> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
+  };
+  if (countryCode) {
+    const market = getMarketByCode(countryCode);
+    headers["Accept-Language"] = market.locale;
+  }
+
   const response = await fetch(SHOPIFY_STOREFRONT_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
-    },
+    headers,
     body: JSON.stringify({ query, variables }),
   });
 
@@ -226,18 +234,28 @@ export async function storefrontApiRequest<T = unknown>(
   return data as T;
 }
 
-export async function fetchShopifyProducts(query = "*", first = 50): Promise<ShopifyProduct[]> {
-  const data = await storefrontApiRequest<ShopifyProductsResponse>(PRODUCTS_QUERY, {
-    first,
-    query,
-  });
+export async function fetchShopifyProducts(
+  query = "*",
+  first = 50,
+  countryCode?: string
+): Promise<ShopifyProduct[]> {
+  const data = await storefrontApiRequest<ShopifyProductsResponse>(
+    PRODUCTS_QUERY,
+    { first, query, country: countryCode },
+    countryCode
+  );
   return data?.data?.products?.edges ?? [];
 }
 
-export async function fetchShopifyProductByHandle(handle: string): Promise<ShopifyProduct["node"] | null> {
+export async function fetchShopifyProductByHandle(
+  handle: string,
+  countryCode?: string
+): Promise<ShopifyProduct["node"] | null> {
   const data = (await storefrontApiRequest<{
     data: { product: ShopifyProduct["node"] | null };
-  }>(PRODUCT_BY_HANDLE_QUERY, { handle })) ?? { data: { product: null } };
+  }>(PRODUCT_BY_HANDLE_QUERY, { handle, country: countryCode }, countryCode)) ?? {
+    data: { product: null },
+  };
   return data.data.product;
 }
 
@@ -247,6 +265,9 @@ const CART_CREATE_MUTATION = `
       cart {
         id
         checkoutUrl
+        buyerIdentity {
+          countryCode
+        }
         lines(first: 100) {
           edges {
             node {
@@ -339,8 +360,16 @@ export interface CartItemInput {
   quantity: number;
 }
 
-export async function createShopifyCart(item: CartItemInput): Promise<
-  | { cartId: string; checkoutUrl: string; lineId: string }
+export async function createShopifyCart(
+  item: CartItemInput,
+  countryCode?: string
+): Promise<
+  | {
+      cartId: string;
+      checkoutUrl: string;
+      lineId: string;
+      countryCode: string | undefined;
+    }
   | null
 > {
   const data = await storefrontApiRequest<{
@@ -349,6 +378,7 @@ export async function createShopifyCart(item: CartItemInput): Promise<
         cart: {
           id: string;
           checkoutUrl: string;
+          buyerIdentity?: { countryCode?: string };
           lines: {
             edges: Array<{
               node: { id: string; merchandise: { id: string } };
@@ -358,9 +388,16 @@ export async function createShopifyCart(item: CartItemInput): Promise<
         userErrors: Array<{ field: string[] | null; message: string }>;
       };
     };
-  }>(CART_CREATE_MUTATION, {
-    input: { lines: [{ quantity: item.quantity, merchandiseId: item.variantId }] },
-  });
+  }>(
+    CART_CREATE_MUTATION,
+    {
+      input: {
+        lines: [{ quantity: item.quantity, merchandiseId: item.variantId }],
+        buyerIdentity: countryCode ? { countryCode } : undefined,
+      },
+    },
+    countryCode
+  );
 
   const userErrors = data?.data?.cartCreate?.userErrors ?? [];
   if (userErrors.length > 0) {
@@ -378,12 +415,14 @@ export async function createShopifyCart(item: CartItemInput): Promise<
     cartId: cart.id,
     checkoutUrl: formatCheckoutUrl(cart.checkoutUrl),
     lineId,
+    countryCode: cart.buyerIdentity?.countryCode,
   };
 }
 
 export async function addLineToShopifyCart(
   cartId: string,
-  item: CartItemInput
+  item: CartItemInput,
+  countryCode?: string
 ): Promise<{ success: boolean; lineId?: string; cartNotFound?: boolean }> {
   const data = await storefrontApiRequest<{
     data: {
@@ -398,10 +437,14 @@ export async function addLineToShopifyCart(
         userErrors: Array<{ field: string[] | null; message: string }>;
       };
     };
-  }>(CART_LINES_ADD_MUTATION, {
-    cartId,
-    lines: [{ quantity: item.quantity, merchandiseId: item.variantId }],
-  });
+  }>(
+    CART_LINES_ADD_MUTATION,
+    {
+      cartId,
+      lines: [{ quantity: item.quantity, merchandiseId: item.variantId }],
+    },
+    countryCode
+  );
 
   const userErrors = data?.data?.cartLinesAdd?.userErrors ?? [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
@@ -419,7 +462,8 @@ export async function addLineToShopifyCart(
 export async function updateShopifyCartLine(
   cartId: string,
   lineId: string,
-  quantity: number
+  quantity: number,
+  countryCode?: string
 ): Promise<{ success: boolean; cartNotFound?: boolean }> {
   const data = await storefrontApiRequest<{
     data: {
@@ -427,10 +471,14 @@ export async function updateShopifyCartLine(
         userErrors: Array<{ field: string[] | null; message: string }>;
       };
     };
-  }>(CART_LINES_UPDATE_MUTATION, {
-    cartId,
-    lines: [{ id: lineId, quantity }],
-  });
+  }>(
+    CART_LINES_UPDATE_MUTATION,
+    {
+      cartId,
+      lines: [{ id: lineId, quantity }],
+    },
+    countryCode
+  );
 
   const userErrors = data?.data?.cartLinesUpdate?.userErrors ?? [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
@@ -443,7 +491,8 @@ export async function updateShopifyCartLine(
 
 export async function removeLineFromShopifyCart(
   cartId: string,
-  lineId: string
+  lineId: string,
+  countryCode?: string
 ): Promise<{ success: boolean; cartNotFound?: boolean }> {
   const data = await storefrontApiRequest<{
     data: {
@@ -451,10 +500,14 @@ export async function removeLineFromShopifyCart(
         userErrors: Array<{ field: string[] | null; message: string }>;
       };
     };
-  }>(CART_LINES_REMOVE_MUTATION, {
-    cartId,
-    lineIds: [lineId],
-  });
+  }>(
+    CART_LINES_REMOVE_MUTATION,
+    {
+      cartId,
+      lineIds: [lineId],
+    },
+    countryCode
+  );
 
   const userErrors = data?.data?.cartLinesRemove?.userErrors ?? [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
@@ -502,13 +555,14 @@ export interface ShopifyCartSnapshot {
   };
 }
 
-export async function getShopifyCart(cartId: string): Promise<
-  | { data: { cart: ShopifyCartSnapshot | null } }
-  | undefined
-> {
+export async function getShopifyCart(
+  cartId: string,
+  countryCode?: string
+): Promise<{ data: { cart: ShopifyCartSnapshot | null } } | undefined> {
   return storefrontApiRequest<{ data: { cart: ShopifyCartSnapshot | null } }>(
     CART_QUERY,
-    { id: cartId }
+    { id: cartId },
+    countryCode
   );
 }
 
