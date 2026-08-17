@@ -82,8 +82,8 @@ const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${
 const SHOPIFY_STOREFRONT_TOKEN = "5aa8021fdacca0eccf7517254b518901";
 
 const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $query: String, $country: CountryCode) {
-    products(first: $first, query: $query, country: $country) {
+  query GetProducts($first: Int!, $query: String, $country: CountryCode) @inContext(country: $country) {
+    products(first: $first, query: $query) {
       edges {
         node {
           id
@@ -141,8 +141,8 @@ const PRODUCTS_QUERY = `
 `;
 
 const PRODUCT_BY_HANDLE_QUERY = `
-  query GetProductByHandle($handle: String!, $country: CountryCode) {
-    product(handle: $handle, country: $country) {
+  query GetProductByHandle($handle: String!, $country: CountryCode) @inContext(country: $country) {
+    product(handle: $handle) {
       id
       title
       description
