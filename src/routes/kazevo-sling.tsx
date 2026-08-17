@@ -354,8 +354,8 @@ function KazevoSlingPage() {
                   <div className="mt-6 flex flex-wrap items-baseline gap-3">
                     <span className="font-display text-3xl font-black">
                       {selectedVariant
-                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
+                        ? formatMoney(parseFloat(selectedVariant.price.amount), selectedVariant.price.currencyCode, market.locale)
+                        : formatMoney(parseFloat(product.node.priceRange.minVariantPrice.amount), product.node.priceRange.minVariantPrice.currencyCode, market.locale)}
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-mint/25 px-3 py-1 text-xs font-semibold text-accent-foreground">
                       <Truck size={14} /> Free worldwide shipping
