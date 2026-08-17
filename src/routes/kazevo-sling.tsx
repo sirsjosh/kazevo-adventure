@@ -199,11 +199,12 @@ function KazevoSlingPage() {
     products: ShopifyProduct[];
     reviews: ProductReviewsData;
   };
+  const { countryCode, market } = useMarket();
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
     let cancelled = false;
-    fetchShopifyProducts("*", 50)
+    fetchShopifyProducts("*", 50, countryCode)
       .then((fresh) => {
         if (!cancelled && fresh.length > 0) setProducts(fresh);
       })
@@ -211,7 +212,7 @@ function KazevoSlingPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [countryCode]);
 
   const product = products.find((p) => p.node.handle === SLING_HANDLE);
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
