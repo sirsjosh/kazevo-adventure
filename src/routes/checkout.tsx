@@ -292,7 +292,7 @@ function CheckoutPage() {
               <dl className="mt-5 space-y-3 text-sm">
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Subtotal</dt>
-                  <dd className="font-semibold">{formatUsd(subtotal)} USD</dd>
+                  <dd className="font-semibold">{formatMoney(subtotal, items[0]?.price.currencyCode ?? "USD", market.locale)}</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-muted-foreground">Shipping</dt>
@@ -308,7 +308,7 @@ function CheckoutPage() {
               <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
                 <span className="font-display text-lg font-black">Total</span>
                 <span className="font-display text-2xl font-black">
-                  {formatUsd(subtotal)} USD
+                  {formatMoney(subtotal, items[0]?.price.currencyCode ?? "USD", market.locale)}
                 </span>
               </div>
               <div className="mt-6">
