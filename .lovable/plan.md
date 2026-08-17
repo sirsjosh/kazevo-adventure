@@ -1,33 +1,32 @@
-# Send email subscribers to Shopify automatically
+# Capture subscriber + checkout emails into Shopify
 
-Yes. Every time someone submits the discount popup, we can create (or update) that person as a customer in your Shopify store with email-marketing consent, so they land in Shopify's Customers list and any Shopify/Klaviyo/Mailchimp flows connected to it.
+Two sources of customer data flow into Shopify as customers with marketing consent:
 
-## How it will work
+1. Discount popup signups (already being built).
+2. People who reach the `/checkout` page — whether or not they complete the purchase.
 
-```text
-Popup submit -> save to Lovable Cloud (as today)
-             -> server function -> Shopify Admin API -> customer created
-                                                       + accepts marketing
-                                                       + tag "kazevo-popup"
-```
+Important context: payment happens on Shopify's own hosted checkout, so once a shopper types their email there, Shopify already records them (order or abandoned checkout). The gap is shoppers who reach *our* checkout page and never type anything on Shopify's. So we capture the email on our page, before handing off.
 
-- The popup keeps working exactly as it does now (email stored, discount code shown). Shopify sync happens in the background, so a Shopify hiccup never blocks the customer from getting their code.
-- If the email already exists in Shopify, we update that customer's marketing consent instead of creating a duplicate.
-- Existing subscribers already in the database can be pushed to Shopify in a one-time backfill run if you want them included.
+## What changes on the checkout page
 
-## What I need from you
+- Add an email field above the "Pay securely" button: "Email — for your order updates" with a short note that we'll also send occasional offers.
+- On checkout click:
+  - The email is saved to the subscriber list and pushed to Shopify as a customer with marketing consent, tagged `kazevo-checkout`.
+  - The email is appended to the Shopify checkout URL so their address is prefilled — meaning if they abandon on Shopify's side, it becomes a real abandoned checkout Shopify can recover.
+- If the field is empty, checkout still proceeds; we never block the sale. Only a valid email is captured.
+- If the shopper already gave an email through the popup, the field is prefilled from local storage so they don't retype it.
 
-Shopify's storefront token can't write customers, so this needs an Admin API token:
+## Tagging so you can tell sources apart in Shopify
 
-1. In your Shopify admin: Settings > Apps and sales channels > Develop apps > Create an app.
-2. Give it the Admin API scopes `write_customers` and `read_customers`.
-3. Install it and copy the Admin API access token.
-4. I'll ask for it through the secure secret form (never paste it in chat).
+- `kazevo-popup` — discount popup signup
+- `kazevo-checkout` — reached checkout page (bought or not)
+- Existing customers get the new tag added and consent refreshed; no duplicates.
 
 ## Technical notes
 
-- New server function `src/lib/shopify-customers.functions.ts` calling the Shopify Admin GraphQL API (`2025-07`) with `customerCreate`, falling back to `customerEmailMarketingConsentUpdate` when the customer already exists.
-- Token read inside the handler from `process.env['SHOPIFY_ADMIN_API_TOKEN']`; store domain reused from the existing constant.
-- `src/components/DiscountPopup.tsx` calls the function after the database insert, fire-and-forget with errors logged only.
-- Add `shopify_synced_at timestamptz` to `public.email_subscribers` so we can tell which records reached Shopify and retry the rest.
-- Marketing consent is recorded as `SUBSCRIBED` with `consentCollectedFrom: OTHER` — the popup copy should state signup means marketing emails.
+- Server function `syncEmailSubscriberToShopify` (in progress) takes `email` + `source`, calls Shopify Admin GraphQL `2025-07` `customerCreate`, falls back to lookup + `customerEmailMarketingConsentUpdate` + `tagsAdd` when the email already exists.
+- Uses the existing project Shopify admin token from the environment (`SHOPIFY_ADMIN_API_TOKEN`, falling back to `SHOPIFY_ACCESS_TOKEN`); if the token lacks `write_customers`, I'll report back and ask you to create a custom app token.
+- Migration: add `shopify_synced_at timestamptz` to `public.email_subscribers` (fixes the current build error) and allow the `checkout_page` source value.
+- Insert of the checkout email uses the existing anon INSERT policy; the sync + `shopify_synced_at` update happen server-side with the service-role client.
+- Checkout URL prefill: append `checkout[email]` to the Shopify checkout URL in `formatCheckoutUrl` usage from `src/routes/checkout.tsx`; also feed the email into Meta advanced matching, same as the popup does.
+- Failures are logged only — never block checkout or the discount code.
