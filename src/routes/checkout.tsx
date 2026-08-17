@@ -309,6 +309,28 @@ function CheckoutPage() {
                   {formatUsd(subtotal)} USD
                 </span>
               </div>
+              <div className="mt-6">
+                <label
+                  htmlFor="checkout-email"
+                  className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                >
+                  Email for order updates
+                </label>
+                <Input
+                  id="checkout-email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-2 h-11 rounded-full px-4"
+                />
+                <p className="mt-2 text-xs text-muted-foreground">
+                  We&apos;ll send your order updates here — plus the occasional kazevo
+                  offer. You can unsubscribe anytime.
+                </p>
+              </div>
               <Button
                 onClick={handleCheckout}
                 size="lg"
