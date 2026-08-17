@@ -17,8 +17,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
+import { useMarket } from "@/components/MarketProvider";
 import { supabase } from "@/integrations/supabase/client";
-import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
+import { formatMoney, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import {
   trackInitiateCheckout,
   newEventId,
