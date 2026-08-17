@@ -11,17 +11,26 @@ import {
   Trash2,
 } from "lucide-react";
 
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
+import { supabase } from "@/integrations/supabase/client";
 import { formatUsd, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import {
   trackInitiateCheckout,
   newEventId,
   numericId,
   rememberCheckoutEventId,
+  saveKnownUser,
+  setAdvancedMatching,
 } from "@/lib/meta-pixel";
+import { syncEmailSubscriberToShopify } from "@/lib/shopify-customers.functions";
 import { useCartStore } from "@/stores/cartStore";
+
+const checkoutEmailSchema = z.string().trim().email().max(254);
 
 
 export const Route = createFileRoute("/checkout")({
