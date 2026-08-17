@@ -143,7 +143,7 @@ export function CartDrawer() {
                 <AccessoryUpsell handles={items.map((i) => i.product.node.handle)} />
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Total</span>
-                  <span className="text-xl font-bold">{formatUsd(totalPrice)} USD</span>
+                  <span className="text-xl font-bold">{formatMoney(totalPrice, items[0]?.price.currencyCode ?? "USD", market.locale)}</span>
                 </div>
                 <p className="text-sm font-medium text-primary">
                   Free shipping on every order
