@@ -242,7 +242,7 @@ export function CrossSellOffer({ handles, layout = "panel" }: CrossSellOfferProp
 
           <div className="mt-2 flex items-center justify-between gap-2">
             <span className="text-sm font-semibold">
-              {formatUsd(parseFloat(display.price.amount))} USD
+              {formatMoney(parseFloat(display.price.amount), display.price.currencyCode, market.locale)}
             </span>
             {added ? (
               <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary">
