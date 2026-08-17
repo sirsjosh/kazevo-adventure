@@ -75,6 +75,16 @@ function CheckoutPage() {
   const removeItem = useCartStore((s) => s.removeItem);
   const getCheckoutUrl = useCartStore((s) => s.getCheckoutUrl);
 
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("kazevo_email");
+      if (saved) setEmail(saved);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
   const subtotal = items.reduce(
     (sum, i) => sum + parseFloat(i.price.amount) * i.quantity,
