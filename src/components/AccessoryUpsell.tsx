@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import { Check, Loader2, PackagePlus, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useMarket } from "@/components/MarketProvider";
 import { getAccessoryUpsells, type AccessoryUpsell as Accessory } from "@/lib/productContent";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import {
-  formatUsd,
+  formatMoney,
   getColorLabel,
   getVariantColorValue,
   getVariantDotColor,
