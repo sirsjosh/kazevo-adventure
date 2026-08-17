@@ -85,10 +85,9 @@ export function getBrowserCountry(): string {
       return saved.toUpperCase();
     }
     const lang = navigator.language?.toLowerCase();
-    if (lang) {
-      const fromLang = parseAcceptLanguage(lang);
-      if (fromLang) return fromLang;
-    }
+    const region = lang?.split("-")[1]?.toUpperCase();
+    if (region && MARKET_BY_CODE.has(region)) return region;
+
   } catch {
     /* storage unavailable */
   }
