@@ -1,9 +1,5 @@
-import { createServerFn } from "@tanstack/react-start";
-import {
-  getRequestHeader,
-  getCookie,
-  setCookie,
-} from "@tanstack/react-start/server";
+import { detectCountryFn } from "./market.functions";
+
 
 export const COUNTRY_COOKIE = "kazevo_country";
 export const DEFAULT_COUNTRY = "US";
@@ -34,59 +30,25 @@ export function getMarketByCode(code?: string | null): Market {
   return MARKET_BY_CODE.get(code?.toUpperCase() ?? "") ?? MARKET_BY_CODE.get(DEFAULT_COUNTRY)!;
 }
 
-function parseAcceptLanguage(header?: string | null): string | null {
-  if (!header) return null;
-  const first = header.split(",")[0]?.trim();
-  if (!first) return null;
-  const lang = first.split(";")[0]?.trim().toLowerCase();
-  if (!lang) return null;
-  // Map common language prefixes to a default country.
-  const map: Record<string, string> = {
-    "en": "US",
-    "en-gb": "GB",
-    "en-ca": "CA",
-    "en-au": "AU",
-    "de": "DE",
-    "fr": "FR",
-    "it": "IT",
-    "es": "ES",
-    "nl": "NL",
-    "ja": "JP",
-    "ko": "KR",
-    "pt": "BR",
-    "pt-br": "BR",
-    "ar": "AE",
-    "hi": "IN",
-  };
-  return map[lang] ?? null;
+export function isSupportedCountry(code?: string | null): boolean {
+  return MARKET_BY_CODE.has(code?.toUpperCase() ?? "");
 }
 
-function detectFromHeaders(): string {
-  const cfCountry = getRequestHeader("cf-ipcountry") || getRequestHeader("cloudflare-ipcountry");
-  if (cfCountry && cfCountry !== "XX" && MARKET_BY_CODE.has(cfCountry.toUpperCase())) {
-    return cfCountry.toUpperCase();
+/**
+ * Isomorphic country detection.
+ * On the server it reads request headers/cookies; on the client it reads the
+ * cookie/localStorage directly instead of issuing an RPC call, so a failed
+ * network request can never blank out a route loader.
+ */
+export async function detectCountry(): Promise<string> {
+  if (typeof window !== "undefined") return readClientCountry();
+  try {
+    return await detectCountryFn();
+  } catch {
+    return DEFAULT_COUNTRY;
   }
-  const acceptLang = parseAcceptLanguage(getRequestHeader("accept-language"));
-  if (acceptLang && MARKET_BY_CODE.has(acceptLang)) {
-    return acceptLang;
-  }
-  return DEFAULT_COUNTRY;
 }
 
-export const detectCountry = createServerFn({ method: "GET" }).handler(async () => {
-  const cookie = getCookie(COUNTRY_COOKIE);
-  if (cookie && MARKET_BY_CODE.has(cookie.toUpperCase())) {
-    return cookie.toUpperCase();
-  }
-  const detected = detectFromHeaders();
-  setCookie(COUNTRY_COOKIE, detected, {
-    path: "/",
-    maxAge: 60 * 60 * 24 * 365,
-    sameSite: "lax",
-    secure: process.env["NODE_ENV"] === "production",
-  });
-  return detected;
-});
 
 export function readClientCountry(): string {
   if (typeof window === "undefined") return DEFAULT_COUNTRY;
@@ -123,10 +85,9 @@ export function getBrowserCountry(): string {
       return saved.toUpperCase();
     }
     const lang = navigator.language?.toLowerCase();
-    if (lang) {
-      const fromLang = parseAcceptLanguage(lang);
-      if (fromLang) return fromLang;
-    }
+    const region = lang?.split("-")[1]?.toUpperCase();
+    if (region && MARKET_BY_CODE.has(region)) return region;
+
   } catch {
     /* storage unavailable */
   }
