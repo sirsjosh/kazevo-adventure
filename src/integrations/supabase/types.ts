@@ -20,6 +20,7 @@ export type Database = {
           discount_code: string | null
           email: string
           id: string
+          shopify_synced_at: string | null
           source: string
         }
         Insert: {
@@ -27,6 +28,7 @@ export type Database = {
           discount_code?: string | null
           email: string
           id?: string
+          shopify_synced_at?: string | null
           source?: string
         }
         Update: {
@@ -34,6 +36,7 @@ export type Database = {
           discount_code?: string | null
           email?: string
           id?: string
+          shopify_synced_at?: string | null
           source?: string
         }
         Relationships: []

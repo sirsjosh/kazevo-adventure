@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
 import { saveKnownUser, setAdvancedMatching, trackLead } from "@/lib/meta-pixel";
+import { syncEmailSubscriberToShopify } from "@/lib/shopify-customers.functions";
 
 import { useCartStore } from "@/stores/cartStore";
 
@@ -53,12 +54,21 @@ export function DiscountPopup() {
       return;
     }
 
+    // Push the subscriber into Shopify (customer + marketing consent).
+    // Fire-and-forget: a Shopify hiccup must never withhold the code.
+    void syncEmailSubscriberToShopify({
+      data: { email: parsed.data.toLowerCase(), source: "kazevo-popup" },
+    }).catch(() => undefined);
+
     // Feed the email into Meta advanced matching (hashed) + fire a Lead event.
     saveKnownUser({ em: parsed.data });
     setAdvancedMatching({ em: parsed.data });
     trackLead({ content_name: "10% discount signup" });
 
-    if (typeof window !== "undefined") window.localStorage.setItem(STORAGE_KEY, "1");
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(STORAGE_KEY, "1");
+      window.localStorage.setItem("kazevo_email", parsed.data.toLowerCase());
+    }
 
     setStatus("done");
 
