@@ -17,15 +17,17 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CountrySelector } from "@/components/CountrySelector";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
 import { ProductReviews } from "@/components/ProductReviews";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
 import type { ProductPageContent } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
-import { formatUsd, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
+import { formatMoney, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { trackViewContent } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
+import { useMarket } from "@/components/MarketProvider";
 import logo from "@/assets/kazevo-logo.png.asset.json";
 
 const benefitIcons = [Feather, ShieldCheck, Layers, Palette, Sparkles, Truck];
@@ -46,11 +48,12 @@ export function ProductPageTemplate({
   products: loaderProducts,
   reviews,
 }: ProductPageTemplateProps) {
+  const { countryCode, market } = useMarket();
   const [products, setProducts] = useState<ShopifyProduct[]>(loaderProducts);
 
   useEffect(() => {
     let cancelled = false;
-    fetchShopifyProducts("*", 50)
+    fetchShopifyProducts("*", 50, countryCode)
       .then((fresh) => {
         if (!cancelled && fresh.length > 0) setProducts(fresh);
       })
@@ -58,7 +61,7 @@ export function ProductPageTemplate({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [countryCode]);
 
   const product = products.find((p) => p.node.handle === content.handle);
   const variants = product?.node.variants.edges.map((edge) => edge.node) ?? [];
@@ -76,7 +79,7 @@ export function ProductPageTemplate({
       content_ids: [selectedVariant.id],
       content_name: product.node.title,
       content_type: "product",
-      currency: "USD",
+      currency: selectedVariant.price.currencyCode,
       value: parseFloat(selectedVariant.price.amount),
     });
   }, [product, selectedVariant]);
@@ -137,7 +140,10 @@ export function ProductPageTemplate({
               kazevo by solarah
             </span>
           </Link>
-          <CartButton />
+          <div className="flex items-center gap-3">
+            <CountrySelector />
+            <CartButton />
+          </div>
         </nav>
       </header>
 
@@ -205,13 +211,21 @@ export function ProductPageTemplate({
                   <div className="mt-6 flex flex-wrap items-baseline gap-3">
                     <span className="font-display text-3xl font-black">
                       {selectedVariant
-                        ? `${formatUsd(parseFloat(selectedVariant.price.amount))} USD`
-                        : `${formatUsd(parseFloat(product.node.priceRange.minVariantPrice.amount))} USD`}
+                        ? formatMoney(
+                            parseFloat(selectedVariant.price.amount),
+                            selectedVariant.price.currencyCode,
+                            market.locale
+                          )
+                        : formatMoney(
+                            parseFloat(product.node.priceRange.minVariantPrice.amount),
+                            product.node.priceRange.minVariantPrice.currencyCode,
+                            market.locale
+                          )}
                     </span>
                     {saleInfo?.isOnSale && (
                       <>
                         <span className="font-display text-xl font-semibold text-muted-foreground line-through">
-                          {formatUsd(saleInfo.compareAt!)}
+                          {formatMoney(saleInfo.compareAt!, market.currency, market.locale)}
                         </span>
                         <span className="rounded-full bg-sunset px-3 py-1 text-xs font-semibold text-primary-foreground">
                           Save {saleInfo.percentOff}%

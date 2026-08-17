@@ -13,6 +13,7 @@ import {
 
 import { trackAddToCart } from "@/lib/meta-pixel";
 import { isAccessoryHandle } from "@/lib/productContent";
+import { readClientCountry } from "@/lib/market";
 
 
 
@@ -31,6 +32,7 @@ interface CartStore {
   items: CartItem[];
   cartId: string | null;
   checkoutUrl: string | null;
+  countryCode: string | null;
   isLoading: boolean;
   isSyncing: boolean;
   isDrawerOpen: boolean;
@@ -49,6 +51,7 @@ export const useCartStore = create<CartStore>()(
       items: [],
       cartId: null,
       checkoutUrl: null,
+      countryCode: null,
       isLoading: false,
       isSyncing: false,
       isDrawerOpen: false,
@@ -56,17 +59,22 @@ export const useCartStore = create<CartStore>()(
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();
         const existingItem = items.find((i) => i.variantId === item.variantId);
+        const countryCode = readClientCountry();
 
         set({ isLoading: true });
         try {
           let succeeded = false;
           if (!cartId) {
-            const result = await createShopifyCart({ variantId: item.variantId, quantity: item.quantity });
+            const result = await createShopifyCart(
+              { variantId: item.variantId, quantity: item.quantity },
+              countryCode
+            );
             if (result) {
               succeeded = true;
               set({
                 cartId: result.cartId,
                 checkoutUrl: result.checkoutUrl,
+                countryCode,
                 items: [{ ...item, lineId: result.lineId }],
                 isDrawerOpen: true,
               });
@@ -77,7 +85,12 @@ export const useCartStore = create<CartStore>()(
               console.error("Cannot update quantity for item without lineId:", existingItem);
               return;
             }
-            const result = await updateShopifyCartLine(cartId, existingItem.lineId, newQuantity);
+            const result = await updateShopifyCartLine(
+              cartId,
+              existingItem.lineId,
+              newQuantity,
+              countryCode
+            );
             if (result.success) {
               succeeded = true;
               const currentItems = get().items;
@@ -91,7 +104,11 @@ export const useCartStore = create<CartStore>()(
               clearCart();
             }
           } else {
-            const result = await addLineToShopifyCart(cartId, { variantId: item.variantId, quantity: item.quantity });
+            const result = await addLineToShopifyCart(
+              cartId,
+              { variantId: item.variantId, quantity: item.quantity },
+              countryCode
+            );
             if (result.success) {
               succeeded = true;
               const currentItems = get().items;
@@ -112,7 +129,7 @@ export const useCartStore = create<CartStore>()(
               content_ids: [item.variantId],
               content_name: item.product.node.title,
               content_type: "product",
-              currency: "USD",
+              currency: item.price.currencyCode,
               value: parseFloat(item.price.amount) * item.quantity,
               quantity: item.quantity,
             });
@@ -135,9 +152,10 @@ export const useCartStore = create<CartStore>()(
         const item = items.find((i) => i.variantId === variantId);
         if (!item?.lineId || !cartId) return;
 
+        const countryCode = readClientCountry();
         set({ isLoading: true });
         try {
-          const result = await updateShopifyCartLine(cartId, item.lineId, quantity);
+          const result = await updateShopifyCartLine(cartId, item.lineId, quantity, countryCode);
           if (result.success) {
             const currentItems = get().items;
             set({
@@ -160,9 +178,10 @@ export const useCartStore = create<CartStore>()(
         const item = items.find((i) => i.variantId === variantId);
         if (!item?.lineId || !cartId) return;
 
+        const countryCode = readClientCountry();
         set({ isLoading: true });
         try {
-          const result = await removeLineFromShopifyCart(cartId, item.lineId);
+          const result = await removeLineFromShopifyCart(cartId, item.lineId, countryCode);
           if (result.success) {
             const currentItems = get().items;
             let newItems = currentItems.filter((i) => i.variantId !== variantId);
@@ -176,7 +195,7 @@ export const useCartStore = create<CartStore>()(
             if (onlyAccessoriesLeft) {
               for (const leftover of newItems) {
                 if (leftover.lineId) {
-                  await removeLineFromShopifyCart(cartId, leftover.lineId);
+                  await removeLineFromShopifyCart(cartId, leftover.lineId, countryCode);
                 }
               }
               newItems = [];
@@ -194,7 +213,7 @@ export const useCartStore = create<CartStore>()(
       },
 
 
-      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
+      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null, countryCode: null }),
       getCheckoutUrl: () => {
         const url = get().checkoutUrl;
         return url ? formatCheckoutUrl(url) : null;
@@ -203,12 +222,21 @@ export const useCartStore = create<CartStore>()(
       setDrawerOpen: (open) => set({ isDrawerOpen: open }),
 
       syncCart: async () => {
-        const { cartId, isSyncing, clearCart } = get();
+        const { cartId, isSyncing, clearCart, countryCode: storedCountry } = get();
         if (!cartId || isSyncing) return;
+
+        const countryCode = readClientCountry();
+        // A Shopify cart is locked to the currency/market it was created in.
+        // If the shopper changed country, clear the cart so a new cart is
+        // created in the new market on the next add-to-cart.
+        if (storedCountry && storedCountry !== countryCode) {
+          clearCart();
+          return;
+        }
 
         set({ isSyncing: true });
         try {
-          const data = await getShopifyCart(cartId);
+          const data = await getShopifyCart(cartId, countryCode);
           if (!data) return;
           const cart = data?.data?.cart;
           if (!cart || cart.totalQuantity === 0) {
@@ -242,6 +270,7 @@ export const useCartStore = create<CartStore>()(
         items: state.items,
         cartId: state.cartId,
         checkoutUrl: state.checkoutUrl,
+        countryCode: state.countryCode,
       }),
     }
   )

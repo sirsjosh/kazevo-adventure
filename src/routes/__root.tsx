@@ -14,8 +14,10 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartDrawer } from "@/components/CartDrawer";
 import { DiscountPopup } from "@/components/DiscountPopup";
 import { MetaPixelTracker } from "@/components/MetaPixelTracker";
+import { MarketProvider } from "@/components/MarketProvider";
 import { useCartSync } from "@/hooks/useCartSync";
 import { getPixelId } from "@/lib/meta-pixel";
+import { detectCountry } from "@/lib/market";
 
 
 function NotFoundComponent() {
@@ -79,6 +81,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: async () => {
+    const countryCode = await detectCountry();
+    return { countryCode };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -176,16 +182,18 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { countryCode } = Route.useLoaderData();
   useCartSync();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <MetaPixelTracker />
-      <Outlet />
-      <CartDrawer />
-      <DiscountPopup />
-
+      <MarketProvider initialCountryCode={countryCode}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <MetaPixelTracker />
+        <Outlet />
+        <CartDrawer />
+        <DiscountPopup />
+      </MarketProvider>
     </QueryClientProvider>
   );
 }

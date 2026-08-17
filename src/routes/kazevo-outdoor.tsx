@@ -16,19 +16,22 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
+import { CountrySelector } from "@/components/CountrySelector";
 import { LifestyleMarquee } from "@/components/LifestyleMarquee";
 import { ProductReviews } from "@/components/ProductReviews";
 import { getProductReviews } from "@/lib/judgeme.functions";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
+import { detectCountry } from "@/lib/market";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import {
-  formatUsd,
+  formatMoney,
   getColorLabel,
   getVariantColorValue,
   getVariantDotColor,
 } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 import { trackViewContent } from "@/lib/meta-pixel";
+import { useMarket } from "@/components/MarketProvider";
 
 import outdoor1 from "@/assets/outdoor-1.jpg.asset.json";
 import outdoor2 from "@/assets/outdoor-2.jpg.asset.json";
@@ -184,14 +187,16 @@ export const Route = createFileRoute("/kazevo-outdoor")({
   }),
   loader: async () => {
     try {
-      const products = await fetchShopifyProducts("*", 50);
+      const countryCode = await detectCountry();
+      const products = await fetchShopifyProducts("*", 50, countryCode);
       const reviews = await getProductReviews({ data: { handle: OUTDOOR_HANDLE } });
-      return { products, reviews };
+      return { products, reviews, countryCode };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
       return {
         products: [] as ShopifyProduct[],
         reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+        countryCode: "US",
       };
     }
   },
