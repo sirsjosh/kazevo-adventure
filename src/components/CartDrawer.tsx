@@ -28,6 +28,7 @@ import { useCartStore } from "@/stores/cartStore";
 export function CartDrawer() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { isDrawerOpen, setDrawerOpen } = useCartStore();
+  const { market } = useMarket();
   const {
     items,
     isLoading,
