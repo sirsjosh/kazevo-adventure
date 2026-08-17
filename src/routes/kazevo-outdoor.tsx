@@ -254,7 +254,7 @@ function KazevoOutdoorPage() {
       content_ids: [selectedVariant.id],
       content_name: product.node.title,
       content_type: "product",
-      currency: "USD",
+      currency: selectedVariant.price.currencyCode,
       value: parseFloat(selectedVariant.price.amount),
     });
   }, [product, selectedVariant]);
