@@ -157,7 +157,7 @@ function AccessoryCard({
     </div>
   );
 
-  const price = formatUsd(parseFloat(display.price.amount));
+  const price = formatMoney(parseFloat(display.price.amount), display.price.currencyCode, market.locale);
   // Name always comes live from Shopify
   const name = product.title || accessory.name;
 
