@@ -177,14 +177,16 @@ export const Route = createFileRoute("/kazevo-sling")({
   }),
   loader: async () => {
     try {
-      const products = await fetchShopifyProducts("*", 50);
+      const countryCode = await detectCountry();
+      const products = await fetchShopifyProducts("*", 50, countryCode);
       const reviews = await getProductReviews({ data: { handle: SLING_HANDLE } });
-      return { products, reviews };
+      return { products, reviews, countryCode };
     } catch (err) {
       console.error("Shopify products fetch failed:", err);
       return {
         products: [] as ShopifyProduct[],
         reviews: { reviews: [], averageRating: 0, reviewCount: 0 } as ProductReviewsData,
+        countryCode: "US",
       };
     }
   },
