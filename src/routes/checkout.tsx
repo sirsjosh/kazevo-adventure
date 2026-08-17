@@ -245,7 +245,7 @@ function CheckoutPage() {
                         {getVariantColorName(item.selectedOptions)}
                       </h2>
                       <p className="mt-3 font-display text-xl font-black">
-                        {formatUsd(parseFloat(item.price.amount) * item.quantity)} USD
+                        {formatMoney(parseFloat(item.price.amount) * item.quantity, item.price.currencyCode, market.locale)}
                       </p>
                       <div className="mt-auto flex items-center justify-between gap-4 pt-5">
                         <div className="flex items-center gap-1 rounded-full border border-border p-1">
