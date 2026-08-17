@@ -297,7 +297,10 @@ function KazevoOutdoorPage() {
               kazevo by solarah
             </span>
           </Link>
-          <CartButton />
+          <div className="flex items-center gap-3">
+            <CountrySelector />
+            <CartButton />
+          </div>
         </nav>
       </header>
 
