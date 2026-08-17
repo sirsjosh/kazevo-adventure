@@ -164,7 +164,7 @@ function CheckoutPage() {
       eventId,
     );
 
-    window.open(url, "_blank");
+    window.open(checkoutUrl, "_blank");
   };
 
 
