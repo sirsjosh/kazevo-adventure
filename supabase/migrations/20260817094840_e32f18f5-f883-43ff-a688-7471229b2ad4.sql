@@ -1,0 +1,1 @@
+UPDATE public.email_subscribers SET shopify_synced_at = now() WHERE shopify_synced_at IS NULL AND email <> 'kazevo.sync.test@example.com';
