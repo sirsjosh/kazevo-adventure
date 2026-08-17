@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
+import { useMarket } from "@/components/MarketProvider";
 import { formatMoney, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
 
