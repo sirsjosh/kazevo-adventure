@@ -1673,7 +1673,8 @@ export function getEnglishPath(handle: string): string | null {
 /* ------------------------------------------------------------------ */
 
 export interface AccessoryUpsell {
-  id: "pencil-case" | "thermos" | "bottle";
+  id: "pencil-case" | "thermos" | "bottle" | "tumbler";
+
   handle: string;
   name: string;
   pitch: string;
