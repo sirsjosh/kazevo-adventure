@@ -1350,11 +1350,11 @@ export const productPages = {
       "A breathable, hangable garment cover for wardrobe storage and travel — in a suit length and a gown length.",
     specs: [
       ["Material", "Non-woven fabric"],
-      ["Sizes", "110 × 60 cm, 152 × 60 cm"],
+      ["Sizes", "110 × 60 cm (200 g), 152 × 60 cm (250 g)"],
       ["Closure", "Full-length zip"],
       ["Opening", "Top hanger opening"],
-      ["Protection", "Dust-proof and breathable (not waterproof)"],
-      ["Best for", "Suits, jackets, coats, dresses, gowns"],
+      ["Protection", "Dust-proof, moisture-resistant and breathable (not waterproof)"],
+      ["Best for", "Suits, formalwear, coats and gowns — wardrobe, travel, exhibitions and studio wardrobe"],
     ],
     faqs: [
       {
