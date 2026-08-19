@@ -1673,7 +1673,8 @@ export function getEnglishPath(handle: string): string | null {
 /* ------------------------------------------------------------------ */
 
 export interface AccessoryUpsell {
-  id: "pencil-case" | "thermos" | "bottle";
+  id: "pencil-case" | "thermos" | "bottle" | "tumbler";
+
   handle: string;
   name: string;
   pitch: string;
@@ -1698,7 +1699,14 @@ export const accessoryUpsells: AccessoryUpsell[] = [
     name: "kazevo Gradient Water Bottle",
     pitch: "Large gradient bottle with a straw and carry cord — light enough to clip on.",
   },
+  {
+    id: "tumbler",
+    handle: "跨境40oz二代大容量手柄车载冰霸杯304不锈钢保温杯汽车杯吸管杯",
+    name: "40oz Insulated Tumbler with Handle",
+    pitch: "40oz double-wall 304 stainless — 6–12 hours cold, straw lid, handle that fits the car holder.",
+  },
 ];
+
 
 /** Handles that must never appear as a browsable product (upsell only). */
 export const accessoryHandles = accessoryUpsells.map((a) => a.handle);
@@ -1724,16 +1732,16 @@ const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
   "/kazevo-mini": ["pencil-case", "bottle"],
 
   // Outdoor and commuter packs: hydration first.
-  "/kazevo-outdoor": ["thermos", "bottle"],
-  "/outdoor-hiking-backpack": ["thermos", "bottle"],
-  "/large-capacity-backpack": ["thermos", "bottle"],
-  "/kazevo-sling": ["thermos", "bottle"],
+  "/kazevo-outdoor": ["thermos", "tumbler", "bottle"],
+  "/outdoor-hiking-backpack": ["thermos", "tumbler", "bottle"],
+  "/large-capacity-backpack": ["thermos", "tumbler", "bottle"],
+  "/kazevo-sling": ["thermos", "tumbler", "bottle"],
 
   // Bottle sling — the whole point is what goes in it.
   "/denim-water-bottle-bag": ["bottle", "thermos"],
 
   // Party cooler: a thermos rides along nicely, the plastic bottle doesn't.
-  "/insulated-drinks-tote": ["thermos"],
+  "/insulated-drinks-tote": ["thermos", "tumbler"],
 
   // Small bags: one light add-on only, nothing that outweighs the bag.
   "/dopamine-chest-bag": ["bottle"],
@@ -1746,7 +1754,8 @@ const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
 };
 
 /** Sensible default when a handle isn't explicitly mapped. */
-const defaultAccessoryIds: AccessoryId[] = ["thermos", "bottle"];
+const defaultAccessoryIds: AccessoryId[] = ["thermos", "bottle", "tumbler"];
+
 
 function accessoryIdsForHandle(handle: string): AccessoryId[] {
   const path = handleToPath[handle];

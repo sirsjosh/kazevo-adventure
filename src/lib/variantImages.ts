@@ -114,7 +114,13 @@ export const colorDotMap: Record<string, string> = {
   "khaki plaid": "oklch(0.74 0.07 90)",
   "strawberry": "oklch(0.68 0.19 15)",
   "blue floral": "oklch(0.66 0.12 250)",
+  // 40oz insulated tumbler
+  "coffee": "oklch(0.42 0.06 55)",
+  "off-white": "oklch(0.95 0.015 90)",
+  "apricot": "oklch(0.85 0.08 65)",
+  "mint green": "oklch(0.85 0.09 165)",
 };
+
 
 
 export const colorNameMap: Record<string, string> = {
