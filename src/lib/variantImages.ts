@@ -102,6 +102,18 @@ export const colorDotMap: Record<string, string> = {
   "rend and white": "oklch(0.58 0.2 25)",
   "red and white": "oklch(0.58 0.2 25)",
   "blue and white": "oklch(0.6 0.15 250)",
+  // Transparent PVC backpack
+  "purple transparent": "oklch(0.78 0.1 300)",
+  "pink transparent": "oklch(0.86 0.07 5)",
+  "gray transparent": "oklch(0.82 0.01 285)",
+  "black transparent": "oklch(0.45 0.02 285)",
+  // Corduroy + canvas totes
+  "baige": "oklch(0.9 0.04 85)",
+  "beige": "oklch(0.9 0.04 85)",
+  "green and white": "oklch(0.72 0.1 155)",
+  "khaki plaid": "oklch(0.74 0.07 90)",
+  "strawberry": "oklch(0.68 0.19 15)",
+  "blue floral": "oklch(0.66 0.12 250)",
 };
 
 
