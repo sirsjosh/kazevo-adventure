@@ -1438,7 +1438,7 @@ export const productPages = {
     faqs: [
       {
         q: "Does a laptop fit?",
-        a: "Yes — the main opening takes a standard 14–15\" laptop flat against the back panel, with room left for a notebook.",
+        a: "Yes — there is a dedicated laptop slot against the back panel sized for a standard 14–15\" machine, with room left for a notebook alongside.",
       },
       {
         q: "How do I clean corduroy?",
