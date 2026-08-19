@@ -1226,6 +1226,310 @@ export const productPages = {
       "The Kazevo Insulated Storage Tote: a 30 L waterproof-lined, foldable cooler bag that keeps your own drinks cold at the beach, the pool or the club. Free worldwide shipping.",
     fallbackImage: `${CDN}/O1CN01CkWpvJ2FhIMOS7XAA__2215487308911-0-cib.jpg?v=1786623555`,
   },
+
+  "clear-pvc-backpack": {
+    path: "/clear-pvc-backpack",
+    handle: "透明pvc双肩背包学生时尚背包休闲大容量书包百搭防轻便清新甜美",
+    name: "Kazevo Transparent PVC Backpack",
+    eyebrow: "Stadium · Campus · Work",
+    headline: ["kazevo", "transparent", "pvc backpack"],
+    intro:
+      "A see-through PVC backpack that walks straight through clear-bag security — stadiums, festivals, campus and warehouse checks — without emptying your pockets at the gate.",
+    bullets: [
+      "Clear PVC, security-check friendly",
+      "Large main compartment",
+      "Padded adjustable shoulder straps",
+      "Four tinted colourways",
+    ],
+    benefits: [
+      {
+        title: "Straight through the gate",
+        body: "Clear-bag policies at stadiums, arenas and festivals exist to speed up entry. A fully transparent pack means the guard sees everything at a glance and waves you through.",
+      },
+      {
+        title: "Everyday capacity, not a novelty pouch",
+        body: "This is a full-size backpack, not a token clear tote — books, a laptop sleeve, a hoodie and a water bottle all go in the main compartment.",
+      },
+      {
+        title: "Padded straps, not plastic cord",
+        body: "Wide padded adjustable straps spread the load across your shoulders, which is exactly what budget clear bags cut to hit their price.",
+      },
+      {
+        title: "Nothing gets lost inside",
+        body: "You can see the whole contents without unzipping — keys, cards and chargers stop disappearing into a dark bottom corner.",
+      },
+      {
+        title: "Wipes clean in seconds",
+        body: "Spilled drinks, sand and stadium floors wipe straight off PVC with a damp cloth. No fabric to stain, no smell to keep.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns if the tint isn't the one you pictured.",
+      },
+    ],
+    benefitsHeading: "The clear bag that still works as a backpack",
+    benefitsSub:
+      "Built for stadium and campus clear-bag rules — with the straps, capacity and finish that budget PVC packs skip.",
+    specs: [
+      ["Material", "Transparent PVC"],
+      ["Style", "Twin-strap backpack"],
+      ["Straps", "Padded, adjustable"],
+      ["Closure", "Zip main compartment"],
+      ["Colours", "Purple, Pink, Gray and Black transparent"],
+      ["Best for", "Stadiums, festivals, campus, work security checks"],
+    ],
+    faqs: [
+      {
+        q: "Will it pass a stadium clear-bag policy?",
+        a: "It is fully transparent PVC, which is what most clear-bag policies ask for. Venues differ on maximum size, so check your venue's published dimensions before game day.",
+      },
+      {
+        q: "Does PVC crack over time?",
+        a: "PVC stiffens in cold and softens in heat. Avoid folding it hard when cold, don't leave it packed flat in a hot car, and it will keep its shape season after season.",
+      },
+      {
+        q: "Does it smell of plastic when it arrives?",
+        a: "New PVC has a faint plastic smell from packaging. Unzip it and air it out for a day and it fades.",
+      },
+      {
+        q: "How do I keep the zip running smoothly?",
+        a: "Grit is the enemy of any zip on a beach or stadium bag. Rinse sand off the teeth and dry it before storing.",
+      },
+    ],
+    ctaHeadline: "See-through. Walk straight in.",
+    ctaSub: "Free worldwide shipping on every Kazevo Transparent PVC Backpack.",
+    title: "Kazevo Transparent PVC Backpack | Clear Stadium & Campus Bag",
+    description:
+      "A clear PVC backpack built for stadium, festival and campus clear-bag policies: full-size main compartment, padded adjustable straps, four tinted colours. Free worldwide shipping.",
+    fallbackImage: `${CDN}/O1CN012LSkPz1cMtcrSlZMv__3339923587-0-cib.jpg?v=1787145682`,
+  },
+
+  "garment-storage-bag": {
+    path: "/garment-storage-bag",
+    handle: "亚马逊热销旅行服装收纳袋无纺布服装袋防尘悬挂西装套礼服防尘罩",
+    name: "Kazevo Garment Storage Bag",
+    eyebrow: "Travel · Closet · Suits & Gowns",
+    headline: ["kazevo", "garment", "storage bag"],
+    intro:
+      "A breathable non-woven garment bag that hangs a suit, coat or gown on its own hanger and keeps the dust off — in the wardrobe or in the back of the car.",
+    bullets: [
+      "Breathable non-woven fabric",
+      "Hangs on your own hanger",
+      "Two sizes: 110 × 60 cm and 152 × 60 cm",
+      "Full-length zip closure",
+    ],
+    benefits: [
+      {
+        title: "Dust off, air in",
+        body: "Non-woven fabric blocks dust and light while still letting the garment breathe — the reason tailors use fabric covers instead of sealed plastic.",
+      },
+      {
+        title: "Two lengths, two jobs",
+        body: "110 × 60 cm covers suits, jackets and shirts. 152 × 60 cm takes floor-length gowns, long coats and wedding dresses without the hem bunching.",
+      },
+      {
+        title: "Straight onto your own hanger",
+        body: "The hanger opening at the top means nothing gets re-folded. Slide it over what's already hanging and zip.",
+      },
+      {
+        title: "Folds down to nothing",
+        body: "Empty, it folds flat into a drawer or a suitcase pocket — take it with you and hang the suit the moment you check in.",
+      },
+      {
+        title: "Honest about what it is",
+        body: "This is a dust and dirt cover, not a waterproof case. It shields hanging clothes in a wardrobe or a car; it isn't built for a downpour or heavy shoes in the bottom.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Keep the suit sharp between wears",
+    benefitsSub:
+      "A breathable, hangable garment cover for wardrobe storage and travel — in a suit length and a gown length.",
+    specs: [
+      ["Material", "Non-woven fabric"],
+      ["Sizes", "110 × 60 cm, 152 × 60 cm"],
+      ["Closure", "Full-length zip"],
+      ["Opening", "Top hanger opening"],
+      ["Protection", "Dust-proof and breathable (not waterproof)"],
+      ["Best for", "Suits, jackets, coats, dresses, gowns"],
+    ],
+    faqs: [
+      {
+        q: "Which size do I need?",
+        a: "110 × 60 cm fits suits, blazers, shirts and short coats. Choose 152 × 60 cm for gowns, wedding dresses and full-length coats.",
+      },
+      {
+        q: "Is it waterproof?",
+        a: "No. It is dust-proof and breathable. It protects hanging clothes from dust, light and dirt in a wardrobe or car, but it is not a rain cover.",
+      },
+      {
+        q: "Can I store shoes in the bottom?",
+        a: "We don't recommend it. Non-woven fabric is light by design; heavy items hanging in the base strain the seams. Keep it to garments.",
+      },
+      {
+        q: "Will my clothes crease inside?",
+        a: "No. The garment stays on its own hanger at full length, so it hangs exactly as it would in the wardrobe.",
+      },
+    ],
+    ctaHeadline: "Hang it. Zip it. Forget about dust.",
+    ctaSub: "Free worldwide shipping on every Kazevo Garment Storage Bag.",
+    title: "Kazevo Garment Storage Bag | Breathable Suit & Dress Cover",
+    description:
+      "A breathable non-woven garment bag for suits, coats and gowns, in 110 × 60 cm and 152 × 60 cm. Dust-proof, hangs on your own hanger, folds flat for travel. Free worldwide shipping.",
+    fallbackImage: `${CDN}/O1CN01XshwiA1fDgiVGNl9U__2605413973-0-cib.jpg?v=1787145244`,
+  },
+
+  "corduroy-tote-bag": {
+    path: "/corduroy-tote-bag",
+    handle: "飞泓跨境格子托特包高颜值大容量灯芯绒单肩包休闲旅行便携手提包",
+    name: "Kazevo Plaid Corduroy Tote Bag",
+    eyebrow: "Everyday · Campus · Weekend",
+    headline: ["kazevo", "plaid corduroy", "tote bag"],
+    intro:
+      "A soft corduroy shoulder tote with real depth to it — laptop, notebook, lunch and a jumper — in ten prints that don't look like everyone else's canvas bag.",
+    bullets: [
+      "Soft corduroy outer",
+      "Large-capacity shoulder tote",
+      "Ten prints and colourways",
+      "Light enough to carry all day",
+    ],
+    benefits: [
+      {
+        title: "Corduroy, not plain canvas",
+        body: "The ribbed corduroy texture reads warmer and more considered than a flat cotton tote — it dresses up a plain outfit instead of just carrying things.",
+      },
+      {
+        title: "Actually holds a day",
+        body: "A large main opening swallows a laptop, a notebook, a water bottle, lunch and a jumper without the sides bulging out of shape.",
+      },
+      {
+        title: "Ten ways to pick yours",
+        body: "Black, beige, pink, blue, green, black and white, green and white, khaki plaid, strawberry and blue floral — plain or loud, your call.",
+      },
+      {
+        title: "Shoulder-carry comfort",
+        body: "The strap drop clears a coat, so it stays on your shoulder on a commute instead of sliding down your arm at every step.",
+      },
+      {
+        title: "Folds into a suitcase",
+        body: "Soft-bodied and unstructured, it packs flat as a spare bag and opens up as the shopping or beach tote on the other end.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns if the print isn't right in person.",
+      },
+    ],
+    benefitsHeading: "The tote you'll actually reach for",
+    benefitsSub: "Soft corduroy, full-day capacity and ten prints — from plain black to blue floral.",
+    specs: [
+      ["Material", "Corduroy"],
+      ["Style", "Shoulder tote"],
+      ["Capacity", "Large — fits laptop, notebook, bottle and layers"],
+      ["Colours", "Black, Beige, Pink, Blue, Green, Black/White, Green/White, Khaki Plaid, Strawberry, Blue Floral"],
+      ["Best for", "Campus, commuting, shopping, weekends, travel"],
+    ],
+    faqs: [
+      {
+        q: "Does a laptop fit?",
+        a: "Yes — the main opening takes a standard 14–15\" laptop flat against the back panel, with room left for a notebook.",
+      },
+      {
+        q: "How do I clean corduroy?",
+        a: "Spot-clean with a damp cloth and mild soap, then air-dry. Avoid a hot machine wash, which flattens the rib.",
+      },
+      {
+        q: "Is it a shoulder bag or a hand carry?",
+        a: "Both. The strap drop is long enough to sit on the shoulder over a coat, and short enough to carry in the hand.",
+      },
+      {
+        q: "Are the plaid prints the same on every bag?",
+        a: "Patterned fabric is cut from a roll, so the exact placement of the plaid or floral varies slightly bag to bag.",
+      },
+    ],
+    ctaHeadline: "Soft corduroy. Serious capacity.",
+    ctaSub: "Free worldwide shipping on every Kazevo Plaid Corduroy Tote Bag.",
+    title: "Kazevo Plaid Corduroy Tote Bag | Large-Capacity Shoulder Tote",
+    description:
+      "A soft corduroy shoulder tote with room for a laptop, notebook and layers, in ten prints from plain black to blue floral. Free worldwide shipping and 7-day returns.",
+    fallbackImage: `${CDN}/O1CN019fAzI62Caw8q7BBEk__2217126688491-0-cib.jpg?v=1787145242`,
+  },
+
+  "canvas-tote-bag": {
+    path: "/canvas-tote-bag",
+    handle: "跨境帆布大容量托特包包女2024新款春季单肩斜挎手提包休闲通勤包",
+    name: "Kazevo Large-Capacity Canvas Tote Bag",
+    eyebrow: "Commute · Campus · Everyday",
+    headline: ["kazevo", "large-capacity", "canvas tote"],
+    intro:
+      "A big, soft canvas tote that carries like a shoulder bag and crosses over when your hands are full — seven quiet colours that go with everything you own.",
+    bullets: [
+      "Durable canvas construction",
+      "Shoulder or crossbody carry",
+      "Large-capacity main compartment",
+      "Seven everyday colours",
+    ],
+    benefits: [
+      {
+        title: "One bag for the whole day",
+        body: "Laptop, folder, gym kit, groceries on the way home — the main compartment is sized for a real day, not a photo shoot.",
+      },
+      {
+        title: "Shoulder or crossbody",
+        body: "Carry it on the shoulder for the commute, swing it across the body when you're on a bike or holding a coffee and a phone.",
+      },
+      {
+        title: "Canvas that takes a beating",
+        body: "Canvas creases and softens instead of cracking, so the bag looks better after a year of use than it did in week one.",
+      },
+      {
+        title: "Colours that don't fight your outfit",
+        body: "Cream, gray, black, pink, khaki, green and blue — neutral enough for an office, warm enough for a weekend.",
+      },
+      {
+        title: "Light before you fill it",
+        body: "A soft, unstructured body means almost all the weight you carry is your stuff, not the bag itself.",
+      },
+      {
+        title: "Free worldwide shipping",
+        body: "Ships free anywhere, with 7-day returns.",
+      },
+    ],
+    benefitsHeading: "Big canvas, small effort",
+    benefitsSub: "A soft canvas tote sized for commuting and campus, in seven colours that go with everything.",
+    specs: [
+      ["Material", "Canvas"],
+      ["Style", "Tote — shoulder or crossbody"],
+      ["Capacity", "Large main compartment"],
+      ["Colours", "Cream, Gray, Black, Pink, Khaki, Green, Blue"],
+      ["Best for", "Commuting, campus, shopping, travel"],
+    ],
+    faqs: [
+      {
+        q: "Can I wear it across the body?",
+        a: "Yes. It is designed for both shoulder and crossbody carry, so it stays put when your hands are full.",
+      },
+      {
+        q: "Will a laptop fit?",
+        a: "A standard 14–15\" laptop sits flat inside the main compartment with room for a folder alongside.",
+      },
+      {
+        q: "How do I wash canvas?",
+        a: "Spot-clean with mild soap and cold water, then air-dry out of direct sun. Skip the tumble dryer so the shape holds.",
+      },
+      {
+        q: "Does the pale canvas mark easily?",
+        a: "Cream and khaki show marks sooner than black or gray, but they spot-clean well. Pick a darker colour if it will live on train floors.",
+      },
+    ],
+    ctaHeadline: "Everything you carry. One canvas tote.",
+    ctaSub: "Free worldwide shipping on every Kazevo Large-Capacity Canvas Tote Bag.",
+    title: "Kazevo Large-Capacity Canvas Tote Bag | Shoulder & Crossbody",
+    description:
+      "A durable large-capacity canvas tote for commuting and campus, worn on the shoulder or crossbody, in seven everyday colours. Free worldwide shipping and 7-day returns.",
+    fallbackImage: `${CDN}/O1CN01uMiTJI1Bs2xD4cceP__0-0-cib.jpg?v=1787145239`,
+  },
 } satisfies Record<string, ProductPageContent>;
 
 export type ProductPageKey = keyof typeof productPages;
