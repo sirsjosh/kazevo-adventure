@@ -1468,33 +1468,33 @@ export const productPages = {
     eyebrow: "Commute · Campus · Everyday",
     headline: ["kazevo", "large-capacity", "canvas tote"],
     intro:
-      "A big, soft canvas tote that carries like a shoulder bag and crosses over when your hands are full — seven quiet colours that go with everything you own.",
+      "A soft canvas shoulder tote with a magnetic snap top and a zip pocket inside — roomy enough for a real day, light enough to forget you're carrying it. Seven quiet colours that go with everything you own.",
     bullets: [
-      "Durable canvas construction",
-      "Shoulder or crossbody carry",
-      "Large-capacity main compartment",
-      "Seven everyday colours",
+      "Canvas outer, polyester lining",
+      "Magnetic snap closure",
+      "Interior zip pocket",
+      "Just 300 g empty",
     ],
     benefits: [
       {
-        title: "One bag for the whole day",
-        body: "Laptop, folder, gym kit, groceries on the way home — the main compartment is sized for a real day, not a photo shoot.",
+        title: "Roomy for a real day",
+        body: "A folder, a book, a water bottle, gym kit and the groceries you pick up on the way home — a mid-size tote sized for daily carry rather than a weekend away.",
       },
       {
-        title: "Shoulder or crossbody",
-        body: "Carry it on the shoulder for the commute, swing it across the body when you're on a bike or holding a coffee and a phone.",
+        title: "Snaps shut, no zip to fight",
+        body: "A magnetic snap at the top closes with one hand and keeps the opening from gaping — quicker than a zip when your arms are full.",
+      },
+      {
+        title: "One pocket that matters",
+        body: "An interior zip pocket keeps your phone, keys and cards off the bottom, so you're not digging through the whole bag at the ticket barrier.",
       },
       {
         title: "Canvas that takes a beating",
-        body: "Canvas creases and softens instead of cracking, so the bag looks better after a year of use than it did in week one.",
+        body: "Canvas creases and softens instead of cracking, so the bag looks better after a year of use than it did in week one. Topstitched seams hold the shape.",
       },
       {
         title: "Colours that don't fight your outfit",
         body: "Cream, gray, black, pink, khaki, green and blue — neutral enough for an office, warm enough for a weekend.",
-      },
-      {
-        title: "Light before you fill it",
-        body: "A soft, unstructured body means almost all the weight you carry is your stuff, not the bag itself.",
       },
       {
         title: "Free worldwide shipping",
@@ -1502,22 +1502,26 @@ export const productPages = {
       },
     ],
     benefitsHeading: "Big canvas, small effort",
-    benefitsSub: "A soft canvas tote sized for commuting and campus, in seven colours that go with everything.",
+    benefitsSub:
+      "A soft 300 g canvas tote for commuting and campus — magnetic snap top, interior zip pocket, seven colours.",
     specs: [
-      ["Material", "Canvas"],
-      ["Style", "Tote — shoulder or crossbody"],
-      ["Capacity", "Large main compartment"],
+      ["Material", "Canvas outer, polyester lining"],
+      ["Style", "Single-strap shoulder tote, horizontal square shape"],
+      ["Weight", "300 g empty"],
+      ["Closure", "Magnetic snap"],
+      ["Inside", "One interior zip pocket, inner patch pocket"],
+      ["Size", "Mid-size — one size fits all"],
       ["Colours", "Cream, Gray, Black, Pink, Khaki, Green, Blue"],
       ["Best for", "Commuting, campus, shopping, travel"],
     ],
     faqs: [
       {
-        q: "Can I wear it across the body?",
-        a: "Yes. It is designed for both shoulder and crossbody carry, so it stays put when your hands are full.",
+        q: "How is it carried?",
+        a: "It has a single shoulder strap, so it sits on the shoulder or hangs in the hand. It isn't an adjustable crossbody — for hands-free carry over the body, look at our sling.",
       },
       {
         q: "Will a laptop fit?",
-        a: "A standard 14–15\" laptop sits flat inside the main compartment with room for a folder alongside.",
+        a: "There is no padded laptop slot in this tote. A slim 13\" machine in its own sleeve will go in the main compartment; if you carry a laptop daily, the Plaid Corduroy Tote has a dedicated laptop pocket.",
       },
       {
         q: "How do I wash canvas?",
@@ -1530,9 +1534,9 @@ export const productPages = {
     ],
     ctaHeadline: "Everything you carry. One canvas tote.",
     ctaSub: "Free worldwide shipping on every Kazevo Large-Capacity Canvas Tote Bag.",
-    title: "Kazevo Large-Capacity Canvas Tote Bag | Shoulder & Crossbody",
+    title: "Kazevo Canvas Tote Bag | Soft 300 g Shoulder Tote",
     description:
-      "A durable large-capacity canvas tote for commuting and campus, worn on the shoulder or crossbody, in seven everyday colours. Free worldwide shipping and 7-day returns.",
+      "A soft canvas shoulder tote for commuting and campus: magnetic snap top, interior zip pocket, 300 g, seven everyday colours. Free worldwide shipping and 7-day returns.",
     fallbackImage: `${CDN}/O1CN01uMiTJI1Bs2xD4cceP__0-0-cib.jpg?v=1787145239`,
   },
 } satisfies Record<string, ProductPageContent>;
