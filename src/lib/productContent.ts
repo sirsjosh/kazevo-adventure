@@ -1271,8 +1271,9 @@ export const productPages = {
     benefitsSub:
       "Built for stadium and campus clear-bag rules — with the straps, capacity and finish that budget PVC packs skip.",
     specs: [
-      ["Material", "Transparent PVC"],
+      ["Material", "Transparent PVC, waterproof"],
       ["Style", "Twin-strap backpack"],
+      ["Weight", "280 g empty"],
       ["Straps", "Padded, adjustable"],
       ["Closure", "Zip main compartment"],
       ["Colours", "Purple, Pink, Gray and Black transparent"],
@@ -1349,11 +1350,11 @@ export const productPages = {
       "A breathable, hangable garment cover for wardrobe storage and travel — in a suit length and a gown length.",
     specs: [
       ["Material", "Non-woven fabric"],
-      ["Sizes", "110 × 60 cm, 152 × 60 cm"],
+      ["Sizes", "110 × 60 cm (200 g), 152 × 60 cm (250 g)"],
       ["Closure", "Full-length zip"],
       ["Opening", "Top hanger opening"],
-      ["Protection", "Dust-proof and breathable (not waterproof)"],
-      ["Best for", "Suits, jackets, coats, dresses, gowns"],
+      ["Protection", "Dust-proof, moisture-resistant and breathable (not waterproof)"],
+      ["Best for", "Suits, formalwear, coats and gowns — wardrobe, travel, exhibitions and studio wardrobe"],
     ],
     faqs: [
       {
@@ -1390,10 +1391,10 @@ export const productPages = {
     intro:
       "A soft corduroy shoulder tote with real depth to it — laptop, notebook, lunch and a jumper — in ten prints that don't look like everyone else's canvas bag.",
     bullets: [
-      "Soft corduroy outer",
-      "Large-capacity shoulder tote",
+      "Soft corduroy outer, polyester lining",
+      "Padded laptop slot inside",
+      "Zip top with four interior pockets",
       "Ten prints and colourways",
-      "Light enough to carry all day",
     ],
     benefits: [
       {
@@ -1401,20 +1402,20 @@ export const productPages = {
         body: "The ribbed corduroy texture reads warmer and more considered than a flat cotton tote — it dresses up a plain outfit instead of just carrying things.",
       },
       {
-        title: "Actually holds a day",
-        body: "A large main opening swallows a laptop, a notebook, a water bottle, lunch and a jumper without the sides bulging out of shape.",
+        title: "A laptop slot, not just a hole",
+        body: "There is a dedicated laptop compartment against the back panel, so your machine stops sliding around loose against your water bottle.",
+      },
+      {
+        title: "Four pockets that end the rummage",
+        body: "Inside: a laptop slot, a phone pocket, a hidden zip pocket and a zip divider pocket. Keys, cards and cable stay where you put them.",
+      },
+      {
+        title: "Zips shut at the top",
+        body: "A full zip closure across the opening — the thing most open-top totes skip — so nothing tips out on a bus seat or a bike.",
       },
       {
         title: "Ten ways to pick yours",
         body: "Black, beige, pink, blue, green, black and white, green and white, khaki plaid, strawberry and blue floral — plain or loud, your call.",
-      },
-      {
-        title: "Shoulder-carry comfort",
-        body: "The strap drop clears a coat, so it stays on your shoulder on a commute instead of sliding down your arm at every step.",
-      },
-      {
-        title: "Folds into a suitcase",
-        body: "Soft-bodied and unstructured, it packs flat as a spare bag and opens up as the shopping or beach tote on the other end.",
       },
       {
         title: "Free worldwide shipping",
@@ -1422,18 +1423,22 @@ export const productPages = {
       },
     ],
     benefitsHeading: "The tote you'll actually reach for",
-    benefitsSub: "Soft corduroy, full-day capacity and ten prints — from plain black to blue floral.",
+    benefitsSub:
+      "Soft corduroy, a real laptop slot and four interior pockets — in ten prints from plain black to blue floral.",
     specs: [
-      ["Material", "Corduroy"],
-      ["Style", "Shoulder tote"],
-      ["Capacity", "Large — fits laptop, notebook, bottle and layers"],
+      ["Material", "Corduroy outer, polyester lining"],
+      ["Style", "Twin-strap shoulder tote, horizontal square shape"],
+      ["Weight", "650 g empty"],
+      ["Closure", "Zip top"],
+      ["Inside", "Laptop slot, phone pocket, hidden zip pocket, zip divider pocket"],
+      ["Capacity", "Large — laptop, notebook, bottle and layers"],
       ["Colours", "Black, Beige, Pink, Blue, Green, Black/White, Green/White, Khaki Plaid, Strawberry, Blue Floral"],
       ["Best for", "Campus, commuting, shopping, weekends, travel"],
     ],
     faqs: [
       {
         q: "Does a laptop fit?",
-        a: "Yes — the main opening takes a standard 14–15\" laptop flat against the back panel, with room left for a notebook.",
+        a: "Yes — there is a dedicated laptop slot against the back panel sized for a standard 14–15\" machine, with room left for a notebook alongside.",
       },
       {
         q: "How do I clean corduroy?",
@@ -1463,33 +1468,33 @@ export const productPages = {
     eyebrow: "Commute · Campus · Everyday",
     headline: ["kazevo", "large-capacity", "canvas tote"],
     intro:
-      "A big, soft canvas tote that carries like a shoulder bag and crosses over when your hands are full — seven quiet colours that go with everything you own.",
+      "A soft canvas shoulder tote with a magnetic snap top and a zip pocket inside — roomy enough for a real day, light enough to forget you're carrying it. Seven quiet colours that go with everything you own.",
     bullets: [
-      "Durable canvas construction",
-      "Shoulder or crossbody carry",
-      "Large-capacity main compartment",
-      "Seven everyday colours",
+      "Canvas outer, polyester lining",
+      "Magnetic snap closure",
+      "Interior zip pocket",
+      "Just 300 g empty",
     ],
     benefits: [
       {
-        title: "One bag for the whole day",
-        body: "Laptop, folder, gym kit, groceries on the way home — the main compartment is sized for a real day, not a photo shoot.",
+        title: "Roomy for a real day",
+        body: "A folder, a book, a water bottle, gym kit and the groceries you pick up on the way home — a mid-size tote sized for daily carry rather than a weekend away.",
       },
       {
-        title: "Shoulder or crossbody",
-        body: "Carry it on the shoulder for the commute, swing it across the body when you're on a bike or holding a coffee and a phone.",
+        title: "Snaps shut, no zip to fight",
+        body: "A magnetic snap at the top closes with one hand and keeps the opening from gaping — quicker than a zip when your arms are full.",
+      },
+      {
+        title: "One pocket that matters",
+        body: "An interior zip pocket keeps your phone, keys and cards off the bottom, so you're not digging through the whole bag at the ticket barrier.",
       },
       {
         title: "Canvas that takes a beating",
-        body: "Canvas creases and softens instead of cracking, so the bag looks better after a year of use than it did in week one.",
+        body: "Canvas creases and softens instead of cracking, so the bag looks better after a year of use than it did in week one. Topstitched seams hold the shape.",
       },
       {
         title: "Colours that don't fight your outfit",
         body: "Cream, gray, black, pink, khaki, green and blue — neutral enough for an office, warm enough for a weekend.",
-      },
-      {
-        title: "Light before you fill it",
-        body: "A soft, unstructured body means almost all the weight you carry is your stuff, not the bag itself.",
       },
       {
         title: "Free worldwide shipping",
@@ -1497,22 +1502,26 @@ export const productPages = {
       },
     ],
     benefitsHeading: "Big canvas, small effort",
-    benefitsSub: "A soft canvas tote sized for commuting and campus, in seven colours that go with everything.",
+    benefitsSub:
+      "A soft 300 g canvas tote for commuting and campus — magnetic snap top, interior zip pocket, seven colours.",
     specs: [
-      ["Material", "Canvas"],
-      ["Style", "Tote — shoulder or crossbody"],
-      ["Capacity", "Large main compartment"],
+      ["Material", "Canvas outer, polyester lining"],
+      ["Style", "Single-strap shoulder tote, horizontal square shape"],
+      ["Weight", "300 g empty"],
+      ["Closure", "Magnetic snap"],
+      ["Inside", "One interior zip pocket, inner patch pocket"],
+      ["Size", "Mid-size — one size fits all"],
       ["Colours", "Cream, Gray, Black, Pink, Khaki, Green, Blue"],
       ["Best for", "Commuting, campus, shopping, travel"],
     ],
     faqs: [
       {
-        q: "Can I wear it across the body?",
-        a: "Yes. It is designed for both shoulder and crossbody carry, so it stays put when your hands are full.",
+        q: "How is it carried?",
+        a: "It has a single shoulder strap, so it sits on the shoulder or hangs in the hand. It isn't an adjustable crossbody — for hands-free carry over the body, look at our sling.",
       },
       {
         q: "Will a laptop fit?",
-        a: "A standard 14–15\" laptop sits flat inside the main compartment with room for a folder alongside.",
+        a: "There is no padded laptop slot in this tote. A slim 13\" machine in its own sleeve will go in the main compartment; if you carry a laptop daily, the Plaid Corduroy Tote has a dedicated laptop pocket.",
       },
       {
         q: "How do I wash canvas?",
@@ -1525,9 +1534,9 @@ export const productPages = {
     ],
     ctaHeadline: "Everything you carry. One canvas tote.",
     ctaSub: "Free worldwide shipping on every Kazevo Large-Capacity Canvas Tote Bag.",
-    title: "Kazevo Large-Capacity Canvas Tote Bag | Shoulder & Crossbody",
+    title: "Kazevo Canvas Tote Bag | Soft 300 g Shoulder Tote",
     description:
-      "A durable large-capacity canvas tote for commuting and campus, worn on the shoulder or crossbody, in seven everyday colours. Free worldwide shipping and 7-day returns.",
+      "A soft canvas shoulder tote for commuting and campus: magnetic snap top, interior zip pocket, 300 g, seven everyday colours. Free worldwide shipping and 7-day returns.",
     fallbackImage: `${CDN}/O1CN01uMiTJI1Bs2xD4cceP__0-0-cib.jpg?v=1787145239`,
   },
 } satisfies Record<string, ProductPageContent>;
