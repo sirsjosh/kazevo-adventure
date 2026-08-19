@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BogeWadeSchoolBackpackRouteImport } from './routes/boge-wade-school-backpack'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ClearPvcBackpackRouteImport } from './routes/clear-pvc-backpack'
 import { Route as ColorBlockKidsBackpackRouteImport } from './routes/color-block-kids-backpack'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CrossbodyWaistBagRouteImport } from './routes/crossbody-waist-bag'
@@ -51,6 +52,11 @@ const BogeWadeSchoolBackpackRoute = BogeWadeSchoolBackpackRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClearPvcBackpackRoute = ClearPvcBackpackRouteImport.update({
+  id: '/clear-pvc-backpack',
+  path: '/clear-pvc-backpack',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ColorBlockKidsBackpackRoute = ColorBlockKidsBackpackRouteImport.update({
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/boge-wade-school-backpack': typeof BogeWadeSchoolBackpackRoute
   '/checkout': typeof CheckoutRoute
+  '/clear-pvc-backpack': typeof ClearPvcBackpackRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/boge-wade-school-backpack': typeof BogeWadeSchoolBackpackRoute
   '/checkout': typeof CheckoutRoute
+  '/clear-pvc-backpack': typeof ClearPvcBackpackRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/boge-wade-school-backpack': typeof BogeWadeSchoolBackpackRoute
   '/checkout': typeof CheckoutRoute
+  '/clear-pvc-backpack': typeof ClearPvcBackpackRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
@@ -279,6 +288,7 @@ export interface FileRouteTypes {
     | '/'
     | '/boge-wade-school-backpack'
     | '/checkout'
+    | '/clear-pvc-backpack'
     | '/color-block-kids-backpack'
     | '/contact'
     | '/crossbody-waist-bag'
@@ -309,6 +319,7 @@ export interface FileRouteTypes {
     | '/'
     | '/boge-wade-school-backpack'
     | '/checkout'
+    | '/clear-pvc-backpack'
     | '/color-block-kids-backpack'
     | '/contact'
     | '/crossbody-waist-bag'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/'
     | '/boge-wade-school-backpack'
     | '/checkout'
+    | '/clear-pvc-backpack'
     | '/color-block-kids-backpack'
     | '/contact'
     | '/crossbody-waist-bag'
@@ -370,6 +382,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BogeWadeSchoolBackpackRoute: typeof BogeWadeSchoolBackpackRoute
   CheckoutRoute: typeof CheckoutRoute
+  ClearPvcBackpackRoute: typeof ClearPvcBackpackRoute
   ColorBlockKidsBackpackRoute: typeof ColorBlockKidsBackpackRoute
   ContactRoute: typeof ContactRoute
   CrossbodyWaistBagRoute: typeof CrossbodyWaistBagRoute
@@ -418,6 +431,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clear-pvc-backpack': {
+      id: '/clear-pvc-backpack'
+      path: '/clear-pvc-backpack'
+      fullPath: '/clear-pvc-backpack'
+      preLoaderRoute: typeof ClearPvcBackpackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/color-block-kids-backpack': {
@@ -602,6 +622,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BogeWadeSchoolBackpackRoute: BogeWadeSchoolBackpackRoute,
   CheckoutRoute: CheckoutRoute,
+  ClearPvcBackpackRoute: ClearPvcBackpackRoute,
   ColorBlockKidsBackpackRoute: ColorBlockKidsBackpackRoute,
   ContactRoute: ContactRoute,
   CrossbodyWaistBagRoute: CrossbodyWaistBagRoute,
