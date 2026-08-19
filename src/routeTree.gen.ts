@@ -15,6 +15,7 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ClearPvcBackpackRouteImport } from './routes/clear-pvc-backpack'
 import { Route as ColorBlockKidsBackpackRouteImport } from './routes/color-block-kids-backpack'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CorduroyToteBagRouteImport } from './routes/corduroy-tote-bag'
 import { Route as CrossbodyWaistBagRouteImport } from './routes/crossbody-waist-bag'
 import { Route as DenimWaterBottleBagRouteImport } from './routes/denim-water-bottle-bag'
 import { Route as DopamineChestBagRouteImport } from './routes/dopamine-chest-bag'
@@ -68,6 +69,11 @@ const ColorBlockKidsBackpackRoute = ColorBlockKidsBackpackRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CorduroyToteBagRoute = CorduroyToteBagRouteImport.update({
+  id: '/corduroy-tote-bag',
+  path: '/corduroy-tote-bag',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CrossbodyWaistBagRoute = CrossbodyWaistBagRouteImport.update({
@@ -201,6 +207,7 @@ export interface FileRoutesByFullPath {
   '/clear-pvc-backpack': typeof ClearPvcBackpackRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
+  '/corduroy-tote-bag': typeof CorduroyToteBagRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
   '/denim-water-bottle-bag': typeof DenimWaterBottleBagRoute
   '/dopamine-chest-bag': typeof DopamineChestBagRoute
@@ -233,6 +240,7 @@ export interface FileRoutesByTo {
   '/clear-pvc-backpack': typeof ClearPvcBackpackRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
+  '/corduroy-tote-bag': typeof CorduroyToteBagRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
   '/denim-water-bottle-bag': typeof DenimWaterBottleBagRoute
   '/dopamine-chest-bag': typeof DopamineChestBagRoute
@@ -266,6 +274,7 @@ export interface FileRoutesById {
   '/clear-pvc-backpack': typeof ClearPvcBackpackRoute
   '/color-block-kids-backpack': typeof ColorBlockKidsBackpackRoute
   '/contact': typeof ContactRoute
+  '/corduroy-tote-bag': typeof CorduroyToteBagRoute
   '/crossbody-waist-bag': typeof CrossbodyWaistBagRoute
   '/denim-water-bottle-bag': typeof DenimWaterBottleBagRoute
   '/dopamine-chest-bag': typeof DopamineChestBagRoute
@@ -300,6 +309,7 @@ export interface FileRouteTypes {
     | '/clear-pvc-backpack'
     | '/color-block-kids-backpack'
     | '/contact'
+    | '/corduroy-tote-bag'
     | '/crossbody-waist-bag'
     | '/denim-water-bottle-bag'
     | '/dopamine-chest-bag'
@@ -332,6 +342,7 @@ export interface FileRouteTypes {
     | '/clear-pvc-backpack'
     | '/color-block-kids-backpack'
     | '/contact'
+    | '/corduroy-tote-bag'
     | '/crossbody-waist-bag'
     | '/denim-water-bottle-bag'
     | '/dopamine-chest-bag'
@@ -364,6 +375,7 @@ export interface FileRouteTypes {
     | '/clear-pvc-backpack'
     | '/color-block-kids-backpack'
     | '/contact'
+    | '/corduroy-tote-bag'
     | '/crossbody-waist-bag'
     | '/denim-water-bottle-bag'
     | '/dopamine-chest-bag'
@@ -397,6 +409,7 @@ export interface RootRouteChildren {
   ClearPvcBackpackRoute: typeof ClearPvcBackpackRoute
   ColorBlockKidsBackpackRoute: typeof ColorBlockKidsBackpackRoute
   ContactRoute: typeof ContactRoute
+  CorduroyToteBagRoute: typeof CorduroyToteBagRoute
   CrossbodyWaistBagRoute: typeof CrossbodyWaistBagRoute
   DenimWaterBottleBagRoute: typeof DenimWaterBottleBagRoute
   DopamineChestBagRoute: typeof DopamineChestBagRoute
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/corduroy-tote-bag': {
+      id: '/corduroy-tote-bag'
+      path: '/corduroy-tote-bag'
+      fullPath: '/corduroy-tote-bag'
+      preLoaderRoute: typeof CorduroyToteBagRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crossbody-waist-bag': {
@@ -645,6 +665,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClearPvcBackpackRoute: ClearPvcBackpackRoute,
   ColorBlockKidsBackpackRoute: ColorBlockKidsBackpackRoute,
   ContactRoute: ContactRoute,
+  CorduroyToteBagRoute: CorduroyToteBagRoute,
   CrossbodyWaistBagRoute: CrossbodyWaistBagRoute,
   DenimWaterBottleBagRoute: DenimWaterBottleBagRoute,
   DopamineChestBagRoute: DopamineChestBagRoute,
