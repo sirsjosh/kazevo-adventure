@@ -120,7 +120,6 @@ export const colorDotMap: Record<string, string> = {
 export const colorNameMap: Record<string, string> = {
   "baige": "Beige",
   "khaki plaid": "Khaki Plaid",
-  "black and white": "Black / White",
   "green and white": "Green / White",
   "深紫色": "Deep Purple",
   "橘色": "Vibrant Orange",
