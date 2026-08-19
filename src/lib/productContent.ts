@@ -1271,8 +1271,9 @@ export const productPages = {
     benefitsSub:
       "Built for stadium and campus clear-bag rules — with the straps, capacity and finish that budget PVC packs skip.",
     specs: [
-      ["Material", "Transparent PVC"],
+      ["Material", "Transparent PVC, waterproof"],
       ["Style", "Twin-strap backpack"],
+      ["Weight", "280 g empty"],
       ["Straps", "Padded, adjustable"],
       ["Closure", "Zip main compartment"],
       ["Colours", "Purple, Pink, Gray and Black transparent"],
