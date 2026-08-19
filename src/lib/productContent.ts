@@ -1699,7 +1699,14 @@ export const accessoryUpsells: AccessoryUpsell[] = [
     name: "kazevo Gradient Water Bottle",
     pitch: "Large gradient bottle with a straw and carry cord — light enough to clip on.",
   },
+  {
+    id: "tumbler",
+    handle: "跨境40oz二代大容量手柄车载冰霸杯304不锈钢保温杯汽车杯吸管杯",
+    name: "40oz Insulated Tumbler with Handle",
+    pitch: "40oz double-wall 304 stainless — 6–12 hours cold, straw lid, handle that fits the car holder.",
+  },
 ];
+
 
 /** Handles that must never appear as a browsable product (upsell only). */
 export const accessoryHandles = accessoryUpsells.map((a) => a.handle);
