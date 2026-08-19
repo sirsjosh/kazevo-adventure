@@ -1391,10 +1391,10 @@ export const productPages = {
     intro:
       "A soft corduroy shoulder tote with real depth to it — laptop, notebook, lunch and a jumper — in ten prints that don't look like everyone else's canvas bag.",
     bullets: [
-      "Soft corduroy outer",
-      "Large-capacity shoulder tote",
+      "Soft corduroy outer, polyester lining",
+      "Padded laptop slot inside",
+      "Zip top with four interior pockets",
       "Ten prints and colourways",
-      "Light enough to carry all day",
     ],
     benefits: [
       {
@@ -1402,20 +1402,20 @@ export const productPages = {
         body: "The ribbed corduroy texture reads warmer and more considered than a flat cotton tote — it dresses up a plain outfit instead of just carrying things.",
       },
       {
-        title: "Actually holds a day",
-        body: "A large main opening swallows a laptop, a notebook, a water bottle, lunch and a jumper without the sides bulging out of shape.",
+        title: "A laptop slot, not just a hole",
+        body: "There is a dedicated laptop compartment against the back panel, so your machine stops sliding around loose against your water bottle.",
+      },
+      {
+        title: "Four pockets that end the rummage",
+        body: "Inside: a laptop slot, a phone pocket, a hidden zip pocket and a zip divider pocket. Keys, cards and cable stay where you put them.",
+      },
+      {
+        title: "Zips shut at the top",
+        body: "A full zip closure across the opening — the thing most open-top totes skip — so nothing tips out on a bus seat or a bike.",
       },
       {
         title: "Ten ways to pick yours",
         body: "Black, beige, pink, blue, green, black and white, green and white, khaki plaid, strawberry and blue floral — plain or loud, your call.",
-      },
-      {
-        title: "Shoulder-carry comfort",
-        body: "The strap drop clears a coat, so it stays on your shoulder on a commute instead of sliding down your arm at every step.",
-      },
-      {
-        title: "Folds into a suitcase",
-        body: "Soft-bodied and unstructured, it packs flat as a spare bag and opens up as the shopping or beach tote on the other end.",
       },
       {
         title: "Free worldwide shipping",
@@ -1423,11 +1423,15 @@ export const productPages = {
       },
     ],
     benefitsHeading: "The tote you'll actually reach for",
-    benefitsSub: "Soft corduroy, full-day capacity and ten prints — from plain black to blue floral.",
+    benefitsSub:
+      "Soft corduroy, a real laptop slot and four interior pockets — in ten prints from plain black to blue floral.",
     specs: [
-      ["Material", "Corduroy"],
-      ["Style", "Shoulder tote"],
-      ["Capacity", "Large — fits laptop, notebook, bottle and layers"],
+      ["Material", "Corduroy outer, polyester lining"],
+      ["Style", "Twin-strap shoulder tote, horizontal square shape"],
+      ["Weight", "650 g empty"],
+      ["Closure", "Zip top"],
+      ["Inside", "Laptop slot, phone pocket, hidden zip pocket, zip divider pocket"],
+      ["Capacity", "Large — laptop, notebook, bottle and layers"],
       ["Colours", "Black, Beige, Pink, Blue, Green, Black/White, Green/White, Khaki Plaid, Strawberry, Blue Floral"],
       ["Best for", "Campus, commuting, shopping, weekends, travel"],
     ],
