@@ -1732,16 +1732,16 @@ const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
   "/kazevo-mini": ["pencil-case", "bottle"],
 
   // Outdoor and commuter packs: hydration first.
-  "/kazevo-outdoor": ["thermos", "bottle"],
-  "/outdoor-hiking-backpack": ["thermos", "bottle"],
-  "/large-capacity-backpack": ["thermos", "bottle"],
-  "/kazevo-sling": ["thermos", "bottle"],
+  "/kazevo-outdoor": ["thermos", "tumbler", "bottle"],
+  "/outdoor-hiking-backpack": ["thermos", "tumbler", "bottle"],
+  "/large-capacity-backpack": ["thermos", "tumbler", "bottle"],
+  "/kazevo-sling": ["thermos", "tumbler", "bottle"],
 
   // Bottle sling — the whole point is what goes in it.
   "/denim-water-bottle-bag": ["bottle", "thermos"],
 
   // Party cooler: a thermos rides along nicely, the plastic bottle doesn't.
-  "/insulated-drinks-tote": ["thermos"],
+  "/insulated-drinks-tote": ["thermos", "tumbler"],
 
   // Small bags: one light add-on only, nothing that outweighs the bag.
   "/dopamine-chest-bag": ["bottle"],
@@ -1754,7 +1754,8 @@ const accessoryMatchesByPath: Record<string, AccessoryId[]> = {
 };
 
 /** Sensible default when a handle isn't explicitly mapped. */
-const defaultAccessoryIds: AccessoryId[] = ["thermos", "bottle"];
+const defaultAccessoryIds: AccessoryId[] = ["thermos", "bottle", "tumbler"];
+
 
 function accessoryIdsForHandle(handle: string): AccessoryId[] {
   const path = handleToPath[handle];
