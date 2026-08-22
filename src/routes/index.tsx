@@ -626,10 +626,10 @@ function Landing() {
           </div>
           <div className="flex shrink-0 gap-3">
             <a
-              href="https://www.instagram.com/kazevoadventures/"
+              href="https://www.instagram.com/kazevo.official/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="kazevo on Instagram"
+              aria-label="kazevo.official on Instagram"
               className="grid h-10 w-10 place-items-center rounded-full border border-border transition-colors hover:bg-muted"
             >
               <Instagram size={18} />
