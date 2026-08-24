@@ -27,6 +27,7 @@ import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@
 import { formatMoney, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { trackViewContent } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
+import { isSoldOut } from "@/lib/stock";
 import { useMarket } from "@/components/MarketProvider";
 import logo from "@/assets/kazevo-logo.png.asset.json";
 
@@ -84,6 +85,9 @@ export function ProductPageTemplate({
     });
   }, [product, selectedVariant]);
 
+  const soldOut = isSoldOut(content.handle);
+  const canBuy = !soldOut && !!selectedVariant?.availableForSale;
+
   const saleInfo = selectedVariant ? getVariantSaleInfo(selectedVariant) : null;
 
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -105,7 +109,7 @@ export function ProductPageTemplate({
     content.fallbackImage;
 
   const handleAddToCart = async () => {
-    if (!product || !selectedVariant) return;
+    if (!product || !selectedVariant || soldOut) return;
     await addItem({
       product,
       variantId: selectedVariant.id,
@@ -239,7 +243,7 @@ export function ProductPageTemplate({
 
                   <Button
                     onClick={handleAddToCart}
-                    disabled={isLoading || !selectedVariant?.availableForSale}
+                    disabled={isLoading || !canBuy}
                     className="mt-7 inline-flex h-auto w-full items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold shadow-[var(--shadow-pop)] transition-transform hover:scale-[1.02] sm:w-auto"
                   >
                     {isLoading ? (
@@ -251,7 +255,7 @@ export function ProductPageTemplate({
                       </>
                     )}
                   </Button>
-                  {!selectedVariant?.availableForSale && (
+                  {!canBuy && (
                     <p className="mt-3 text-sm font-medium text-muted-foreground">Out of stock</p>
                   )}
                 </>
@@ -415,7 +419,7 @@ export function ProductPageTemplate({
               <button
                 type="button"
                 onClick={handleAddToCart}
-                disabled={isLoading || !selectedVariant?.availableForSale}
+                disabled={isLoading || !canBuy}
                 className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105 disabled:opacity-60"
               >
                 Add to Cart <ArrowRight size={18} />

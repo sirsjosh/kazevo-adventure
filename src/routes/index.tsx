@@ -403,7 +403,7 @@ function Landing() {
                     (option) => option.name.toLowerCase() === "color" || option.name.toLowerCase() === "colour",
                   );
                   const colorCount = colorOption?.values.length ?? 0;
-                  const inStock = productVariants.some((variant) => variant.availableForSale);
+                  const inStock = !isSoldOut(node.handle) && productVariants.some((variant) => variant.availableForSale);
                   const dedicated = DEDICATED_PAGES.find((d) => d.handle === node.handle);
                   // Titles always come live from Shopify
                   const title = node.title || dedicated?.title || "";

@@ -5,6 +5,7 @@ import { ShoppingBag, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
+import { isSoldOut } from "@/lib/stock";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -18,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!selectedVariant) return;
+    if (!selectedVariant || soldOut) return;
 
     await addItem({
       product,
@@ -30,6 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
     });
   };
 
+  const soldOut = isSoldOut(product.node.handle);
   const image = product.node.images.edges[0]?.node;
   const price = product.node.priceRange.minVariantPrice;
 
@@ -69,11 +71,13 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
           <Button
             onClick={handleAddToCart}
-            disabled={isLoading || !selectedVariant?.availableForSale}
+            disabled={isLoading || soldOut || !selectedVariant?.availableForSale}
             size="sm"
             className="rounded-full"
           >
-            {isLoading ? (
+            {soldOut ? (
+              "Sold out"
+            ) : isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
               <>
