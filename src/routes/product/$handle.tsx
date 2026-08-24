@@ -13,6 +13,7 @@ import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import { formatMoney, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
+import { isSoldOut } from "@/lib/stock";
 import { useMarket } from "@/components/MarketProvider";
 import { detectCountry } from "@/lib/market";
 
@@ -146,8 +147,10 @@ function ProductDetail() {
     setSelectedOptions((prev) => ({ ...prev, [optionName]: value }));
   };
 
+  const soldOut = isSoldOut(product.handle);
+
   const handleAddToCart = async () => {
-    if (!selectedVariant) return;
+    if (!selectedVariant || soldOut) return;
     await addItem({
       product: { node: product },
       variantId: selectedVariant.id,
@@ -250,7 +253,7 @@ function ProductDetail() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Button
                 onClick={handleAddToCart}
-                disabled={isLoading || !selectedVariant?.availableForSale}
+                disabled={isLoading || soldOut || !selectedVariant?.availableForSale}
                 size="lg"
                 className="rounded-full px-8"
               >
@@ -263,7 +266,7 @@ function ProductDetail() {
                   </>
                 )}
               </Button>
-              {!selectedVariant?.availableForSale && (
+              {(soldOut || !selectedVariant?.availableForSale) && (
                 <span className="text-sm font-medium text-muted-foreground">
                   Out of stock
                 </span>

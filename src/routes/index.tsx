@@ -24,6 +24,7 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { isAccessoryHandle, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatMoney, getVariantImage } from "@/lib/variantImages";
+import { isSoldOut } from "@/lib/stock";
 import { detectCountry } from "@/lib/market";
 import { useMarket } from "@/components/MarketProvider";
 
@@ -403,7 +404,7 @@ function Landing() {
                     (option) => option.name.toLowerCase() === "color" || option.name.toLowerCase() === "colour",
                   );
                   const colorCount = colorOption?.values.length ?? 0;
-                  const inStock = productVariants.some((variant) => variant.availableForSale);
+                  const inStock = !isSoldOut(node.handle) && productVariants.some((variant) => variant.availableForSale);
                   const dedicated = DEDICATED_PAGES.find((d) => d.handle === node.handle);
                   // Titles always come live from Shopify
                   const title = node.title || dedicated?.title || "";
