@@ -24,6 +24,7 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { isAccessoryHandle, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatMoney, getVariantImage } from "@/lib/variantImages";
+import { isSoldOut } from "@/lib/stock";
 import { detectCountry } from "@/lib/market";
 import { useMarket } from "@/components/MarketProvider";
 
