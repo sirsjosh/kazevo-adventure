@@ -90,6 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "author", content: "kazevo" },
+      { name: "google-site-verification", content: "fzElT7i1RFRJukkOVkivC4AwD9z1YoXvOnc-imTzsWM" },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://kazevo-adventure-launch.lovable.app/" },
       { property: "og:site_name", content: "kazevo by solarah" },
