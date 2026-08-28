@@ -28,6 +28,13 @@ export interface ProductPageContent {
   /** Closing CTA */
   ctaHeadline: string;
   ctaSub: string;
+  /** Optional pre-order campaign settings */
+  preorder?: {
+    deadline: string;
+    shipsBy: string;
+    badgeText: string;
+    closedMessage: string;
+  };
   /** SEO */
   title: string;
   description: string;
