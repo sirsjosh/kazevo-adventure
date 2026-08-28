@@ -287,7 +287,7 @@ function KazevoMiniPage() {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
               <Mountain size={18} />
             </span>
-            <span className="font-display text-xl font-black tracking-tight lowercase">
+            <span className="hidden sm:inline font-display text-xl font-black tracking-tight lowercase">
               kazevo by solarah
             </span>
           </Link>
