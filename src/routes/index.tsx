@@ -267,7 +267,7 @@ function Landing() {
               height={36}
               className="h-9 w-9 shrink-0 rounded-xl object-cover"
             />
-            <span className="font-display text-xl font-black tracking-tight lowercase">
+            <span className="hidden sm:inline font-display text-xl font-black tracking-tight lowercase">
               kazevo by solarah
             </span>
           </a>
