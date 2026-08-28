@@ -1,66 +1,60 @@
-# Install Shopify Flow for Kazevo
+# Pre-order Campaign for Plaid Corduroy Tote Bag
 
-## Recommendation
+## Recommendation: no Shopify app required
 
-Yes — install Shopify Flow. It is free on your current Shopify plan and plugs directly into the customer-tagging work the storefront already does. The biggest win is turning the `kazevo-popup` and `kazevo-checkout` tags into automated actions inside Shopify.
+The campaign experience (countdown timer, pre-order badges, shipping-date messaging, deadline-based purchase gating, and early-bird pricing) can be built entirely in the frontend. The only Shopify-side change needed is the price setup for the early-bird discount.
 
-## What Shopify Flow will replace or improve
+Shopify has a built-in way to show a discount: set the variant's **Compare-at price** to the regular price and the variant's **Price** to the lower pre-order price. The storefront already reads `compareAtPrice` and renders "Save X%" badges.
 
-- Manual customer segmentation after popups / checkout.
-- Delayed or missed review requests after purchase.
-- Invisible low-stock situations that delay fulfillment.
-- One-off thank-you / post-purchase messaging.
+## Campaign rules
 
-## Priority Flows to build (in order)
+- Product: **Kazevo Plaid Corduroy Tote Bag** (`/corduroy-tote-bag`, handle `飞泓跨境格子托特包高颜值大容量灯芯绒单肩包休闲旅行便携手提包`)
+- Pre-order window: now until **30 September 2026, 23:59 Bangkok time (UTC+7)**
+- Shipping promise: all orders ship **before 3 October 2026**
+- Post-deadline: Add to Cart is disabled and a "Pre-order ended" message is shown
+- Pricing: early-bird discount via Shopify compare-at/price (need regular and pre-order amounts)
 
-### 1. Tag customers by source (already in progress)
+## Shopify-side work
 
-Trigger: Customer created.
-Action: If tags contain `kazevo-popup`, add tag `popup-lead`; if `kazevo-checkout`, add tag `checkout-lead`.
-Purpose: Makes segments visible in Shopify admin and other apps without relying on raw tags alone.
+1. Remove the Plaid Corduroy Tote Bag from the frontend `SOLD_OUT_HANDLES` override so it becomes purchasable again.
+2. In Shopify admin (or via API if authorized), set each variant's **Compare-at price** to the regular price and **Price** to the pre-order price.
+3. After 30 September, either:
+   - revert the price to regular, or
+   - set inventory to 0 and disable "Continue selling when out of stock" so Shopify itself blocks new orders.
 
-### 2. Judge.me review request timing
+## Frontend work
 
-Trigger: Order fulfilled / Fulfilled (not paid), 7 days after fulfillment.
-Action: Use Judge.me connector (if available) to send a review request, or tag order `review-requested` so Judge.me can trigger it.
-Purpose: Ensures real buyers get review prompts while the product is still in use.
+1. **Add pre-order metadata to `src/lib/productContent.ts`**
+   - Add an optional `preorder` block to `ProductPageContent`:
+     - `deadline`: ISO timestamp for 30 September 2026 23:59:59+07:00
+     - `shipsBy`: "3 October 2026"
+     - `badgeText`: "Pre-order"
+     - `closedMessage`: "Pre-order ended"
+   - Apply it only to the `corduroy-tote-bag` entry.
 
-### 3. Low-stock / reorder alert
+2. **Create a `PreorderBanner` component**
+   - Live countdown to the deadline (days / hours / minutes / seconds).
+   - Shipping promise line: "Ships before 3 October 2026".
+   - Early-bird badge when the variant is on sale.
+   - Stops rendering or switches to "Pre-order ended" after the deadline.
 
-Trigger: Inventory quantity changed, quantity <= 10.
-Action: Send internal email / Slack notification to reorder the product.
-Purpose: Prevents stockouts on high-converting pages.
+3. **Update `src/components/ProductPageTemplate.tsx`**
+   - Render the `PreorderBanner` when `content.preorder` exists.
+   - After the deadline, disable the Add to Cart button and CTA button and show the closed message.
+   - Keep the product visible (as requested for the sold-out state previously).
 
-### 4. Welcome back / abandoned browse for tagged leads
+4. **Update `src/components/ProductCard.tsx`**
+   - Show a "Pre-order" pill on the card image for the tote bag.
+   - Disable the Add button after the deadline.
 
-Trigger: Customer created with tag `kazevo-popup` or `kazevo-checkout`, no order after 3 days.
-Action: Add customer tag `nurture-sequence` for use by email/Meta audiences.
-Purpose: Surfaces warm leads for remarketing.
+5. **Update `src/lib/stock.ts`**
+   - Remove the Plaid Corduroy Tote Bag from `SOLD_OUT_HANDLES`.
+   - Add an `isPreorderClosed(handle)` helper that checks the deadline for configured products.
+   - Use it in product card and product page purchase gating.
 
-### 5. Post-purchase thank-you + cross-sell tag
+## Open values needed before implementation
 
-Trigger: Order created.
-Condition: Product contains specific handles (e.g., `kazevo-mini`, `kazevo-outdoor`).
-Action: Tag customer with `bought-mini`, `bought-outdoor`, etc., for future cross-sell campaigns.
-Purpose: Feeds later upsells and lookalike audiences.
+- Regular price for the Plaid Corduroy Tote Bag
+- Early-bird pre-order price
 
-## Code changes (if any)
-
-The storefront already writes customer tags via `syncSubscriberToShopify`. We may standardize the tags slightly so Flow conditions are easier to match:
-
-- Keep `kazevo-popup` and `kazevo-checkout` as primary tags.
-- Optionally add a second normalized tag: `kazevo-lead` to both sources.
-
-No other frontend changes are required; Flow is configured inside Shopify admin.
-
-## Verification
-
-- Create a test customer through the popup or checkout.
-- Confirm the customer appears in Shopify with the expected tags.
-- Turn on one Flow at a time and check the run history for errors.
-
-## Out of scope
-
-- Replacing the existing email-capture code with Flow.
-- Building custom Flow connectors (use native connectors only).
-- Modifying checkout or storefront logic unless tag standardization is approved.
+Once those are provided, the Shopify price update and frontend build can be done in one turn.
