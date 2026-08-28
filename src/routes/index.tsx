@@ -24,7 +24,7 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { isAccessoryHandle, productPages } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatMoney, getVariantImage } from "@/lib/variantImages";
-import { isSoldOut } from "@/lib/stock";
+import { isSoldOut, isPreorderClosed } from "@/lib/stock";
 import { detectCountry } from "@/lib/market";
 import { useMarket } from "@/components/MarketProvider";
 
@@ -405,6 +405,7 @@ function Landing() {
                   );
                   const colorCount = colorOption?.values.length ?? 0;
                   const inStock = !isSoldOut(node.handle) && productVariants.some((variant) => variant.availableForSale);
+                  const preorderClosed = isPreorderClosed(node.handle);
                   const dedicated = DEDICATED_PAGES.find((d) => d.handle === node.handle);
                   // Titles always come live from Shopify
                   const title = node.title || dedicated?.title || "";
@@ -447,6 +448,11 @@ function Landing() {
                         {colorCount > 1 && (
                           <span className={`absolute ${saleInfo?.isOnSale ? "left-4 top-12" : "left-4 top-4"} rounded-full bg-background/90 px-3 py-1 text-xs font-semibold`}>
                             {colorCount} colors
+                          </span>
+                        )}
+                        {node.handle === productPages["corduroy-tote-bag"].handle && (
+                          <span className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                            {preorderClosed ? "Pre-order ended" : "Pre-order"}
                           </span>
                         )}
                         {!inStock && (
