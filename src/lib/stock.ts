@@ -7,12 +7,14 @@ export const SOLD_OUT_HANDLES = new Set<string>([
 
 interface PreorderConfig {
   deadline: string;
+  shipsBy: string;
 }
 
-const PREORDER_CONFIGS: Record<string, PreorderConfig> = {
+export const PREORDER_CONFIGS: Record<string, PreorderConfig> = {
   // Plaid Corduroy Tote Bag pre-order campaign
   "飞泓跨境格子托特包高颜值大容量灯芯绒单肩包休闲旅行便携手提包": {
     deadline: "2026-09-30T23:59:59+07:00",
+    shipsBy: "3 October 2026",
   },
 };
 

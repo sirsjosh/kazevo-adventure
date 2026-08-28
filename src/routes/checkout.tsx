@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
+import { PreorderCheckoutNotice } from "@/components/PreorderCheckoutNotice";
 import { useMarket } from "@/components/MarketProvider";
 import { supabase } from "@/integrations/supabase/client";
 import { formatMoney, getVariantColorName, getVariantImage } from "@/lib/variantImages";
@@ -178,7 +179,7 @@ function CheckoutPage() {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
               <Mountain size={18} />
             </span>
-            <span className="font-display text-xl font-black tracking-tight lowercase">
+            <span className="hidden sm:inline font-display text-xl font-black tracking-tight lowercase">
               kazevo by solarah
             </span>
           </Link>
@@ -303,6 +304,9 @@ function CheckoutPage() {
                 <CrossSellOffer handles={items.map((i) => i.product.node.handle)} />
                 <div className="mt-4">
                   <AccessoryUpsell handles={items.map((i) => i.product.node.handle)} />
+                </div>
+                <div className="mt-4">
+                  <PreorderCheckoutNotice handles={items.map((i) => i.product.node.handle)} />
                 </div>
               </div>
               <div className="mt-5 flex items-center justify-between border-t border-border pt-5">

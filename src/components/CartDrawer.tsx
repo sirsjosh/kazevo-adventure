@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
+import { PreorderCheckoutNotice } from "@/components/PreorderCheckoutNotice";
 import { useMarket } from "@/components/MarketProvider";
 import { formatMoney, getVariantColorName, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
@@ -141,6 +142,7 @@ export function CartDrawer() {
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
                 <CrossSellOffer handles={items.map((i) => i.product.node.handle)} />
                 <AccessoryUpsell handles={items.map((i) => i.product.node.handle)} />
+                <PreorderCheckoutNotice handles={items.map((i) => i.product.node.handle)} />
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Total</span>
                   <span className="text-xl font-bold">{formatMoney(totalPrice, items[0]?.price.currencyCode ?? "USD", market.locale)}</span>
