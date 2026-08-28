@@ -12,16 +12,15 @@ export function PreorderCheckoutNotice({ handles }: PreorderCheckoutNoticeProps)
     return config && !isPreorderClosed(handle);
   });
 
-  if (!activeHandle) return null;
-
-  const { shipsBy } = PREORDER_CONFIGS[activeHandle];
+  const config = activeHandle ? PREORDER_CONFIGS[activeHandle] : null;
+  if (!config) return null;
 
   return (
     <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 p-3 text-sm text-foreground">
       <Package className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
       <p>
         <span className="font-semibold text-primary">Pre-order:</span> this item ships before{" "}
-        <span className="font-semibold">{shipsBy}</span>.
+        <span className="font-semibold">{config.shipsBy}</span>.
       </p>
     </div>
   );
