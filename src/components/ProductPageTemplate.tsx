@@ -87,7 +87,8 @@ export function ProductPageTemplate({
   }, [product, selectedVariant]);
 
   const soldOut = isSoldOut(content.handle);
-  const canBuy = !soldOut && !!selectedVariant?.availableForSale;
+  const preorderClosed = isPreorderClosed(content.handle);
+  const canBuy = !soldOut && !preorderClosed && !!selectedVariant?.availableForSale;
 
   const saleInfo = selectedVariant ? getVariantSaleInfo(selectedVariant) : null;
 
@@ -182,6 +183,17 @@ export function ProductPageTemplate({
               </h1>
               <p className="mt-5 max-w-md text-lg text-muted-foreground">{content.intro}</p>
 
+              {content.preorder && (
+                <div className="mt-5 max-w-md">
+                  <PreorderBanner
+                    deadline={content.preorder.deadline}
+                    shipsBy={content.preorder.shipsBy}
+                    badgeText={content.preorder.badgeText}
+                    closedMessage={content.preorder.closedMessage}
+                  />
+                </div>
+              )}
+
               {variants.length > 0 && (
                 <div className="mt-7">
                   <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -246,6 +258,7 @@ export function ProductPageTemplate({
                     onClick={handleAddToCart}
                     disabled={isLoading || !canBuy}
                     className="mt-7 inline-flex h-auto w-full items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold shadow-[var(--shadow-pop)] transition-transform hover:scale-[1.02] sm:w-auto"
+                    aria-label={preorderClosed ? "Pre-order ended" : "Add to cart"}
                   >
                     {isLoading ? (
                       <Loader2 className="h-5 w-5 animate-spin" />
@@ -257,7 +270,9 @@ export function ProductPageTemplate({
                     )}
                   </Button>
                   {!canBuy && (
-                    <p className="mt-3 text-sm font-medium text-muted-foreground">Out of stock</p>
+                    <p className="mt-3 text-sm font-medium text-muted-foreground">
+                      {preorderClosed ? "Pre-order has ended" : "Out of stock"}
+                    </p>
                   )}
                 </>
               ) : (
@@ -423,7 +438,7 @@ export function ProductPageTemplate({
                 disabled={isLoading || !canBuy}
                 className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 font-semibold text-background transition-transform hover:scale-105 disabled:opacity-60"
               >
-                Add to Cart <ArrowRight size={18} />
+                {preorderClosed ? "Pre-order ended" : "Add to Cart"} <ArrowRight size={18} />
               </button>
             </div>
           </div>

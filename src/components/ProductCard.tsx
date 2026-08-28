@@ -19,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!selectedVariant || soldOut) return;
+    if (!selectedVariant || soldOut || preorderClosed) return;
 
     await addItem({
       product,
@@ -32,6 +32,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   const soldOut = isSoldOut(product.node.handle);
+  const preorderClosed = isPreorderClosed(product.node.handle);
   const image = product.node.images.edges[0]?.node;
   const price = product.node.priceRange.minVariantPrice;
 
@@ -50,6 +51,11 @@ export function ProductCard({ product }: ProductCardProps) {
           />
         ) : (
           <div className="h-full w-full bg-muted" />
+        )}
+        {product.node.handle === "飞泓跨境格子托特包高颜值大容量灯芯绒单肩包休闲旅行便携手提包" && (
+          <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-1 text-xs font-bold text-primary-foreground">
+            {preorderClosed ? "Pre-order ended" : "Pre-order"}
+          </span>
         )}
       </Link>
       <div className="flex flex-col flex-1 p-5">
@@ -71,12 +77,14 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
           <Button
             onClick={handleAddToCart}
-            disabled={isLoading || soldOut || !selectedVariant?.availableForSale}
+            disabled={isLoading || soldOut || preorderClosed || !selectedVariant?.availableForSale}
             size="sm"
             className="rounded-full"
           >
             {soldOut ? (
               "Sold out"
+            ) : preorderClosed ? (
+              "Ended"
             ) : isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
