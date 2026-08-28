@@ -5,7 +5,7 @@ import { ShoppingBag, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
-import { isSoldOut } from "@/lib/stock";
+import { isSoldOut, isPreorderClosed } from "@/lib/stock";
 
 interface ProductCardProps {
   product: ShopifyProduct;

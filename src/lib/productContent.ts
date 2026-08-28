@@ -1462,6 +1462,12 @@ export const productPages = {
     ],
     ctaHeadline: "Soft corduroy. Serious capacity.",
     ctaSub: "Free worldwide shipping on every Kazevo Plaid Corduroy Tote Bag.",
+    preorder: {
+      deadline: "2026-09-30T23:59:59+07:00",
+      shipsBy: "3 October 2026",
+      badgeText: "Pre-order",
+      closedMessage: "Pre-order ended",
+    },
     title: "Kazevo Plaid Corduroy Tote Bag | Large-Capacity Shoulder Tote",
     description:
       "A soft corduroy shoulder tote with room for a laptop, notebook and layers, in ten prints from plain black to blue floral. Free worldwide shipping and 7-day returns.",

@@ -21,13 +21,14 @@ import { CountrySelector } from "@/components/CountrySelector";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
 import { ProductReviews } from "@/components/ProductReviews";
+import { PreorderBanner } from "@/components/PreorderBanner";
 import type { ProductReviewsData } from "@/lib/judgeme.server";
 import type { ProductPageContent } from "@/lib/productContent";
 import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@/lib/shopify";
 import { formatMoney, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { trackViewContent } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
-import { isSoldOut } from "@/lib/stock";
+import { isSoldOut, isPreorderClosed } from "@/lib/stock";
 import { useMarket } from "@/components/MarketProvider";
 import logo from "@/assets/kazevo-logo.png.asset.json";
 
