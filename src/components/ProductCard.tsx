@@ -33,6 +33,8 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const soldOut = isSoldOut(product.node.handle);
   const preorderClosed = isPreorderClosed(product.node.handle);
+  const preorderActive = isPreorderActive(product.node.handle);
+  const unavailable = !selectedVariant?.availableForSale && !preorderActive;
   const image = product.node.images.edges[0]?.node;
   const price = product.node.priceRange.minVariantPrice;
 

@@ -88,7 +88,11 @@ export function ProductPageTemplate({
 
   const soldOut = isSoldOut(content.handle);
   const preorderClosed = isPreorderClosed(content.handle);
-  const canBuy = !soldOut && !preorderClosed && !!selectedVariant?.availableForSale;
+  const preorderActive = isPreorderActive(content.handle);
+  const canBuy =
+    !soldOut &&
+    !preorderClosed &&
+    (preorderActive || !!selectedVariant?.availableForSale);
 
   const saleInfo = selectedVariant ? getVariantSaleInfo(selectedVariant) : null;
 
