@@ -5,7 +5,7 @@ import { ShoppingBag, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
-import { isSoldOut, isPreorderClosed } from "@/lib/stock";
+import { isSoldOut, isPreorderClosed, isPreorderActive } from "@/lib/stock";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -19,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!selectedVariant || soldOut || preorderClosed) return;
+    if (!selectedVariant || soldOut || preorderClosed || unavailable) return;
 
     await addItem({
       product,
@@ -33,6 +33,8 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const soldOut = isSoldOut(product.node.handle);
   const preorderClosed = isPreorderClosed(product.node.handle);
+  const preorderActive = isPreorderActive(product.node.handle);
+  const unavailable = !selectedVariant?.availableForSale && !preorderActive;
   const image = product.node.images.edges[0]?.node;
   const price = product.node.priceRange.minVariantPrice;
 
@@ -77,7 +79,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
           <Button
             onClick={handleAddToCart}
-            disabled={isLoading || soldOut || preorderClosed || !selectedVariant?.availableForSale}
+            disabled={isLoading || soldOut || preorderClosed || unavailable || !selectedVariant}
             size="sm"
             className="rounded-full"
           >

@@ -28,3 +28,11 @@ export function isPreorderClosed(handle?: string | null): boolean {
   if (!config) return false;
   return Date.parse(config.deadline) <= Date.now();
 }
+
+// True while a product has an active pre-order campaign (before its deadline).
+// During the campaign the purchase button ignores Shopify availability so
+// pre-orders can be taken regardless of reported inventory.
+export function isPreorderActive(handle?: string | null): boolean {
+  if (!handle) return false;
+  return !!PREORDER_CONFIGS[handle] && !isPreorderClosed(handle);
+}

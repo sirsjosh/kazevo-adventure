@@ -28,7 +28,7 @@ import { fetchShopifyProducts, getVariantSaleInfo, type ShopifyProduct } from "@
 import { formatMoney, getColorLabel, getVariantColorValue, getVariantDotColor } from "@/lib/variantImages";
 import { trackViewContent } from "@/lib/meta-pixel";
 import { useCartStore } from "@/stores/cartStore";
-import { isSoldOut, isPreorderClosed } from "@/lib/stock";
+import { isSoldOut, isPreorderClosed, isPreorderActive } from "@/lib/stock";
 import { useMarket } from "@/components/MarketProvider";
 import logo from "@/assets/kazevo-logo.png.asset.json";
 
@@ -88,7 +88,11 @@ export function ProductPageTemplate({
 
   const soldOut = isSoldOut(content.handle);
   const preorderClosed = isPreorderClosed(content.handle);
-  const canBuy = !soldOut && !preorderClosed && !!selectedVariant?.availableForSale;
+  const preorderActive = isPreorderActive(content.handle);
+  const canBuy =
+    !soldOut &&
+    !preorderClosed &&
+    (preorderActive || !!selectedVariant?.availableForSale);
 
   const saleInfo = selectedVariant ? getVariantSaleInfo(selectedVariant) : null;
 
