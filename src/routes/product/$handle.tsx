@@ -13,7 +13,7 @@ import type { ProductReviewsData } from "@/lib/judgeme.server";
 import { fetchShopifyProductByHandle, type ShopifyProduct } from "@/lib/shopify";
 import { formatMoney, getVariantImage } from "@/lib/variantImages";
 import { useCartStore } from "@/stores/cartStore";
-import { isSoldOut } from "@/lib/stock";
+import { isSoldOut, isPreorderClosed, isPreorderActive } from "@/lib/stock";
 import { useMarket } from "@/components/MarketProvider";
 import { detectCountry } from "@/lib/market";
 
