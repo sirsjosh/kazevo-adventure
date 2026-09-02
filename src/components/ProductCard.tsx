@@ -19,7 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!selectedVariant || soldOut || preorderClosed) return;
+    if (!selectedVariant || soldOut || preorderClosed || unavailable) return;
 
     await addItem({
       product,
@@ -79,7 +79,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
           <Button
             onClick={handleAddToCart}
-            disabled={isLoading || soldOut || preorderClosed || !selectedVariant?.availableForSale}
+            disabled={isLoading || soldOut || preorderClosed || unavailable || !selectedVariant}
             size="sm"
             className="rounded-full"
           >
