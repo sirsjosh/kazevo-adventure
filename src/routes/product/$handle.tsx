@@ -148,9 +148,12 @@ function ProductDetail() {
   };
 
   const soldOut = isSoldOut(product.handle);
+  const preorderClosed = isPreorderClosed(product.handle);
+  const preorderActive = isPreorderActive(product.handle);
+  const unavailable = !selectedVariant?.availableForSale && !preorderActive;
 
   const handleAddToCart = async () => {
-    if (!selectedVariant || soldOut) return;
+    if (!selectedVariant || soldOut || preorderClosed || unavailable) return;
     await addItem({
       product: { node: product },
       variantId: selectedVariant.id,
@@ -253,7 +256,7 @@ function ProductDetail() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Button
                 onClick={handleAddToCart}
-                disabled={isLoading || soldOut || !selectedVariant?.availableForSale}
+                disabled={isLoading || soldOut || preorderClosed || unavailable || !selectedVariant}
                 size="lg"
                 className="rounded-full px-8"
               >
@@ -266,10 +269,16 @@ function ProductDetail() {
                   </>
                 )}
               </Button>
-              {(soldOut || !selectedVariant?.availableForSale) && (
+              {preorderClosed ? (
                 <span className="text-sm font-medium text-muted-foreground">
-                  Out of stock
+                  Pre-order ended
                 </span>
+              ) : (
+                (soldOut || unavailable) && (
+                  <span className="text-sm font-medium text-muted-foreground">
+                    Out of stock
+                  </span>
+                )
               )}
             </div>
           </div>
