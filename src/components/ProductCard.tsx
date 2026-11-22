@@ -28,6 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
       price: selectedVariant.price,
       quantity: 1,
       selectedOptions: selectedVariant.selectedOptions,
+      ...(image?.url ? { imageUrl: image.url } : {}),
     });
   };
 

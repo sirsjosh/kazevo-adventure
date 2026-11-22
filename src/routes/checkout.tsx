@@ -228,7 +228,9 @@ function CheckoutPage() {
             <ul className="space-y-6">
               {items.map((item) => {
                 const image =
-                  item.imageUrl ?? getVariantImage(item.selectedOptions);
+                  item.imageUrl ??
+                  item.product.node.images.edges[0]?.node.url ??
+                  getVariantImage(item.selectedOptions);
                 return (
                   <li
                     key={item.variantId}
@@ -237,14 +239,19 @@ function CheckoutPage() {
                     <div className="aspect-square w-full overflow-hidden rounded-2xl bg-muted sm:h-40 sm:w-40 sm:shrink-0">
                       <img
                         src={image}
-                        alt={getVariantColorName(item.selectedOptions)}
+                        alt={item.product.node.title}
                         className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="flex flex-1 flex-col">
                       <h2 className="font-display text-lg font-black leading-snug">
-                        {getVariantColorName(item.selectedOptions)}
+                        {item.product.node.title}
                       </h2>
+                      {getVariantColorName(item.selectedOptions) && (
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          {getVariantColorName(item.selectedOptions)}
+                        </p>
+                      )}
                       <p className="mt-3 font-display text-xl font-black">
                         {formatMoney(parseFloat(item.price.amount) * item.quantity, item.price.currencyCode, market.locale)}
                       </p>

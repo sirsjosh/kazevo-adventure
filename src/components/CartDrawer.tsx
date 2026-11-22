@@ -10,14 +10,12 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { AccessoryUpsell } from "@/components/AccessoryUpsell";
 import { CrossSellOffer } from "@/components/CrossSellOffer";
@@ -58,16 +56,6 @@ export function CartDrawer() {
 
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setDrawerOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="relative shrink-0">
-          <ShoppingCart className="h-5 w-5" />
-          {totalItems > 0 && (
-            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-primary text-primary-foreground">
-              {totalItems}
-            </Badge>
-          )}
-        </Button>
-      </SheetTrigger>
       <SheetContent className="w-full sm:max-w-lg flex flex-col h-full">
         <SheetHeader className="flex-shrink-0">
           <SheetTitle>Shopping Cart</SheetTitle>
@@ -93,15 +81,24 @@ export function CartDrawer() {
                     <div key={item.variantId} className="flex gap-4 p-2">
                       <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
                         <img
-                          src={item.imageUrl ?? getVariantImage(item.selectedOptions)}
-                          alt={getVariantColorName(item.selectedOptions)}
+                          src={
+                            item.imageUrl ??
+                            item.product.node.images.edges[0]?.node.url ??
+                            getVariantImage(item.selectedOptions)
+                          }
+                          alt={item.product.node.title}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-medium truncate">
-                          {getVariantColorName(item.selectedOptions)}
+                          {item.product.node.title}
                         </h4>
+                        {getVariantColorName(item.selectedOptions) && (
+                          <p className="text-sm text-muted-foreground truncate">
+                            {getVariantColorName(item.selectedOptions)}
+                          </p>
+                        )}
                         <p className="font-semibold">
                           {formatMoney(parseFloat(item.price.amount), item.price.currencyCode, market.locale)}
                         </p>
